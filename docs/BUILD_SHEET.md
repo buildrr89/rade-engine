@@ -39,6 +39,8 @@ Fixture input -> normalize -> fingerprint -> deduplicate -> score -> recommend -
 
 No blocker for the phase-0 proof. Hosted persistence remains deferred until the guardrail pass stays green.
 
+GitHub-enforced branch protection is currently blocked on this private repository because GitHub returned: `Upgrade to GitHub Pro or make this repository public to enable this feature.`
+
 ## Decision log
 
 - 2026-03-18 - Use fixture-first bootstrap - keep the proof slice narrow
@@ -47,6 +49,7 @@ No blocker for the phase-0 proof. Hosted persistence remains deferred until the 
 - 2026-03-18 - Replace faux tool branding with repo-owned `rade-proof` and `rade-devserver` launchers
 - 2026-03-18 - Scrub report artifacts at write time while preserving stable structural identifiers
 - 2026-03-19 - Default to PR-only changes on a protected `main` branch once GitHub settings are enabled
+- 2026-03-19 - GitHub branch protection could not be enabled on this private repository because the current plan returned HTTP 403 for protection APIs
 
 ## Next immediate action
 

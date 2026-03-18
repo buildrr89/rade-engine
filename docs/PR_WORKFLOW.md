@@ -12,6 +12,12 @@ The goal is to preserve proof, contract discipline, and doc sync without slowing
 - Direct pushes to `main` are discouraged once branch protection is enabled.
 - The only acceptable reason to bypass the PR path is an urgent fix that cannot wait for normal review and CI.
 
+## Current enforcement status
+
+- PR-first is the active repo policy by convention.
+- GitHub branch protection is not currently enforced on this private repository because GitHub returned: `Upgrade to GitHub Pro or make this repository public to enable this feature.`
+- Until that platform constraint is removed, treat the workflow in this file as mandatory operating policy even though GitHub cannot enforce every rule automatically.
+
 ## Branch model
 
 - `main` is the protected production branch.
