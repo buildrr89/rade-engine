@@ -18,6 +18,11 @@ Each screen object has these fields:
 - `screen_name`: string
 - `elements`: array of element objects
 
+Validation rules:
+
+- `screen_id` must be unique within the payload
+- `elements` must contain at least one element
+
 Each element object has these fields:
 
 - `element_id`: string
@@ -30,11 +35,17 @@ Each element object has these fields:
 - `interactive`: boolean
 - `visible`: boolean
 - `bounds`: array of four numbers or null
-- `hierarchy_depth`: integer
-- `child_count`: integer
+- `hierarchy_depth`: non-negative integer
+- `child_count`: non-negative integer
 - `text_present`: boolean
 - `traits`: array of strings
 - `source`: string
+
+Validation rules:
+
+- `element_id` must be unique within a screen
+- `parent_id` must point to another element in the same screen when present
+- `bounds` must be either `null` or exactly four numeric values
 
 ## Normalized node contract
 
@@ -64,6 +75,17 @@ The report output must include:
 - `findings`
 - `recommendations`
 - `roadmap`
+
+Report identifier rules:
+
+- Public report evidence must use stable `node_ref` strings in the form `screen_id#element_id`
+- Recommendations must expose explicit `rule_id`
+- `recommendation_id` must be derived from stable rule and target inputs, not human prose
+
+Artifact scrub rule:
+
+- JSON and Markdown report artifacts are scrubbed at write time for obvious sensitive strings
+- Structural identifiers such as `node_ref`, `screen_id`, `recommendation_id`, `rule_id`, and fingerprints remain intentionally preserved
 
 ## Determinism rule
 

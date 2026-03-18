@@ -7,16 +7,17 @@ This is a thin architecture document. It exists to support the current proof sli
 ## System shape
 
 - Client: CLI first, web shell second
-- Backend: Python core library with thin API shell
+- Backend: Python core library with a thin WSGI API shell
 - Auth: deferred until hosted mode
 - Database: deferred until the first real persisted run
 - Payments: not in this slice
 - AI: not used for deterministic scoring
 - Integrations: local fixture input only for the proof slice
+- Hosted services such as Redis, object storage, and managed auth are strategic only and not part of the current implementation
 
 ## Current architecture decision
 
-Use a single repository with deterministic Python core modules, a thin API shell, a thin agent shell, and a simple web scaffold.
+Use a single repository with deterministic Python core modules, a thin API shell, a thin agent shell, and a simple Node-based web shell.
 
 ## Request flow
 
@@ -41,6 +42,7 @@ Use a single repository with deterministic Python core modules, a thin API shell
 - Protected actions require auth in hosted mode
 - Validation happens before persistence
 - Raw sensitive content is not retained by default
+- Report artifacts are scrubbed at output write time
 
 ## Known unknowns
 
@@ -55,3 +57,5 @@ Use a single repository with deterministic Python core modules, a thin API shell
 - Persistent analysis history
 - Benchmark corpus ingestion
 - Real-time collection modes
+- Real Next.js runtime adoption
+- Real FastAPI adoption

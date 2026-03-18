@@ -9,6 +9,12 @@ labels: bug
 
 ## Expected
 
+## Scope of impact
+
 ## Evidence
 
-## Notes
+## Reproduction steps
+
+## Security / data exposure risk
+
+## Unknowns / decisions

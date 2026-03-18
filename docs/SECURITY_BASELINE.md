@@ -18,6 +18,8 @@
 - Persist raw captures only when strictly needed.
 - Encrypt retained raw captures.
 - Support deletion-by-default for sensitive customers.
+- Scrub report artifacts for obvious sensitive strings before JSON and Markdown write.
+- Preserve only the structural identifiers needed for deterministic review and debugging.
 
 ## Product rule
 

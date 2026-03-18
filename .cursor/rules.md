@@ -10,6 +10,7 @@ Accuracy over confidence. Proof before expansion. Repo truth over model assumpti
 - No scope drift.
 - No production-ready claims without proof.
 - Mark unknowns explicitly.
+- Prefer `UNKNOWN / NEEDS DECISION` over inferred behavior.
 - Prefer existing repo patterns before adding new abstractions.
 - Prefer existing dependencies before adding new dependencies.
 - Security-sensitive changes require explicit verification.
@@ -17,6 +18,7 @@ Accuracy over confidence. Proof before expansion. Repo truth over model assumpti
 ## Before coding
 
 - Read the canonical files in order.
+- Resolve truth conflicts using `docs/TRUTH_HIERARCHY.md`.
 - Identify the single objective.
 - Identify the biggest relevant risk.
 - State what will change and what will not.

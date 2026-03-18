@@ -1,0 +1,17 @@
+{
+  "name": "rade-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.0.0",
+  "devDependencies": {
+    "playwright": "^1.58.2"
+  },
+  "scripts": {
+    "postinstall": "playwright install chromium",
+    "dev": "node ./scripts/dev.mjs",
+    "build": "node ./scripts/build.mjs",
+    "test": "node ./scripts/test.mjs",
+    "lint": "node ./scripts/lint.mjs"
+  }
+}

@@ -1,5 +1,11 @@
 # APP_SCOPE
 
+## Authority
+
+This file is the canonical implementation scope for the current slice.
+
+If `RADE.md` is broader, this file wins for implementation decisions until the scope changes here.
+
 ## Product summary
 
 RADE helps teams analyze authorized software interfaces and get evidence-backed recommendations for better layout, accessibility, interaction, and flow decisions.
@@ -31,6 +37,7 @@ RADE helps teams analyze authorized software interfaces and get evidence-backed 
 ## V1 boundaries
 
 - Platform(s): web, Python CLI, and local analysis only
+- Active web runtime: `web/lib/shell.mjs`; `web/app/` is dormant scaffold only
 - Geography: none
 - Integrations allowed in v1: local file input, sample fixture output
 - Integrations explicitly deferred: repo connectors, build connectors, hosted auth, queues, object storage, Redis

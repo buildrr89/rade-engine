@@ -45,6 +45,7 @@ Each score must include:
 ## Required recommendation fields
 
 - `recommendation_id`
+- `rule_id`
 - `category`
 - `scope`
 - `target`
@@ -62,6 +63,28 @@ Each score must include:
 - `affected_components`
 - `provenance`
 
+## Required finding fields
+
+- `finding_id`
+- `rule_id`
+- `category`
+- `title`
+- `priority`
+- `provenance`
+- `evidence`
+
+## Required duplicate cluster fields
+
+- `fingerprint`
+- `count`
+- `interactive`
+- `screen_ids`
+- `screen_names`
+- `node_refs`
+- `element_types`
+- `roles`
+- `representative_node_ref`
+
 ## Markdown structure
 
 The Markdown report must use these sections in order:
@@ -77,3 +100,5 @@ The Markdown report must use these sections in order:
 ## Rendering rule
 
 The Markdown report should be readable without the JSON file open next to it.
+
+The Markdown report should expose `rule_id` and `recommendation_id` for traceability.

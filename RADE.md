@@ -6,6 +6,12 @@ Date: `2026-03-18`
 
 If any older document conflicts with this file, this file wins.
 
+Interpretation rule:
+
+- `RADE.md` is the strategic product north star.
+- Current implementation truth and precedence live in `docs/TRUTH_HIERARCHY.md`.
+- Future-state sections below are strategic unless the current-slice docs and source code prove they are implemented now.
+
 ---
 
 ## 1. Mission
@@ -124,6 +130,15 @@ A customer connects an app or project, runs a scan, and receives:
 ---
 
 ## 5. Product Surface
+
+Strategic / not current implementation.
+
+Current repo reality:
+
+- thin web shell
+- local CLI proof path
+- thin API shell
+- no hosted onboarding, auth, queue, tenant model, or persisted analysis history yet
 
 ### 5.1 Required surfaces
 
@@ -569,6 +584,8 @@ Project Skeleton only works safely if redaction happens before durable persisten
 
 ## 16. System Architecture
 
+Strategic / not current implementation.
+
 ### 16.1 Required services
 
 Build exactly these services first:
@@ -580,6 +597,8 @@ Build exactly these services first:
 5. `postgres`
 6. `redis`
 7. `object storage`
+
+This is the intended hosted shape, not a claim that these services are active in the current repo.
 
 ### 16.2 Technology choices
 
@@ -593,6 +612,8 @@ Default stack:
 - `auth`: Supabase Auth or equivalent managed auth
 - `storage`: S3-compatible storage or Supabase Storage
 - `queue/cache`: Redis
+
+These are target technology choices for hosted mode, not proof of current runtime adoption.
 
 ### 16.3 Architecture rules
 
@@ -640,6 +661,7 @@ Use this exact structure.
 ```text
 rade/
 ├── README.md
+├── RADE.md
 ├── RADE2.0.md
 ├── pyproject.toml
 ├── uv.lock
@@ -649,16 +671,20 @@ rade/
 │   ├── sample_ios_output.json
 │   └── sample_modernization_report.md
 ├── docs/
-│   ├── V1_SCOPE.md
+│   ├── TRUTH_HIERARCHY.md
+│   ├── DECISIONS.md
+│   ├── APP_SCOPE.md
+│   ├── HARD_RISKS.md
+│   ├── ARCHITECTURE.md
+│   ├── BUILD_SHEET.md
+│   ├── NEXT_EXECUTION_BACKLOG.md
 │   ├── DATA_CONTRACT.md
 │   ├── MVP_REPORT_SPEC.md
 │   ├── SCORING_MODEL.md
 │   ├── RECOMMENDATION_ENGINE.md
 │   ├── STANDARDS_PACK.md
 │   ├── SECURITY_BASELINE.md
-│   ├── OPERATIONS_BASELINE.md
-│   ├── DEMO_SCRIPT.md
-│   └── ROADMAP.md
+│   └── OPEN_SOURCE_ADOPTION_BACKLOG.md
 ├── src/
 │   ├── core/
 │   │   ├── models.py
@@ -695,13 +721,16 @@ rade/
 │   ├── connectors/
 │   └── collectors/
 ├── web/
-│   ├── app/
+│   ├── app/            # dormant scaffold until a real Next.js runtime is adopted
 │   ├── components/
 │   ├── lib/
+│   ├── scripts/
 │   └── package.json
 ├── tests/
 │   ├── fixtures/
 │   ├── golden/
+│   ├── helpers.py
+│   ├── runner.py
 │   ├── test_normalizer.py
 │   ├── test_layering.py
 │   ├── test_fingerprint.py
@@ -711,7 +740,8 @@ rade/
 │   ├── test_roadmap_generator.py
 │   ├── test_recommendation_engine.py
 │   ├── test_report_generator.py
-│   └── test_api_smoke.py
+│   ├── test_api_smoke.py
+│   └── test_scrubber.py
 └── output/
 ```
 
@@ -731,14 +761,14 @@ pnpm --dir web install
 ### 18.2 Run tests
 
 ```bash
-uv run pytest
+./rade-proof
 pnpm --dir web test
 ```
 
 ### 18.3 Run API
 
 ```bash
-uv run uvicorn src.api.app:app --reload
+./rade-devserver src.api.app:app --reload
 ```
 
 ### 18.4 Run worker
@@ -772,6 +802,10 @@ uv run python -m src.core.cli analyze \
 ---
 
 ## 19. Build Phases
+
+Strategic / not current execution order.
+
+Use `docs/BUILD_SHEET.md` and `docs/NEXT_EXECUTION_BACKLOG.md` for the actual current sequence.
 
 Build in this exact order.
 
@@ -1075,17 +1109,9 @@ These are hard bans.
 
 ---
 
-## 26. Immediate Next Actions
+## 26. Strategic Next Actions
 
-Execute these next, in order:
+For the current execution order and next smallest action, use:
 
-1. reset the repo to the exact layout in this spec
-2. pin the toolchain
-3. write the five contract docs
-4. rebuild the deterministic core
-5. build recommendation engine v1
-6. build the web app shell
-7. build the agent shell
-8. run first pilot scans
-
-That is the build sheet.
+- `docs/BUILD_SHEET.md`
+- `docs/NEXT_EXECUTION_BACKLOG.md`

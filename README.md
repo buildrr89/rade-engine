@@ -19,13 +19,15 @@ Build the phase-0 proof slice:
 Read these in order before changing behavior:
 
 1. `README.md`
-2. `docs/APP_SCOPE.md`
-3. `docs/HARD_RISKS.md`
-4. `docs/ARCHITECTURE.md`
-5. `docs/BUILD_SHEET.md`
-6. `AGENTS.md`
-7. `.cursor/rules.md`
-8. `docs/NEXT_EXECUTION_BACKLOG.md`
+2. `docs/TRUTH_HIERARCHY.md`
+3. `docs/APP_SCOPE.md`
+4. `docs/HARD_RISKS.md`
+5. `docs/ARCHITECTURE.md`
+6. `docs/BUILD_SHEET.md`
+7. `AGENTS.md`
+8. `.cursor/rules.md`
+9. `docs/NEXT_EXECUTION_BACKLOG.md`
+10. `docs/OPEN_SOURCE_ADOPTION_BACKLOG.md`
 
 ## Canonical commands
 
@@ -39,7 +41,21 @@ pnpm --dir web install
 Run tests:
 
 ```bash
-uv run pytest
+./rade-proof
+```
+
+Run lint:
+
+```bash
+uv run ruff check src tests agent
+uv run black --check src tests agent
+```
+
+Format code:
+
+```bash
+uv run ruff check --fix src tests agent
+uv run black src tests agent
 ```
 
 Run the proof slice:
@@ -55,7 +71,7 @@ uv run python -m src.core.cli analyze \
 Run the API shell:
 
 ```bash
-uv run uvicorn src.api.app:app --reload
+./rade-devserver src.api.app:app --reload
 ```
 
 Run the worker shell:
@@ -70,11 +86,19 @@ Run the agent shell:
 uv run python -m agent.cli scan
 ```
 
+Run the web smoke test:
+
+```bash
+pnpm --dir web test
+make web-test
+```
+
 ## Notes
 
 - The repo is intentionally thin.
 - Deterministic behavior matters more than breadth at this stage.
-- `RADE.md` is the canonical product spec.
+- `docs/TRUTH_HIERARCHY.md` defines how repo truth is resolved.
+- `RADE.md` is the strategic product spec, not proof that future hosted surfaces already exist.
 
 ## Repository
 

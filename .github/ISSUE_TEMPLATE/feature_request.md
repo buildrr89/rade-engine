@@ -7,8 +7,18 @@ labels: enhancement
 
 ## Problem
 
-## Proposed change
-
 ## Why now
 
-## Notes
+## Scope
+
+## Non-scope
+
+## Proposed change
+
+## Acceptance criteria
+
+## Verification plan
+
+## Security / scalability notes
+
+## Unknowns / decisions

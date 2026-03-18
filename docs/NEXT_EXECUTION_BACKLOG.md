@@ -9,62 +9,82 @@
 
 ## Backlog
 
-### 1. Deterministic core proof
+### 1. Truth hierarchy and doc drift enforcement
 
-- Goal: make the sample report command work end to end
-- Why now: it proves the core contract and report shape
-- Input files: `examples/sample_ios_output.json`
-- Output: JSON and Markdown modernization reports
-- Proof: identical output for repeated runs except timestamp
-- Blockers: none once the core modules exist
-- Est. complexity: M
-
-### 2. Golden test lock
-
-- Goal: lock the JSON and Markdown report shapes
-- Why now: it prevents silent contract drift
-- Input files: generated sample report
-- Output: golden fixtures
-- Proof: comparison tests pass
-- Blockers: deterministic report generation
-- Est. complexity: S
-
-### 3. Scrubber baseline
-
-- Goal: redact obvious sensitive content before durable persistence
-- Why now: it protects the future Project Skeleton layer
-- Input files: sample raw text and structured payloads
-- Output: scrubbed strings and payloads
-- Proof: scrubber regression tests pass
+- Goal: make the repo explicit about strategic truth versus current implementation truth
+- Why now: future changes will drift or hallucinate without a written precedence rule
+- Input files: `README.md`, `docs/TRUTH_HIERARCHY.md`, `docs/APP_SCOPE.md`, `docs/BUILD_SHEET.md`
+- Output: aligned entry docs and rule surfaces
+- Proof: read order and truth precedence agree across the repo
 - Blockers: none
 - Est. complexity: S
 
-### 4. API shell health route
+### 2. Proof workflow and template enforcement
 
-- Goal: expose a simple service health check
-- Why now: it gives the backend shell a visible contract
-- Input files: `src/api/app.py`
-- Output: `/healthz` response
-- Proof: smoke test passes against the app callable
-- Blockers: core package structure
-- Est. complexity: XS
-
-### 5. Web shell scaffold
-
-- Goal: keep a minimal front-end folder and entry point
-- Why now: it reserves the product surface without overbuilding it
-- Input files: `web/package.json` and `web/app/*`
-- Output: a shell that can be extended into Next.js later
-- Proof: package metadata and placeholder app files exist
+- Goal: require proof, scope, security, and docs sync on every change
+- Why now: the repo has local proof commands but no automated gate
+- Input files: `.github/`, `Makefile`, canonical docs
+- Output: CI proof workflow and stronger issue/PR templates
+- Proof: workflow definition plus template fields covering proof and open decisions
 - Blockers: none
-- Est. complexity: XS
+- Est. complexity: S
 
-### 6. Hosted persistence plan
+### 3. Report artifact scrub boundary
 
-- Goal: define the first real storage and tenant isolation path
-- Why now: the next phase will need durable state
-- Input files: security and architecture docs
-- Output: a constrained hosted-mode plan
-- Proof: updated docs with explicit unknowns and decisions
-- Blockers: proof slice completion
+- Goal: scrub obvious sensitive strings before report artifacts are written
+- Why now: the current core is deterministic but output artifacts can still echo raw sensitive values
+- Input files: `src/core/report_generator.py`, `src/scrubber/pii_scrubber.py`, `docs/SECURITY_BASELINE.md`
+- Output: explicit artifact scrub boundary and regression tests
+- Proof: redaction tests against JSON and Markdown output
+- Blockers: none
 - Est. complexity: M
+
+### 4. Input contract hardening
+
+- Goal: reject malformed and ambiguous fixture inputs earlier
+- Why now: duplicate IDs and invalid parent references are avoidable contract drift
+- Input files: `src/core/schemas.py`, `docs/DATA_CONTRACT.md`
+- Output: stricter validation and negative-path tests
+- Proof: invalid fixtures fail predictably
+- Blockers: none
+- Est. complexity: M
+
+### 5. Stable report identifiers
+
+- Goal: replace ambiguous report-level element references with stable node references and rule IDs
+- Why now: current report evidence can be ambiguous across screens
+- Input files: `src/core/report_generator.py`, `src/core/recommendation_engine.py`, `docs/MVP_REPORT_SPEC.md`
+- Output: stable `node_ref`, `rule_id`, and recommendation identity behavior
+- Proof: golden fixture diff and identifier tests
+- Blockers: input contract hardening
+- Est. complexity: M
+
+### 6. Hosted persistence contract
+
+- Goal: define the first tenant-aware persistence model
+- Why now: this becomes the next risk after the guardrail pass is proven
+- Input files: `docs/ARCHITECTURE.md`, `docs/SECURITY_BASELINE.md`
+- Output: a concrete hosted-mode data contract
+- Proof: a short doc update with explicit entities and trust boundaries
+- Blockers: guardrail pass completion
+- Est. complexity: M
+
+### 7. Queue and worker boundary
+
+- Goal: define how analysis jobs are enqueued and processed
+- Why now: hosted mode needs an execution boundary
+- Input files: `src/worker/main.py`, `docs/SECURITY_BASELINE.md`
+- Output: a minimal queue and worker contract
+- Proof: documented request and lifecycle states
+- Blockers: hosted persistence contract
+- Est. complexity: M
+
+### 8. Repo connector shell
+
+- Goal: define the first repo metadata extractor
+- Why now: future scans need a bridge back to source ownership
+- Input files: `src/connectors/repo_connector.py`
+- Output: a stub that returns repo shape and metadata
+- Proof: stub connector test or smoke check
+- Blockers: queue and worker boundary
+- Est. complexity: S

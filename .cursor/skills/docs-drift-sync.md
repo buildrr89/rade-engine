@@ -14,6 +14,7 @@ Keep docs aligned with actual implementation.
 
 ## Files to check
 
+- `docs/TRUTH_HIERARCHY.md`
 - `docs/APP_SCOPE.md`
 - `docs/ARCHITECTURE.md`
 - `docs/BUILD_SHEET.md`
@@ -26,6 +27,7 @@ Keep docs aligned with actual implementation.
 - Do not rewrite everything.
 - Keep docs concise.
 - Reflect actual repo truth, not aspirational plans.
+- If a contract, workflow, or public report shape changes, update the matching canonical contract doc in the same change.
 
 ## Output
 

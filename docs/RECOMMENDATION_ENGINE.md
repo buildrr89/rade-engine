@@ -43,6 +43,21 @@ Every recommendation must include:
 - direct evidence from the project graph
 - references to standards or benchmarks when available
 
+## Identity rule
+
+Every recommendation must include:
+
+- `rule_id`: stable identifier for the rule that fired
+- `recommendation_id`: stable identifier derived from `rule_id` plus stable target evidence
+
+Do not derive recommendation identity from human prose.
+
+## Evidence rule
+
+- Use stable `node_ref` values in the form `screen_id#element_id` when pointing to concrete nodes.
+- Prefer stable IDs and fingerprints over screen titles or transient labels in evidence strings.
+- Evidence must stay deterministic across runs for the same payload.
+
 ## v1 recommendation rules
 
 - Accessibility gaps on interactive nodes should produce an accessibility recommendation.

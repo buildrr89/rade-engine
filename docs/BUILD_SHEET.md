@@ -2,7 +2,7 @@
 
 ## Current objective
 
-Implement the deterministic sample report path from `examples/sample_ios_output.json` to `output/modernization_report.json` and `output/modernization_report.md`.
+Keep the deterministic sample report path stable and keep truth, validation, and proof workflow aligned before any hosted persistence work.
 
 ## Why this is the current objective
 
@@ -26,21 +26,30 @@ Fixture input -> normalize -> fingerprint -> deduplicate -> score -> recommend -
 ## Latest proof
 
 - Date: 2026-03-18
-- Status: In progress
-- Evidence: repo scaffold created, contract docs written, and implementation pending
+- Status: Passed
+- Evidence:
+  - `./rade-proof` -> `25 passed, 0 failed`
+  - `uv run ruff check src tests agent` -> `All checks passed!`
+  - `uv run black --check src tests agent` -> `53 files would be left unchanged.`
+  - `pnpm --dir web lint` -> `RADE web shell lint passed`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:51586`
+  - `uv run python -m src.core.cli analyze --input examples/sample_ios_output.json --app-id com.example.legacyapp --json-output output/modernization_report.json --md-output output/modernization_report.md` -> `generated 2 screens and 3 recommendations`
 
 ## Current blocker
 
-The repo has no implementation yet for the deterministic core pipeline.
+No blocker for the phase-0 proof. Hosted persistence remains deferred until the guardrail pass stays green.
 
 ## Decision log
 
 - 2026-03-18 - Use fixture-first bootstrap - keep the proof slice narrow
 - 2026-03-18 - Favor deterministic core before web, hosted API, or collector expansion
+- 2026-03-18 - Use dual-track truth: `RADE.md` is strategic and the current-slice docs plus tests are implementation truth
+- 2026-03-18 - Replace faux tool branding with repo-owned `rade-proof` and `rade-devserver` launchers
+- 2026-03-18 - Scrub report artifacts at write time while preserving stable structural identifiers
 
 ## Next immediate action
 
-Implement the core data model, normalization, fingerprinting, scoring, recommendation engine, and report generator.
+Draft the hosted persistence contract only after the current proof, validation, and doc-sync gates remain green.
 
 ## Stop conditions
 

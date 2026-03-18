@@ -1,0 +1,1 @@
+"""Worker shell for RADE."""
