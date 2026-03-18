@@ -75,3 +75,7 @@ uv run python -m agent.cli scan
 - The repo is intentionally thin.
 - Deterministic behavior matters more than breadth at this stage.
 - `RADE.md` is the canonical product spec.
+
+## Repository
+
+- GitHub: [buildrr89/rade-project](https://github.com/buildrr89/rade-project)
