@@ -25,6 +25,7 @@ Use this order whenever docs, backlog items, templates, or source code appear to
 9. supportive docs and backlogs:
    - `docs/NEXT_EXECUTION_BACKLOG.md`
    - `docs/OPEN_SOURCE_ADOPTION_BACKLOG.md`
+   - `docs/PR_WORKFLOW.md`
    - issue templates
    - PR template
    - local skills and editor rules

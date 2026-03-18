@@ -1,0 +1,14 @@
+# Default owner for this repo.
+* @buildrr89
+
+# Canonical docs and workflow surfaces.
+/README.md @buildrr89
+/AGENTS.md @buildrr89
+/docs/ @buildrr89
+/.github/ @buildrr89
+
+# Runtime and tests.
+/src/ @buildrr89
+/agent/ @buildrr89
+/tests/ @buildrr89
+/web/ @buildrr89

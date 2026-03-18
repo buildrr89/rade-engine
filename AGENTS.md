@@ -33,6 +33,7 @@ Before making changes, read:
 - Keep unknowns explicit.
 - Write `UNKNOWN / NEEDS DECISION` instead of guessing missing behavior.
 - Do not present strategic future-state sections from `RADE.md` as current implementation.
+- Follow `docs/PR_WORKFLOW.md` for the default change and merge path.
 - Do not overwrite changes you did not make.
 
 ## Proof rule

@@ -32,7 +32,7 @@ Fixture input -> normalize -> fingerprint -> deduplicate -> score -> recommend -
   - `uv run ruff check src tests agent` -> `All checks passed!`
   - `uv run black --check src tests agent` -> `53 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:51586`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:<ephemeral-port>`
   - `uv run python -m src.core.cli analyze --input examples/sample_ios_output.json --app-id com.example.legacyapp --json-output output/modernization_report.json --md-output output/modernization_report.md` -> `generated 2 screens and 3 recommendations`
 
 ## Current blocker
@@ -46,6 +46,7 @@ No blocker for the phase-0 proof. Hosted persistence remains deferred until the 
 - 2026-03-18 - Use dual-track truth: `RADE.md` is strategic and the current-slice docs plus tests are implementation truth
 - 2026-03-18 - Replace faux tool branding with repo-owned `rade-proof` and `rade-devserver` launchers
 - 2026-03-18 - Scrub report artifacts at write time while preserving stable structural identifiers
+- 2026-03-19 - Default to PR-only changes on a protected `main` branch once GitHub settings are enabled
 
 ## Next immediate action
 

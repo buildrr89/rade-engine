@@ -28,6 +28,7 @@ Read these in order before changing behavior:
 8. `.cursor/rules.md`
 9. `docs/NEXT_EXECUTION_BACKLOG.md`
 10. `docs/OPEN_SOURCE_ADOPTION_BACKLOG.md`
+11. `docs/PR_WORKFLOW.md`
 
 ## Canonical commands
 
@@ -99,6 +100,7 @@ make web-test
 - Deterministic behavior matters more than breadth at this stage.
 - `docs/TRUTH_HIERARCHY.md` defines how repo truth is resolved.
 - `RADE.md` is the strategic product spec, not proof that future hosted surfaces already exist.
+- `docs/PR_WORKFLOW.md` defines the default branch, PR, review, and merge operating rules.
 
 ## Repository
 
