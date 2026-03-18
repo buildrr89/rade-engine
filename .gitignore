@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.DS_Store
+node_modules/
+web/.next/
+web/dist/
+.uv-cache/
+output/*
+!output/.gitkeep
