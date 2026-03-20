@@ -8,6 +8,7 @@ This document defines the input and output contract for the deterministic proof 
 
 The analysis input is a JSON object with these top-level fields:
 
+- `rade_legal`: optional object carrying the Lead Architect compliance header because JSON does not support comments
 - `project_name`: string
 - `platform`: string, currently `ios`, `android`, or `web`
 - `screens`: array of screen objects
@@ -22,6 +23,8 @@ Validation rules:
 
 - `screen_id` must be unique within the payload
 - `elements` must contain at least one element
+- `label` must be a string
+- `traits` must contain only strings
 
 Each element object has these fields:
 
@@ -44,8 +47,27 @@ Each element object has these fields:
 Validation rules:
 
 - `element_id` must be unique within a screen
-- `parent_id` must point to another element in the same screen when present
+- `parent_id` must point to a different element in the same screen when present
 - `bounds` must be either `null` or exactly four numeric values
+- `slab_layer` must be one of the canonical construction labels below when present
+
+Canonical slab labels:
+
+- `01. OS Site (The Land)`
+- `02. Root (The Slab)`
+- `03. Containers (The Frame)`
+- `04. Links/Events (Wires & Plumbing)`
+- `05. Assets (The Decor)`
+
+Canonical mapping locked in:
+
+- `foundation` -> `01. OS Site (The Land)`
+- `framework` -> `02. Root (The Slab)`
+- `systems` -> `03. Containers (The Frame)`
+- `fitout` -> `04. Links/Events (Wires & Plumbing)`
+- `finish` -> `05. Assets (The Decor)`
+
+Legacy slab labels are no longer valid contract values.
 
 ## Normalized node contract
 
@@ -62,6 +84,7 @@ Fingerprinting must ignore literal labels and other transient content when struc
 
 The report output must include:
 
+- `rade_legal`
 - `report_version`
 - `generated_at`
 - `app_id`
@@ -86,6 +109,19 @@ Artifact scrub rule:
 
 - JSON and Markdown report artifacts are scrubbed at write time for obvious sensitive strings
 - Structural identifiers such as `node_ref`, `screen_id`, `recommendation_id`, `rule_id`, and fingerprints remain intentionally preserved
+- `rade_legal` preserves the Lead Architect notice, the exclusive intellectual-property claim for the `5-Slab Taxonomy` and `Ambient Engine`, the SVG watermark text, and the report Live Raid date
+
+## Legal metadata contract
+
+`rade_legal` may contain these compliance fields when present:
+
+- `header_notice`
+- `lead_architect`
+- `classification`
+- `ownership`
+- `proprietary_systems`
+- `visible_svg_watermark`
+- `live_raid_date`
 
 ## Determinism rule
 

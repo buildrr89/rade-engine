@@ -1,9 +1,12 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 import argparse
 import importlib
 import os
 from wsgiref.simple_server import make_server
+
+from ..core.compliance import emit_terminal_banner
 
 
 def _load_app(spec: str):
@@ -37,4 +40,5 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
+    emit_terminal_banner()
     raise SystemExit(main())

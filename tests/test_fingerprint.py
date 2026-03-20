@@ -1,5 +1,7 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
+from src.core.layering import CONTAINERS_LAYER
 from src.core.fingerprint import fingerprint_node
 
 
@@ -7,7 +9,7 @@ def test_fingerprint_ignores_labels_but_keeps_structure():
     base = {
         "platform": "ios",
         "element_type": "button",
-        "slab_layer": "systems",
+        "slab_layer": CONTAINERS_LAYER,
         "role": "button",
         "interactive": True,
         "visible": True,
@@ -26,7 +28,7 @@ def test_fingerprint_changes_for_different_structure():
     first = {
         "platform": "ios",
         "element_type": "button",
-        "slab_layer": "systems",
+        "slab_layer": CONTAINERS_LAYER,
         "role": "button",
         "interactive": True,
         "visible": True,

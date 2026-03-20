@@ -1,3 +1,4 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 from src.core.deduplicator import deduplicate_nodes
@@ -27,10 +28,24 @@ def test_recommendation_engine_produces_three_standard_backed_actions():
     ]
     assert all(rec["provenance"] == "standards" for rec in recommendations)
     assert all(not rec["benchmark_refs"] for rec in recommendations)
-    assert recommendations[0]["recommendation_id"].startswith(
-        "rec-accessibility_missing_identifier-"
-    )
-    assert recommendations[0]["evidence"] == [
-        "project-overview#primary-cta",
-        "analysis-review#primary-cta",
+    assert [rec["recommendation_id"] for rec in recommendations] == [
+        "rec-accessibility_missing_identifier-8c7b61bc",
+        "rec-migration_sequence_accessibility_before_reuse-536109ca",
+        "rec-component_reuse_interactive_cluster-df13c83b",
+    ]
+    assert [rec["evidence"] for rec in recommendations] == [
+        [
+            "project-overview#primary-cta",
+            "analysis-review#primary-cta",
+        ],
+        [
+            "missing_accessibility_node_refs=project-overview#primary-cta,analysis-review#primary-cta",
+            "repeated_interactive_cluster_fingerprint=25610e7cc32de585",
+            "primary_reuse_target=project-overview#primary-cta",
+        ],
+        [
+            "cluster_fingerprint=25610e7cc32de585",
+            "screen_ids=analysis-review,project-overview",
+            "node_refs=project-overview#primary-cta,analysis-review#primary-cta",
+        ],
     ]

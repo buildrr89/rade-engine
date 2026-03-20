@@ -1,8 +1,10 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 import argparse
 from typing import Sequence
 
+from src.core.compliance import emit_terminal_banner
 from src.core.cli import main as core_main
 
 
@@ -39,4 +41,5 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
+    emit_terminal_banner()
     raise SystemExit(main())

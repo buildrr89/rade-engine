@@ -1,12 +1,19 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 from ..connectors.standards_pack import load_standards_pack
 from ..scrubber.pii_scrubber import scrub_report_artifact
+from .compliance import (
+    iso_date_from_timestamp,
+    markdown_legal_lines,
+    with_legal_metadata,
+)
 from .deduplicator import deduplicate_nodes
 from .fingerprint import fingerprint_node
 from .models import REPORT_VERSION
@@ -15,6 +22,7 @@ from .recommendation_engine import build_recommendations
 from .roadmap_generator import build_roadmap
 from .schemas import load_json_file, validate_project_payload
 from .scoring import score_project
+from .telemetry import log_stage
 
 JsonDict = dict[str, Any]
 
@@ -31,23 +39,32 @@ def now_iso() -> str:
 def analyze_payload(
     payload: JsonDict, app_id: str, generated_at: str | None = None
 ) -> JsonDict:
-    validated = validate_project_payload(payload)
-    project = normalize_project(validated, app_id)
+    run_id = str(uuid4())
+    _set_last_run_metadata({"run_id": run_id})
 
-    for screen in project["screens"]:
-        for element_index, element in enumerate(screen["elements"]):
-            enriched = dict(element)
-            enriched["structural_fingerprint"] = fingerprint_node(enriched)
-            screen["elements"][element_index] = enriched
+    with log_stage(run_id=run_id, component="cli", stage="load_payload"):
+        validated = validate_project_payload(payload)
+
+    with log_stage(run_id=run_id, component="cli", stage="normalize"):
+        project = normalize_project(validated, app_id)
+        for screen in project["screens"]:
+            for element_index, element in enumerate(screen["elements"]):
+                enriched = dict(element)
+                enriched["structural_fingerprint"] = fingerprint_node(enriched)
+                screen["elements"][element_index] = enriched
 
     project["nodes"] = [
         element for screen in project["screens"] for element in screen["elements"]
     ]
-    clusters = deduplicate_nodes(project["nodes"])
-    scores = score_project(project, clusters)
-    standards_pack = load_standards_pack()
-    recommendations = build_recommendations(project, clusters)
-    roadmap = build_roadmap(recommendations)
+
+    with log_stage(run_id=run_id, component="cli", stage="score"):
+        clusters = deduplicate_nodes(project["nodes"])
+        scores = score_project(project, clusters)
+
+    with log_stage(run_id=run_id, component="cli", stage="recommend"):
+        standards_pack = load_standards_pack()
+        recommendations = build_recommendations(project, clusters)
+        roadmap = build_roadmap(recommendations)
     generated_at = generated_at or now_iso()
 
     findings = [
@@ -131,11 +148,29 @@ def analyze_payload(
         "recommendations": recommendations,
         "roadmap": roadmap,
     }
+    report["_telemetry"] = {"run_id": run_id}
     return report
 
 
+_last_run_metadata: dict[str, Any] | None = None
+
+
+def _set_last_run_metadata(metadata: dict[str, Any]) -> None:
+    global _last_run_metadata
+    _last_run_metadata = metadata.copy()
+
+
+def get_last_run_metadata() -> dict[str, Any] | None:
+    return _last_run_metadata
+
+
 def prepare_report_for_output(report: JsonDict) -> JsonDict:
-    return scrub_report_artifact(report)
+    scrubbed = scrub_report_artifact(report)
+    scrubbed.pop("_telemetry", None)
+    return with_legal_metadata(
+        scrubbed,
+        live_raid_date=iso_date_from_timestamp(scrubbed.get("generated_at")),
+    )
 
 
 def render_markdown_report(report: JsonDict) -> str:
@@ -149,6 +184,11 @@ def render_markdown_report(report: JsonDict) -> str:
     lines.append(f"- Project: {report['project_name']}")
     lines.append(f"- Platform: {report['platform']}")
     lines.append(f"- Standards pack: {report['standards_pack']['version']}")
+    lines.extend(
+        markdown_legal_lines(
+            live_raid_date=report["rade_legal"].get("live_raid_date")
+        )
+    )
     lines.append("")
     lines.append("## Summary")
     for key, value in report["summary"].items():
@@ -214,18 +254,20 @@ def render_markdown_report(report: JsonDict) -> str:
 def write_report(
     report: JsonDict, json_output: Path | None, md_output: Path | None
 ) -> None:
-    report_for_output = prepare_report_for_output(report)
-    if json_output is not None:
-        json_output.parent.mkdir(parents=True, exist_ok=True)
-        json_output.write_text(
-            json.dumps(report_for_output, indent=2, sort_keys=False) + "\n",
-            encoding="utf-8",
-        )
-    if md_output is not None:
-        md_output.parent.mkdir(parents=True, exist_ok=True)
-        md_output.write_text(
-            render_markdown_report(report_for_output), encoding="utf-8"
-        )
+    run_id = report.get("_telemetry", {}).get("run_id")
+    with log_stage(run_id=run_id, component="cli", stage="report_write"):
+        report_for_output = prepare_report_for_output(report)
+        if json_output is not None:
+            json_output.parent.mkdir(parents=True, exist_ok=True)
+            json_output.write_text(
+                json.dumps(report_for_output, indent=2, sort_keys=False) + "\n",
+                encoding="utf-8",
+            )
+        if md_output is not None:
+            md_output.parent.mkdir(parents=True, exist_ok=True)
+            md_output.write_text(
+                render_markdown_report(report_for_output), encoding="utf-8"
+            )
 
 
 def analyze_file(

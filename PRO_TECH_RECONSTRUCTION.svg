@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 936" role="img" aria-label="RADE reconstruction">
+<metadata id="rade-metadata">legal_notice=© 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. | ownership=Exclusive intellectual property of Trung Nguyen (Buildrr89) | systems=5-Slab Taxonomy; Ambient Engine | watermark=© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89</metadata>
+<defs>
+<linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#04110b" />
+<stop offset="100%" stop-color="#071f16" />
+</linearGradient>
+</defs>
+<rect width="1400" height="936" fill="url(#bg)" />
+<text x="72" y="42" font-family="Menlo, Consolas, monospace" font-size="26" fill="#98ffad" font-weight="700">RADE Reconstruction - Spotify Surface</text>
+<text x="72" y="68" font-family="Menlo, Consolas, monospace" font-size="13" fill="#7ecf93">com.rade.chrome.spotify | nodes=55 | edges=54</text>
+<line x1="700.0" y1="132.0" x2="72.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="176.7" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="281.3" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="386.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="490.7" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="490.7" y1="272.0" x2="72.0" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="490.7" y1="272.0" x2="115.3" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="490.7" y1="272.0" x2="158.6" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="490.7" y1="272.0" x2="201.9" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="595.3" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="700.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="804.7" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="909.3" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="1198.1" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="245.2" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="245.2" y1="412.0" x2="72.0" y2="480.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="245.2" y1="412.0" x2="323.2" y2="480.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="288.6" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="288.6" y1="412.0" x2="574.4" y2="480.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="331.9" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="331.9" y1="412.0" x2="825.6" y2="480.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="375.2" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="418.5" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="461.8" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="505.1" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="548.4" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="591.7" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="635.0" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="678.3" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="721.7" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="765.0" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="808.3" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="851.6" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="894.9" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="938.2" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="981.5" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="1024.8" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1198.1" y1="412.0" x2="1068.1" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="1118.7" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="1223.3" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1223.3" y1="272.0" x2="1111.4" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1223.3" y1="272.0" x2="1154.8" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1223.3" y1="272.0" x2="1198.1" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1223.3" y1="272.0" x2="1241.4" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1223.3" y1="272.0" x2="1284.7" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="1328.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="272.0" x2="1328.0" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="412.0" x2="1076.8" y2="480.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="412.0" x2="1328.0" y2="480.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="552.0" x2="72.0" y2="620.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="552.0" x2="386.0" y2="620.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="552.0" x2="700.0" y2="620.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="552.0" x2="1014.0" y2="620.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="552.0" x2="1328.0" y2="620.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<g id="spotify-surface#15364be0" data-order="0">
+<rect x="570.0" y="64.0" width="260" height="64" rx="16" ry="16" fill="#113f2a" stroke="#7cf7a0" stroke-width="2" />
+<text x="700.0" y="94.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Spotify Surface</text>
+<text x="700.0" y="116.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">screen | fc2cab4c</text>
+</g>
+<g id="spotify-surface#3cad7536" data-order="1">
+<rect x="-58.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#123e30" stroke="#7cf7a0" stroke-width="2" />
+<text x="72.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Text Area</text>
+<text x="72.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">text | f1eb399d</text>
+</g>
+<g id="spotify-surface#d2f0c326" data-order="2">
+<rect x="46.7" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="176.7" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="176.7" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | df213da4</text>
+</g>
+<g id="spotify-surface#bbf2d655" data-order="3">
+<rect x="151.3" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="281.3" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="281.3" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | df213da4</text>
+</g>
+<g id="spotify-surface#d3e67f18" data-order="4">
+<rect x="256.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="386.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="386.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 9e148034</text>
+</g>
+<g id="spotify-surface#5e5fd906" data-order="5">
+<rect x="360.7" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="490.7" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Form</text>
+<text x="490.7" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | 45d15bfc</text>
+</g>
+<g id="spotify-surface#a8680c63" data-order="10">
+<rect x="465.3" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="595.3" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="595.3" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | df213da4</text>
+</g>
+<g id="spotify-surface#2e706957" data-order="11">
+<rect x="570.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="700.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="700.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 9e148034</text>
+</g>
+<g id="spotify-surface#e265be31" data-order="12">
+<rect x="674.7" y="204.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="804.7" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="804.7" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 9e148034</text>
+</g>
+<g id="spotify-surface#80ff8c90" data-order="13">
+<rect x="779.3" y="204.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="909.3" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="909.3" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 9e148034</text>
+</g>
+<g id="spotify-surface#[redacted-phone]" data-order="14">
+<rect x="884.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1014.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Navigation</text>
+<text x="1014.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">navigation | 1a829f4c</text>
+</g>
+<g id="spotify-surface#e193f74a" data-order="39">
+<rect x="988.7" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1118.7" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Input Field</text>
+<text x="1118.7" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">input | c0b8c0a7</text>
+</g>
+<g id="spotify-surface#dc8256ea" data-order="40">
+<rect x="1093.3" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1223.3" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Sidebar</text>
+<text x="1223.3" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | af2d7433</text>
+</g>
+<g id="spotify-surface#1f49f0eb" data-order="46">
+<rect x="1198.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1328.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Main Content</text>
+<text x="1328.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | a4670b44</text>
+</g>
+<g id="spotify-surface#5471581e" data-order="6">
+<rect x="-58.0" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="72.0" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="72.0" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#7518ed09" data-order="7">
+<rect x="-14.7" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="115.3" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="115.3" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#988c7951" data-order="8">
+<rect x="28.6" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="158.6" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="158.6" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#1b23b896" data-order="9">
+<rect x="71.9" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="201.9" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Search Field</text>
+<text x="201.9" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">input | c7fe4aff</text>
+</g>
+<g id="spotify-surface#1bb4cd21" data-order="15">
+<rect x="115.2" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="245.2" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Header</text>
+<text x="245.2" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | 7bc4905a</text>
+</g>
+<g id="spotify-surface#8686f069" data-order="18">
+<rect x="158.6" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="288.6" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Section</text>
+<text x="288.6" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | 5d0d132c</text>
+</g>
+<g id="spotify-surface#8c3691a5" data-order="20">
+<rect x="201.9" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="331.9" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Section</text>
+<text x="331.9" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | 5d0d132c</text>
+</g>
+<g id="spotify-surface#1cb0cc95" data-order="22">
+<rect x="245.2" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="375.2" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Grid</text>
+<text x="375.2" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | 05a648d6</text>
+</g>
+<g id="spotify-surface#df1d6165" data-order="23">
+<rect x="288.5" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="418.5" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Presentation</text>
+<text x="418.5" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 601e5899</text>
+</g>
+<g id="spotify-surface#3f89e76b" data-order="24">
+<rect x="331.8" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="461.8" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Presentation</text>
+<text x="461.8" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 601e5899</text>
+</g>
+<g id="spotify-surface#8c84262c" data-order="25">
+<rect x="375.1" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="505.1" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Row</text>
+<text x="505.1" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 631a54c6</text>
+</g>
+<g id="spotify-surface#0ed41a13" data-order="26">
+<rect x="418.4" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="548.4" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Presentation</text>
+<text x="548.4" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 601e5899</text>
+</g>
+<g id="spotify-surface#5ce85737" data-order="27">
+<rect x="461.7" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="591.7" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Presentation</text>
+<text x="591.7" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 601e5899</text>
+</g>
+<g id="spotify-surface#2a53c093" data-order="28">
+<rect x="505.0" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="635.0" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Presentation</text>
+<text x="635.0" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 601e5899</text>
+</g>
+<g id="spotify-surface#38b99f4a" data-order="29">
+<rect x="548.3" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="678.3" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Presentation</text>
+<text x="678.3" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 601e5899</text>
+</g>
+<g id="spotify-surface#134a42d4" data-order="30">
+<rect x="591.7" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="721.7" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Row</text>
+<text x="721.7" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 631a54c6</text>
+</g>
+<g id="spotify-surface#42d5d6b5" data-order="31">
+<rect x="635.0" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="765.0" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="765.0" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="spotify-surface#9242aa51" data-order="32">
+<rect x="678.3" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="808.3" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="808.3" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="spotify-surface#a4da9cc5" data-order="33">
+<rect x="721.6" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="851.6" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="851.6" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="spotify-surface#cac64bed" data-order="34">
+<rect x="764.9" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="894.9" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="894.9" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="spotify-surface#f0bdfb05" data-order="35">
+<rect x="808.2" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="938.2" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="938.2" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="spotify-surface#6344dc64" data-order="36">
+<rect x="851.5" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="981.5" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="981.5" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="spotify-surface#18ab5a5a" data-order="37">
+<rect x="894.8" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1024.8" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="1024.8" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="spotify-surface#fb9083e1" data-order="38">
+<rect x="938.1" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="1068.1" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="1068.1" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#ce168a70" data-order="41">
+<rect x="981.4" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="1111.4" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="1111.4" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#ab9adfd5" data-order="42">
+<rect x="1024.8" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="1154.8" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="1154.8" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#[redacted-phone]" data-order="43">
+<rect x="1068.1" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="1198.1" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="1198.1" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#292acb0a" data-order="44">
+<rect x="1111.4" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="1241.4" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="1241.4" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#4d1a968a" data-order="45">
+<rect x="1154.7" y="344.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="1284.7" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="1284.7" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | 5b6f9773</text>
+</g>
+<g id="spotify-surface#1a7ebbee" data-order="47">
+<rect x="1198.0" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1328.0" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Section</text>
+<text x="1328.0" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | a998341f</text>
+</g>
+<g id="spotify-surface#b85580d3" data-order="16">
+<rect x="-58.0" y="484.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="72.0" y="514.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="72.0" y="536.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | f7dd58d6</text>
+</g>
+<g id="spotify-surface#94322a26" data-order="17">
+<rect x="193.2" y="484.0" width="260" height="64" rx="16" ry="16" fill="#123e30" stroke="#7cf7a0" stroke-width="2" />
+<text x="323.2" y="514.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Heading</text>
+<text x="323.2" y="536.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">text | fc38670d</text>
+</g>
+<g id="spotify-surface#be3037f2" data-order="19">
+<rect x="444.4" y="484.0" width="260" height="64" rx="16" ry="16" fill="#184d34" stroke="#7cf7a0" stroke-width="2" />
+<text x="574.4" y="514.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Button</text>
+<text x="574.4" y="536.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">button | f7dd58d6</text>
+</g>
+<g id="spotify-surface#0ac1e51d" data-order="21">
+<rect x="695.6" y="484.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="825.6" y="514.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="825.6" y="536.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | d73a289b</text>
+</g>
+<g id="spotify-surface#b9af0223" data-order="48">
+<rect x="946.8" y="484.0" width="260" height="64" rx="16" ry="16" fill="#123e30" stroke="#7cf7a0" stroke-width="2" />
+<text x="1076.8" y="514.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Heading</text>
+<text x="1076.8" y="536.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">text | fc38670d</text>
+</g>
+<g id="spotify-surface#9771becc" data-order="49">
+<rect x="1198.0" y="484.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1328.0" y="514.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Section</text>
+<text x="1328.0" y="536.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | 3c283cfb</text>
+</g>
+<g id="spotify-surface#42f4c82e" data-order="50">
+<rect x="-58.0" y="624.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="72.0" y="654.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="72.0" y="676.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 9813a94c</text>
+</g>
+<g id="spotify-surface#0c993c74" data-order="51">
+<rect x="256.0" y="624.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="386.0" y="654.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="386.0" y="676.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 9813a94c</text>
+</g>
+<g id="spotify-surface#b35e421d" data-order="52">
+<rect x="570.0" y="624.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="700.0" y="654.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Grid</text>
+<text x="700.0" y="676.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | bfe70614</text>
+</g>
+<g id="spotify-surface#ee1e53ee" data-order="53">
+<rect x="884.0" y="624.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1014.0" y="654.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Group</text>
+<text x="1014.0" y="676.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | e6d49f23</text>
+</g>
+<g id="spotify-surface#5fd331b5" data-order="54">
+<rect x="1198.0" y="624.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1328.0" y="654.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Presentation</text>
+<text x="1328.0" y="676.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 7ebf5a95</text>
+</g>
+<g id="rade-legal" data-rade-dna="rade-legal" data-slab-layer="02. Root (The Slab)">
+<text x="1312" y="864" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="12" fill="#b9ffda">© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89</text>
+<text x="1312" y="882" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">5-Slab Taxonomy | Ambient Engine</text>
+<text x="1312" y="900" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">Live Raid: 2026-03-21</text>
+</g>
+</svg>

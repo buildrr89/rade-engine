@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 720" role="img" aria-label="RADE reconstruction">
+<metadata id="rade-metadata">legal_notice=© 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. | ownership=Exclusive intellectual property of Trung Nguyen (Buildrr89) | systems=5-Slab Taxonomy; Ambient Engine | watermark=© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89</metadata>
+<defs>
+<linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#04110b" />
+<stop offset="100%" stop-color="#071f16" />
+</linearGradient>
+</defs>
+<rect width="1400" height="720" fill="url(#bg)" />
+<text x="72" y="42" font-family="Menlo, Consolas, monospace" font-size="26" fill="#98ffad" font-weight="700">RADE Reconstruction - Www Surface</text>
+<text x="72" y="68" font-family="Menlo, Consolas, monospace" font-size="13" fill="#7ecf93">com.rade.chrome.www | nodes=9 | edges=8</text>
+<line x1="700.0" y1="132.0" x2="72.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="386.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="700.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="1014.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="700.0" y1="132.0" x2="1328.0" y2="200.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="272.0" x2="72.0" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="272.0" x2="700.0" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<line x1="1328.0" y1="272.0" x2="1328.0" y2="340.0" stroke="#62f2b1" stroke-width="2" opacity="0.85" />
+<g id="www-surface#882a0ea5" data-order="0">
+<rect x="570.0" y="64.0" width="260" height="64" rx="16" ry="16" fill="#113f2a" stroke="#7cf7a0" stroke-width="2" />
+<text x="700.0" y="94.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Www Surface</text>
+<text x="700.0" y="116.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">screen | 040e2f30</text>
+</g>
+<g id="www-surface#b12dd981" data-order="1">
+<rect x="-58.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="72.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="72.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | df213da4</text>
+</g>
+<g id="www-surface#4b3fad85" data-order="2">
+<rect x="256.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="386.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Alert</text>
+<text x="386.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | d378772a</text>
+</g>
+<g id="www-surface#607d44fe" data-order="3">
+<rect x="570.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#123e30" stroke="#7cf7a0" stroke-width="2" />
+<text x="700.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Heading</text>
+<text x="700.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">text | e5b16712</text>
+</g>
+<g id="www-surface#3ea30c03" data-order="4">
+<rect x="884.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1014.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Main Content</text>
+<text x="1014.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">container | ba958129</text>
+</g>
+<g id="www-surface#8370d901" data-order="5">
+<rect x="1198.0" y="204.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1328.0" y="234.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Navigation</text>
+<text x="1328.0" y="256.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">navigation | 048d1107</text>
+</g>
+<g id="www-surface#87ed70db" data-order="6">
+<rect x="-58.0" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="72.0" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="72.0" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="www-surface#58ede978" data-order="7">
+<rect x="570.0" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="700.0" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="700.0" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="www-surface#682ce58c" data-order="8">
+<rect x="1198.0" y="344.0" width="260" height="64" rx="16" ry="16" fill="#173b2c" stroke="#7cf7a0" stroke-width="2" />
+<text x="1328.0" y="374.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="18" fill="#f2fff4" font-weight="700">Link</text>
+<text x="1328.0" y="396.0" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="11" fill="#b7f7c2">unknown | 8cd3c6bf</text>
+</g>
+<g id="rade-legal" data-rade-dna="rade-legal" data-slab-layer="02. Root (The Slab)">
+<text x="1312" y="648" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="12" fill="#b9ffda">© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89</text>
+<text x="1312" y="666" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">5-Slab Taxonomy | Ambient Engine</text>
+<text x="1312" y="684" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">Live Raid: 2026-03-21</text>
+</g>
+</svg>

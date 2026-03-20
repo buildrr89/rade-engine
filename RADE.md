@@ -234,7 +234,37 @@ Status:
 
 - mandatory for Project Skeleton pilot
 
-### 6.4 Mode D: Public web interface scan
+### 6.4 Accessibility hook scanning
+
+This is the preferred runtime collection method.
+
+Primary sources:
+
+- Android `AccessibilityNodeInfo` / accessibility services
+- iOS XCTest accessibility / `AXElement` tree
+- web DOM plus accessibility tree where available
+
+Principle:
+
+- do not parse pixels first when the accessibility tree already exposes structure, roles, labels, and hierarchy
+- use visual capture only as a fallback or corroborating signal
+
+Why this matters:
+
+- the operating system already knows containment, actions, labels, and semantics
+- the collector should observe the interface as a functional hierarchy, not as a pixel grid
+
+### 6.5 Virtual device farm
+
+Project Skeleton may eventually use controlled Android and iOS emulators or simulators to scale authorized scans.
+
+Rule:
+
+- device-farm execution is an orchestration layer
+- the product is the captured functional graph and recommendations
+- scale does not substitute for redaction quality or product clarity
+
+### 6.6 Mode D: Public web interface scan
 
 Purpose:
 
@@ -301,6 +331,18 @@ Allowed forms:
 - no anti-bot evasion as a default strategy
 - no collection from private user accounts without authority
 - no persistence of sensitive raw user content when structural data is enough
+
+### 7.6 hiQ and CFAA framing
+
+Use hiQ as a narrow domain-logic reference, not as a blanket permission slip.
+
+Current working interpretation:
+
+- public-facing data collection has stronger CFAA footing than gated access
+- access-control bypass, credential sharing, fake accounts, and anti-bot circumvention materially raise risk
+- privacy law, contract law, platform terms, and anti-circumvention law still apply
+
+Do not write product copy that says “hiQ makes scraping legal.” That is too broad and not defensible.
 
 ---
 
@@ -391,24 +433,24 @@ Every normalized node must support:
 
 RADE must reason about interfaces using five slab layers:
 
-1. `foundation`
-2. `framework`
-3. `systems`
-4. `fitout`
-5. `finish`
+1. `01. OS Site (The Land)`
+2. `02. Root (The Slab)`
+3. `03. Containers (The Frame)`
+4. `04. Links/Events (Wires & Plumbing)`
+5. `05. Assets (The Decor)`
 
 Definitions:
 
-- `foundation`: screen footprint, primary regions, shell placement
-- `framework`: containers, stacks, lists, grids, cards, hierarchy skeleton
-- `systems`: buttons, inputs, navigation, toggles, interaction controls
-- `fitout`: content, labels, helper text, media, semantic user-facing elements
-- `finish`: visual styling, theme, tokens, cosmetic treatment
+- `01. OS Site (The Land)`: screen footprint, primary regions, shell placement
+- `02. Root (The Slab)`: containers, stacks, lists, grids, cards, hierarchy skeleton
+- `03. Containers (The Frame)`: buttons, inputs, navigation, toggles, interaction controls
+- `04. Links/Events (Wires & Plumbing)`: content, labels, helper text, media, semantic user-facing elements
+- `05. Assets (The Decor)`: visual styling, theme, tokens, cosmetic treatment
 
 Rule:
 
-- layers `foundation`, `framework`, `systems`, and `fitout` are first-class for deterministic analysis
-- layer `finish` is secondary in v1 and must not dominate scoring
+- layers `01. OS Site (The Land)`, `02. Root (The Slab)`, `03. Containers (The Frame)`, and `04. Links/Events (Wires & Plumbing)` are first-class for deterministic analysis
+- layer `05. Assets (The Decor)` is secondary in v1 and must not dominate scoring
 
 ### 10.3 Interface graph entities
 
@@ -571,6 +613,18 @@ Project Skeleton only works safely if redaction happens before durable persisten
 - detect and remove personal identifiers
 - detect and remove secrets, tokens, and session identifiers
 - detect and remove free-form user text unless structurally required
+
+Implementation guidance:
+
+- use deterministic regex rules first
+- use NER or classification only as a second pass
+- preserve structure while dropping literal sensitive strings
+- keep a scrub log so redaction coverage is measurable
+
+Required target:
+
+- define redaction coverage as a measurable metric
+- do not promise 100 percent PII removal in marketing copy unless it is empirically validated on the exact data class
 
 ### 15.3 Storage rules
 

@@ -1,3 +1,4 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 from src.core.schemas import ValidationError, validate_project_payload
@@ -37,6 +38,29 @@ def test_schema_rejects_unknown_parent_reference():
     _assert_validation_error(payload, "references unknown element")
 
 
+def test_schema_rejects_self_parent_reference():
+    payload = load_fixture()
+    payload["screens"][0]["elements"][1]["parent_id"] = payload["screens"][0][
+        "elements"
+    ][1]["element_id"]
+
+    _assert_validation_error(payload, "must reference a different element")
+
+
+def test_schema_rejects_non_string_label():
+    payload = load_fixture()
+    payload["screens"][0]["elements"][0]["label"] = 123
+
+    _assert_validation_error(payload, "'label' must be a string")
+
+
+def test_schema_rejects_non_string_traits():
+    payload = load_fixture()
+    payload["screens"][0]["elements"][0]["traits"] = ["shell", 123]
+
+    _assert_validation_error(payload, "'traits[1]' must be a string")
+
+
 def test_schema_rejects_invalid_bounds_and_negative_integers():
     payload = load_fixture()
     payload["screens"][0]["elements"][0]["bounds"] = [0, 1, 2]
@@ -46,3 +70,10 @@ def test_schema_rejects_invalid_bounds_and_negative_integers():
     payload = load_fixture()
     payload["screens"][0]["elements"][0]["hierarchy_depth"] = -1
     _assert_validation_error(payload, "zero or greater")
+
+
+def test_schema_rejects_legacy_slab_labels():
+    payload = load_fixture()
+    payload["screens"][0]["elements"][0]["slab_layer"] = "foundation"
+
+    _assert_validation_error(payload, "'slab_layer' must be one of")

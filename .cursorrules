@@ -1,0 +1,12 @@
+# RADE Cursor Rules
+© 2026 RADE Project. All Rights Reserved.
+
+- Prioritize semantic accessibility nodes over screen coordinates.
+- Collect only from authorized or public surfaces.
+- No fake accounts.
+- No login bypass.
+- No stealth collection.
+- No deterministic scoring from LLM output.
+- Unknowns must be written as `UNKNOWN / NEEDS DECISION`.
+- Reuse current repo patterns before inventing new abstractions.
+- Update canonical docs and tests when behavior changes.

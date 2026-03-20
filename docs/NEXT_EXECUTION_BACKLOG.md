@@ -7,84 +7,53 @@
 - Order by risk reduction first
 - No vague epics
 
-## Backlog
+## Completed
 
 ### 1. Truth hierarchy and doc drift enforcement
 
-- Goal: make the repo explicit about strategic truth versus current implementation truth
-- Why now: future changes will drift or hallucinate without a written precedence rule
-- Input files: `README.md`, `docs/TRUTH_HIERARCHY.md`, `docs/APP_SCOPE.md`, `docs/BUILD_SHEET.md`
-- Output: aligned entry docs and rule surfaces
-- Proof: read order and truth precedence agree across the repo
-- Blockers: none
-- Est. complexity: S
+- Status: implemented in `README.md`, `docs/APP_SCOPE.md`, and `docs/BUILD_SHEET.md`
+- Result: the entry docs explicitly cite `docs/TRUTH_HIERARCHY.md`, describe the ordered truth adjudication, and instruct contributors to update canonical docs alongside implementation changes when behaviors/contracts shift.
 
 ### 2. Proof workflow and template enforcement
 
-- Goal: require proof, scope, security, and docs sync on every change
-- Why now: the repo has local proof commands but no automated gate
-- Input files: `.github/`, `Makefile`, canonical docs
-- Output: CI proof workflow and stronger issue/PR templates
-- Proof: workflow definition plus template fields covering proof and open decisions
-- Blockers: none
-- Est. complexity: S
+- Status: implemented in [.github/workflows/proof.yml](/Users/restolad/Desktop/RADE/.github/workflows/proof.yml), [.github/pull_request_template.md](/Users/restolad/Desktop/RADE/.github/pull_request_template.md), [.github/ISSUE_TEMPLATE/bug_report.md](/Users/restolad/Desktop/RADE/.github/ISSUE_TEMPLATE/bug_report.md), and [.github/ISSUE_TEMPLATE/feature_request.md](/Users/restolad/Desktop/RADE/.github/ISSUE_TEMPLATE/feature_request.md)
+- Result: the proof workflow and template guardrails are now covered by repository contract tests
 
 ### 3. Report artifact scrub boundary
 
-- Goal: scrub obvious sensitive strings before report artifacts are written
-- Why now: the current core is deterministic but output artifacts can still echo raw sensitive values
-- Input files: `src/core/report_generator.py`, `src/scrubber/pii_scrubber.py`, `docs/SECURITY_BASELINE.md`
-- Output: explicit artifact scrub boundary and regression tests
-- Proof: redaction tests against JSON and Markdown output
-- Blockers: none
-- Est. complexity: M
+- Status: implemented in [src/core/report_generator.py](/Users/restolad/Desktop/RADE/src/core/report_generator.py), [src/scrubber/pii_scrubber.py](/Users/restolad/Desktop/RADE/src/scrubber/pii_scrubber.py), and [tests/test_scrubber.py](/Users/restolad/Desktop/RADE/tests/test_scrubber.py)
+- Result: artifacts are scrubbed before JSON and Markdown writes, including a regression test that proves the Markdown renderer never exposes sensitive strings
 
 ### 4. Input contract hardening
 
-- Goal: reject malformed and ambiguous fixture inputs earlier
-- Why now: duplicate IDs and invalid parent references are avoidable contract drift
-- Input files: `src/core/schemas.py`, `docs/DATA_CONTRACT.md`
-- Output: stricter validation and negative-path tests
-- Proof: invalid fixtures fail predictably
-- Blockers: none
-- Est. complexity: M
+- Status: implemented in [src/core/schemas.py](/Users/restolad/Desktop/RADE/src/core/schemas.py) and [tests/test_schemas.py](/Users/restolad/Desktop/RADE/tests/test_schemas.py)
+- Result: invalid self-parent references, non-string labels, and non-string trait entries are rejected before normalization
 
 ### 5. Stable report identifiers
 
-- Goal: replace ambiguous report-level element references with stable node references and rule IDs
-- Why now: current report evidence can be ambiguous across screens
-- Input files: `src/core/report_generator.py`, `src/core/recommendation_engine.py`, `docs/MVP_REPORT_SPEC.md`
-- Output: stable `node_ref`, `rule_id`, and recommendation identity behavior
-- Proof: golden fixture diff and identifier tests
-- Blockers: input contract hardening
-- Est. complexity: M
+- Status: implemented in [tests/test_recommendation_engine.py](/Users/restolad/Desktop/RADE/tests/test_recommendation_engine.py) and [docs/MVP_REPORT_SPEC.md](/Users/restolad/Desktop/RADE/docs/MVP_REPORT_SPEC.md)
+- Result: recommendations now prove their evidence references immutable `node_ref`, `rule_id`, and fingerprint identifiers while documenting the deterministic `recommendation_id` derivation required by the MVP spec
 
 ### 6. Hosted persistence contract
 
-- Goal: define the first tenant-aware persistence model
-- Why now: this becomes the next risk after the guardrail pass is proven
-- Input files: `docs/ARCHITECTURE.md`, `docs/SECURITY_BASELINE.md`
-- Output: a concrete hosted-mode data contract
-- Proof: a short doc update with explicit entities and trust boundaries
-- Blockers: guardrail pass completion
-- Est. complexity: M
+- Status: implemented in [docs/ARCHITECTURE.md](/Users/restolad/Desktop/RADE/docs/ARCHITECTURE.md) and [docs/SECURITY_BASELINE.md](/Users/restolad/Desktop/RADE/docs/SECURITY_BASELINE.md)
+- Result: hosted-mode persistence now has tenant-aware schema, RLS expectations, and audit/retention controls that mirror the proof slice’s deterministic identifiers
 
 ### 7. Queue and worker boundary
 
-- Goal: define how analysis jobs are enqueued and processed
-- Why now: hosted mode needs an execution boundary
-- Input files: `src/worker/main.py`, `docs/SECURITY_BASELINE.md`
-- Output: a minimal queue and worker contract
-- Proof: documented request and lifecycle states
-- Blockers: hosted persistence contract
-- Est. complexity: M
+- Status: implemented in [docs/QUEUE_WORKER_BOUNDARY.md](/Users/restolad/Desktop/RADE/docs/QUEUE_WORKER_BOUNDARY.md)
+- Result: the minimal queue/worker contract now documents job/job state shape, tenant isolation expectations, and worker responsibilities for deterministic proof runs
 
 ### 8. Repo connector shell
 
-- Goal: define the first repo metadata extractor
-- Why now: future scans need a bridge back to source ownership
-- Input files: `src/connectors/repo_connector.py`
-- Output: a stub that returns repo shape and metadata
-- Proof: stub connector test or smoke check
-- Blockers: queue and worker boundary
-- Est. complexity: S
+- Status: implemented in [src/connectors/repo_connector.py](/Users/restolad/Desktop/RADE/src/connectors/repo_connector.py), [tests/test_repo_connector.py](/Users/restolad/Desktop/RADE/tests/test_repo_connector.py), and [docs/REPO_CONNECTOR_SPEC.md](/Users/restolad/Desktop/RADE/docs/REPO_CONNECTOR_SPEC.md)
+- Result: the stub connector now exposes deterministic repository metadata and is covered by a regression test and spec that guarantee the shape stays stable
+
+### 9. Observability contract
+
+- Status: implemented in [docs/OBSERVABILITY_CONTRACT.md](/Users/restolad/Desktop/RADE/docs/OBSERVABILITY_CONTRACT.md)
+- Result: structured logging, queue/worker metrics, and error budget guardrails are now documented so future hosted monitoring can align with the proof slice’s deterministic identifiers
+
+## Backlog
+
+No additional proof slices are queued at the moment; add new tasks once the current enforcement guardrails stay proven and a new deterministic risk slice is identified.

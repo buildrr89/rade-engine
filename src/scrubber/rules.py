@@ -1,3 +1,4 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 import re
@@ -13,6 +14,9 @@ SENSITIVE_KEYS = {
     "email",
     "phone",
     "address",
+    "price",
+    "amount",
+    "cost",
     "token",
     "secret",
     "session_id",

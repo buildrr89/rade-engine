@@ -1,5 +1,7 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
+from src.core.layering import CONTAINERS_LAYER, OS_SITE_LAYER
 from src.core.normalizer import normalize_project
 from src.core.schemas import validate_project_payload
 
@@ -16,5 +18,5 @@ def test_normalizer_produces_stable_project_shape():
     assert project["platform"] == "ios"
     assert len(project["screens"]) == 2
     assert len(project["nodes"]) == 10
-    assert project["nodes"][0]["slab_layer"] == "foundation"
-    assert project["nodes"][3]["slab_layer"] == "systems"
+    assert project["nodes"][0]["slab_layer"] == OS_SITE_LAYER
+    assert project["nodes"][3]["slab_layer"] == CONTAINERS_LAYER

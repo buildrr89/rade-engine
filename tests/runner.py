@@ -1,3 +1,4 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 import importlib.util
@@ -6,6 +7,8 @@ import sys
 import traceback
 from pathlib import Path
 from tempfile import TemporaryDirectory
+
+from src.core.compliance import emit_terminal_banner
 
 
 def _discover_test_files(selection: list[str]) -> list[Path]:
@@ -69,4 +72,5 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
+    emit_terminal_banner()
     raise SystemExit(main())

@@ -1,61 +1,113 @@
 # ARCHITECTURE
 
-## Rule
+© 2026 RADE Project. All Rights Reserved.
 
-This is a thin architecture document. It exists to support the current proof slice, not a fantasy future platform.
+## Purpose
 
-## System shape
+This document defines the starting engine and the boundary between deconstruction and scraping.
 
-- Client: CLI first, web shell second
-- Backend: Python core library with a thin WSGI API shell
-- Auth: deferred until hosted mode
-- Database: deferred until the first real persisted run
-- Payments: not in this slice
-- AI: not used for deterministic scoring
-- Integrations: local fixture input only for the proof slice
-- Hosted services such as Redis, object storage, and managed auth are strategic only and not part of the current implementation
+## Principle
 
-## Current architecture decision
+RADE does not start from pixels. It starts from the operating system accessibility tree.
 
-Use a single repository with deterministic Python core modules, a thin API shell, a thin agent shell, and a simple Node-based web shell.
+- Android: `AccessibilityNodeInfo`
+- iOS: `AXElement` / XCTest accessibility
+- Web: DOM plus accessibility semantics where available
 
-## Request flow
+Pixels are fallback validation only.
 
-1. User runs the analysis command with a local fixture
-2. The CLI loads and validates the input
-3. The core normalizer and fingerprint engine derive stable structure
-4. The scorer and recommendation engine produce evidence-backed output
-5. The report generator writes JSON and Markdown files
+## Deconstruction vs Scraping
 
-## Data model
+Deconstruction means:
 
-- `project`: source file and app-level metadata
-- `screen`: named view or screen in the source fixture
-- `node`: normalized structural element
-- `cluster`: repeated structural fingerprint group
-- `score`: deterministic metric with evidence
-- `recommendation`: evidence-backed action item
+- observe the running interface
+- read roles, labels, traits, containment, and bounds
+- build a structural graph of the interface
+- preserve logical relationships
 
-## Security baseline
+Scraping means:
 
-- Secrets stay in environment variables
-- Protected actions require auth in hosted mode
-- Validation happens before persistence
-- Raw sensitive content is not retained by default
-- Report artifacts are scrubbed at output write time
+- copying rendered content without understanding structure
+- treating pixels or text as the primary object
 
-## Known unknowns
+RADE is a deconstruction engine.
 
-- Exact hosted auth provider
-- Exact queue choice for worker orchestration
-- Exact database schema for multi-tenant persistence
-- Exact web app navigation structure
+## Collection boundary
 
-## Deferred decisions
+Allowed collection sources:
 
-- Hosted auth implementation
-- Persistent analysis history
-- Benchmark corpus ingestion
-- Real-time collection modes
-- Real Next.js runtime adoption
-- Real FastAPI adoption
+- authorized customer apps
+- customer-consented devices or simulators
+- public unauthenticated surfaces where collection is permitted
+
+Forbidden collection behaviors:
+
+- login bypass
+- fake accounts
+- stealth collection
+- access-control circumvention
+
+## Initial runtime target
+
+The initial cloud target is AWS Device Farm with managed real-device sessions and Appium endpoints.
+
+The orchestrator should be provider-adapter driven so the engine can later swap in equivalent device farms without changing the structural model.
+
+## Edge Shield
+
+Raw payloads must pass through the edge scrubber before durable persistence.
+
+Required behavior:
+
+- regex-first PII removal
+- second-pass entity escalation for ambiguous free-form text
+- preserve structural nodes and edges
+- emit audit metadata for every redaction pass
+- neutralize node-local sensitive strings into generic construction placeholders such as `DATA_SLOT_01` before persistence
+
+## Deep Raid operating rules
+
+The recursive crawler must emit rebuilding instructions, not a flat element list.
+
+Required behavior:
+
+- isolate repeating `03. Containers (The Frame)` patterns such as grids, flex rows, sidebars, and list shells as structural frames
+- trace interactive `Links/Events` edges to their functional destinations so the graph records the app's plumbing, not just containment
+- collapse repeated components into shared pattern identifiers derived from normalized functional DNA instead of literal labels or user data
+- keep these rules deterministic so the same authorized surface yields the same frame, plumbing, and pattern graph on repeat runs
+
+## Illustrator Bridge
+
+The Illustrator bridge is export-only.
+
+It maps accessibility roles and structural nodes to vector primitives:
+
+- rectangles
+- text paths
+- swatches
+- groups
+
+Required export behavior:
+
+- emit a deterministic force-relaxed schematic layout rather than a generic tree dump
+- use the `Construction Dark` SVG treatment with `#04110b` background, `#62f2b1` node strokes, and `#98ffad` plumbing edges
+- bias `03. Containers (The Frame)` nodes toward larger geometry and more central placement than `05. Assets (The Decor)` nodes
+- inject `data-rade-dna` and `data-slab-layer` on every SVG `<g>` so downstream Illustrator selection can target plumbing, frames, and repeated DNA groups directly
+- inject a `<metadata id="rade-metadata">` block plus a persistent `g#rade-legal` footer at the bottom-right of every blueprint with the Lead Architect watermark, Live Raid date, and proprietary `5-Slab Taxonomy` / `Ambient Engine` references
+
+It is not the core model.
+
+## Legal framing
+
+The `5-Slab Taxonomy` and `Ambient Engine` are the exclusive intellectual property of Trung Nguyen (Buildrr89).
+
+Use hiQ v. LinkedIn as a narrow CFAA-domain reference for public-facing collection logic.
+
+Do not write the system as if hiQ is a blanket authorization to bypass gates, ignore terms, or collect private user content.
+
+## Non-goals
+
+- no pixel-first reverse engineering
+- no LLM-based deterministic scoring
+- no stealth collection model
+- no hosted persistence assumptions inside the engine layer

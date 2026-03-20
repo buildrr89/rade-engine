@@ -6,6 +6,10 @@
 - Project: Legacy Repair App
 - Platform: ios
 - Standards pack: 2026-Q1
+- Legal notice: © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+- Ownership: Exclusive intellectual property of Trung Nguyen (Buildrr89).
+- Proprietary systems: The 5-Slab Taxonomy and Ambient Engine are the exclusive intellectual property of Trung Nguyen (Buildrr89).
+- Live Raid date: 2026-03-18
 
 ## Summary
 - Screen Count: 2
@@ -39,14 +43,14 @@
 - Category: migration_sequencing
 - Priority: P1
 - Provenance: standards
-- Evidence: missing_accessibility_node_refs=project-overview#primary-cta,analysis-review#primary-cta, repeated_interactive_cluster_fingerprint=54ca0659a4286a48, primary_reuse_target=project-overview#primary-cta
+- Evidence: missing_accessibility_node_refs=project-overview#primary-cta,analysis-review#primary-cta, repeated_interactive_cluster_fingerprint=25610e7cc32de585, primary_reuse_target=project-overview#primary-cta
 
 ### Repeated interactive structure appears 2 times across 2 screens.
 - Rule ID: component_reuse_interactive_cluster
 - Category: component_reuse
 - Priority: P2
 - Provenance: standards
-- Evidence: cluster_fingerprint=54ca0659a4286a48, screen_ids=analysis-review,project-overview, node_refs=project-overview#primary-cta,analysis-review#primary-cta
+- Evidence: cluster_fingerprint=25610e7cc32de585, screen_ids=analysis-review,project-overview, node_refs=project-overview#primary-cta,analysis-review#primary-cta
 
 ## Recommendations
 ### accessibility - interactive_nodes_without_accessibility_identifier
@@ -65,7 +69,7 @@
 - Evidence: project-overview#primary-cta, analysis-review#primary-cta
 
 ### migration_sequencing - accessibility-before-reuse
-- Recommendation ID: rec-migration_sequence_accessibility_before_reuse-42a97955
+- Recommendation ID: rec-migration_sequence_accessibility_before_reuse-536109ca
 - Rule ID: migration_sequence_accessibility_before_reuse
 - Priority: P1
 - Confidence: high
@@ -77,10 +81,10 @@
 - Standards refs: WCAG 2.2: accessibility first, Apple HIG: system consistency
 - Benchmark refs: none
 - Provenance: standards
-- Evidence: missing_accessibility_node_refs=project-overview#primary-cta,analysis-review#primary-cta, repeated_interactive_cluster_fingerprint=54ca0659a4286a48, primary_reuse_target=project-overview#primary-cta
+- Evidence: missing_accessibility_node_refs=project-overview#primary-cta,analysis-review#primary-cta, repeated_interactive_cluster_fingerprint=25610e7cc32de585, primary_reuse_target=project-overview#primary-cta
 
 ### component_reuse - button
-- Recommendation ID: rec-component_reuse_interactive_cluster-f72f63bc
+- Recommendation ID: rec-component_reuse_interactive_cluster-df13c83b
 - Rule ID: component_reuse_interactive_cluster
 - Priority: P2
 - Confidence: high
@@ -92,7 +96,7 @@
 - Standards refs: Apple HIG: consistency, Material 3: reusable component patterns
 - Benchmark refs: none
 - Provenance: standards
-- Evidence: cluster_fingerprint=54ca0659a4286a48, screen_ids=analysis-review,project-overview, node_refs=project-overview#primary-cta,analysis-review#primary-cta
+- Evidence: cluster_fingerprint=25610e7cc32de585, screen_ids=analysis-review,project-overview, node_refs=project-overview#primary-cta,analysis-review#primary-cta
 
 ## Roadmap
 - Step 1: Add stable accessibility identifiers and preserve the accessible name, role, and value for each interactive node. (P1, S)

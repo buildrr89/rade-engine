@@ -23,6 +23,7 @@ RADE helps teams analyze authorized software interfaces and get evidence-backed 
 - Deduplication of repeated interface structure
 - Evidence-backed recommendations
 - Markdown and JSON report generation
+- Founder-owned legal metadata on generated JSON, Markdown, and blueprint SVG artifacts
 - Sample proof run from a fixture
 
 ## Out of scope for v1
@@ -43,6 +44,7 @@ RADE helps teams analyze authorized software interfaces and get evidence-backed 
 - Integrations explicitly deferred: repo connectors, build connectors, hosted auth, queues, object storage, Redis
 - AI use allowed in v1: none for deterministic scoring; prose generation only if needed later
 - AI use explicitly deferred: autonomous scoring, recommendation ranking, and structural fingerprinting
+- Proprietary systems language required in generated docs: `5-Slab Taxonomy` and `Ambient Engine`
 
 ## Non-goals
 
@@ -62,3 +64,7 @@ RADE helps teams analyze authorized software interfaces and get evidence-backed 
 - If a feature does not support the proof slice or v1 success criteria, defer it.
 - If a task adds complexity before risk reduction, defer it.
 - If a new dependency is proposed, prove why the current repo cannot solve the need.
+
+## Truth discipline
+
+`docs/APP_SCOPE.md` is the canonical declaration of current scope for this proof slice. When scope, behavior, or contract questions arise, follow the read-order list in `README.md` and the adjudication rules described in `docs/TRUTH_HIERARCHY.md`: canonical docs + implementation truth win, while `RADE.md` remains strategic intent only. Always update these canonical artifacts together with any implementation change that touches their expressed behavior.

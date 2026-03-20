@@ -1,0 +1,112 @@
+{
+  "rade_legal": {
+    "header_notice": "\u00a9 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.",
+    "lead_architect": "Trung Nguyen - BUILDRR89",
+    "classification": "Confidential Construction Data Model",
+    "ownership": "Exclusive intellectual property of Trung Nguyen (Buildrr89)",
+    "proprietary_systems": "The 5-Slab Taxonomy and Ambient Engine are the exclusive intellectual property of Trung Nguyen (Buildrr89).",
+    "visible_svg_watermark": "\u00a9 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89"
+  },
+  "schema_version": "1.0",
+  "copyright": "\u00a9 2026 RADE Project. All Rights Reserved.",
+  "purpose": "Export-only bridge from accessibility graph nodes to Illustrator-ready vector primitives.",
+  "source_signal": "accessibility_tree",
+  "core_principles": [
+    "Accessibility semantics are the source of truth.",
+    "Coordinates are layout hints, not identity.",
+    "The mapping is deterministic and export-only.",
+    "The graph model remains separate from the Illustrator export schema."
+  ],
+  "svg_theme": {
+    "name": "Construction Dark",
+    "background": "#04110b",
+    "node_stroke": "#62f2b1",
+    "plumbing_edge": "#98ffad"
+  },
+  "illustrator_metadata": {
+    "group_attributes": [
+      "data-rade-dna",
+      "data-slab-layer"
+    ],
+    "selection_goal": "Allow Illustrator bulk selection by structural DNA and slab layer."
+  },
+  "node_mappings": [
+    {
+      "normalized_role": "button",
+      "source_roles": [
+        "XCUIElementTypeButton",
+        "android.widget.Button"
+      ],
+      "vector_primitive": "rect",
+      "vector_style": "rounded_rectangle",
+      "text_binding": "label",
+      "swatch_binding": "action_primary",
+      "interaction_binding": "tap"
+    },
+    {
+      "normalized_role": "input",
+      "source_roles": [
+        "XCUIElementTypeTextField",
+        "android.widget.EditText"
+      ],
+      "vector_primitive": "rect",
+      "vector_style": "field_outline",
+      "text_binding": "label_or_placeholder",
+      "swatch_binding": "form_surface",
+      "interaction_binding": "focus_and_edit"
+    },
+    {
+      "normalized_role": "text",
+      "source_roles": [
+        "XCUIElementTypeStaticText",
+        "android.widget.TextView"
+      ],
+      "vector_primitive": "text_path",
+      "vector_style": "text_block",
+      "text_binding": "label",
+      "swatch_binding": "content_text",
+      "interaction_binding": "none"
+    },
+    {
+      "normalized_role": "navigation",
+      "source_roles": [
+        "XCUIElementTypeNavigationBar",
+        "android.widget.Toolbar"
+      ],
+      "vector_primitive": "group",
+      "vector_style": "navigation_shell",
+      "text_binding": "title",
+      "swatch_binding": "navigation_surface",
+      "interaction_binding": "navigate"
+    },
+    {
+      "normalized_role": "image",
+      "source_roles": [
+        "XCUIElementTypeImage",
+        "android.widget.ImageView"
+      ],
+      "vector_primitive": "vector_group",
+      "vector_style": "media_frame",
+      "text_binding": "alt_text",
+      "swatch_binding": "media_surface",
+      "interaction_binding": "none"
+    }
+  ],
+  "edge_mappings": [
+    {
+      "edge_type": "contains",
+      "vector_output": "nested_group",
+      "notes": "Preserve hierarchy as groups/artboards."
+    },
+    {
+      "edge_type": "flows_to",
+      "vector_output": "linked_artboard",
+      "notes": "Use for flow exports only."
+    }
+  ],
+  "export_notes": [
+    "Do not use this schema for scoring.",
+    "Do not use this schema as the normalized construction data model.",
+    "Do not lose accessibility roles when converting to primitives."
+  ]
+}

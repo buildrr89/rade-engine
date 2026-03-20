@@ -1,4 +1,12 @@
 {
+  "rade_legal": {
+    "header_notice": "\u00a9 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.",
+    "lead_architect": "Trung Nguyen - BUILDRR89",
+    "classification": "Confidential Construction Data Model",
+    "ownership": "Exclusive intellectual property of Trung Nguyen (Buildrr89)",
+    "proprietary_systems": "The 5-Slab Taxonomy and Ambient Engine are the exclusive intellectual property of Trung Nguyen (Buildrr89).",
+    "visible_svg_watermark": "\u00a9 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89"
+  },
   "project_name": "Legacy Repair App",
   "platform": "ios",
   "screens": [
@@ -11,16 +19,23 @@
           "parent_id": null,
           "element_type": "container",
           "role": "screen",
-          "slab_layer": "foundation",
+          "slab_layer": "01. OS Site (The Land)",
           "label": "",
           "accessibility_identifier": "overview_root",
           "interactive": false,
           "visible": true,
-          "bounds": [0, 0, 390, 844],
+          "bounds": [
+            0,
+            0,
+            390,
+            844
+          ],
           "hierarchy_depth": 0,
           "child_count": 4,
           "text_present": false,
-          "traits": ["shell"],
+          "traits": [
+            "shell"
+          ],
           "source": "fixture"
         },
         {
@@ -28,16 +43,23 @@
           "parent_id": "overview-root",
           "element_type": "text",
           "role": "heading",
-          "slab_layer": "fitout",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
           "label": "Project overview",
           "accessibility_identifier": "overview_title",
           "interactive": false,
           "visible": true,
-          "bounds": [24, 40, 240, 40],
+          "bounds": [
+            24,
+            40,
+            240,
+            40
+          ],
           "hierarchy_depth": 1,
           "child_count": 0,
           "text_present": true,
-          "traits": ["static"],
+          "traits": [
+            "static"
+          ],
           "source": "fixture"
         },
         {
@@ -45,16 +67,23 @@
           "parent_id": "overview-root",
           "element_type": "card",
           "role": "summary",
-          "slab_layer": "framework",
+          "slab_layer": "02. Root (The Slab)",
           "label": "",
           "accessibility_identifier": "overview_card",
           "interactive": false,
           "visible": true,
-          "bounds": [24, 96, 342, 160],
+          "bounds": [
+            24,
+            96,
+            342,
+            160
+          ],
           "hierarchy_depth": 1,
           "child_count": 2,
           "text_present": false,
-          "traits": ["group"],
+          "traits": [
+            "group"
+          ],
           "source": "fixture"
         },
         {
@@ -62,16 +91,23 @@
           "parent_id": "overview-root",
           "element_type": "button",
           "role": "button",
-          "slab_layer": "systems",
+          "slab_layer": "03. Containers (The Frame)",
           "label": "Start scan",
           "accessibility_identifier": "",
           "interactive": true,
           "visible": true,
-          "bounds": [24, 704, 342, 56],
+          "bounds": [
+            24,
+            704,
+            342,
+            56
+          ],
           "hierarchy_depth": 1,
           "child_count": 0,
           "text_present": true,
-          "traits": ["primary"],
+          "traits": [
+            "primary"
+          ],
           "source": "fixture"
         },
         {
@@ -79,16 +115,23 @@
           "parent_id": "overview-root",
           "element_type": "button",
           "role": "button",
-          "slab_layer": "systems",
+          "slab_layer": "03. Containers (The Frame)",
           "label": "Import JSON",
           "accessibility_identifier": "import_json_button",
           "interactive": true,
           "visible": true,
-          "bounds": [24, 772, 342, 48],
+          "bounds": [
+            24,
+            772,
+            342,
+            48
+          ],
           "hierarchy_depth": 1,
           "child_count": 0,
           "text_present": true,
-          "traits": ["secondary"],
+          "traits": [
+            "secondary"
+          ],
           "source": "fixture"
         }
       ]
@@ -102,16 +145,23 @@
           "parent_id": null,
           "element_type": "container",
           "role": "screen",
-          "slab_layer": "foundation",
+          "slab_layer": "01. OS Site (The Land)",
           "label": "",
           "accessibility_identifier": "review_root",
           "interactive": false,
           "visible": true,
-          "bounds": [0, 0, 390, 844],
+          "bounds": [
+            0,
+            0,
+            390,
+            844
+          ],
           "hierarchy_depth": 0,
           "child_count": 4,
           "text_present": false,
-          "traits": ["shell"],
+          "traits": [
+            "shell"
+          ],
           "source": "fixture"
         },
         {
@@ -119,16 +169,23 @@
           "parent_id": "review-root",
           "element_type": "text",
           "role": "heading",
-          "slab_layer": "fitout",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
           "label": "Analysis review",
           "accessibility_identifier": "review_title",
           "interactive": false,
           "visible": true,
-          "bounds": [24, 40, 240, 40],
+          "bounds": [
+            24,
+            40,
+            240,
+            40
+          ],
           "hierarchy_depth": 1,
           "child_count": 0,
           "text_present": true,
-          "traits": ["static"],
+          "traits": [
+            "static"
+          ],
           "source": "fixture"
         },
         {
@@ -136,16 +193,23 @@
           "parent_id": "review-root",
           "element_type": "card",
           "role": "summary",
-          "slab_layer": "framework",
+          "slab_layer": "02. Root (The Slab)",
           "label": "",
           "accessibility_identifier": "review_card",
           "interactive": false,
           "visible": true,
-          "bounds": [24, 96, 342, 160],
+          "bounds": [
+            24,
+            96,
+            342,
+            160
+          ],
           "hierarchy_depth": 1,
           "child_count": 2,
           "text_present": false,
-          "traits": ["group"],
+          "traits": [
+            "group"
+          ],
           "source": "fixture"
         },
         {
@@ -153,16 +217,23 @@
           "parent_id": "review-root",
           "element_type": "button",
           "role": "button",
-          "slab_layer": "systems",
+          "slab_layer": "03. Containers (The Frame)",
           "label": "View details",
           "accessibility_identifier": "",
           "interactive": true,
           "visible": true,
-          "bounds": [24, 704, 342, 56],
+          "bounds": [
+            24,
+            704,
+            342,
+            56
+          ],
           "hierarchy_depth": 1,
           "child_count": 0,
           "text_present": true,
-          "traits": ["primary"],
+          "traits": [
+            "primary"
+          ],
           "source": "fixture"
         },
         {
@@ -170,16 +241,23 @@
           "parent_id": "review-root",
           "element_type": "link",
           "role": "link",
-          "slab_layer": "systems",
+          "slab_layer": "03. Containers (The Frame)",
           "label": "Help",
           "accessibility_identifier": "help_link",
           "interactive": true,
           "visible": true,
-          "bounds": [24, 772, 88, 48],
+          "bounds": [
+            24,
+            772,
+            88,
+            48
+          ],
           "hierarchy_depth": 1,
           "child_count": 0,
           "text_present": true,
-          "traits": ["tertiary"],
+          "traits": [
+            "tertiary"
+          ],
           "source": "fixture"
         }
       ]

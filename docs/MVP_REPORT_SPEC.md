@@ -8,6 +8,7 @@ This document defines the minimum JSON and Markdown report shape for v1.
 
 The JSON report must contain:
 
+- `rade_legal`
 - `report_version`
 - `generated_at`
 - `app_id`
@@ -102,3 +103,12 @@ The Markdown report must use these sections in order:
 The Markdown report should be readable without the JSON file open next to it.
 
 The Markdown report should expose `rule_id` and `recommendation_id` for traceability.
+
+The title and metadata block must also state that the `5-Slab Taxonomy` and `Ambient Engine`
+are the exclusive intellectual property of Trung Nguyen (Buildrr89) and surface the Live Raid date.
+
+## Stable identifiers & references
+
+- `recommendation_id` must remain deterministic. Each recommendation builds its identifier from `rule_id`, the declared `target`, and any stable identity parts (cluster fingerprints or node references) before hashing. The concrete format is `rec-{rule_id}-{stable_digest(rule_id, target, *identity_parts)}` as implemented in `src/core/models.py`.
+- Evidence entries must reference immutable identifiers: normalized `node_ref`s (`<screen_id>#<element_id>`), cluster fingerprints, or the `rule_id` itself. Avoid human-readable labels or runtime indexes so that every report can be traced back to a unique, verifiable node or fingerprint.
+- Cluster evidence keys (`cluster_fingerprint=…`, `screen_ids=…`, `node_refs=…`) must reuse the deduplicator output so repeated structure can be linked directly to the stable `duplicate_clusters.fingerprint` recorded elsewhere in the report.

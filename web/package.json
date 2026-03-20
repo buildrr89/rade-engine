@@ -1,4 +1,12 @@
 {
+  "rade_legal": {
+    "header_notice": "\u00a9 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.",
+    "lead_architect": "Trung Nguyen - BUILDRR89",
+    "classification": "Confidential Construction Data Model",
+    "ownership": "Exclusive intellectual property of Trung Nguyen (Buildrr89)",
+    "proprietary_systems": "The 5-Slab Taxonomy and Ambient Engine are the exclusive intellectual property of Trung Nguyen (Buildrr89).",
+    "visible_svg_watermark": "\u00a9 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89"
+  },
   "name": "rade-web",
   "private": true,
   "version": "0.1.0",

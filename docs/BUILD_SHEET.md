@@ -25,15 +25,12 @@ Fixture input -> normalize -> fingerprint -> deduplicate -> score -> recommend -
 
 ## Latest proof
 
-- Date: 2026-03-18
+- Date: 2026-03-19
 - Status: Passed
 - Evidence:
-  - `./rade-proof` -> `25 passed, 0 failed`
+  - `./rade-proof` -> `34 passed, 0 failed`
   - `uv run ruff check src tests agent` -> `All checks passed!`
-  - `uv run black --check src tests agent` -> `53 files would be left unchanged.`
-  - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:<ephemeral-port>`
-  - `uv run python -m src.core.cli analyze --input examples/sample_ios_output.json --app-id com.example.legacyapp --json-output output/modernization_report.json --md-output output/modernization_report.md` -> `generated 2 screens and 3 recommendations`
+  - `uv run black --check src tests agent` -> `All done! ✨ 🍰 ✨ 58 files would be left unchanged.`
 
 ## Current blocker
 
@@ -50,6 +47,9 @@ GitHub-enforced branch protection is currently blocked on this private repositor
 - 2026-03-18 - Scrub report artifacts at write time while preserving stable structural identifiers
 - 2026-03-19 - Default to PR-only changes on a protected `main` branch once GitHub settings are enabled
 - 2026-03-19 - GitHub branch protection could not be enabled on this private repository because the current plan returned HTTP 403 for protection APIs
+- 2026-03-19 - Harden input validation to reject self-parent references and non-string labels or traits before normalization
+- 2026-03-19 - Enforce proof workflow and template coverage with repository contract tests
+- 2026-03-19 - Reinforce the artifact scrub boundary with Markdown regression coverage
 
 ## Next immediate action
 
@@ -62,3 +62,12 @@ Stop broadening work if:
 - the current proof is still unverified
 - new scope is being added without updating `docs/APP_SCOPE.md`
 - docs and implementation diverge
+
+## Truth discipline
+
+This sheet tracks the deterministic proof path but is subordinate to the truth hierarchy in
+`docs/TRUTH_HIERARCHY.md`. When doc drift is suspected, consult the ordered list in `README.md`
+and align all affected entry docs before accepting a change. The canonical docs (`README.md`,
+`docs/TRUTH_HIERARCHY.md`, `docs/APP_SCOPE.md`, `docs/BUILD_SHEET.md`, etc.) and executable
+code/tests are the binding implementation truth; update them together to stay aligned with the
+repo’s disciplined approach.

@@ -1,8 +1,14 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 import json
 
-from src.core.report_generator import analyze_payload, write_report
+from src.core.layering import CONTAINERS_LAYER
+from src.core.report_generator import (
+    analyze_payload,
+    render_markdown_report,
+    write_report,
+)
 from src.scrubber.pii_scrubber import scrub_payload, scrub_text
 
 
@@ -45,7 +51,7 @@ def test_report_artifacts_are_scrubbed_but_node_refs_stay_stable(tmp_path):
                             "parent_id": None,
                             "element_type": "button",
                             "role": "button",
-                            "slab_layer": "systems",
+                            "slab_layer": CONTAINERS_LAYER,
                             "label": "Contact alice@example.com",
                             "accessibility_identifier": "",
                             "interactive": True,
@@ -85,3 +91,50 @@ def test_report_artifacts_are_scrubbed_but_node_refs_stay_stable(tmp_path):
     assert written["findings"][0]["evidence"] == ["project-overview#tok_primary"]
     assert "project-overview#tok_primary" in markdown
     assert "[redacted-email]" in markdown
+
+
+def test_render_markdown_report_scrubs_sensitive_strings_before_output():
+    report = analyze_payload(
+        {
+            "project_name": "alice@example.com",
+            "platform": "ios",
+            "screens": [
+                {
+                    "screen_id": "project-overview",
+                    "screen_name": "Project Overview",
+                    "elements": [
+                        {
+                            "element_id": "tok_primary",
+                            "parent_id": None,
+                            "element_type": "button",
+                            "role": "button",
+                            "slab_layer": CONTAINERS_LAYER,
+                            "label": "Contact alice@example.com",
+                            "accessibility_identifier": "",
+                            "interactive": True,
+                            "visible": True,
+                            "bounds": [0, 0, 100, 40],
+                            "hierarchy_depth": 0,
+                            "child_count": 0,
+                            "text_present": True,
+                            "traits": ["primary"],
+                            "source": "fixture",
+                        }
+                    ],
+                }
+            ],
+        },
+        "com.example.legacyapp",
+        generated_at="2026-03-18T00:00:00Z",
+    )
+
+    report["project_name"] = "alice@example.com"
+    report["recommendations"][0][
+        "problem_statement"
+    ] = "Contact alice@example.com with token sk_test_12345678."
+
+    markdown = render_markdown_report(report)
+
+    assert "[redacted-email]" in markdown
+    assert "[redacted-token]" in markdown
+    assert "alice@example.com" not in markdown

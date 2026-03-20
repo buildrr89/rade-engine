@@ -1,8 +1,11 @@
+# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
 import json
 from pathlib import Path
 from typing import Any
+
+from .layering import VALID_LAYERS, normalize_slab_layer
 
 JsonDict = dict[str, Any]
 ALLOWED_PLATFORMS = {"ios", "android", "web"}
@@ -38,6 +41,29 @@ def _require_optional_str(
     return value or None
 
 
+def _require_optional_slab_layer(
+    mapping: dict[str, Any], key: str, context: str
+) -> str | None:
+    value = mapping.get(key)
+    if value is None:
+        return None
+    if not isinstance(value, str):
+        raise ValidationError(f"{context}: '{key}' must be a string or null.")
+    normalized = normalize_slab_layer(value)
+    if normalized is None:
+        raise ValidationError(
+            f"{context}: '{key}' must be one of {sorted(VALID_LAYERS)} or null."
+        )
+    return normalized
+
+
+def _require_label(mapping: dict[str, Any], key: str, context: str) -> str:
+    value = mapping.get(key)
+    if not isinstance(value, str):
+        raise ValidationError(f"{context}: '{key}' must be a string.")
+    return value.strip()
+
+
 def _require_bool(mapping: dict[str, Any], key: str, context: str) -> bool:
     value = mapping.get(key)
     if not isinstance(value, bool):
@@ -64,6 +90,14 @@ def _require_list(mapping: dict[str, Any], key: str, context: str) -> list[Any]:
     if not isinstance(value, list):
         raise ValidationError(f"{context}: '{key}' must be an array.")
     return value
+
+
+def _require_str_list(mapping: dict[str, Any], key: str, context: str) -> list[str]:
+    value = _require_list(mapping, key, context)
+    for item_index, item in enumerate(value):
+        if not isinstance(item, str):
+            raise ValidationError(f"{context}: '{key}[{item_index}]' must be a string.")
+    return list(value)
 
 
 def _require_bounds(
@@ -138,14 +172,10 @@ def validate_project_payload(payload: JsonDict) -> JsonDict:
                         element, "element_type", element_context
                     ),
                     "role": _require_str(element, "role", element_context),
-                    "slab_layer": _require_optional_str(
+                    "slab_layer": _require_optional_slab_layer(
                         element, "slab_layer", element_context
                     ),
-                    "label": (
-                        (element.get("label") or "").strip()
-                        if isinstance(element.get("label"), str)
-                        else ""
-                    ),
+                    "label": _require_label(element, "label", element_context),
                     "accessibility_identifier": _require_optional_str(
                         element, "accessibility_identifier", element_context
                     ),
@@ -163,11 +193,7 @@ def validate_project_payload(payload: JsonDict) -> JsonDict:
                     "text_present": _require_bool(
                         element, "text_present", element_context
                     ),
-                    "traits": (
-                        list(element.get("traits", []))
-                        if isinstance(element.get("traits"), list)
-                        else []
-                    ),
+                    "traits": _require_str_list(element, "traits", element_context),
                     "source": _require_str(element, "source", element_context),
                 }
             )
@@ -175,6 +201,12 @@ def validate_project_payload(payload: JsonDict) -> JsonDict:
         element_id_set = {str(element["element_id"]) for element in validated_elements}
         for element_index, element in enumerate(validated_elements):
             parent_id = element["parent_id"]
+            element_id = element["element_id"]
+            if parent_id is not None and parent_id == element_id:
+                raise ValidationError(
+                    f"{screen_context}.element[{element_index}]: 'parent_id' must "
+                    "reference a different element in the same screen."
+                )
             if parent_id is not None and parent_id not in element_id_set:
                 raise ValidationError(
                     (
