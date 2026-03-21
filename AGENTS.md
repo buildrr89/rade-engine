@@ -16,13 +16,14 @@ This file defines how agents should work in this repository.
 Before making changes, read:
 
 1. `README.md`
-2. `docs/TRUTH_HIERARCHY.md`
-3. `docs/APP_SCOPE.md`
-4. `docs/HARD_RISKS.md`
-5. `docs/ARCHITECTURE.md`
-6. `docs/BUILD_SHEET.md`
-7. `AGENTS.md`
-8. `.cursor/rules.md`
+2. `PRD.md`
+3. `docs/TRUTH_HIERARCHY.md`
+4. `docs/APP_SCOPE.md`
+5. `docs/HARD_RISKS.md`
+6. `docs/ARCHITECTURE.md`
+7. `docs/BUILD_SHEET.md`
+8. `AGENTS.md`
+9. `.cursor/rules.md`
 
 ## Working rules
 
@@ -32,7 +33,7 @@ Before making changes, read:
 - Search the repo before inventing new helpers or abstractions.
 - Keep unknowns explicit.
 - Write `UNKNOWN / NEEDS DECISION` instead of guessing missing behavior.
-- Do not present strategic future-state sections from `RADE.md` as current implementation.
+- Do not present product-definition intent from `PRD.md` as current implementation unless code and tests prove it.
 - Follow `docs/PR_WORKFLOW.md` for the default change and merge path.
 - Do not overwrite changes you did not make.
 

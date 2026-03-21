@@ -2,17 +2,24 @@
 from __future__ import annotations
 
 import io
+import json
 import xml.etree.ElementTree as ET
 from contextlib import redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
+import pytest
 from src.core.compliance import SVG_HEADER_COMMENT, SVG_WATERMARK_TEXT
 from src.core.layering import ASSETS_LAYER, CONTAINERS_LAYER, OS_SITE_LAYER
 from src.demo.run_raid_visualizer import (
     ChromeTabContext,
     DemoNode,
     RadeVectorBridge,
+    StructuralDomParser,
+    _app_name_from_host,
+    _build_chrome_tab_tree,
+    _count_tree_nodes,
+    _parse_structural_dom,
     main,
     run_demo,
 )
@@ -20,6 +27,7 @@ from src.engine.rade_orchestrator import (
     ConstructionGraph,
     FunctionalEdge,
     FunctionalNode,
+    RadeOrchestrator,
 )
 
 
@@ -93,6 +101,9 @@ def test_demo_runner_svg_is_illustrator_ready(tmp_path) -> None:
     plumbing_paths = root.findall(".//svg:g[@id='plumbing-edges']//svg:path", namespace)
     assert plumbing_paths
     assert all(path.attrib["stroke"] == "#98ffad" for path in plumbing_paths)
+    plumbing_group = root.find(".//svg:g[@id='INTERACTIVE_PLUMBING']", namespace)
+    assert plumbing_group is not None
+    assert plumbing_group.attrib["data-slab-layer"] == "04"
 
     root_node_rect = root.find(".//svg:g[@id='raid-demo#abfff1af']/svg:rect", namespace)
     assert root_node_rect is not None
@@ -110,10 +121,152 @@ def test_demo_runner_svg_is_illustrator_ready(tmp_path) -> None:
 def test_demo_runner_main_returns_zero(tmp_path) -> None:
     with patch("src.core.compliance.os.system") as mocked_clear:
         with redirect_stdout(io.StringIO()):
-            exit_code = main(["--output-dir", str(tmp_path), "--sleep-seconds", "0"])
+            exit_code = main(
+                [
+                    "--output-dir",
+                    str(tmp_path),
+                    "--sleep-seconds",
+                    "0",
+                    "--depth",
+                    "5",
+                ]
+            )
 
     mocked_clear.assert_called_once()
     assert exit_code == 0
+
+
+def test_structural_dom_parser_promotes_accessible_labels_and_decor() -> None:
+    parser = StructuralDomParser(app_name="Test App", max_depth=5)
+    parser.feed("""
+        <main>
+          <button aria-label="Close"></button>
+          <img class="hero-image" alt="Hero Artwork" />
+          <svg id="site-logo" aria-hidden="true"></svg>
+        </main>
+        """)
+    parser.close()
+
+    root = parser.root.freeze()
+    main_container = root.children[0]
+    labels = [child.label for child in main_container.children]
+    asset_nodes = [
+        child
+        for child in main_container.children
+        if child.metadata.get("slab_layer") == ASSETS_LAYER
+    ]
+
+    assert "Close Button" in labels
+    assert any(child.label == "Hero Artwork" for child in asset_nodes)
+    assert any(child.label == "Site Logo" for child in asset_nodes)
+
+
+def test_structural_dom_parser_depth_limit_skips_deeper_controls() -> None:
+    parser = StructuralDomParser(app_name="Test App", max_depth=1)
+    parser.feed("""
+        <main>
+          <section>
+            <button aria-label="Close"></button>
+          </section>
+        </main>
+        """)
+    parser.close()
+
+    root = parser.root.freeze()
+    assert len(root.children) == 1
+    assert root.children[0].label == "Main Content"
+    assert root.children[0].children == []
+
+
+def test_parse_structural_dom_respects_max_nodes() -> None:
+    buttons = "".join(f'<button aria-label="B{i}"></button>' for i in range(30))
+    dom = f"<!DOCTYPE html><html><body><main>{buttons}</main></body></html>"
+    tree_full = _parse_structural_dom(
+        dom, app_name="Test App", max_depth=10, max_nodes=64
+    )
+    tree_limited = _parse_structural_dom(
+        dom, app_name="Test App", max_depth=10, max_nodes=8
+    )
+    assert _count_tree_nodes(tree_full) > _count_tree_nodes(tree_limited)
+    assert _count_tree_nodes(tree_limited) <= 8
+
+
+def test_run_demo_emits_high_density_warning_on_stderr(capsys, tmp_path) -> None:
+    with redirect_stdout(io.StringIO()):
+        run_demo(
+            output_dir=tmp_path,
+            sleep_seconds=0.0,
+            max_nodes=300,
+            live_raid_date="2026-03-21",
+        )
+    captured = capsys.readouterr()
+    assert (
+        "⚠️ HIGH DENSITY RAID: SVG rendering may impact system performance."
+        in captured.err
+    )
+
+
+def test_parser_decor_asset_produces_slab_05_svg_layer(tmp_path) -> None:
+    parser = StructuralDomParser(app_name="Test App", max_depth=5)
+    parser.feed("""
+        <main>
+          <h1 title="Overview"></h1>
+          <button aria-label="Close"></button>
+          <img class="hero-image" alt="Hero Artwork" />
+        </main>
+        """)
+    parser.close()
+
+    orchestrator = RadeOrchestrator(app_id="com.example.web", platform="web")
+    graph = orchestrator.collect_from_root(
+        parser.root.freeze(),
+        screen_id="home",
+        screen_name="Home",
+        max_depth=5,
+    )
+    bridge = RadeVectorBridge(live_raid_date="2026-03-21")
+    svg_path = bridge.export_svg(graph, tmp_path / "decor.svg")
+    svg_text = svg_path.read_text(encoding="utf-8")
+
+    assert any(node.label == "Close Button" for node in graph.nodes)
+    assert any(
+        node.label == "Hero Artwork" and node.slab_layer == ASSETS_LAYER
+        for node in graph.nodes
+    )
+    assert 'data-slab-layer="05. Assets (The Decor)"' in svg_text
+
+
+def test_vector_bridge_node_dna_includes_slab03_anchor_kind() -> None:
+    bridge = RadeVectorBridge()
+    node = FunctionalNode(
+        node_ref="t#1",
+        parent_node_ref=None,
+        element_id="1",
+        parent_id=None,
+        screen_id="s",
+        screen_name="S",
+        platform="ios",
+        source="x",
+        element_type="div",
+        role="button",
+        label="X",
+        accessibility_identifier=None,
+        interactive=True,
+        visible=True,
+        bounds=[0, 0, 10, 10],
+        hierarchy_depth=1,
+        child_count=0,
+        text_present=False,
+        slab03_anchor_kind="visual:vbox-contained",
+        structural_fingerprint="abc12345",
+        functional_dna={
+            "instruction_role": "component",
+            "frame_kind": "sidebar",
+        },
+    )
+    assert bridge._node_dna(node) == (
+        "component|sidebar|visual:vbox-contained|abc12345|button"
+    )
 
 
 def test_vector_bridge_centralizes_frames_over_decor() -> None:
@@ -243,7 +396,14 @@ def test_vector_bridge_centralizes_frames_over_decor() -> None:
 
 
 def test_demo_runner_can_render_active_chrome_tab_structurally(tmp_path) -> None:
-    def fake_chrome_tree() -> tuple[DemoNode, ChromeTabContext]:
+    def fake_chrome_tree(
+        max_depth: int = 20,
+        max_nodes: int = 64,
+        *,
+        redline_output_path: Path | None = None,
+    ) -> tuple[DemoNode, ChromeTabContext]:
+        assert max_depth == 20
+        assert redline_output_path is not None
         return (
             DemoNode(
                 "web_surface_window",
@@ -316,6 +476,170 @@ def test_demo_runner_can_render_active_chrome_tab_structurally(tmp_path) -> None
     assert "Spotify - Web Player" not in svg_text
     assert "Navigation" in svg_text
     assert "Main Content" in svg_text
+
+
+def test_build_chrome_tab_tree_retries_after_empty_structural_parse() -> None:
+    context = ChromeTabContext(
+        title="Wikipedia, the free encyclopedia",
+        url="https://en.wikipedia.org/wiki/Main_Page",
+        app_name="Wikipedia",
+        app_id="com.rade.chrome.wikipedia",
+        screen_id="wikipedia-surface",
+        screen_name="Wikipedia Surface",
+    )
+    dom_attempts = iter(
+        (
+            "<!DOCTYPE html><html><head></head><body></body></html>",
+            """
+            <!DOCTYPE html>
+            <html>
+              <body>
+                <main>
+                  <button aria-label="Close"></button>
+                </main>
+              </body>
+            </html>
+            """,
+        )
+    )
+
+    with patch(
+        "src.demo.run_raid_visualizer._active_chrome_tab_context",
+        return_value=context,
+    ):
+        with patch(
+            "src.demo.run_raid_visualizer._rendered_dom_from_url",
+            side_effect=lambda url: next(dom_attempts),
+        ) as mocked_dump_dom:
+            with patch("src.demo.run_raid_visualizer.time.sleep") as mocked_sleep:
+                tree, returned_context = _build_chrome_tab_tree(
+                    max_depth=8,
+                    retry_attempts=2,
+                    retry_delay_seconds=0.0,
+                )
+
+    assert returned_context == context
+    assert mocked_dump_dom.call_count == 2
+    mocked_sleep.assert_called_once_with(0.0)
+    assert len(tree.children) == 1
+    assert tree.children[0].label == "Main Content"
+    assert tree.children[0].children[0].label == "Close Button"
+
+
+def test_build_chrome_tab_tree_retries_after_runtime_error() -> None:
+    context = ChromeTabContext(
+        title="Wikipedia, the free encyclopedia",
+        url="https://en.wikipedia.org/wiki/Main_Page",
+        app_name="Wikipedia",
+        app_id="com.rade.chrome.wikipedia",
+        screen_id="wikipedia-surface",
+        screen_name="Wikipedia Surface",
+    )
+    dom_attempts = iter(
+        (
+            """
+            <!DOCTYPE html>
+            <html>
+              <body>
+                <main>
+                  <button aria-label="Close"></button>
+                </main>
+              </body>
+            </html>
+            """,
+        )
+    )
+
+    call_count = {"value": 0}
+
+    def _rendered_dom_with_transient_error(url: str) -> str:
+        call_count["value"] += 1
+        if call_count["value"] == 1:
+            raise RuntimeError("temporary chrome capture error")
+        return next(dom_attempts)
+
+    with patch(
+        "src.demo.run_raid_visualizer._active_chrome_tab_context",
+        return_value=context,
+    ):
+        with patch(
+            "src.demo.run_raid_visualizer._rendered_dom_from_url",
+            side_effect=_rendered_dom_with_transient_error,
+        ) as mocked_dump_dom:
+            with patch("src.demo.run_raid_visualizer.time.sleep") as mocked_sleep:
+                tree, returned_context = _build_chrome_tab_tree(
+                    max_depth=8,
+                    retry_attempts=2,
+                    retry_delay_seconds=0.0,
+                )
+
+    assert returned_context == context
+    assert mocked_dump_dom.call_count == 2
+    mocked_sleep.assert_called_once_with(0.0)
+    assert len(tree.children) == 1
+    assert tree.children[0].label == "Main Content"
+    assert tree.children[0].children[0].label == "Close Button"
+
+
+def test_build_chrome_tab_tree_writes_redline_on_exhausted_failure(tmp_path) -> None:
+    context = ChromeTabContext(
+        title="Locked Surface",
+        url="chrome://settings/",
+        app_name="Chrome",
+        app_id="com.rade.chrome.chrome",
+        screen_id="chrome-surface",
+        screen_name="Chrome Surface",
+    )
+    redline_path = tmp_path / "redline_report.json"
+
+    with patch(
+        "src.demo.run_raid_visualizer._active_chrome_tab_context",
+        return_value=context,
+    ):
+        with patch(
+            "src.demo.run_raid_visualizer._rendered_dom_from_url",
+            side_effect=RuntimeError("capture blocked"),
+        ):
+            with patch("src.demo.run_raid_visualizer.time.sleep"):
+                with pytest.raises(RuntimeError):
+                    _build_chrome_tab_tree(
+                        max_depth=8,
+                        retry_attempts=2,
+                        retry_delay_seconds=0.0,
+                        redline_output_path=redline_path,
+                    )
+
+    payload = json.loads(redline_path.read_text(encoding="utf-8"))
+    assert payload["url"] == "chrome://settings/"
+    assert payload["title"] == "Locked Surface"
+    assert payload["last_known_a11y_state"] in {"UNKNOWN", "EMPTY"}
+    assert "capture blocked" in payload["error"]
+
+
+def test_run_demo_active_chrome_falls_back_with_redline_notice(tmp_path) -> None:
+    buffer = io.StringIO()
+    with patch(
+        "src.demo.run_raid_visualizer._build_chrome_tab_tree",
+        side_effect=RuntimeError("capture blocked"),
+    ):
+        with redirect_stdout(buffer):
+            result = run_demo(
+                output_dir=tmp_path,
+                sleep_seconds=0.0,
+                capture_mode="active-chrome-tab",
+                output_name="fallback.svg",
+                live_raid_date="2026-03-21",
+            )
+
+    output = buffer.getvalue()
+    assert result.svg_path.exists()
+    assert "falling back to demo tree" in output
+    assert "redline_report.json" in output
+
+
+def test_app_name_from_host_handles_common_www_and_wiki_hosts() -> None:
+    assert _app_name_from_host("www.amazon.com.au") == "Amazon"
+    assert _app_name_from_host("en.wikipedia.org") == "Wikipedia"
 
 
 def _svg_structure(

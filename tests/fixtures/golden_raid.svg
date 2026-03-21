@@ -53,7 +53,7 @@
 </g>
 </g>
 <g id="nodes-01-os-site-the-land" data-rade-dna="nodes|01-os-site-the-land" data-slab-layer="01. OS Site (The Land)">
-<g id="raid-demo#abfff1af" data-order="0" data-rade-dna="component|node|22aad15f|screen" data-slab-layer="01. OS Site (The Land)">
+<g id="raid-demo#abfff1af" data-order="0" data-rade-dna="component|node|none|22aad15f|screen" data-slab-layer="01. OS Site (The Land)">
 <rect x="539.4" y="132.0" width="356.0" height="94.0" rx="18" ry="18" fill="#0d2c1d" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.8" />
 <rect x="549.4" y="142.0" width="336.0" height="74.0" rx="12" ry="12" fill="none" stroke="#5ecb94" stroke-width="1" opacity="0.42" />
 <line x1="557.4" y1="154.0" x2="877.4" y2="154.0" stroke="#5ecb94" stroke-width="1.2" opacity="0.78" />
@@ -63,7 +63,7 @@
 </g>
 </g>
 <g id="nodes-03-containers-the-frame" data-rade-dna="nodes|03-containers-the-frame" data-slab-layer="03. Containers (The Frame)">
-<g id="raid-demo#e32cff39" data-order="2" data-rade-dna="component|node|88ecd414|button" data-slab-layer="03. Containers (The Frame)">
+<g id="raid-demo#e32cff39" data-order="2" data-rade-dna="component|node|none|88ecd414|button" data-slab-layer="03. Containers (The Frame)">
 <rect x="557.6" y="334.8" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
 <rect x="567.6" y="344.8" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
 <line x1="575.6" y1="356.8" x2="871.6" y2="356.8" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
@@ -71,7 +71,7 @@
 <text x="577.6" y="372.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">DATA_SLOT_03</text>
 <text x="577.6" y="394.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 19ec795d</text>
 </g>
-<g id="raid-demo#61b632cb" data-order="5" data-rade-dna="plumbing|node|5883828a|button" data-slab-layer="03. Containers (The Frame)">
+<g id="raid-demo#61b632cb" data-order="5" data-rade-dna="plumbing|node|none|5883828a|button" data-slab-layer="03. Containers (The Frame)">
 <rect x="346.5" y="259.4" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
 <rect x="356.5" y="269.4" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
 <line x1="364.5" y1="281.4" x2="660.5" y2="281.4" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
@@ -81,7 +81,8 @@
 </g>
 </g>
 <g id="nodes-04-links-events-wires-plumbing" data-rade-dna="nodes|04-links-events-wires-plumbing" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
-<g id="raid-demo#3ff73a5f" data-order="1" data-rade-dna="component|node|9e36028a|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<g id="INTERACTIVE_PLUMBING" data-rade-dna="nodes|interactive-plumbing" data-slab-layer="04" data-slab-layer-label="04. Links/Events (Wires &amp; Plumbing)">
+<g id="raid-demo#3ff73a5f" data-order="1" data-rade-dna="component|node|none|9e36028a|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
 <rect x="808.0" y="267.9" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
 <rect x="818.0" y="277.9" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
 <line x1="826.0" y1="289.9" x2="1038.0" y2="289.9" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
@@ -89,7 +90,7 @@
 <text x="828.0" y="305.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_02</text>
 <text x="828.0" y="327.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | 29d2ba0f</text>
 </g>
-<g id="raid-demo#b50ac8ab" data-order="3" data-rade-dna="component|node|9e36028a|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<g id="raid-demo#b50ac8ab" data-order="3" data-rade-dna="component|node|none|9e36028a|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
 <rect x="164.3" y="268.6" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
 <rect x="174.3" y="278.6" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
 <line x1="182.3" y1="290.6" x2="394.3" y2="290.6" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
@@ -97,13 +98,14 @@
 <text x="184.3" y="306.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_04</text>
 <text x="184.3" y="328.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | 29d2ba0f</text>
 </g>
-<g id="raid-demo#4decd199" data-order="4" data-rade-dna="component|node|9e36028a|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<g id="raid-demo#4decd199" data-order="4" data-rade-dna="component|node|none|9e36028a|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
 <rect x="983.6" y="269.3" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
 <rect x="993.6" y="279.3" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
 <line x1="1001.6" y1="291.3" x2="1213.6" y2="291.3" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
 <text x="1211.6" y="287.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
 <text x="1003.6" y="307.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_05</text>
 <text x="1003.6" y="329.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | 29d2ba0f</text>
+</g>
 </g>
 </g>
 <g id="rade-legal" data-rade-dna="rade-legal" data-slab-layer="02. Root (The Slab)">

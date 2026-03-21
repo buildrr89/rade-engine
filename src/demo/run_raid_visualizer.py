@@ -16,9 +16,13 @@ from urllib.parse import urlparse
 from xml.sax.saxutils import escape
 
 from ..core.compliance import (
-    LEAD_ARCHITECT_NOTICE,
-    LEAD_ARCHITECT as COMPLIANCE_LEAD_ARCHITECT,
     IP_OWNER as COMPLIANCE_IP_OWNER,
+)
+from ..core.compliance import (
+    LEAD_ARCHITECT as COMPLIANCE_LEAD_ARCHITECT,
+)
+from ..core.compliance import (
+    LEAD_ARCHITECT_NOTICE,
     LEGAL_NOTICE,
     SVG_HEADER_COMMENT,
     SVG_WATERMARK_TEXT,
@@ -208,7 +212,6 @@ class StructuralDomParser(HTMLParser):
         "noscript",
         "script",
         "style",
-        "svg",
         "template",
         "title",
     }
@@ -235,7 +238,13 @@ class StructuralDomParser(HTMLParser):
         "wbr",
     }
 
-    def __init__(self, *, app_name: str, max_nodes: int = 64) -> None:
+    def __init__(
+        self,
+        *,
+        app_name: str,
+        max_nodes: int = 64,
+        max_depth: int = 20,
+    ) -> None:
         super().__init__(convert_charrefs=True)
         self.root = _MutableDemoNode(
             element_type="web_surface_window",
@@ -246,6 +255,7 @@ class StructuralDomParser(HTMLParser):
         self._open_container_tags: list[str] = []
         self._skip_depth = 0
         self._max_nodes = max_nodes
+        self._max_depth = max_depth
         self._node_count = 1
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -268,13 +278,15 @@ class StructuralDomParser(HTMLParser):
         if normalized_tag in self.IGNORE_TAGS:
             return
 
-        if self._is_hidden(attributes):
+        if self._is_hidden(normalized_tag, attributes):
             return
 
         if self._node_count >= self._max_nodes:
             return
         node = self._build_node(normalized_tag, attributes)
         if node is None:
+            return
+        if len(self._container_stack) > self._max_depth:
             return
 
         self._container_stack[-1].children.append(node)
@@ -294,10 +306,15 @@ class StructuralDomParser(HTMLParser):
         attributes = {
             name.lower(): (value or "").strip() for name, value in attrs if name
         }
-        if self._is_hidden(attributes) or self._node_count >= self._max_nodes:
+        if (
+            self._is_hidden(normalized_tag, attributes)
+            or self._node_count >= self._max_nodes
+        ):
             return
         node = self._build_node(normalized_tag, attributes)
         if node is None:
+            return
+        if len(self._container_stack) > self._max_depth:
             return
         self._container_stack[-1].children.append(node)
         self._node_count += 1
@@ -321,6 +338,14 @@ class StructuralDomParser(HTMLParser):
         role = attributes.get("role", "").lower()
         input_type = attributes.get("type", "").lower()
         frame_kind = self._frame_kind(tag, attributes)
+        accessible_label = self._preferred_accessible_label(attributes)
+        decor_label = self._decor_label(attributes)
+        slab_layer_hint = self._slab_layer_hint(
+            tag=tag,
+            role=role,
+            frame_kind=frame_kind,
+            attributes=attributes,
+        )
         element_type = ""
         label = ""
         traits: list[str] = []
@@ -407,10 +432,19 @@ class StructuralDomParser(HTMLParser):
             element_type = "text_block"
             label = "Text Block"
             traits = ["text"]
-        elif tag in {"img"} or role == "img":
+        elif tag in {"img", "svg"} or role == "img":
             element_type = "image"
-            label = "Image"
+            label = "Decor Asset" if slab_layer_hint == ASSETS_LAYER else "Image"
             traits = ["image"]
+        elif self._is_decorative_asset_candidate(
+            tag=tag,
+            role=role,
+            frame_kind=frame_kind,
+            attributes=attributes,
+        ):
+            element_type = "image_asset"
+            label = "Decor Asset"
+            traits = ["image", "decor"]
         elif role in {"dialog", "alertdialog"}:
             element_type = "dialog_container"
             label = "Dialog"
@@ -433,10 +467,21 @@ class StructuralDomParser(HTMLParser):
         if frame_kind is not None and "structural_frame" not in traits:
             traits = [*traits, "structural_frame"]
             metadata.setdefault("frame_kind", frame_kind)
+        if slab_layer_hint is not None:
+            metadata["slab_layer"] = slab_layer_hint
+            if slab_layer_hint == ASSETS_LAYER and "decor" not in traits:
+                traits = [*traits, "decor"]
+
+        resolved_label = self._resolve_label(
+            default_label=label,
+            accessible_label=accessible_label,
+            decor_label=decor_label,
+            element_type=element_type,
+        )
 
         return _MutableDemoNode(
             element_type=element_type,
-            label=label,
+            label=resolved_label,
             traits=traits,
             bounds=self._synthetic_bounds(),
             enabled=True,
@@ -444,10 +489,12 @@ class StructuralDomParser(HTMLParser):
             metadata=metadata,
         )
 
-    def _is_hidden(self, attributes: dict[str, str]) -> bool:
+    def _is_hidden(self, tag: str, attributes: dict[str, str]) -> bool:
         aria_hidden = attributes.get("aria-hidden", "").lower()
         hidden = "hidden" in attributes
-        return hidden or aria_hidden == "true"
+        if not hidden and aria_hidden != "true":
+            return False
+        return not self._should_capture_hidden_asset(tag, attributes)
 
     def _structural_label_from_role(self, role: str) -> str:
         return role.replace("-", " ").replace("_", " ").title()
@@ -500,6 +547,123 @@ class StructuralDomParser(HTMLParser):
             "container": "Container Frame",
         }.get(frame_kind, "Frame")
 
+    def _preferred_accessible_label(self, attributes: dict[str, str]) -> str:
+        for key in ("aria-label", "alt", "title"):
+            value = self._clean_label(attributes.get(key, ""))
+            if value:
+                return value
+        return ""
+
+    def _resolve_label(
+        self,
+        *,
+        default_label: str,
+        accessible_label: str,
+        decor_label: str,
+        element_type: str,
+    ) -> str:
+        primary_label = accessible_label or decor_label
+        if not primary_label:
+            return default_label
+        if element_type == "button" and not primary_label.lower().endswith("button"):
+            return f"{primary_label} Button"
+        return primary_label
+
+    def _clean_label(self, value: str) -> str:
+        return re.sub(r"\s+", " ", value).strip()
+
+    def _decor_label(self, attributes: dict[str, str]) -> str:
+        for candidate in (
+            attributes.get("id", ""),
+            attributes.get("data-testid", ""),
+            attributes.get("class", "").split()[0] if attributes.get("class") else "",
+        ):
+            value = self._humanize_token(candidate)
+            if value:
+                return value
+        return ""
+
+    def _humanize_token(self, value: str) -> str:
+        normalized = re.sub(r"[^a-zA-Z0-9]+", " ", value).strip()
+        if not normalized:
+            return ""
+        return normalized.title()
+
+    def _slab_layer_hint(
+        self,
+        *,
+        tag: str,
+        role: str,
+        frame_kind: str | None,
+        attributes: dict[str, str],
+    ) -> str | None:
+        if self._is_decorative_asset_candidate(
+            tag=tag,
+            role=role,
+            frame_kind=frame_kind,
+            attributes=attributes,
+        ):
+            return ASSETS_LAYER
+        return None
+
+    def _is_decorative_asset_candidate(
+        self,
+        *,
+        tag: str,
+        role: str,
+        frame_kind: str | None,
+        attributes: dict[str, str],
+    ) -> bool:
+        if frame_kind is not None:
+            return False
+        if tag in {"img", "svg"} or role == "img":
+            return True
+        if tag not in {"div", "span"}:
+            return False
+        if not self._has_identifier(attributes):
+            return False
+        signals = " ".join(
+            part
+            for part in (
+                attributes.get("id", ""),
+                attributes.get("class", ""),
+                attributes.get("data-testid", ""),
+                attributes.get("style", ""),
+            )
+            if part
+        ).lower()
+        return any(
+            token in signals
+            for token in (
+                "avatar",
+                "badge",
+                "hero",
+                "icon",
+                "illustration",
+                "image",
+                "logo",
+                "media",
+                "poster",
+                "thumbnail",
+            )
+        )
+
+    def _has_identifier(self, attributes: dict[str, str]) -> bool:
+        return any(
+            self._clean_label(attributes.get(key, ""))
+            for key in ("id", "class", "data-testid")
+        )
+
+    def _should_capture_hidden_asset(
+        self, tag: str, attributes: dict[str, str]
+    ) -> bool:
+        return self._is_decorative_asset_candidate(
+            tag=tag,
+            role=attributes.get("role", "").lower(),
+            frame_kind=self._frame_kind(tag, attributes),
+            attributes=attributes,
+        ) and self._has_identifier(attributes)
+
     def _build_metadata(self, attributes: dict[str, str]) -> dict[str, Any]:
         metadata: dict[str, Any] = {}
         for source_key, target_key in (
@@ -507,9 +671,13 @@ class StructuralDomParser(HTMLParser):
             ("action", "action"),
             ("formaction", "action"),
             ("aria-controls", "aria-controls"),
+            ("aria-label", "aria-label"),
+            ("alt", "alt"),
             ("data-action", "data-action"),
+            ("id", "id"),
             ("class", "class"),
             ("data-testid", "data-testid"),
+            ("title", "title"),
         ):
             value = attributes.get(source_key, "").strip()
             if value:
@@ -582,6 +750,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="Pause between demo steps.",
     )
     parser.add_argument(
+        "--depth",
+        type=_positive_int("depth"),
+        default=20,
+        help="Maximum structural depth collected by the ambient crawler.",
+    )
+    parser.add_argument(
+        "--max-nodes",
+        type=_positive_int("max-nodes"),
+        default=64,
+        help="Maximum DOM nodes parsed for active-chrome-tab structural capture.",
+    )
+    parser.add_argument(
         "--auto-open",
         action="store_true",
         help="Open the generated SVG with the default macOS handler.",
@@ -591,6 +771,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="Override the Live Raid date embedded in blueprint metadata.",
     )
     return parser
+
+
+def _positive_int(field_name: str):
+    def _parser(value: str) -> int:
+        parsed = int(value)
+        if parsed < 1:
+            raise argparse.ArgumentTypeError(f"{field_name} must be >= 1")
+        return parsed
+
+    return _parser
 
 
 def _build_demo_tree() -> DemoNode:
@@ -684,9 +874,12 @@ def _active_chrome_tab_context() -> ChromeTabContext:
 def _app_name_from_host(host: str) -> str:
     known_names = {
         "airbnb.com": "Airbnb",
+        "amazon.com": "Amazon",
+        "amazon.com.au": "Amazon",
         "linear.app": "Linear",
         "open.spotify.com": "Spotify",
         "spotify.com": "Spotify",
+        "wikipedia.org": "Wikipedia",
     }
     for suffix, app_name in known_names.items():
         if host == suffix or host.endswith(f".{suffix}"):
@@ -727,20 +920,122 @@ def _rendered_dom_from_url(url: str) -> str:
     raise RuntimeError("rendered DOM capture did not return HTML")
 
 
-def _build_chrome_tab_tree() -> tuple[DemoNode, ChromeTabContext]:
-    context = _active_chrome_tab_context()
-    dom = _rendered_dom_from_url(context.url)
-    parser = StructuralDomParser(app_name=context.app_name)
+def _parse_structural_dom(
+    dom: str, *, app_name: str, max_depth: int, max_nodes: int = 64
+) -> DemoNode:
+    parser = StructuralDomParser(
+        app_name=app_name,
+        max_depth=max_depth,
+        max_nodes=max_nodes,
+    )
     parser.feed(dom)
     parser.close()
-    tree = parser.root.freeze()
-    if not tree.children:
-        raise RuntimeError("active Chrome tab did not yield a structural DOM tree")
-    return tree, context
+    return parser.root.freeze()
+
+
+def _count_tree_nodes(root: DemoNode) -> int:
+    total = 1
+    for child in root.children:
+        total += _count_tree_nodes(child)
+    return total
+
+
+def _write_redline_report(
+    *,
+    output_path: Path,
+    context: ChromeTabContext | None,
+    last_known_a11y_state: str,
+    error: str,
+) -> None:
+    payload = {
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "url": (context.url if context is not None else ""),
+        "title": (context.title if context is not None else ""),
+        "last_known_a11y_state": last_known_a11y_state,
+        "error": error,
+    }
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
+
+def _build_chrome_tab_tree(
+    max_depth: int = 20,
+    max_nodes: int = 64,
+    *,
+    retry_attempts: int = 3,
+    retry_delay_seconds: float = 0.5,
+    redline_output_path: Path | None = None,
+) -> tuple[DemoNode, ChromeTabContext]:
+    last_context: ChromeTabContext | None = None
+    last_known_a11y_state = "UNKNOWN"
+    for attempt in range(1, retry_attempts + 1):
+        try:
+            context = _active_chrome_tab_context()
+            last_context = context
+            is_internal_page = context.url.startswith(
+                "chrome://"
+            ) or context.url.startswith("about:")
+            print(
+                "[RADE DIAG] State of the Land: "
+                f"url={context.url!r} internal_page={is_internal_page}"
+            )
+            dom = _rendered_dom_from_url(context.url)
+            tree = _parse_structural_dom(
+                dom,
+                app_name=context.app_name,
+                max_depth=max_depth,
+                max_nodes=max_nodes,
+            )
+            initial_node_count = _count_tree_nodes(tree)
+            last_known_a11y_state = "POPULATED" if initial_node_count > 1 else "EMPTY"
+            print(
+                "[RADE DIAG] A11y Pulse: "
+                f"state={last_known_a11y_state} node_count={initial_node_count}"
+            )
+            if tree.children:
+                return tree, context
+        except RuntimeError as error:
+            if redline_output_path is not None:
+                _write_redline_report(
+                    output_path=redline_output_path,
+                    context=last_context,
+                    last_known_a11y_state=last_known_a11y_state,
+                    error=str(error),
+                )
+                print(f"[RADE DIAG] Redline report emitted: {redline_output_path}")
+            if attempt >= retry_attempts:
+                raise
+        if attempt < retry_attempts:
+            time.sleep(retry_delay_seconds)
+
+    context = last_context
+    assert context is not None
+    if redline_output_path is not None:
+        _write_redline_report(
+            output_path=redline_output_path,
+            context=context,
+            last_known_a11y_state=last_known_a11y_state,
+            error=(
+                "active Chrome tab did not yield a structural DOM tree after "
+                f"{retry_attempts} attempts"
+            ),
+        )
+        print(f"[RADE DIAG] Redline report emitted: {redline_output_path}")
+    raise RuntimeError(
+        "active Chrome tab did not yield a structural DOM tree after "
+        f"{retry_attempts} attempts: title={context.title!r} url={context.url!r}"
+    )
+
+
+def _node_from_graph_payload(row: dict[str, Any]) -> FunctionalNode:
+    data = {k: v for k, v in row.items() if k != "bounding_box"}
+    return FunctionalNode(**data)
 
 
 def _build_graph_from_payload(payload: dict[str, Any]) -> ConstructionGraph:
-    nodes = [FunctionalNode(**node) for node in payload.get("nodes", [])]
+    nodes = [_node_from_graph_payload(node) for node in payload.get("nodes", [])]
     edges = [FunctionalEdge(**edge) for edge in payload.get("edges", [])]
     return ConstructionGraph(
         app_id=str(payload["app_id"]),
@@ -860,12 +1155,26 @@ class RadeVectorBridge:
         for layer in ordered_layers:
             if not nodes_by_layer.get(layer):
                 continue
+            children = nodes_by_layer[layer]
+            if layer == LINKS_EVENTS_LAYER:
+                children = [
+                    "\n".join(
+                        [
+                            '<g id="INTERACTIVE_PLUMBING" '
+                            'data-rade-dna="nodes|interactive-plumbing" '
+                            'data-slab-layer="04" '
+                            f'data-slab-layer-label="{_escape_xml_attribute(LINKS_EVENTS_LAYER)}">',
+                            *children,
+                            "</g>",
+                        ]
+                    )
+                ]
             layer_markup.append(
                 self._wrap_layer_group(
                     group_id=f"nodes-{self._slugify(layer)}",
                     rade_dna=f"nodes|{self._slugify(layer)}",
                     slab_layer=layer,
-                    children=nodes_by_layer[layer],
+                    children=children,
                 )
             )
 
@@ -927,7 +1236,9 @@ class RadeVectorBridge:
             ]
         )
 
-    def _render_legal_footer(self, *, width: int, height: int, right_margin: int) -> str:
+    def _render_legal_footer(
+        self, *, width: int, height: int, right_margin: int
+    ) -> str:
         x = width - right_margin
         base_y = height - 72
         return "\n".join(
@@ -1342,9 +1653,11 @@ class RadeVectorBridge:
 
     def _node_dna(self, node: FunctionalNode) -> str:
         dna = node.functional_dna
+        slab03_kind = dna.get("slab03_anchor_kind") or node.slab03_anchor_kind
         tokens = [
             str(dna.get("instruction_role", "component")),
             str(dna.get("frame_kind") or "node"),
+            str(slab03_kind or "none"),
             str(dna.get("pattern_fingerprint") or node.structural_fingerprint),
             node.role or node.element_type,
         ]
@@ -1474,11 +1787,18 @@ def run_demo(
     output_dir: Path,
     sleep_seconds: float = 0.5,
     capture_mode: str = "demo",
+    depth: int = 20,
+    max_nodes: int = 64,
     output_name: str = "RADE_RECONSTRUCTION.svg",
     auto_open: bool = False,
     live_raid_date: str | None = None,
 ) -> DemoRunResult:
     styler = TerminalStyler()
+    if max_nodes > 256:
+        print(
+            "⚠️ HIGH DENSITY RAID: SVG rendering may impact system performance.",
+            file=sys.stderr,
+        )
     styler.emit("RADE Lead Architect View Demo Runner", color="magenta", bold=True)
     styler.emit(LEGAL_NOTICE, color="cyan")
     styler.emit(LEAD_ARCHITECT_NOTICE, color="cyan")
@@ -1490,13 +1810,24 @@ def run_demo(
     capture_notice = "Target App connected on AWS Device Farm demo surface."
     root = _build_demo_tree()
     if capture_mode == "active-chrome-tab":
-        root, context = _build_chrome_tab_tree()
-        screen_name = context.screen_name
-        screen_id = context.screen_id
-        app_id = context.app_id
-        capture_notice = (
-            f"Active Chrome tab mapped to {context.app_name} structural surface."
-        )
+        redline_path = output_dir / "redline_report.json"
+        try:
+            root, context = _build_chrome_tab_tree(
+                max_depth=depth,
+                max_nodes=max_nodes,
+                redline_output_path=redline_path,
+            )
+            screen_name = context.screen_name
+            screen_id = context.screen_id
+            app_id = context.app_id
+            capture_notice = (
+                f"Active Chrome tab mapped to {context.app_name} structural surface."
+            )
+        except RuntimeError as error:
+            capture_notice = (
+                "Active Chrome tab capture failed; "
+                f"falling back to demo tree. Redline: {redline_path} ({error})"
+            )
 
     orchestrator = RadeOrchestrator(
         app_id=app_id,
@@ -1520,6 +1851,7 @@ def run_demo(
         root,
         screen_id=screen_id,
         screen_name=screen_name,
+        max_depth=depth,
     )
     styler.emit(capture_notice, color="green")
     time.sleep(sleep_seconds)
@@ -1618,6 +1950,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         output_dir=args.output_dir,
         sleep_seconds=float(args.sleep_seconds),
         capture_mode=str(args.capture_mode),
+        depth=int(args.depth),
+        max_nodes=int(args.max_nodes),
         output_name=str(args.output_name),
         auto_open=bool(args.auto_open),
         live_raid_date=(

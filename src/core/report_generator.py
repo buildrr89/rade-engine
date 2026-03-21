@@ -185,9 +185,7 @@ def render_markdown_report(report: JsonDict) -> str:
     lines.append(f"- Platform: {report['platform']}")
     lines.append(f"- Standards pack: {report['standards_pack']['version']}")
     lines.extend(
-        markdown_legal_lines(
-            live_raid_date=report["rade_legal"].get("live_raid_date")
-        )
+        markdown_legal_lines(live_raid_date=report["rade_legal"].get("live_raid_date"))
     )
     lines.append("")
     lines.append("## Summary")

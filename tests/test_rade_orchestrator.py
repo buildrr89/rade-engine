@@ -15,6 +15,7 @@ class FakeNode:
         self,
         element_type: str,
         *,
+        role: str | None = None,
         label: str = "",
         accessibility_identifier: str | None = None,
         traits: list[str] | None = None,
@@ -24,6 +25,7 @@ class FakeNode:
         children: list["FakeNode"] | None = None,
     ) -> None:
         self.element_type = element_type
+        self.role = role
         self.label = label
         self.accessibility_identifier = accessibility_identifier
         self.traits = traits or []
@@ -39,6 +41,9 @@ class FakeNode:
             "class_name": self.element_type,
             "className": self.element_type,
             "type": self.element_type,
+            "role": self.role,
+            "accessibility_role": self.role,
+            "accessibilityRole": self.role,
             "label": self.label,
             "text": self.label,
             "name": self.label,
@@ -156,3 +161,56 @@ def test_orchestrator_main_clears_terminal_and_prints_notice() -> None:
     mocked_clear.assert_called_once()
     assert exit_code == 0
     assert TERMINAL_NOTICE in stdout.getvalue()
+
+
+def test_orchestrator_persists_modal_slab03_frame_id() -> None:
+    root = FakeNode(
+        "XCUIElementTypeWindow",
+        children=[
+            FakeNode(
+                "XCUIElementTypeOther",
+                role="group",
+                bounds={"x": 0, "y": 0, "width": 100, "height": 100},
+            ),
+            FakeNode(
+                "XCUIElementTypeOther",
+                role="dialog",
+                bounds={"x": 20, "y": 20, "width": 60, "height": 60},
+                children=[
+                    FakeNode(
+                        "XCUIElementTypeButton",
+                        label="Confirm",
+                        traits=["button"],
+                        bounds={"x": 30, "y": 30, "width": 20, "height": 10},
+                    )
+                ],
+            ),
+        ],
+    )
+    orchestrator = RadeOrchestrator(
+        app_id="com.example.legacyapp",
+        platform="ios",
+    )
+    graph = orchestrator.collect_from_root(root, screen_id="checkout")
+    dialog = next(node.to_dict() for node in graph.nodes if node.role == "dialog")
+    button = next(
+        node.to_dict()
+        for node in graph.nodes
+        if node.role == "button" and node.parent_id == dialog["element_id"]
+    )
+    non_modal_sibling = next(
+        node.to_dict()
+        for node in graph.nodes
+        if node.role not in {"screen", "dialog", "button"}
+    )
+
+    assert dialog["slab03_frame_id"] is not None
+    assert dialog["slab03_frame_id"].startswith("slab03:modal:")
+    assert dialog["slab03_anchor_kind"] == "a11y:dialog"
+    assert button["slab03_frame_id"] == dialog["slab03_frame_id"]
+    assert button["slab03_anchor_kind"] == "a11y:dialog-descendant"
+    assert button["functional_dna"]["slab03_frame_id"] == dialog["slab03_frame_id"]
+    assert (
+        button["functional_dna"]["slab03_anchor_kind"] == "a11y:dialog-descendant"
+    )
+    assert non_modal_sibling["slab03_frame_id"] is None

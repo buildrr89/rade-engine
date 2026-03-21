@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 from src.core.compliance import (
     JSON_LEGAL_KEY,

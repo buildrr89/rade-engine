@@ -195,5 +195,9 @@ def test_collect_from_root_samples_scroll_children_by_priority() -> None:
     graph = orchestrator.collect_from_root(root, screen_id="feed")
 
     assert len(graph.nodes) == 7
-    assert {node.label for node in graph.nodes} >= {"Continue", "Terms", "Section Title"}
+    assert {node.label for node in graph.nodes} >= {
+        "Continue",
+        "Terms",
+        "Section Title",
+    }
     assert sum(node.label.startswith("Item ") for node in graph.nodes) == 2

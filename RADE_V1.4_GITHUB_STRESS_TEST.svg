@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1410" role="img" aria-label="RADE reconstruction">
+<metadata id="rade-metadata">legal_notice=© 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. | ownership=Exclusive intellectual property of Trung Nguyen (Buildrr89) | systems=5-Slab Taxonomy; Ambient Engine | watermark=© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89 | live_raid_date=2026-03-20</metadata>
+<defs>
+<linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#04110b" />
+<stop offset="100%" stop-color="#072116" />
+</linearGradient>
+<pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+<path d="M 24 0 L 0 0 0 24" fill="none" stroke="#0e261c" stroke-width="1" />
+</pattern>
+<pattern id="major-grid" width="120" height="120" patternUnits="userSpaceOnUse">
+<rect width="120" height="120" fill="url(#minor-grid)" />
+<path d="M 120 0 L 0 0 0 120" fill="none" stroke="#153726" stroke-width="1.2" />
+</pattern>
+<marker id="arrow-plumbing" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#98ffad" />
+</marker>
+</defs>
+<rect width="1400" height="1410" fill="url(#bg)" />
+<g id="site-grid" data-rade-dna="construction-grid" data-slab-layer="01. OS Site (The Land)">
+<rect width="1400" height="1410" fill="url(#major-grid)" opacity="0.72" />
+<rect width="1400" height="1410" fill="url(#minor-grid)" opacity="0.16" />
+</g>
+<g id="drawing-header" data-rade-dna="drawing-header" data-slab-layer="02. Root (The Slab)">
+<text x="88" y="46" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="26" fill="#98ffad" font-weight="700">RADE Reconstruction - DATA_SLOT_01</text>
+<text x="88" y="74" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="13" fill="#6fdaa3">com.rade.chrome.stripe | nodes=46 | edges=55</text>
+<line x1="88" y1="92" x2="1312" y2="92" stroke="#173d2b" stroke-width="1.2" opacity="0.85" />
+</g>
+<g id="containment-edges" data-rade-dna="edges|containment" data-slab-layer="02. Root (The Slab)">
+<g id="edge-000" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 710.4 216.0 C 710.4 214.0, 428.1 250.0, 428.1 248.0" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-001" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 428.1 288.0 C 428.1 298.3, 634.2 334.3, 634.2 344.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-002" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 491.6, 659.2 527.6, 659.2 592.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-004" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 514.2, 198.0 550.2, 198.0 637.8" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-005" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 509.3, 902.5 545.3, 902.5 628.1" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-006" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 902.5 668.1 C 902.5 685.4, 501.6 721.4, 501.6 738.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-007" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 501.6 778.6 C 501.6 921.2, 614.7 957.2, 614.7 1099.7" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-008" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 501.6 778.6 C 501.6 844.6, 1102.1 880.6, 1102.1 946.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-009" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 902.5 668.1 C 902.5 691.6, 886.4 727.6, 886.4 751.1" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-010" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 886.4 791.1 C 886.4 926.6, 790.4 962.6, 790.4 1098.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-011" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 886.4 791.1 C 886.4 896.7, 198.0 932.7, 198.0 1038.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-012" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 902.5 668.1 C 902.5 729.0, 461.5 765.0, 461.5 825.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-013" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 461.5 865.9 C 461.5 890.3, 611.1 926.3, 611.1 950.7" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-014" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 461.5 865.9 C 461.5 933.5, 1202.0 969.5, 1202.0 1037.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-015" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 902.5 668.1 C 902.5 720.2, 952.6 756.2, 952.6 808.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-016" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 952.6 848.2 C 952.6 879.4, 798.4 915.4, 798.4 946.5" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-017" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 952.6 848.2 C 952.6 872.3, 198.0 908.3, 198.0 932.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-018" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 902.5 668.1 C 902.5 720.7, 355.3 756.7, 355.3 809.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-019" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 355.3 849.3 C 355.3 894.7, 496.6 930.7, 496.6 976.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-021" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 515.7, 448.7 551.7, 448.7 640.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-022" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 448.7 680.9 C 448.7 687.2, 690.6 723.2, 690.6 729.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-024" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 448.7 680.9 C 448.7 722.3, 600.9 758.3, 600.9 799.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-026" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 448.7 680.9 C 448.7 735.0, 1059.6 771.0, 1059.6 825.0" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-027" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 508.7, 1023.2 544.7, 1023.2 626.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-028" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1023.2 666.9 C 1023.2 714.4, 797.7 750.4, 797.7 797.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-029" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1023.2 666.9 C 1023.2 710.7, 1202.0 746.7, 1202.0 790.5" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-030" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 477.1, 793.1 513.1, 793.1 563.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-032" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 466.2, 555.1 502.2, 555.1 541.8" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-033" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 517.9, 1202.0 553.9, 1202.0 645.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-034" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 634.2 426.6 C 634.2 501.5, 335.5 537.5, 335.5 612.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-035" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 335.5 652.4 C 335.5 683.2, 296.3 719.2, 296.3 749.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-036" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 296.3 789.9 C 296.3 860.9, 908.8 896.9, 908.8 967.8" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-038" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 296.3 789.9 C 296.3 839.3, 1202.0 875.3, 1202.0 924.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-039" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 335.5 652.4 C 335.5 675.3, 1091.4 711.3, 1091.4 734.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-040" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1091.4 774.2 C 1091.4 914.2, 411.1 950.2, 411.1 1090.1" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-042" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1091.4 774.2 C 1091.4 838.5, 317.4 874.5, 317.4 938.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-043" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 710.4 216.0 C 710.4 217.8, 937.3 253.8, 937.3 255.5" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-044" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 937.3 295.5 C 937.3 329.8, 1038.9 365.8, 1038.9 400.1" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-045" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1038.9 440.1 C 996.9 440.1, 899.4 451.3, 857.4 451.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-047" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1038.9 440.1 C 996.9 440.1, 473.7 454.4, 431.7 454.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-049" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1038.9 440.1 C 1038.9 465.4, 1188.0 501.4, 1188.0 526.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-050" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1038.9 440.1 C 1038.9 476.4, 1054.6 512.4, 1054.6 548.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-051" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1038.9 440.1 C 1038.9 461.3, 212.0 497.3, 212.0 518.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-052" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 558.6 C 212.0 658.1, 212.0 694.1, 212.0 793.5" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-053" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 833.5 C 212.0 942.6, 984.4 978.6, 984.4 1087.7" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+</g>
+<g id="plumbing-edges" data-rade-dna="edges|plumbing" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<g id="edge-003" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 659.2 660.6 C 659.2 658.6, 975.2 746.6, 975.2 744.6" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="975.2" cy="744.6" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="989.2" y="748.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-020" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 496.6 1044.2 C 496.6 1060.2, 776.6 1148.2, 776.6 1164.2" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="776.6" cy="1164.2" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="790.6" y="1168.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-023" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 690.6 797.4 C 690.6 813.4, 1006.6 901.4, 1006.6 917.4" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="1006.6" cy="917.4" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="1020.6" y="921.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-025" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 600.9 867.6 C 600.9 874.6, 916.9 962.6, 916.9 969.6" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="916.9" cy="969.6" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="930.9" y="973.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-031" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 793.1 631.6 C 793.1 638.6, 1109.1 726.6, 1109.1 733.6" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="1109.1" cy="733.6" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="1123.1" y="737.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-037" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 908.8 1035.8 C 908.8 1042.8, 1224.8 1130.8, 1224.8 1137.8" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="1224.8" cy="1137.8" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="1238.8" y="1141.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-041" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 411.1 1158.1 C 411.1 1174.1, 727.1 1262.1, 727.1 1278.1" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="727.1" cy="1278.1" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="741.1" y="1282.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-046" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 857.4 519.3 C 857.4 526.3, 1137.4 614.3, 1137.4 621.3" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="1137.4" cy="621.3" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="1151.4" y="625.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-048" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 431.7 522.4 C 431.7 520.4, 711.7 608.4, 711.7 606.4" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="711.7" cy="606.4" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="725.7" y="610.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-054" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 984.4 1155.7 C 984.4 1153.7, 1256.0 1241.7, 1256.0 1239.7" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="1256.0" cy="1239.7" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="1270.0" y="1243.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+</g>
+<g id="nodes-01-os-site-the-land" data-rade-dna="nodes|01-os-site-the-land" data-slab-layer="01. OS Site (The Land)">
+<g id="stripe-surface#6d34b452" data-order="0" data-rade-dna="component|node|12da41d7|screen" data-slab-layer="01. OS Site (The Land)">
+<rect x="532.4" y="132.0" width="356.0" height="94.0" rx="18" ry="18" fill="#0d2c1d" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.8" />
+<rect x="542.4" y="142.0" width="336.0" height="74.0" rx="12" ry="12" fill="none" stroke="#5ecb94" stroke-width="1" opacity="0.42" />
+<line x1="550.4" y1="154.0" x2="870.4" y2="154.0" stroke="#5ecb94" stroke-width="1.2" opacity="0.78" />
+<text x="868.4" y="150.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L01 SITE</text>
+<text x="552.4" y="170.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_01</text>
+<text x="552.4" y="192.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">screen | e85fa609</text>
+</g>
+</g>
+<g id="nodes-03-containers-the-frame" data-rade-dna="nodes|03-containers-the-frame" data-slab-layer="03. Containers (The Frame)">
+<g id="stripe-surface#a8d6215e" data-order="2" data-rade-dna="frame|container|fcbaacf4|navigation" data-slab-layer="03. Containers (The Frame)">
+<rect x="450.2" y="334.6" width="368.0" height="102.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="460.2" y="344.6" width="348.0" height="82.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="468.2" y1="356.6" x2="800.2" y2="356.6" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="798.2" y="352.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="470.2" y="372.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">DATA_SLOT_04</text>
+<text x="470.2" y="394.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">navigation | 0dd84f3e</text>
+</g>
+<g id="stripe-surface#ecafe2f4" data-order="3" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="493.2" y="582.6" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="503.2" y="592.6" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="511.2" y1="604.6" x2="807.2" y2="604.6" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="805.2" y="600.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="513.2" y="620.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Stripe homepage</text>
+<text x="513.2" y="642.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 05ad8346</text>
+</g>
+<g id="stripe-surface#8e8888a9" data-order="7" data-rade-dna="component|node|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="448.7" y="1089.7" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="458.7" y="1099.7" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="466.7" y1="1111.7" x2="762.7" y2="1111.7" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="760.7" y="1107.7" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="468.7" y="1127.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="468.7" y="1149.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 16fd012c</text>
+</g>
+<g id="stripe-surface#1fb33526" data-order="10" data-rade-dna="component|node|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="624.4" y="1088.2" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="634.4" y="1098.2" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="642.4" y1="1110.2" x2="938.4" y2="1110.2" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="936.4" y="1106.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="644.4" y="1126.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="644.4" y="1148.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 16fd012c</text>
+</g>
+<g id="stripe-surface#55efca9a" data-order="13" data-rade-dna="component|node|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="445.1" y="940.7" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="455.1" y="950.7" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="463.1" y1="962.7" x2="759.1" y2="962.7" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="757.1" y="958.7" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="465.1" y="978.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="465.1" y="1000.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 16fd012c</text>
+</g>
+<g id="stripe-surface#596b6cbc" data-order="16" data-rade-dna="component|node|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="632.4" y="936.5" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="642.4" y="946.5" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="650.4" y1="958.5" x2="946.4" y2="958.5" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="944.4" y="954.5" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="652.4" y="974.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="652.4" y="996.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 16fd012c</text>
+</g>
+<g id="stripe-surface#a617e575" data-order="19" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="330.6" y="966.2" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="340.6" y="976.2" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="348.6" y1="988.2" x2="644.6" y2="988.2" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="642.6" y="984.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="350.6" y="1004.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="350.6" y="1026.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | ee66ec4f</text>
+</g>
+<g id="stripe-surface#be0b585d" data-order="21" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="524.6" y="719.4" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="534.6" y="729.4" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="542.6" y1="741.4" x2="838.6" y2="741.4" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="836.6" y="737.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="544.6" y="757.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="544.6" y="779.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 2bff25e2</text>
+</g>
+<g id="stripe-surface#8041c280" data-order="22" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="434.9" y="789.6" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="444.9" y="799.6" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="452.9" y1="811.6" x2="748.9" y2="811.6" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="746.9" y="807.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="454.9" y="827.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="454.9" y="849.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 2bff25e2</text>
+</g>
+<g id="stripe-surface#6eb427f1" data-order="25" data-rade-dna="component|node|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="631.7" y="787.9" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="641.7" y="797.9" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="649.7" y1="809.9" x2="945.7" y2="809.9" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="943.7" y="805.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="651.7" y="825.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="651.7" y="847.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 92443910</text>
+</g>
+<g id="stripe-surface#2f08589a" data-order="27" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="627.1" y="553.6" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="637.1" y="563.6" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="645.1" y1="575.6" x2="941.1" y2="575.6" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="939.1" y="571.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="647.1" y="591.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Header Contact Sales Cta Button</text>
+<text x="647.1" y="613.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 05ad8346</text>
+</g>
+<g id="stripe-surface#c452a9d9" data-order="28" data-rade-dna="component|node|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="389.1" y="531.8" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="399.1" y="541.8" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="407.1" y1="553.8" x2="703.1" y2="553.8" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="701.1" y="549.8" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="409.1" y="569.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Toggle navigation menu Button</text>
+<text x="409.1" y="591.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 4e618306</text>
+</g>
+<g id="stripe-surface#c80f7ab3" data-order="32" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="742.8" y="957.8" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="752.8" y="967.8" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="760.8" y1="979.8" x2="1056.8" y2="979.8" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1054.8" y="975.8" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="762.8" y="995.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Sign in</text>
+<text x="762.8" y="1017.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | ee66ec4f</text>
+</g>
+<g id="stripe-surface#ee79a333" data-order="35" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="245.1" y="1080.1" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="255.1" y="1090.1" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="263.1" y1="1102.1" x2="559.1" y2="1102.1" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="557.1" y="1098.1" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="265.1" y="1118.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="265.1" y="1140.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | ee66ec4f</text>
+</g>
+<g id="stripe-surface#48cd2f20" data-order="39" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="691.4" y="441.3" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="701.4" y="451.3" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="709.4" y1="463.3" x2="1005.4" y2="463.3" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1003.4" y="459.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="711.4" y="479.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="711.4" y="501.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 05ad8346</text>
+</g>
+<g id="stripe-surface#1fd0792e" data-order="40" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="265.7" y="444.4" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="275.7" y="454.4" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="283.7" y1="466.4" x2="579.7" y2="466.4" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="577.7" y="462.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="285.7" y="482.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Button</text>
+<text x="285.7" y="504.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 05ad8346</text>
+</g>
+<g id="stripe-surface#3e5ea1e0" data-order="45" data-rade-dna="plumbing|node|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="818.4" y="1077.7" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="828.4" y="1087.7" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="836.4" y1="1099.7" x2="1132.4" y2="1099.7" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1130.4" y="1095.7" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="838.4" y="1115.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Hds Link</text>
+<text x="838.4" y="1137.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | ee66ec4f</text>
+</g>
+</g>
+<g id="nodes-04-links-events-wires-plumbing" data-rade-dna="nodes|04-links-events-wires-plumbing" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<g id="INTERACTIVE_PLUMBING" data-rade-dna="nodes|interactive-plumbing" data-slab-layer="04" data-slab-layer-label="04. Links/Events (Wires &amp; Plumbing)">
+<g id="stripe-surface#18e3f6f0" data-order="1" data-rade-dna="frame|container|6fa289ad|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="304.1" y="238.0" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="314.1" y="248.0" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="322.1" y1="260.0" x2="534.1" y2="260.0" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="532.1" y="256.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="324.1" y="276.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_03</text>
+<text x="324.1" y="298.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | d143e683</text>
+</g>
+<g id="stripe-surface#fb582dc1" data-order="5" data-rade-dna="frame|container|c042b93a|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="778.5" y="618.1" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="788.5" y="628.1" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="796.5" y1="640.1" x2="1008.5" y2="640.1" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1006.5" y="636.1" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="798.5" y="656.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Hds Navigation Menu List</text>
+<text x="798.5" y="678.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 53fc9b23</text>
+</g>
+<g id="stripe-surface#4823979e" data-order="6" data-rade-dna="frame|container|2ada0d88|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="377.6" y="728.6" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="387.6" y="738.6" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="395.6" y1="750.6" x2="607.6" y2="750.6" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="605.6" y="746.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="397.6" y="766.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Header Products Nav Item</text>
+<text x="397.6" y="788.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | dea7361d</text>
+</g>
+<g id="stripe-surface#ef373c6f" data-order="9" data-rade-dna="frame|container|2ada0d88|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="762.4" y="741.1" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="772.4" y="751.1" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="780.4" y1="763.1" x2="992.4" y2="763.1" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="990.4" y="759.1" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="782.4" y="779.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Header Solutions Nav Item</text>
+<text x="782.4" y="801.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | dea7361d</text>
+</g>
+<g id="stripe-surface#aab854df" data-order="12" data-rade-dna="frame|container|2ada0d88|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="337.5" y="815.9" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="347.5" y="825.9" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="355.5" y1="837.9" x2="567.5" y2="837.9" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="565.5" y="833.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="357.5" y="853.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Header Developers Nav Item</text>
+<text x="357.5" y="875.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | dea7361d</text>
+</g>
+<g id="stripe-surface#a4b3de8c" data-order="15" data-rade-dna="frame|container|2ada0d88|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="828.6" y="798.2" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="838.6" y="808.2" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="846.6" y1="820.2" x2="1058.6" y2="820.2" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1056.6" y="816.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="848.6" y="836.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Header Resources Nav Item</text>
+<text x="848.6" y="858.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | dea7361d</text>
+</g>
+<g id="stripe-surface#1fe9cd7e" data-order="18" data-rade-dna="frame|container|ca3b0ef2|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="231.3" y="799.3" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="241.3" y="809.3" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="249.3" y1="821.3" x2="461.3" y2="821.3" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="459.3" y="817.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="251.3" y="837.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Hds Navigation Menu Item</text>
+<text x="251.3" y="859.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 6248a0e8</text>
+</g>
+<g id="stripe-surface#ff23c921" data-order="20" data-rade-dna="frame|container|df7a85f9|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="324.7" y="630.9" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="334.7" y="640.9" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="342.7" y1="652.9" x2="554.7" y2="652.9" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="552.7" y="648.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="344.7" y="668.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Navigation Menu Footer</text>
+<text x="344.7" y="690.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 911ad60c</text>
+</g>
+<g id="stripe-surface#b70cb310" data-order="23" data-rade-dna="frame|flex_row|db8efcb8|image" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="935.6" y="815.0" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="945.6" y="825.0" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="953.6" y1="837.0" x2="1165.6" y2="837.0" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1163.6" y="833.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="955.6" y="853.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_05</text>
+<text x="955.6" y="875.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | a6e27ce8</text>
+</g>
+<g id="DATA_SLOT_06" data-order="24" data-rade-dna="frame|container|8247d37b|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="899.2" y="616.9" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="909.2" y="626.9" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="917.2" y1="638.9" x2="1129.2" y2="638.9" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1127.2" y="634.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="919.2" y="654.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Navigation Menu Header</text>
+<text x="919.2" y="676.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 2a4fac55</text>
+</g>
+<g id="stripe-surface#3984b9aa" data-order="30" data-rade-dna="frame|container|8cd718a3|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="211.5" y="602.4" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="221.5" y="612.4" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="229.5" y1="624.4" x2="441.5" y2="624.4" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="439.5" y="620.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="231.5" y="640.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_09</text>
+<text x="231.5" y="662.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 88ef1bc1</text>
+</g>
+<g id="stripe-surface#0ee35376" data-order="31" data-rade-dna="frame|container|2ada0d88|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="172.3" y="739.9" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="182.3" y="749.9" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="190.3" y1="761.9" x2="402.3" y2="761.9" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="400.3" y="757.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="192.3" y="777.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Hds Navigation Menu Item</text>
+<text x="192.3" y="799.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | dea7361d</text>
+</g>
+<g id="stripe-surface#543aa759" data-order="34" data-rade-dna="frame|container|2ada0d88|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="967.4" y="724.2" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="977.4" y="734.2" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="985.4" y1="746.2" x2="1197.4" y2="746.2" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1195.4" y="742.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="987.4" y="762.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Hds Navigation Menu Item</text>
+<text x="987.4" y="784.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | dea7361d</text>
+</g>
+<g id="stripe-surface#2ee06269" data-order="36" data-rade-dna="frame|flex_row|db8efcb8|image" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="193.4" y="928.9" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="203.4" y="938.9" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="211.4" y1="950.9" x2="423.4" y2="950.9" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="421.4" y="946.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="213.4" y="966.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_05</text>
+<text x="213.4" y="988.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 934bf948</text>
+</g>
+<g id="stripe-surface#1b5c4c03" data-order="37" data-rade-dna="frame|container|d40bf480|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="813.3" y="245.5" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="823.3" y="255.5" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="831.3" y1="267.5" x2="1043.3" y2="267.5" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1041.3" y="263.5" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="833.3" y="283.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Main Content</text>
+<text x="833.3" y="305.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | d8b4cd2f</text>
+</g>
+<g id="stripe-surface#7d4ad5f9" data-order="38" data-rade-dna="frame|container|c81bbd0f|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="914.9" y="390.1" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="924.9" y="400.1" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="932.9" y1="412.1" x2="1144.9" y2="412.1" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1142.9" y="408.1" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="934.9" y="428.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_03</text>
+<text x="934.9" y="450.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 88bcb590</text>
+</g>
+<g id="stripe-surface#6e7c2403" data-order="41" data-rade-dna="component|node|e74ecab6|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="1064.0" y="516.6" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="1074.0" y="526.6" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="1082.0" y1="538.6" x2="1294.0" y2="538.6" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="534.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="1084.0" y="554.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_10</text>
+<text x="1084.0" y="576.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | 90e8e07e</text>
+</g>
+<g id="stripe-surface#6f8569dd" data-order="42" data-rade-dna="frame|grid|7df83d5c|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="930.6" y="538.6" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="940.6" y="548.6" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="948.6" y1="560.6" x2="1160.6" y2="560.6" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1158.6" y="556.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="950.6" y="576.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Hero Section Layout Grid</text>
+<text x="950.6" y="598.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 434e8735</text>
+</g>
+<g id="stripe-surface#658b5959" data-order="43" data-rade-dna="frame|container|873212b3|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="88.0" y="508.6" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="98.0" y="518.6" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="530.6" x2="318.0" y2="530.6" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="316.0" y="526.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="108.0" y="546.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_11</text>
+<text x="108.0" y="568.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | ca06352d</text>
+</g>
+<g id="stripe-surface#430d3bf8" data-order="44" data-rade-dna="frame|container|ca3b0ef2|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="88.0" y="783.5" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="98.0" y="793.5" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="805.5" x2="318.0" y2="805.5" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="316.0" y="801.5" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="108.0" y="821.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_12</text>
+<text x="108.0" y="843.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 6248a0e8</text>
+</g>
+</g>
+</g>
+<g id="nodes-05-assets-the-decor" data-rade-dna="nodes|05-assets-the-decor" data-slab-layer="05. Assets (The Decor)">
+<g id="stripe-surface#d8efcb6d" data-order="4" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="88.0" y="627.8" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="98.0" y="637.8" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="649.8" x2="290.0" y2="649.8" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="288.0" y="645.8" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="108.0" y="665.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">Stripe logo</text>
+<text x="108.0" y="687.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | b331a3b7</text>
+</g>
+<g id="stripe-surface#8e3cae6e" data-order="8" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="992.1" y="936.6" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="1002.1" y="946.6" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="1010.1" y1="958.6" x2="1194.1" y2="958.6" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1192.1" y="954.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="1012.1" y="974.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">DATA_SLOT_05</text>
+<text x="1012.1" y="996.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 57366de8</text>
+</g>
+<g id="stripe-surface#7f1ebe8e" data-order="11" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="88.0" y="1028.3" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="98.0" y="1038.3" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="1050.3" x2="290.0" y2="1050.3" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="288.0" y="1046.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="108.0" y="1066.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">DATA_SLOT_05</text>
+<text x="108.0" y="1088.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 57366de8</text>
+</g>
+<g id="stripe-surface#40431edf" data-order="14" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="1092.0" y="1027.2" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="1102.0" y="1037.2" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="1110.0" y1="1049.2" x2="1294.0" y2="1049.2" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="1045.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="1112.0" y="1065.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">DATA_SLOT_05</text>
+<text x="1112.0" y="1087.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 57366de8</text>
+</g>
+<g id="stripe-surface#1b3e80e9" data-order="17" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="88.0" y="922.4" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="98.0" y="932.4" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="944.4" x2="290.0" y2="944.4" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="288.0" y="940.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="108.0" y="960.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">DATA_SLOT_05</text>
+<text x="108.0" y="982.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 57366de8</text>
+</g>
+<g id="stripe-surface#53a226cb" data-order="26" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="1092.0" y="780.5" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="1102.0" y="790.5" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="1110.0" y1="802.5" x2="1294.0" y2="802.5" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="798.5" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="1112.0" y="818.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">Navigation Chevron Left Icon</text>
+<text x="1112.0" y="840.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 1050cc09</text>
+</g>
+<g id="stripe-surface#9b059e93" data-order="29" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="1092.0" y="635.2" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="1102.0" y="645.2" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="1110.0" y1="657.2" x2="1294.0" y2="657.2" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="653.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="1112.0" y="673.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">DATA_SLOT_08</text>
+<text x="1112.0" y="695.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | b331a3b7</text>
+</g>
+<g id="stripe-surface#fd87397b" data-order="33" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="1092.0" y="914.6" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="1102.0" y="924.6" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="1110.0" y1="936.6" x2="1294.0" y2="936.6" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="932.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="1112.0" y="952.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">Navigation Item Sign In Mask</text>
+<text x="1112.0" y="974.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 57366de8</text>
+</g>
+</g>
+<g id="rade-legal" data-rade-dna="rade-legal" data-slab-layer="02. Root (The Slab)">
+<text x="1312" y="1338" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="12" fill="#6fdaa3">© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89</text>
+<text x="1312" y="1356" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">5-Slab Taxonomy | Ambient Engine</text>
+<text x="1312" y="1374" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">Live Raid: 2026-03-20</text>
+</g>
+</svg>

@@ -17,7 +17,7 @@ Accuracy over confidence. Proof before expansion. Repo truth over model assumpti
 
 ## Before coding
 
-- Read the canonical files in order.
+- Read the canonical files in order: `README.md`, `PRD.md`, `docs/TRUTH_HIERARCHY.md`, `docs/APP_SCOPE.md`, `docs/HARD_RISKS.md`, `docs/ARCHITECTURE.md`, `docs/BUILD_SHEET.md`, `AGENTS.md`, `.cursor/rules.md`.
 - Resolve truth conflicts using `docs/TRUTH_HIERARCHY.md`.
 - Identify the single objective.
 - Identify the biggest relevant risk.
@@ -36,3 +36,4 @@ Accuracy over confidence. Proof before expansion. Repo truth over model assumpti
 - Run the relevant proof.
 - Return exact evidence.
 - If proof was not executed, mark the result as unverified.
+- Do not treat missing historical docs as canonical truth; use the files named in the truth hierarchy.

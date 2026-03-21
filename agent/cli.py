@@ -4,8 +4,8 @@ from __future__ import annotations
 import argparse
 from typing import Sequence
 
-from src.core.compliance import emit_terminal_banner
 from src.core.cli import main as core_main
+from src.core.compliance import emit_terminal_banner
 
 
 def build_parser() -> argparse.ArgumentParser:

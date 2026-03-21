@@ -1,8 +1,8 @@
 # © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
 from __future__ import annotations
 
-from src.core.layering import CONTAINERS_LAYER
 from src.core.fingerprint import fingerprint_node
+from src.core.layering import CONTAINERS_LAYER
 
 
 def test_fingerprint_ignores_labels_but_keeps_structure():

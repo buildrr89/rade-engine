@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 898" role="img" aria-label="RADE reconstruction">
+<metadata id="rade-metadata">legal_notice=© 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. | ownership=Exclusive intellectual property of Trung Nguyen (Buildrr89) | systems=5-Slab Taxonomy; Ambient Engine | watermark=© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89 | live_raid_date=2026-03-20</metadata>
+<defs>
+<linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#04110b" />
+<stop offset="100%" stop-color="#072116" />
+</linearGradient>
+<pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+<path d="M 24 0 L 0 0 0 24" fill="none" stroke="#0e261c" stroke-width="1" />
+</pattern>
+<pattern id="major-grid" width="120" height="120" patternUnits="userSpaceOnUse">
+<rect width="120" height="120" fill="url(#minor-grid)" />
+<path d="M 120 0 L 0 0 0 120" fill="none" stroke="#153726" stroke-width="1.2" />
+</pattern>
+<marker id="arrow-plumbing" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#98ffad" />
+</marker>
+</defs>
+<rect width="1400" height="898" fill="url(#bg)" />
+<g id="site-grid" data-rade-dna="construction-grid" data-slab-layer="01. OS Site (The Land)">
+<rect width="1400" height="898" fill="url(#major-grid)" opacity="0.72" />
+<rect width="1400" height="898" fill="url(#minor-grid)" opacity="0.16" />
+</g>
+<g id="drawing-header" data-rade-dna="drawing-header" data-slab-layer="02. Root (The Slab)">
+<text x="88" y="46" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="26" fill="#98ffad" font-weight="700">RADE Reconstruction - DATA_SLOT_01</text>
+<text x="88" y="74" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="13" fill="#6fdaa3">com.rade.chrome.chrome | nodes=6 | edges=5</text>
+<line x1="88" y1="92" x2="1312" y2="92" stroke="#173d2b" stroke-width="1.2" opacity="0.85" />
+</g>
+<g id="containment-edges" data-rade-dna="edges|containment" data-slab-layer="02. Root (The Slab)">
+<g id="edge-000" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 624.1 216.0 C 624.1 232.3, 816.5 268.3, 816.5 284.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-001" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 816.5 324.6 C 816.5 361.0, 624.4 397.0, 624.4 433.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-002" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 816.5 324.6 C 816.5 375.0, 859.7 411.0, 859.7 461.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-003" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 816.5 324.6 C 816.5 368.7, 384.3 404.7, 384.3 448.8" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-004" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 816.5 324.6 C 816.5 368.9, 1050.8 404.9, 1050.8 449.1" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+</g>
+<g id="plumbing-edges" data-rade-dna="edges|plumbing" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+</g>
+<g id="nodes-01-os-site-the-land" data-rade-dna="nodes|01-os-site-the-land" data-slab-layer="01. OS Site (The Land)">
+<g id="chrome-surface#a1b6bfff" data-order="0" data-rade-dna="component|node|872b5025|screen" data-slab-layer="01. OS Site (The Land)">
+<rect x="446.1" y="132.0" width="356.0" height="94.0" rx="18" ry="18" fill="#0d2c1d" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.8" />
+<rect x="456.1" y="142.0" width="336.0" height="74.0" rx="12" ry="12" fill="none" stroke="#5ecb94" stroke-width="1" opacity="0.42" />
+<line x1="464.1" y1="154.0" x2="784.1" y2="154.0" stroke="#5ecb94" stroke-width="1.2" opacity="0.78" />
+<text x="782.1" y="150.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L01 SITE</text>
+<text x="466.1" y="170.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_01</text>
+<text x="466.1" y="192.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">screen | f8a793cf</text>
+</g>
+</g>
+<g id="nodes-03-containers-the-frame" data-rade-dna="nodes|03-containers-the-frame" data-slab-layer="03. Containers (The Frame)">
+<g id="chrome-surface#7dfb2462" data-order="2" data-rade-dna="component|node|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="458.4" y="423.3" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="468.4" y="433.3" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="476.4" y1="445.3" x2="772.4" y2="445.3" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="770.4" y="441.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="478.4" y="461.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Close Button</text>
+<text x="478.4" y="483.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | bec641be</text>
+</g>
+</g>
+<g id="nodes-04-links-events-wires-plumbing" data-rade-dna="nodes|04-links-events-wires-plumbing" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<g id="chrome-surface#0a15f28e" data-order="1" data-rade-dna="frame|container|d2afbf9d|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="692.5" y="274.6" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="702.5" y="284.6" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="710.5" y1="296.6" x2="922.5" y2="296.6" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="920.5" y="292.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="712.5" y="312.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Main Content</text>
+<text x="712.5" y="334.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 63e33e30</text>
+</g>
+<g id="chrome-surface#5b381b39" data-order="3" data-rade-dna="component|node|e74ecab6|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="735.7" y="451.4" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="745.7" y="461.4" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="753.7" y1="473.4" x2="965.7" y2="473.4" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="963.7" y="469.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="755.7" y="489.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Overview</text>
+<text x="755.7" y="511.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | ed3e41da</text>
+</g>
+</g>
+<g id="nodes-05-assets-the-decor" data-rade-dna="nodes|05-assets-the-decor" data-slab-layer="05. Assets (The Decor)">
+<g id="chrome-surface#4aa23c3b" data-order="4" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="274.3" y="438.8" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="284.3" y="448.8" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="292.3" y1="460.8" x2="476.3" y2="460.8" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="474.3" y="456.8" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="294.3" y="476.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">DATA_SLOT_03</text>
+<text x="294.3" y="498.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 55f46318</text>
+</g>
+<g id="chrome-surface#c3b7e929" data-order="5" data-rade-dna="component|node|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="940.8" y="439.1" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="950.8" y="449.1" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="958.8" y1="461.1" x2="1142.8" y2="461.1" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1140.8" y="457.1" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="960.8" y="477.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">DATA_SLOT_04</text>
+<text x="960.8" y="499.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 55f46318</text>
+</g>
+</g>
+<g id="rade-legal" data-rade-dna="rade-legal" data-slab-layer="02. Root (The Slab)">
+<text x="1312" y="826" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="12" fill="#6fdaa3">© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89</text>
+<text x="1312" y="844" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">5-Slab Taxonomy | Ambient Engine</text>
+<text x="1312" y="862" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">Live Raid: 2026-03-20</text>
+</g>
+</svg>

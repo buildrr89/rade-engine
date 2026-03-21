@@ -2,22 +2,42 @@
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from typing import Any, Callable, Protocol
 from urllib.parse import urlparse
 
 from ..core.compliance import (
     IP_OWNER as COMPLIANCE_IP_OWNER,
+)
+from ..core.compliance import (
     LEAD_ARCHITECT as COMPLIANCE_LEAD_ARCHITECT,
+)
+from ..core.compliance import (
     clear_terminal,
     emit_terminal_banner,
 )
 from ..core.fingerprint import fingerprint_node
 from ..core.layering import ASSETS_LAYER, layer_element
 from ..core.models import build_node_ref, stable_digest
+from ..core.slab03_hybrid_anchor import apply_slab03_hybrid_pulse
 
 JsonDict = dict[str, Any]
+
+
+def _bounding_box_from_bounds(bounds: list[int] | None) -> JsonDict | None:
+    """Named rectangle for exporters (derived from ``bounds`` when present)."""
+    if bounds is None or len(bounds) != 4:
+        return None
+    try:
+        x, y, w, h = (int(bounds[i]) for i in range(4))
+    except (TypeError, ValueError):
+        return None
+    if w <= 0 or h <= 0:
+        return None
+    return {"x": x, "y": y, "width": w, "height": h}
+
+
 logger = logging.getLogger(__name__)
 LEAD_ARCHITECT = COMPLIANCE_LEAD_ARCHITECT
 IP_OWNER = COMPLIANCE_IP_OWNER
@@ -106,6 +126,8 @@ class FunctionalNode:
     text_present: bool
     traits: list[str] = field(default_factory=list)
     slab_layer: str = ASSETS_LAYER
+    slab03_frame_id: str | None = None
+    slab03_anchor_kind: str | None = None
     structural_fingerprint: str = ""
     functional_dna: JsonDict = field(default_factory=dict)
 
@@ -126,11 +148,14 @@ class FunctionalNode:
             "interactive": self.interactive,
             "visible": self.visible,
             "bounds": self.bounds,
+            "bounding_box": _bounding_box_from_bounds(self.bounds),
             "hierarchy_depth": self.hierarchy_depth,
             "child_count": self.child_count,
             "text_present": self.text_present,
             "traits": list(self.traits),
             "slab_layer": self.slab_layer,
+            "slab03_frame_id": self.slab03_frame_id,
+            "slab03_anchor_kind": self.slab03_anchor_kind,
             "structural_fingerprint": self.structural_fingerprint,
             "functional_dna": dict(self.functional_dna),
         }
@@ -201,6 +226,20 @@ class ConstructionGraph:
                 }
             ],
         }
+
+    def to_figma_bridge_v0_manifest(self) -> JsonDict:
+        """Deterministic Figma-oriented component manifest (v0.2.0 + ref_map proof slice)."""
+
+        from ..core.figma_bridge_v0 import build_figma_bridge_v0_manifest
+
+        return build_figma_bridge_v0_manifest(
+            app_id=self.app_id,
+            platform=self.platform,
+            screen_id=self.screen_id,
+            screen_name=self.screen_name,
+            nodes=[node.to_dict() for node in self.nodes],
+            edges=[edge.to_dict() for edge in self.edges],
+        )
 
 
 class RadeOrchestrator:
@@ -339,9 +378,67 @@ class RadeOrchestrator:
             visited_nodes=visited_nodes,
             depth_limit_logged=depth_limit_logged,
         )
+        graph.nodes = self._apply_slab03_frame_intelligence(graph.nodes)
         graph.metadata["node_count"] = len(graph.nodes)
         graph.metadata["edge_count"] = len(graph.edges)
         return graph
+
+    def _apply_slab03_frame_intelligence(
+        self, nodes: list[FunctionalNode]
+    ) -> list[FunctionalNode]:
+        if not nodes:
+            return nodes
+        raw_elements = [
+            {
+                "element_id": node.element_id,
+                "node_ref": node.node_ref,
+                "parent_id": node.parent_id,
+                "role": node.role,
+                "element_type": node.element_type,
+                "traits": list(node.traits),
+                "label": node.label,
+                "accessibility_identifier": node.accessibility_identifier,
+                "bounds": node.bounds,
+                "bounding_box": _bounding_box_from_bounds(node.bounds),
+            }
+            for node in nodes
+        ]
+        enriched = apply_slab03_hybrid_pulse(raw_elements)
+        enriched_by_element_id: dict[str, JsonDict] = {}
+        for element in enriched:
+            eid = str(element.get("element_id") or "").strip()
+            if eid:
+                enriched_by_element_id[eid] = element
+        slab03_payload_keys = (
+            "slab03_frame_id",
+            "slab03_anchor_kind",
+            "slab03_landmark_kind",
+            "slab03_figma_alias",
+        )
+        updated_nodes: list[FunctionalNode] = []
+        for node in nodes:
+            row = enriched_by_element_id.get(node.element_id)
+            if row is None or row.get("slab03_frame_id") is None:
+                updated_nodes.append(node)
+                continue
+            dna = dict(node.functional_dna)
+            for key in slab03_payload_keys:
+                value = row.get(key)
+                if value is not None:
+                    dna[key] = value
+            updated_nodes.append(
+                replace(
+                    node,
+                    slab03_frame_id=str(row["slab03_frame_id"]),
+                    slab03_anchor_kind=(
+                        str(row["slab03_anchor_kind"])
+                        if row.get("slab03_anchor_kind") is not None
+                        else None
+                    ),
+                    functional_dna=dna,
+                )
+            )
+        return updated_nodes
 
     def scrub_graph(self, graph: ConstructionGraph) -> tuple[JsonDict, JsonDict]:
         """Apply the edge scrubber at the persistence boundary."""
@@ -482,6 +579,9 @@ class RadeOrchestrator:
         bounds = self._normalize_bounds(
             self._read_attribute(element, "bounds", "rect", "frame")
         )
+        slab_layer = self._normalize_text(
+            self._read_attribute(element, "slab_layer", "slabLayer")
+        )
         text_present = bool(label)
         resolved_child_count = (
             child_count if child_count is not None else len(self._get_children(element))
@@ -502,6 +602,7 @@ class RadeOrchestrator:
             "hierarchy_depth": depth,
             "child_count": resolved_child_count,
             "text_present": text_present,
+            "slab_layer": slab_layer,
             "traits": traits,
             "platform": self.platform,
             "source": self.source,
@@ -850,6 +951,8 @@ class RadeOrchestrator:
             return "toggle"
         if any(token in normalized for token in ("tab", "navigation")):
             return "navigation"
+        if any(token in normalized for token in ("dialog", "alertdialog", "modal")):
+            return "dialog"
         if any(token in normalized for token in ("image", "icon", "media")):
             return "image"
         if any(
