@@ -214,3 +214,44 @@ def test_orchestrator_persists_modal_slab03_frame_id() -> None:
         button["functional_dna"]["slab03_anchor_kind"] == "a11y:dialog-descendant"
     )
     assert non_modal_sibling["slab03_frame_id"] is None
+
+
+def test_orchestrator_collects_token_pulse_design_metadata() -> None:
+    root = FakeNode(
+        "XCUIElementTypeWindow",
+        children=[
+            FakeNode(
+                "XCUIElementTypeButton",
+                label="Styled",
+                traits=["button"],
+            )
+        ],
+    )
+    original_get_attribute = root.children[0].get_attribute
+
+    def get_attribute(name: str):
+        if name == "style":
+            return (
+                "color: #ffffff; background-color: #111111; "
+                "font-family: IBM Plex Sans; font-weight: 600; padding: 16px;"
+            )
+        return original_get_attribute(name)
+
+    root.children[0].get_attribute = get_attribute  # type: ignore[method-assign]
+    orchestrator = RadeOrchestrator(
+        app_id="com.example.legacyapp",
+        platform="ios",
+    )
+    graph = orchestrator.collect_from_root(root, screen_id="styled")
+    styled = graph.nodes[1].to_dict()["functional_dna"]
+
+    assert "token_pulse_id" in styled
+    assert styled["design_tokens"]["color_tokens"] == [
+        "background-color:#111111",
+        "color:#ffffff",
+    ]
+    assert styled["design_tokens"]["typography_tokens"] == [
+        "font-family:ibm plex sans",
+        "font-weight:600",
+    ]
+    assert styled["design_tokens"]["spacing_tokens"] == ["padding:16px"]

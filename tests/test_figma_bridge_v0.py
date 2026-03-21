@@ -40,6 +40,7 @@ def test_build_figma_bridge_v0_manifest_groups_frames_and_legal() -> None:
     )
     assert JSON_LEGAL_KEY in manifest
     assert LEGAL_NOTICE in manifest[JSON_LEGAL_KEY]["header_notice"]
+    assert manifest["manifest_version"] == "0.2.2"
     assert manifest["bridge_kind"] == "rade_figma_bridge_v0"
     assert manifest["frame_count"] == 1
     assert manifest["unassigned_node_count"] == 1
@@ -49,6 +50,11 @@ def test_build_figma_bridge_v0_manifest_groups_frames_and_legal() -> None:
     assert frame0["figma_suggested_name"] == "Nav_Primary"
     assert frame0["member_count"] == 2
     assert set(frame0["pattern_fingerprints"]) == {"fp-aaa", "fp-bbb"}
+    assert frame0["design_tokens"] == {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": [],
+    }
     assert "n1" in frame0["sample_node_refs"][0]
     assert manifest["ref_map"]["wire_count"] == 0
     assert manifest["ref_map"]["wires"] == []
@@ -192,3 +198,48 @@ def test_construction_graph_figma_manifest_after_orchestrator() -> None:
     assert "ref_map" in manifest
     assert "wires" in manifest["ref_map"]
     assert isinstance(manifest["ref_map"]["wire_count"], int)
+
+
+def test_build_figma_bridge_v0_manifest_aggregates_design_tokens() -> None:
+    fid = "slab03:landmark:main:content:a1"
+    nodes = [
+        {
+            "node_ref": "home#n1",
+            "slab03_frame_id": fid,
+            "functional_dna": {
+                "design_tokens": {
+                    "color_tokens": ["color:#fff", "background-color:#111"],
+                    "typography_tokens": ["font-family:ibm plex sans"],
+                    "spacing_tokens": ["padding:16px"],
+                }
+            },
+        },
+        {
+            "node_ref": "home#n2",
+            "slab03_frame_id": fid,
+            "functional_dna": {
+                "design_tokens": {
+                    "color_tokens": ["color:#fff"],
+                    "typography_tokens": ["font-weight:600"],
+                    "spacing_tokens": ["margin:8px"],
+                }
+            },
+        },
+    ]
+    manifest = build_figma_bridge_v0_manifest(
+        app_id="x",
+        platform="web",
+        screen_id="home",
+        screen_name="Home",
+        nodes=nodes,
+    )
+    frame = manifest["frames"][0]
+    assert frame["design_tokens"]["color_tokens"] == [
+        "background-color:#111",
+        "color:#fff",
+    ]
+    assert frame["design_tokens"]["typography_tokens"] == [
+        "font-family:ibm plex sans",
+        "font-weight:600",
+    ]
+    assert frame["design_tokens"]["spacing_tokens"] == ["margin:8px", "padding:16px"]

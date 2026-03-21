@@ -4,7 +4,7 @@
 Emits one component row per distinct ``slab03_frame_id`` so downstream tooling can
 map Slab 03 frames to Figma component candidates. ``ref_map`` records Slab 04
 plumbing edges as cross-frame (or internal) wires. ``variant_axes`` is reserved
-for Tier 2 pattern promotion and is empty in v0.2.0.
+for Tier 2 pattern promotion and is empty in v0.2.2.
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from .models import stable_digest
 
 JsonDict = dict[str, Any]
 
-MANIFEST_VERSION = "0.2.0"
+MANIFEST_VERSION = "0.2.2"
 BRIDGE_KIND = "rade_figma_bridge_v0"
 _SAMPLE_NODE_REF_LIMIT = 5
 _PATTERN_FINGERPRINT_LIMIT = 8
@@ -69,6 +69,32 @@ def _pattern_fingerprint(node: JsonDict) -> str | None:
     if raw is not None and str(raw).strip():
         return str(raw).strip()
     return None
+
+
+def _design_tokens(node: JsonDict) -> JsonDict:
+    raw = _dna(node).get("design_tokens")
+    if not isinstance(raw, dict):
+        return {"color_tokens": [], "typography_tokens": [], "spacing_tokens": []}
+    colors = raw.get("color_tokens")
+    typos = raw.get("typography_tokens")
+    spacing = raw.get("spacing_tokens")
+    return {
+        "color_tokens": (
+            sorted(str(item).strip() for item in colors if str(item).strip())
+            if isinstance(colors, list)
+            else []
+        ),
+        "typography_tokens": (
+            sorted(str(item).strip() for item in typos if str(item).strip())
+            if isinstance(typos, list)
+            else []
+        ),
+        "spacing_tokens": (
+            sorted(str(item).strip() for item in spacing if str(item).strip())
+            if isinstance(spacing, list)
+            else []
+        ),
+    }
 
 
 def _anchor_family(kind: str | None) -> str:
@@ -208,10 +234,17 @@ def build_figma_bridge_v0_manifest(
             anchor_family = "unknown"
 
         pattern_set: set[str] = set()
+        color_tokens: set[str] = set()
+        typography_tokens: set[str] = set()
+        spacing_tokens: set[str] = set()
         for m in members:
             fp = _pattern_fingerprint(m)
             if fp is not None:
                 pattern_set.add(fp)
+            token_bucket = _design_tokens(m)
+            color_tokens.update(token_bucket["color_tokens"])
+            typography_tokens.update(token_bucket["typography_tokens"])
+            spacing_tokens.update(token_bucket["spacing_tokens"])
         patterns = sorted(pattern_set)[:_PATTERN_FINGERPRINT_LIMIT]
 
         sample_refs = [
@@ -252,6 +285,11 @@ def build_figma_bridge_v0_manifest(
                 "member_count": len(members),
                 "sample_node_refs": sample_refs,
                 "pattern_fingerprints": patterns,
+                "design_tokens": {
+                    "color_tokens": sorted(color_tokens),
+                    "typography_tokens": sorted(typography_tokens),
+                    "spacing_tokens": sorted(spacing_tokens),
+                },
             }
         )
 
@@ -269,7 +307,7 @@ def build_figma_bridge_v0_manifest(
         "variant_axes": [],
         "variant_axes_note": (
             "Reserved for Tier 2 variant promotion from DNA patterns; "
-            "empty in Figma Bridge v0.2.0."
+            "empty in Figma Bridge v0.2.2."
         ),
     }
     return with_legal_metadata(core)

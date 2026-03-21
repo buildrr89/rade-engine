@@ -1,0 +1,1007 @@
+{
+  "rade_legal": {
+    "header_notice": "\u00a9 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.",
+    "lead_architect": "Trung Nguyen - BUILDRR89",
+    "classification": "Confidential Construction Data Model",
+    "ownership": "Exclusive intellectual property of Trung Nguyen (Buildrr89)",
+    "proprietary_systems": "The 5-Slab Taxonomy and Ambient Engine are the exclusive intellectual property of Trung Nguyen (Buildrr89).",
+    "visible_svg_watermark": "\u00a9 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89"
+  },
+  "manifest_version": "0.2.2",
+  "bridge_kind": "rade_figma_bridge_v0",
+  "app_id": "com.rade.chrome.www",
+  "platform": "ios",
+  "screen_id": "www-surface",
+  "screen_name": "DATA_SLOT_01",
+  "frame_count": 27,
+  "unassigned_node_count": 31,
+  "frames": [
+    {
+      "component_id": "slab03:landmark:nav:awwwards:03bc4dfe",
+      "stable_component_key": "cc64b497",
+      "slab03_frame_id": "slab03:landmark:nav:awwwards:03bc4dfe",
+      "figma_suggested_name": "Nav_Awwwards",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#884add3a"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [
+          "background-color:#000000",
+          "color:#222222"
+        ],
+        "typography_tokens": [
+          "font-family:\"inter tight\"",
+          "font-weight:400"
+        ],
+        "spacing_tokens": [
+          "gap:normal",
+          "margin:0px",
+          "padding:0px"
+        ]
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:button:2a76c04e",
+      "stable_component_key": "21f6518c",
+      "slab03_frame_id": "slab03:landmark:nav:button:2a76c04e",
+      "figma_suggested_name": "Nav_Button",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#91ddb30d"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [
+          "background-color:#000000",
+          "color:#222222"
+        ],
+        "typography_tokens": [
+          "font-family:\"inter tight\"",
+          "font-weight:400"
+        ],
+        "spacing_tokens": [
+          "gap:normal",
+          "margin:0px",
+          "padding:0px 20px"
+        ]
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:button:47e44e59",
+      "stable_component_key": "452afee5",
+      "slab03_frame_id": "slab03:landmark:nav:button:47e44e59",
+      "figma_suggested_name": "Nav_Button",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#2055e6b7"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [
+          "background-color:#000000",
+          "color:#222222"
+        ],
+        "typography_tokens": [
+          "font-family:\"inter tight\"",
+          "font-weight:400"
+        ],
+        "spacing_tokens": [
+          "gap:normal",
+          "margin:0px",
+          "padding:0px 20px"
+        ]
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:button:7b018a96",
+      "stable_component_key": "fa620e68",
+      "slab03_frame_id": "slab03:landmark:nav:button:7b018a96",
+      "figma_suggested_name": "Nav_Button",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#026e639b"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [
+          "background-color:#000000",
+          "color:#222222"
+        ],
+        "typography_tokens": [
+          "font-family:\"inter tight\"",
+          "font-weight:400"
+        ],
+        "spacing_tokens": [
+          "gap:normal",
+          "margin:0px",
+          "padding:0px 20px"
+        ]
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:button:9fc80abf",
+      "stable_component_key": "3c96e4ca",
+      "slab03_frame_id": "slab03:landmark:nav:button:9fc80abf",
+      "figma_suggested_name": "Nav_Button",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "mixed",
+      "anchor_kinds_observed": [
+        "a11y:landmark",
+        "visual:vbox-contained"
+      ],
+      "member_count": 2,
+      "sample_node_refs": [
+        "www-surface#a2740ce6",
+        "www-surface#4bb3f8ba"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3",
+        "ff4546c8"
+      ],
+      "design_tokens": {
+        "color_tokens": [
+          "background-color:#000000",
+          "color:#222222"
+        ],
+        "typography_tokens": [
+          "font-family:\"inter tight\"",
+          "font-weight:400",
+          "font-weight:500"
+        ],
+        "spacing_tokens": [
+          "gap:normal",
+          "margin:0px",
+          "padding:0px 0px 0px 38px",
+          "padding:0px 20px"
+        ]
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:button:a5f8b846",
+      "stable_component_key": "1d1823fa",
+      "slab03_frame_id": "slab03:landmark:nav:button:a5f8b846",
+      "figma_suggested_name": "Nav_Button",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#7c348d67"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [
+          "background-color:#000000",
+          "color:#222222"
+        ],
+        "typography_tokens": [
+          "font-family:\"inter tight\"",
+          "font-weight:400"
+        ],
+        "spacing_tokens": [
+          "gap:normal",
+          "margin:0px",
+          "padding:0px 20px"
+        ]
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:button:eb1e27d5",
+      "stable_component_key": "5843521a",
+      "slab03_frame_id": "slab03:landmark:nav:button:eb1e27d5",
+      "figma_suggested_name": "Nav_Button",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "mixed",
+      "anchor_kinds_observed": [
+        "a11y:landmark",
+        "visual:vbox-contained"
+      ],
+      "member_count": 2,
+      "sample_node_refs": [
+        "www-surface#a341dad4",
+        "www-surface#ed50af06"
+      ],
+      "pattern_fingerprints": [
+        "16f02084",
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [
+          "background-color:#000000",
+          "background-color:#222222",
+          "color:#000000",
+          "color:#ffffff"
+        ],
+        "typography_tokens": [
+          "font-family:\"inter tight\"",
+          "font-weight:400",
+          "font-weight:500"
+        ],
+        "spacing_tokens": [
+          "gap:normal",
+          "margin:0px",
+          "padding:0px",
+          "padding:0px 20px"
+        ]
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:079fb090",
+      "stable_component_key": "c762d328",
+      "slab03_frame_id": "slab03:landmark:nav:link:079fb090",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "mixed",
+      "anchor_kinds_observed": [
+        "a11y:landmark",
+        "visual:vbox-contained"
+      ],
+      "member_count": 2,
+      "sample_node_refs": [
+        "www-surface#549d2ab3",
+        "www-surface#1ae58f1e"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3",
+        "ca3b0ef2"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:18612f45",
+      "stable_component_key": "fc52ae39",
+      "slab03_frame_id": "slab03:landmark:nav:link:18612f45",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#df81b54d"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:18e903d1",
+      "stable_component_key": "c4fffda9",
+      "slab03_frame_id": "slab03:landmark:nav:link:18e903d1",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#2020cf81"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:224257ac",
+      "stable_component_key": "0262181c",
+      "slab03_frame_id": "slab03:landmark:nav:link:224257ac",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#a6c9a8f4"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:2d821e2d",
+      "stable_component_key": "a84b8503",
+      "slab03_frame_id": "slab03:landmark:nav:link:2d821e2d",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#b2fc8c3d"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:4a2b3654",
+      "stable_component_key": "4f21b1d9",
+      "slab03_frame_id": "slab03:landmark:nav:link:4a2b3654",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#8103a9df"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:4d196d0b",
+      "stable_component_key": "620864e3",
+      "slab03_frame_id": "slab03:landmark:nav:link:4d196d0b",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#906d0824"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:5e19ec7d",
+      "stable_component_key": "3ed23bd9",
+      "slab03_frame_id": "slab03:landmark:nav:link:5e19ec7d",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#9a7c6905"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:703685e3",
+      "stable_component_key": "4531a228",
+      "slab03_frame_id": "slab03:landmark:nav:link:703685e3",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#35d450d4"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:895d135c",
+      "stable_component_key": "18934365",
+      "slab03_frame_id": "slab03:landmark:nav:link:895d135c",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#9506eec5"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:98c5d665",
+      "stable_component_key": "4d2867ec",
+      "slab03_frame_id": "slab03:landmark:nav:link:98c5d665",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#2ba23f3d"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:99b00b4e",
+      "stable_component_key": "c24a333b",
+      "slab03_frame_id": "slab03:landmark:nav:link:99b00b4e",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#1e89078f"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:ba4e0966",
+      "stable_component_key": "31a0fd64",
+      "slab03_frame_id": "slab03:landmark:nav:link:ba4e0966",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#4f8fd72d"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:caa45ca6",
+      "stable_component_key": "3a26c708",
+      "slab03_frame_id": "slab03:landmark:nav:link:caa45ca6",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#6390b45c"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:d6c5ceb3",
+      "stable_component_key": "322d2bdc",
+      "slab03_frame_id": "slab03:landmark:nav:link:d6c5ceb3",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#cb2014be"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:e50e4fd3",
+      "stable_component_key": "5da6a27c",
+      "slab03_frame_id": "slab03:landmark:nav:link:e50e4fd3",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#79d76741"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:ea64dd9a",
+      "stable_component_key": "7aaf91d6",
+      "slab03_frame_id": "slab03:landmark:nav:link:ea64dd9a",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#ab3c710e"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link:eec2b046",
+      "stable_component_key": "ec5d7563",
+      "slab03_frame_id": "slab03:landmark:nav:link:eec2b046",
+      "figma_suggested_name": "Nav_Link",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#7a77ba7f"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": []
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:link_underlined:f1c7e98a",
+      "stable_component_key": "59ebac6b",
+      "slab03_frame_id": "slab03:landmark:nav:link_underlined:f1c7e98a",
+      "figma_suggested_name": "Nav_Link_Underlined",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "mixed",
+      "anchor_kinds_observed": [
+        "a11y:landmark",
+        "visual:vbox-contained"
+      ],
+      "member_count": 5,
+      "sample_node_refs": [
+        "www-surface#13057b02",
+        "www-surface#0d352a13",
+        "www-surface#c37eca18",
+        "www-surface#6c17f15b",
+        "www-surface#d4ba0395"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3",
+        "1e494c01",
+        "c1db5c02",
+        "cb7b1072"
+      ],
+      "design_tokens": {
+        "color_tokens": [],
+        "typography_tokens": [],
+        "spacing_tokens": [
+          "margin:10px 25px",
+          "padding:0px"
+        ]
+      }
+    },
+    {
+      "component_id": "slab03:landmark:nav:stuff_by_kris_temmerman_site_of_the_day:8a910aa7",
+      "stable_component_key": "3148741e",
+      "slab03_frame_id": "slab03:landmark:nav:stuff_by_kris_temmerman_site_of_the_day:8a910aa7",
+      "figma_suggested_name": "Nav_Stuff_By_Kris_Temmerman_Site_Of_The_Day",
+      "slab03_landmark_kind": "nav",
+      "anchor_family": "landmark",
+      "anchor_kinds_observed": [
+        "a11y:landmark"
+      ],
+      "member_count": 1,
+      "sample_node_refs": [
+        "www-surface#996cb20c"
+      ],
+      "pattern_fingerprints": [
+        "1cc251b3"
+      ],
+      "design_tokens": {
+        "color_tokens": [
+          "background-color:#000000",
+          "color:#222222"
+        ],
+        "typography_tokens": [
+          "font-family:\"inter tight\"",
+          "font-weight:300"
+        ],
+        "spacing_tokens": [
+          "gap:normal",
+          "margin:0px",
+          "padding:0px"
+        ]
+      }
+    }
+  ],
+  "ref_map": {
+    "wires": [
+      {
+        "source_node_ref": "www-surface#026e639b",
+        "target_node_ref": "www-surface#destination-3801a77d",
+        "source_frame_id": "slab03:landmark:nav:button:7b018a96",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#1ae58f1e",
+        "target_node_ref": "www-surface#destination-82d04624",
+        "source_frame_id": "slab03:landmark:nav:link:079fb090",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#1e89078f",
+        "target_node_ref": "www-surface#destination-b54710cd",
+        "source_frame_id": "slab03:landmark:nav:link:99b00b4e",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#2020cf81",
+        "target_node_ref": "www-surface#destination-555cec14",
+        "source_frame_id": "slab03:landmark:nav:link:18e903d1",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#2055e6b7",
+        "target_node_ref": "www-surface#destination-b2372121",
+        "source_frame_id": "slab03:landmark:nav:button:47e44e59",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#2ba23f3d",
+        "target_node_ref": "www-surface#destination-ba45dff0",
+        "source_frame_id": "slab03:landmark:nav:link:98c5d665",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#35d450d4",
+        "target_node_ref": "www-surface#destination-300801c9",
+        "source_frame_id": "slab03:landmark:nav:link:703685e3",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#4bb3f8ba",
+        "target_node_ref": "DATA_SLOT_10",
+        "source_frame_id": "slab03:landmark:nav:button:9fc80abf",
+        "target_frame_id": null,
+        "edge_type": "submits_to",
+        "action_type": "submit",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#4f8fd72d",
+        "target_node_ref": "www-surface#destination-dd17cfe9",
+        "source_frame_id": "slab03:landmark:nav:link:ba4e0966",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#6390b45c",
+        "target_node_ref": "www-surface#destination-1170cca1",
+        "source_frame_id": "slab03:landmark:nav:link:caa45ca6",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#79d76741",
+        "target_node_ref": "www-surface#destination-691070ac",
+        "source_frame_id": "slab03:landmark:nav:link:e50e4fd3",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#7a77ba7f",
+        "target_node_ref": "www-surface#destination-0fc209f1",
+        "source_frame_id": "slab03:landmark:nav:link:eec2b046",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#7c348d67",
+        "target_node_ref": "www-surface#destination-b85b33b7",
+        "source_frame_id": "slab03:landmark:nav:button:a5f8b846",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#8103a9df",
+        "target_node_ref": "www-surface#destination-19c8d6d8",
+        "source_frame_id": "slab03:landmark:nav:link:4a2b3654",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#884add3a",
+        "target_node_ref": "www-surface#destination-2adc70cf",
+        "source_frame_id": "slab03:landmark:nav:awwwards:03bc4dfe",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#906d0824",
+        "target_node_ref": "www-surface#destination-8c6e8b7c",
+        "source_frame_id": "slab03:landmark:nav:link:4d196d0b",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#91ddb30d",
+        "target_node_ref": "www-surface#destination-82df4c7c",
+        "source_frame_id": "slab03:landmark:nav:button:2a76c04e",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#9506eec5",
+        "target_node_ref": "www-surface#destination-73f12a70",
+        "source_frame_id": "slab03:landmark:nav:link:895d135c",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#996cb20c",
+        "target_node_ref": "www-surface#destination-e95c5c2f",
+        "source_frame_id": "slab03:landmark:nav:stuff_by_kris_temmerman_site_of_the_day:8a910aa7",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#9a7c6905",
+        "target_node_ref": "www-surface#destination-7f536ac2",
+        "source_frame_id": "slab03:landmark:nav:link:5e19ec7d",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#a2740ce6",
+        "target_node_ref": "www-surface#destination-a79e8d69",
+        "source_frame_id": "slab03:landmark:nav:button:9fc80abf",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#a6c9a8f4",
+        "target_node_ref": "www-surface#destination-8c4aaa78",
+        "source_frame_id": "slab03:landmark:nav:link:224257ac",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#ab3c710e",
+        "target_node_ref": "www-surface#destination-17842f73",
+        "source_frame_id": "slab03:landmark:nav:link:ea64dd9a",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#b2fc8c3d",
+        "target_node_ref": "www-surface#destination-2ad5f4c0",
+        "source_frame_id": "slab03:landmark:nav:link:2d821e2d",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#cb2014be",
+        "target_node_ref": "www-surface#destination-2ec30f23",
+        "source_frame_id": "slab03:landmark:nav:link:d6c5ceb3",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#d4ba0395",
+        "target_node_ref": "www-surface#destination-82d04624",
+        "source_frame_id": "slab03:landmark:nav:link_underlined:f1c7e98a",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#df81b54d",
+        "target_node_ref": "www-surface#destination-a6ed1ba3",
+        "source_frame_id": "slab03:landmark:nav:link:18612f45",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      },
+      {
+        "source_node_ref": "www-surface#ed50af06",
+        "target_node_ref": "www-surface#destination-cb11ced8",
+        "source_frame_id": "slab03:landmark:nav:button:eb1e27d5",
+        "target_frame_id": null,
+        "edge_type": "routes_to",
+        "action_type": "navigate",
+        "plumbing_scope": "unresolved_target"
+      }
+    ],
+    "wire_count": 28,
+    "note": "Slab 04 interactive edges mapped to Slab 03 frames; plumbing_scope internal = same frame, external = cross-frame, unresolved_* = missing frame on source or target node."
+  },
+  "variant_axes": [],
+  "variant_axes_note": "Reserved for Tier 2 variant promotion from DNA patterns; empty in Figma Bridge v0.2.2."
+}

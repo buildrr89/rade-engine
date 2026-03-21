@@ -667,6 +667,7 @@ class StructuralDomParser(HTMLParser):
     def _build_metadata(self, attributes: dict[str, str]) -> dict[str, Any]:
         metadata: dict[str, Any] = {}
         for source_key, target_key in (
+            ("style", "style"),
             ("href", "href"),
             ("action", "action"),
             ("formaction", "action"),
@@ -674,6 +675,13 @@ class StructuralDomParser(HTMLParser):
             ("aria-label", "aria-label"),
             ("alt", "alt"),
             ("data-action", "data-action"),
+            ("data-rade-token-color", "color"),
+            ("data-rade-token-background-color", "background_color"),
+            ("data-rade-token-font-family", "font_family"),
+            ("data-rade-token-font-weight", "font_weight"),
+            ("data-rade-token-margin", "margin"),
+            ("data-rade-token-padding", "padding"),
+            ("data-rade-token-gap", "gap"),
             ("id", "id"),
             ("class", "class"),
             ("data-testid", "data-testid"),
@@ -760,6 +768,22 @@ def build_parser() -> argparse.ArgumentParser:
         type=_positive_int("max-nodes"),
         default=64,
         help="Maximum DOM nodes parsed for active-chrome-tab structural capture.",
+    )
+    parser.add_argument(
+        "--resolve-computed-style-tokens",
+        action="store_true",
+        help=(
+            "Resolve computed styles via Playwright and inject data-rade-token-* "
+            "attributes so Slab 05 token pulse captures brand colors behind CSS vars."
+        ),
+    )
+    parser.add_argument(
+        "--emit-figma-bridge-v0-manifest",
+        action="store_true",
+        help=(
+            "Write a deterministic Figma Bridge v0 JSON manifest (including Slab 05 design tokens) "
+            "next to the exported SVG."
+        ),
     )
     parser.add_argument(
         "--auto-open",
@@ -901,18 +925,40 @@ def _resolve_chrome_binary() -> str:
     raise RuntimeError("Google Chrome binary not found for headless DOM capture")
 
 
-def _rendered_dom_from_url(url: str) -> str:
-    chrome_binary = _resolve_chrome_binary()
-    output = _run_subprocess(
-        [
-            chrome_binary,
-            "--headless=new",
-            "--disable-gpu",
-            "--dump-dom",
-            url,
-        ],
-        error_context="unable to capture rendered DOM from Chrome",
-    )
+def _rendered_dom_from_url(
+    url: str,
+    *,
+    max_nodes: int,
+    resolve_computed_style_tokens: bool = False,
+) -> str:
+    if resolve_computed_style_tokens:
+        script_path = (
+            Path(__file__).resolve().parents[2]
+            / "web"
+            / "scripts"
+            / "dump_computed_style_tokens_dom.mjs"
+        )
+        output = _run_subprocess(
+            [
+                "node",
+                str(script_path),
+                url,
+                str(max_nodes),
+            ],
+            error_context="unable to capture computed-style DOM from Playwright",
+        )
+    else:
+        chrome_binary = _resolve_chrome_binary()
+        output = _run_subprocess(
+            [
+                chrome_binary,
+                "--headless=new",
+                "--disable-gpu",
+                "--dump-dom",
+                url,
+            ],
+            error_context="unable to capture rendered DOM from Chrome",
+        )
     for marker in ("<!DOCTYPE", "<html"):
         index = output.find(marker)
         if index >= 0:
@@ -967,6 +1013,7 @@ def _build_chrome_tab_tree(
     retry_attempts: int = 3,
     retry_delay_seconds: float = 0.5,
     redline_output_path: Path | None = None,
+    resolve_computed_style_tokens: bool = False,
 ) -> tuple[DemoNode, ChromeTabContext]:
     last_context: ChromeTabContext | None = None
     last_known_a11y_state = "UNKNOWN"
@@ -981,7 +1028,11 @@ def _build_chrome_tab_tree(
                 "[RADE DIAG] State of the Land: "
                 f"url={context.url!r} internal_page={is_internal_page}"
             )
-            dom = _rendered_dom_from_url(context.url)
+            dom = _rendered_dom_from_url(
+                context.url,
+                max_nodes=max_nodes,
+                resolve_computed_style_tokens=resolve_computed_style_tokens,
+            )
             tree = _parse_structural_dom(
                 dom,
                 app_name=context.app_name,
@@ -1654,16 +1705,26 @@ class RadeVectorBridge:
     def _node_dna(self, node: FunctionalNode) -> str:
         dna = node.functional_dna
         slab03_kind = dna.get("slab03_anchor_kind") or node.slab03_anchor_kind
-        tokens = [
-            str(dna.get("instruction_role", "component")),
-            str(dna.get("frame_kind") or "node"),
-            str(slab03_kind or "none"),
-            str(dna.get("pattern_fingerprint") or node.structural_fingerprint),
-            node.role or node.element_type,
+
+        def _slot(raw: object, default: str) -> str:
+            if raw is None:
+                text = default
+            else:
+                text = str(raw).strip() or default
+            return text.replace('"', "").replace("|", ":")
+
+        # Fixed first five slots: token 3 is always slab03_anchor_kind.
+        slots = [
+            _slot(dna.get("instruction_role"), "component"),
+            _slot(dna.get("frame_kind"), "node"),
+            _slot(slab03_kind, "none"),
+            _slot(dna.get("pattern_fingerprint") or node.structural_fingerprint, "none"),
+            _slot(node.role or node.element_type, "unknown"),
         ]
-        return "|".join(
-            token.strip().replace('"', "") for token in tokens if token.strip()
-        )
+        token_pulse_id = _slot(dna.get("token_pulse_id"), "none")
+        if token_pulse_id != "none":
+            slots.append(f"token-pulse:{token_pulse_id}")
+        return "|".join(slots)
 
     def _edge_dna(self, edge: FunctionalEdge) -> str:
         edge_family = "plumbing" if edge.edge_type != "contains" else "containment"
@@ -1792,6 +1853,8 @@ def run_demo(
     output_name: str = "RADE_RECONSTRUCTION.svg",
     auto_open: bool = False,
     live_raid_date: str | None = None,
+    resolve_computed_style_tokens: bool = False,
+    emit_figma_bridge_v0_manifest: bool = False,
 ) -> DemoRunResult:
     styler = TerminalStyler()
     if max_nodes > 256:
@@ -1816,6 +1879,7 @@ def run_demo(
                 max_depth=depth,
                 max_nodes=max_nodes,
                 redline_output_path=redline_path,
+                resolve_computed_style_tokens=resolve_computed_style_tokens,
             )
             screen_name = context.screen_name
             screen_id = context.screen_id
@@ -1853,6 +1917,12 @@ def run_demo(
         screen_name=screen_name,
         max_depth=depth,
     )
+    raw_dom_nodes = _count_tree_nodes(root)
+    graph_node_count = len(graph.nodes)
+    print(
+        f"[RADE] Compression: {raw_dom_nodes} DOM nodes collapsed into "
+        f"{graph_node_count} components."
+    )
     styler.emit(capture_notice, color="green")
     time.sleep(sleep_seconds)
 
@@ -1870,6 +1940,20 @@ def run_demo(
         bold=True,
     )
     time.sleep(sleep_seconds)
+
+    if emit_figma_bridge_v0_manifest:
+        bridge_manifest = scrubbed_graph.to_figma_bridge_v0_manifest()
+        stem = Path(output_name).with_suffix("").name
+        manifest_path = output_dir / f"{stem}.figma_bridge_v0_manifest.json"
+        manifest_path.write_text(
+            json.dumps(bridge_manifest, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        styler.emit(
+            f"Figma Bridge v0 manifest export complete: {manifest_path}",
+            color="green",
+            bold=True,
+        )
 
     styler.emit("[3/4] The Graph", color="cyan", bold=True)
     ingestor = RadeGraphIngestor(
@@ -1957,6 +2041,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         live_raid_date=(
             str(args.live_raid_date) if args.live_raid_date is not None else None
         ),
+        resolve_computed_style_tokens=bool(args.resolve_computed_style_tokens),
+        emit_figma_bridge_v0_manifest=bool(args.emit_figma_bridge_v0_manifest),
     )
     return 0
 

@@ -30,6 +30,13 @@ GENERIC_LABEL_TOKENS = {
     "link",
 }
 
+# Style token guardrails: prevent PII regex detectors (notably PHONE_RE) from
+# misclassifying hex colors like `#111111` inside token strings.
+_COLOR_HEX_TOKEN_RE = re.compile(
+    r"^(?:color|background-color|background_color|border-color|border_color|background):#(?:[0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$",
+    flags=re.IGNORECASE,
+)
+
 
 @dataclass
 class RedactionEvent:
@@ -93,6 +100,9 @@ def _allocate_placeholder(value: str, metadata: ScrubMetadata) -> str:
 
 
 def _regex_entities(text: str) -> list[str]:
+    # Early exit for deterministic style tokens.
+    if _COLOR_HEX_TOKEN_RE.fullmatch(text.strip().lower()):
+        return []
     regex_patterns = (
         ("email", EMAIL_RE),
         ("ssn", SSN_RE),
@@ -146,6 +156,13 @@ def _neutralize_text(text: str, *, path: str, metadata: ScrubMetadata) -> str:
 def _scrub_string_value(text: str, *, path: str, metadata: ScrubMetadata) -> str:
     redacted = _neutralize_text(text, path=path, metadata=metadata)
     if redacted != text or not _is_free_form_text(text):
+        return redacted
+
+    # Design token strings are derived from style computations (colors, spacing,
+    # typography). They are not user secrets, and Presidio can misclassify
+    # `#rrggbb` / hex-ish values as names. We still keep the regex neutralizer
+    # above, but skip Presidio escalation under `design_tokens.*`.
+    if "design_tokens" in path.lower():
         return redacted
 
     try:
@@ -233,6 +250,10 @@ def scrub_payload_with_metadata(payload: Any) -> tuple[Any, dict[str, Any]]:
 
     def _walk(value: Any, path: str) -> Any:
         if isinstance(value, str):
+            # `token_pulse_id` is a deterministic hash of derived style tokens.
+            # Scrubbing it would break dedup stability, so we leave it untouched.
+            if path.lower().endswith(".token_pulse_id"):
+                return value
             return _scrub_string_value(value, path=path, metadata=metadata)
         if isinstance(value, list):
             return [_walk(item, f"{path}[{index}]") for index, item in enumerate(value)]

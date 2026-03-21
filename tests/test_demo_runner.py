@@ -178,6 +178,40 @@ def test_structural_dom_parser_depth_limit_skips_deeper_controls() -> None:
     assert root.children[0].children == []
 
 
+def test_token_pulse_captures_inline_style_from_structural_parser() -> None:
+    parser = StructuralDomParser(app_name="Test App", max_depth=5, max_nodes=20)
+    parser.feed("""
+    <main>
+      <button
+        aria-label="Styled"
+        style="color: rgb(255, 0, 0); padding: 16px; font-family: IBM Plex Sans; font-weight: 600;"
+      >
+        X
+      </button>
+    </main>
+    """)
+    parser.close()
+
+    orch = RadeOrchestrator(app_id="com.example.web", platform="web")
+    graph = orch.collect_from_root(
+        parser.root.freeze(),
+        screen_id="home",
+        screen_name="Home",
+        max_depth=5,
+    )
+
+    styled_nodes = [n for n in graph.nodes if n.functional_dna.get("token_pulse_id")]
+    assert len(styled_nodes) == 1
+
+    design_tokens = styled_nodes[0].functional_dna["design_tokens"]
+    assert design_tokens["color_tokens"] == ["color:#ff0000"]
+    assert design_tokens["spacing_tokens"] == ["padding:16px"]
+    assert design_tokens["typography_tokens"] == [
+        "font-family:ibm plex sans",
+        "font-weight:600",
+    ]
+
+
 def test_parse_structural_dom_respects_max_nodes() -> None:
     buttons = "".join(f'<button aria-label="B{i}"></button>' for i in range(30))
     dom = f"<!DOCTYPE html><html><body><main>{buttons}</main></body></html>"
@@ -189,6 +223,17 @@ def test_parse_structural_dom_respects_max_nodes() -> None:
     )
     assert _count_tree_nodes(tree_full) > _count_tree_nodes(tree_limited)
     assert _count_tree_nodes(tree_limited) <= 8
+
+
+def test_run_demo_emits_compression_diagnostic(capsys, tmp_path) -> None:
+    run_demo(
+        output_dir=tmp_path,
+        sleep_seconds=0.0,
+        live_raid_date="2026-03-21",
+    )
+    out = capsys.readouterr().out
+    assert "[RADE] Compression:" in out
+    assert "DOM nodes collapsed into" in out
 
 
 def test_run_demo_emits_high_density_warning_on_stderr(capsys, tmp_path) -> None:
@@ -266,6 +311,40 @@ def test_vector_bridge_node_dna_includes_slab03_anchor_kind() -> None:
     )
     assert bridge._node_dna(node) == (
         "component|sidebar|visual:vbox-contained|abc12345|button"
+    )
+
+
+def test_vector_bridge_node_dna_appends_token_pulse_when_present() -> None:
+    bridge = RadeVectorBridge()
+    node = FunctionalNode(
+        node_ref="t#2",
+        parent_node_ref=None,
+        element_id="2",
+        parent_id=None,
+        screen_id="s",
+        screen_name="S",
+        platform="ios",
+        source="x",
+        element_type="div",
+        role="button",
+        label="X",
+        accessibility_identifier=None,
+        interactive=True,
+        visible=True,
+        bounds=[0, 0, 10, 10],
+        hierarchy_depth=1,
+        child_count=0,
+        text_present=False,
+        slab03_anchor_kind="visual:vbox-contained",
+        structural_fingerprint="abc12345",
+        functional_dna={
+            "instruction_role": "component",
+            "frame_kind": "sidebar",
+            "token_pulse_id": "pulse1234",
+        },
+    )
+    assert bridge._node_dna(node) == (
+        "component|sidebar|visual:vbox-contained|abc12345|button|token-pulse:pulse1234"
     )
 
 
@@ -400,10 +479,12 @@ def test_demo_runner_can_render_active_chrome_tab_structurally(tmp_path) -> None
         max_depth: int = 20,
         max_nodes: int = 64,
         *,
+        resolve_computed_style_tokens: bool = False,
         redline_output_path: Path | None = None,
     ) -> tuple[DemoNode, ChromeTabContext]:
         assert max_depth == 20
         assert redline_output_path is not None
+        assert resolve_computed_style_tokens is False
         return (
             DemoNode(
                 "web_surface_window",
@@ -509,7 +590,7 @@ def test_build_chrome_tab_tree_retries_after_empty_structural_parse() -> None:
     ):
         with patch(
             "src.demo.run_raid_visualizer._rendered_dom_from_url",
-            side_effect=lambda url: next(dom_attempts),
+            side_effect=lambda url, **_: next(dom_attempts),
         ) as mocked_dump_dom:
             with patch("src.demo.run_raid_visualizer.time.sleep") as mocked_sleep:
                 tree, returned_context = _build_chrome_tab_tree(
@@ -552,7 +633,7 @@ def test_build_chrome_tab_tree_retries_after_runtime_error() -> None:
 
     call_count = {"value": 0}
 
-    def _rendered_dom_with_transient_error(url: str) -> str:
+    def _rendered_dom_with_transient_error(url: str, **_: object) -> str:
         call_count["value"] += 1
         if call_count["value"] == 1:
             raise RuntimeError("temporary chrome capture error")

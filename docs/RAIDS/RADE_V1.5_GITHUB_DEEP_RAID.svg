@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1410" role="img" aria-label="RADE reconstruction">
+<metadata id="rade-metadata">legal_notice=© 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model. | ownership=Exclusive intellectual property of Trung Nguyen (Buildrr89) | systems=5-Slab Taxonomy; Ambient Engine | watermark=© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89 | live_raid_date=2026-03-21</metadata>
+<defs>
+<linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#04110b" />
+<stop offset="100%" stop-color="#072116" />
+</linearGradient>
+<pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+<path d="M 24 0 L 0 0 0 24" fill="none" stroke="#0e261c" stroke-width="1" />
+</pattern>
+<pattern id="major-grid" width="120" height="120" patternUnits="userSpaceOnUse">
+<rect width="120" height="120" fill="url(#minor-grid)" />
+<path d="M 120 0 L 0 0 0 120" fill="none" stroke="#153726" stroke-width="1.2" />
+</pattern>
+<marker id="arrow-plumbing" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+<path d="M 0 0 L 10 5 L 0 10 z" fill="#98ffad" />
+</marker>
+</defs>
+<rect width="1400" height="1410" fill="url(#bg)" />
+<g id="site-grid" data-rade-dna="construction-grid" data-slab-layer="01. OS Site (The Land)">
+<rect width="1400" height="1410" fill="url(#major-grid)" opacity="0.72" />
+<rect width="1400" height="1410" fill="url(#minor-grid)" opacity="0.16" />
+</g>
+<g id="drawing-header" data-rade-dna="drawing-header" data-slab-layer="02. Root (The Slab)">
+<text x="88" y="46" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="26" fill="#98ffad" font-weight="700">RADE Reconstruction - DATA_SLOT_01</text>
+<text x="88" y="74" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="13" fill="#6fdaa3">com.rade.chrome.github | nodes=42 | edges=49</text>
+<line x1="88" y1="92" x2="1312" y2="92" stroke="#173d2b" stroke-width="1.2" opacity="0.85" />
+</g>
+<g id="containment-edges" data-rade-dna="edges|containment" data-slab-layer="02. Root (The Slab)">
+<g id="edge-000" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 742.2 216.0, 1146.0 199.7, 1188.0 199.7" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-001" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 700.2 230.7, 690.2 266.7, 690.2 281.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-003" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 700.2 227.3, 564.0 263.3, 564.0 274.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-004" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 700.2 228.2, 863.6 264.2, 863.6 276.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-006" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 700.2 235.7, 323.1 271.7, 323.1 291.5" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-007" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 323.1 331.5 C 323.1 373.1, 702.6 409.1, 702.6 450.8" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-009" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 323.1 331.5 C 323.1 373.5, 1202.0 409.5, 1202.0 451.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-010" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 700.2 243.1, 1047.0 279.1, 1047.0 306.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-011" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1047.0 346.2 C 1047.0 385.5, 602.2 421.5, 602.2 460.7" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-012" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1047.0 346.2 C 1047.0 372.6, 831.2 408.6, 831.2 435.1" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-013" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1047.0 346.2 C 1047.0 351.6, 495.7 387.6, 495.7 392.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-014" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1047.0 346.2 C 1047.0 373.5, 958.7 409.5, 958.7 436.8" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-016" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1047.0 346.2 C 1047.0 379.4, 364.0 415.4, 364.0 448.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-017" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 700.2 246.2, 198.0 282.2, 198.0 312.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-018" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 532.2 179.0 C 574.2 179.0, 651.4 176.0, 693.4 176.0" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-019" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 868.2 179.0 C 826.2 179.0, 775.3 176.0, 733.3 176.0" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-020" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 532.2 179.0 C 574.2 179.0, 498.7 176.0, 540.7 176.0" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-021" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 868.2 179.0 C 826.2 179.0, 896.9 176.0, 854.9 176.0" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-022" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 700.2 247.8, 1202.0 283.8, 1202.0 315.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-023" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 700.2 216.0 C 658.2 216.0, 254.0 192.7, 212.0 192.7" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-024" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 232.7 C 212.0 328.0, 1076.9 364.0, 1076.9 459.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-025" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1076.9 499.3 C 1076.9 539.6, 752.8 575.6, 752.8 615.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-026" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1076.9 499.3 C 1076.9 538.7, 546.2 574.7, 546.2 614.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-027" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1076.9 499.3 C 1076.9 560.6, 866.6 596.6, 866.6 658.0" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-028" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1076.9 499.3 C 1076.9 536.9, 416.9 572.9, 416.9 610.5" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-030" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1076.9 499.3 C 1076.9 536.6, 1188.0 572.6, 1188.0 609.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-031" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 232.7 C 212.0 328.2, 212.0 364.2, 212.0 459.8" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-032" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 499.8 C 212.0 533.6, 979.7 569.6, 979.7 603.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-033" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 499.8 C 212.0 575.2, 656.6 611.2, 656.6 686.6" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-035" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 499.8 C 212.0 570.3, 304.9 606.3, 304.9 676.8" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-036" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 304.9 716.8 C 304.9 757.6, 879.6 793.6, 879.6 834.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-037" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 304.9 716.8 C 304.9 760.1, 349.9 796.1, 349.9 839.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-038" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 499.8 C 212.0 564.0, 1100.2 600.0, 1100.2 664.1" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-039" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 1100.2 704.1 C 1100.2 746.6, 469.1 782.6, 469.1 825.1" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-040" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 469.1 865.1 C 469.1 920.8, 522.1 956.8, 522.1 1012.5" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-042" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 469.1 865.1 C 469.1 909.7, 933.6 945.7, 933.6 990.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-043" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 499.8 C 212.0 540.5, 212.0 576.5, 212.0 617.2" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-044" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 657.2 C 212.0 740.5, 706.8 776.5, 706.8 859.9" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-046" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 657.2 C 212.0 726.3, 1047.4 762.3, 1047.4 831.4" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-047" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 657.2 C 212.0 714.0, 198.0 750.0, 198.0 806.7" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+<g id="edge-048" data-rade-dna="containment|contains|none" data-slab-layer="02. Root (The Slab)">
+<path d="M 212.0 657.2 C 212.0 711.2, 1202.0 747.2, 1202.0 801.3" fill="none" stroke="#24553e" stroke-width="1.2" opacity="0.58" stroke-linecap="round" stroke-dasharray="8 10" />
+</g>
+</g>
+<g id="plumbing-edges" data-rade-dna="edges|plumbing" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<g id="edge-002" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 690.2 349.4 C 690.2 365.4, 970.2 453.4, 970.2 469.4" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="970.2" cy="469.4" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="984.2" y="473.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-005" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 863.6 344.4 C 863.6 360.4, 1179.6 448.4, 1179.6 464.4" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="1179.6" cy="464.4" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="1193.6" y="468.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-008" data-rade-dna="plumbing|submits_to|submit" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 702.6 518.8 C 702.6 534.8, 982.6 622.8, 982.6 638.8" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="982.6" cy="638.8" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="996.6" y="642.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">SUBMIT</text>
+</g>
+<g id="edge-015" data-rade-dna="plumbing|submits_to|submit" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 958.7 504.8 C 958.7 502.8, 1256.0 590.8, 1256.0 588.8" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="1256.0" cy="588.8" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="1270.0" y="592.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">SUBMIT</text>
+</g>
+<g id="edge-029" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 416.9 678.5 C 416.9 694.5, 732.9 782.5, 732.9 798.5" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="732.9" cy="798.5" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="746.9" y="802.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-034" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 656.6 768.6 C 656.6 772.1, 936.6 860.1, 936.6 863.6" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="936.6" cy="863.6" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="950.6" y="867.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-041" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 522.1 1094.5 C 522.1 1107.0, 838.1 1195.0, 838.1 1207.5" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="838.1" cy="1207.5" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="852.1" y="1211.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+<g id="edge-045" data-rade-dna="plumbing|routes_to|route" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<path d="M 706.8 941.9 C 706.8 936.4, 1022.8 1024.4, 1022.8 1018.9" fill="none" stroke="#98ffad" stroke-width="2.6" opacity="0.96" stroke-linecap="round" marker-end="url(#arrow-plumbing)" />
+<circle cx="1022.8" cy="1018.9" r="6" fill="#04110b" stroke="#98ffad" stroke-width="1.8" />
+<text x="1036.8" y="1022.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#98ffad" letter-spacing="0.8">ROUTE</text>
+</g>
+</g>
+<g id="nodes-01-os-site-the-land" data-rade-dna="nodes|01-os-site-the-land" data-slab-layer="01. OS Site (The Land)">
+<g id="github-surface#9aac341c" data-order="0" data-rade-dna="component|node|none|93af3154|screen" data-slab-layer="01. OS Site (The Land)">
+<rect x="522.2" y="132.0" width="356.0" height="94.0" rx="18" ry="18" fill="#0d2c1d" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.8" />
+<rect x="532.2" y="142.0" width="336.0" height="74.0" rx="12" ry="12" fill="none" stroke="#5ecb94" stroke-width="1" opacity="0.42" />
+<line x1="540.2" y1="154.0" x2="860.2" y2="154.0" stroke="#5ecb94" stroke-width="1.2" opacity="0.78" />
+<text x="858.2" y="150.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L01 SITE</text>
+<text x="542.2" y="170.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_01</text>
+<text x="542.2" y="192.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">screen | d0001ba2</text>
+</g>
+</g>
+<g id="nodes-03-containers-the-frame" data-rade-dna="nodes|03-containers-the-frame" data-slab-layer="03. Containers (The Frame)">
+<g id="github-surface#f9df4bd5" data-order="2" data-rade-dna="plumbing|node|a11y:landmark|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="524.2" y="271.4" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="534.2" y="281.4" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="542.2" y1="293.4" x2="838.2" y2="293.4" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="836.2" y="289.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="544.2" y="309.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Px 2</text>
+<text x="544.2" y="331.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | bf89edeb</text>
+</g>
+<g id="github-surface#2086811a" data-order="3" data-rade-dna="component|node|visual:vbox-contained|5f481cd9|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="398.0" y="264.6" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="408.0" y="274.6" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="416.0" y1="286.6" x2="712.0" y2="286.6" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="710.0" y="282.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="418.0" y="302.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Announcement</text>
+<text x="418.0" y="324.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | c381baed</text>
+</g>
+<g id="github-surface#f154f7ca" data-order="4" data-rade-dna="plumbing|node|a11y:landmark|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="697.6" y="266.4" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="707.6" y="276.4" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="715.6" y1="288.4" x2="1011.6" y2="288.4" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1009.6" y="284.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="717.6" y="304.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Global Banner Link</text>
+<text x="717.6" y="326.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | bf89edeb</text>
+</g>
+<g id="github-surface#ec7a84e1" data-order="6" data-rade-dna="plumbing|node|none|679df019|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="536.6" y="440.8" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="546.6" y="450.8" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="554.6" y1="462.8" x2="850.6" y2="462.8" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="848.6" y="458.8" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="556.6" y="478.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Close Button</text>
+<text x="556.6" y="500.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | bec641be</text>
+</g>
+<g id="github-surface#b1476e86" data-order="9" data-rade-dna="component|node|none|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="436.2" y="450.7" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="446.2" y="460.7" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="454.2" y1="472.7" x2="750.2" y2="472.7" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="748.2" y="468.7" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="456.2" y="488.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Toggle navigation Button</text>
+<text x="456.2" y="510.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | bec641be</text>
+</g>
+<g id="DATA_SLOT_04" data-order="10" data-rade-dna="component|node|none|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="665.2" y="425.1" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="675.2" y="435.1" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="683.2" y1="447.1" x2="979.2" y2="447.1" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="977.2" y="443.1" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="685.2" y="463.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Close Button</text>
+<text x="685.2" y="485.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | bec641be</text>
+</g>
+<g id="github-surface#c8803f50" data-order="11" data-rade-dna="component|node|none|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="329.7" y="382.9" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="339.7" y="392.9" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="347.7" y1="404.9" x2="643.7" y2="404.9" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="641.7" y="400.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="349.7" y="420.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Btn Button</text>
+<text x="349.7" y="442.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | bec641be</text>
+</g>
+<g id="github-surface#1cf3575f" data-order="12" data-rade-dna="plumbing|node|none|679df019|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="792.7" y="426.8" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="802.7" y="436.8" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="810.7" y1="448.8" x2="1106.7" y2="448.8" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1104.7" y="444.8" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="812.7" y="464.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Btn Primary Button</text>
+<text x="812.7" y="486.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | bec641be</text>
+</g>
+<g id="github-surface#23363f5e" data-order="13" data-rade-dna="component|node|none|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="198.0" y="438.6" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="208.0" y="448.6" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="216.0" y1="460.6" x2="512.0" y2="460.6" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="510.0" y="456.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="218.0" y="476.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Close Button</text>
+<text x="218.0" y="498.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | bec641be</text>
+</g>
+<g id="github-surface#840b6784" data-order="15" data-rade-dna="component|node|a11y:landmark|9ed92869|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="371.4" y="132.0" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="381.4" y="142.0" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="389.4" y1="154.0" x2="685.4" y2="154.0" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="683.4" y="150.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="391.4" y="170.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Link Intextblock</text>
+<text x="391.4" y="192.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | bf89edeb</text>
+</g>
+<g id="github-surface#b9980d52" data-order="16" data-rade-dna="component|node|a11y:landmark|9ed92869|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="723.3" y="132.0" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="733.3" y="142.0" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="741.3" y1="154.0" x2="1037.3" y2="154.0" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1035.3" y="150.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="743.3" y="170.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Link Intextblock</text>
+<text x="743.3" y="192.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | bf89edeb</text>
+</g>
+<g id="github-surface#d5897d58" data-order="17" data-rade-dna="component|node|a11y:landmark|9ed92869|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="218.7" y="132.0" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="228.7" y="142.0" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="236.7" y1="154.0" x2="532.7" y2="154.0" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="530.7" y="150.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="238.7" y="170.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Link Intextblock</text>
+<text x="238.7" y="192.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | bf89edeb</text>
+</g>
+<g id="github-surface#b2dfbf5b" data-order="18" data-rade-dna="component|node|visual:vbox-contained|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="844.9" y="132.0" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="854.9" y="142.0" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="862.9" y1="154.0" x2="1158.9" y2="154.0" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1156.9" y="150.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="864.9" y="170.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Icon Button 910969E3 D55E 47D8 B714 Ad3Fd278Fc18 Button</text>
+<text x="864.9" y="192.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | ae4485fb</text>
+</g>
+<g id="github-surface#fe1d74ea" data-order="22" data-rade-dna="component|node|a11y:landmark-descendant|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="586.8" y="605.9" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="596.8" y="615.9" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="604.8" y1="627.9" x2="900.8" y2="627.9" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="898.8" y="623.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="606.8" y="643.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Pause Button</text>
+<text x="606.8" y="665.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 4e618306</text>
+</g>
+<g id="github-surface#74f93ec3" data-order="23" data-rade-dna="component|node|a11y:landmark-descendant|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="380.2" y="604.2" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="390.2" y="614.2" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="398.2" y1="626.2" x2="694.2" y2="626.2" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="692.2" y="622.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="400.2" y="642.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Select a GitHub feature Button</text>
+<text x="400.2" y="664.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 4e618306</text>
+</g>
+<g id="github-surface#c328528d" data-order="24" data-rade-dna="component|node|a11y:landmark-descendant|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="700.6" y="648.0" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="710.6" y="658.0" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="718.6" y1="670.0" x2="1014.6" y2="670.0" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1012.6" y="666.0" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="720.6" y="686.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Pause animation Button</text>
+<text x="720.6" y="708.0" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 4e618306</text>
+</g>
+<g id="github-surface#cde4020c" data-order="25" data-rade-dna="plumbing|node|a11y:landmark|1cc251b3|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="250.9" y="600.5" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="260.9" y="610.5" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="268.9" y1="622.5" x2="564.9" y2="622.5" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="562.9" y="618.5" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="270.9" y="638.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Primer Brand Button Module Button Ldruk</text>
+<text x="270.9" y="660.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 05ad8346</text>
+</g>
+<g id="github-surface#fa1737a3" data-order="28" data-rade-dna="component|node|a11y:landmark-descendant|16f02084|button" data-slab-layer="03. Containers (The Frame)">
+<rect x="813.7" y="593.3" width="332.0" height="88.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="823.7" y="603.3" width="312.0" height="68.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="831.7" y1="615.3" x2="1127.7" y2="615.3" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="1125.7" y="611.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="833.7" y="631.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Pause video Button</text>
+<text x="833.7" y="653.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">button | 4e618306</text>
+</g>
+<g id="github-surface#92e24232" data-order="29" data-rade-dna="frame|flex_row|a11y:landmark|bb2b7b7c|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="472.6" y="676.6" width="368.0" height="102.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="482.6" y="686.6" width="348.0" height="82.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="490.6" y1="698.6" x2="822.6" y2="698.6" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="820.6" y="694.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="492.6" y="714.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Primer Brand Link Module Link Lvkjm</text>
+<text x="492.6" y="736.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 97a775e7</text>
+</g>
+<g id="github-surface#c885e4c1" data-order="35" data-rade-dna="frame|flex_row|a11y:landmark|bb2b7b7c|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="338.1" y="1002.5" width="368.0" height="102.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="348.1" y="1012.5" width="348.0" height="82.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="356.1" y1="1024.5" x2="688.1" y2="1024.5" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="686.1" y="1020.5" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="358.1" y="1040.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Primer Brand Link Module Link Lvkjm</text>
+<text x="358.1" y="1062.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | 6a533784</text>
+</g>
+<g id="github-surface#28974e83" data-order="38" data-rade-dna="frame|flex_row|a11y:landmark|bb2b7b7c|unknown" data-slab-layer="03. Containers (The Frame)">
+<rect x="522.8" y="849.9" width="368.0" height="102.0" rx="18" ry="18" fill="#103a26" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.4" />
+<rect x="532.8" y="859.9" width="348.0" height="82.0" rx="12" ry="12" fill="none" stroke="#98ffad" stroke-width="1" opacity="0.42" />
+<line x1="540.8" y1="871.9" x2="872.8" y2="871.9" stroke="#98ffad" stroke-width="1.2" opacity="0.78" />
+<text x="870.8" y="867.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L03 FRAME</text>
+<text x="542.8" y="887.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="17.0" fill="#ecfff5" font-weight="700">Primer Brand Link Module Link Lvkjm</text>
+<text x="542.8" y="909.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">unknown | f8794faa</text>
+</g>
+</g>
+<g id="nodes-04-links-events-wires-plumbing" data-rade-dna="nodes|04-links-events-wires-plumbing" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<g id="INTERACTIVE_PLUMBING" data-rade-dna="nodes|interactive-plumbing" data-slab-layer="04" data-slab-layer-label="04. Links/Events (Wires &amp; Plumbing)">
+<g id="github-surface#41389db2" data-order="1" data-rade-dna="component|node|visual:vbox-contained|63161c64|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="1064.0" y="189.7" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="1074.0" y="199.7" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="1082.0" y1="211.7" x2="1294.0" y2="211.7" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="207.7" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="1084.0" y="227.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Primerportalroot</text>
+<text x="1084.0" y="249.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 9ba539e8</text>
+</g>
+<g id="github-surface#ae90488b" data-order="5" data-rade-dna="frame|flex_row|visual:vbox-contained|db73e18a|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="199.1" y="281.5" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="209.1" y="291.5" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="217.1" y1="303.5" x2="429.1" y2="303.5" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="427.1" y="299.5" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="219.1" y="319.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_03</text>
+<text x="219.1" y="341.5" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 87b25733</text>
+</g>
+<g id="github-surface#109de50f" data-order="8" data-rade-dna="frame|container|visual:vbox-contained|fb898b90|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="923.0" y="296.2" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="933.0" y="306.2" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="941.0" y1="318.2" x2="1153.0" y2="318.2" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1151.0" y="314.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="943.0" y="334.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Headermktg</text>
+<text x="943.0" y="356.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | fccb1548</text>
+</g>
+<g id="github-surface#c14ed0e7" data-order="20" data-rade-dna="frame|container|a11y:landmark|f03b624c|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="88.0" y="182.7" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="98.0" y="192.7" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="204.7" x2="318.0" y2="204.7" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="316.0" y="200.7" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="108.0" y="220.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_06</text>
+<text x="108.0" y="242.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | dce017b2</text>
+</g>
+<g id="github-surface#8a85c131" data-order="21" data-rade-dna="frame|container|a11y:landmark-descendant|9cd1795b|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="952.9" y="449.3" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="962.9" y="459.3" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="970.9" y1="471.3" x2="1182.9" y2="471.3" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1180.9" y="467.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="972.9" y="487.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Hero</text>
+<text x="972.9" y="509.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 3744e23b</text>
+</g>
+<g id="github-surface#372a0f4e" data-order="26" data-rade-dna="component|node|a11y:landmark-descendant|e74ecab6|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="1064.0" y="599.9" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="1074.0" y="609.9" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="1082.0" y1="621.9" x2="1294.0" y2="621.9" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="617.9" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="1084.0" y="637.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">DATA_SLOT_07</text>
+<text x="1084.0" y="659.9" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | 90e8e07e</text>
+</g>
+<g id="github-surface#404aaec6" data-order="27" data-rade-dna="frame|container|a11y:landmark-descendant|e3d0fbeb|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="88.0" y="449.8" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="98.0" y="459.8" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="471.8" x2="318.0" y2="471.8" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="316.0" y="467.8" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="108.0" y="487.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Automation</text>
+<text x="108.0" y="509.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | d23c7d8d</text>
+</g>
+<g id="github-surface#9ba8a4af" data-order="30" data-rade-dna="frame|container|a11y:landmark-descendant|ad49184c|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="180.9" y="666.8" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="190.9" y="676.8" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="198.9" y1="688.8" x2="410.9" y2="688.8" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="408.9" y="684.8" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="200.9" y="704.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Primer Brand Sectionintro Module Sectionintro Rdurb</text>
+<text x="200.9" y="726.8" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 215e3252</text>
+</g>
+<g id="github-surface#5639a59a" data-order="31" data-rade-dna="component|node|a11y:landmark-descendant|e74ecab6|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="755.6" y="824.3" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="765.6" y="834.3" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="773.6" y1="846.3" x2="985.6" y2="846.3" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="983.6" y="842.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="775.6" y="862.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Primer Brand Heading Module Heading Ivpmp</text>
+<text x="775.6" y="884.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | e3ea6c72</text>
+</g>
+<g id="github-surface#3b952d87" data-order="32" data-rade-dna="component|node|a11y:landmark-descendant|cb7b1072|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="225.9" y="829.4" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="235.9" y="839.4" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="243.9" y1="851.4" x2="455.9" y2="851.4" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="453.9" y="847.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="245.9" y="867.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Primer Brand Text Module Text Pechn</text>
+<text x="245.9" y="889.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | 0edf9e5e</text>
+</g>
+<g id="github-surface#814e48ed" data-order="33" data-rade-dna="frame|grid|a11y:landmark-descendant|DATA_SLOT_08|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="976.2" y="654.1" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="986.2" y="664.1" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="994.2" y1="676.1" x2="1206.2" y2="676.1" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1204.2" y="672.1" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="996.2" y="692.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Grid R 49B</text>
+<text x="996.2" y="714.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | c0231957</text>
+</g>
+<g id="github-surface#d0c8b4b5" data-order="34" data-rade-dna="frame|grid|a11y:landmark-descendant|6cff4455|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="345.1" y="815.1" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="355.1" y="825.1" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="363.1" y1="837.1" x2="575.1" y2="837.1" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="573.1" y="833.1" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="365.1" y="853.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Primer Brand Grid Module Grid Column Htpsw</text>
+<text x="365.1" y="875.1" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | 12ff0869</text>
+</g>
+<g id="github-surface#1df8b4fd" data-order="36" data-rade-dna="component|node|a11y:landmark-descendant|e74ecab6|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="809.6" y="980.3" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="819.6" y="990.3" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="827.6" y1="1002.3" x2="1039.6" y2="1002.3" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1037.6" y="998.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="829.6" y="1018.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Primer Brand Heading Module Heading Ivpmp</text>
+<text x="829.6" y="1040.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | 905606f6</text>
+</g>
+<g id="github-surface#ea95401d" data-order="37" data-rade-dna="frame|grid|a11y:landmark-descendant|007f831b|container" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="88.0" y="607.2" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="98.0" y="617.2" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="629.2" x2="318.0" y2="629.2" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="316.0" y="625.2" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="108.0" y="645.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Primer Brand Grid Module Grid Column Htpsw</text>
+<text x="108.0" y="667.2" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">container | e2d8915d</text>
+</g>
+<g id="github-surface#4f9cd0c8" data-order="39" data-rade-dna="component|node|a11y:landmark-descendant|cb7b1072|text" data-slab-layer="04. Links/Events (Wires &amp; Plumbing)">
+<rect x="923.4" y="821.4" width="248.0" height="60.0" rx="18" ry="18" fill="#0f2d22" fill-opacity="0.34" stroke="#62f2b1" stroke-width="2.1" />
+<rect x="933.4" y="831.4" width="228.0" height="40.0" rx="12" ry="12" fill="none" stroke="#77dcb1" stroke-width="1" opacity="0.42" />
+<line x1="941.4" y1="843.4" x2="1153.4" y2="843.4" stroke="#77dcb1" stroke-width="1.2" opacity="0.78" />
+<text x="1151.4" y="839.4" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L04 PLUMB</text>
+<text x="943.4" y="859.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="16.0" fill="#ecfff5" font-weight="700">Primer Brand Text Module Text Pechn</text>
+<text x="943.4" y="881.4" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">text | 0edf9e5e</text>
+</g>
+</g>
+</g>
+<g id="nodes-05-assets-the-decor" data-rade-dna="nodes|05-assets-the-decor" data-slab-layer="05. Assets (The Decor)">
+<g id="github-surface#2295a5fc" data-order="7" data-rade-dna="component|node|none|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="1092.0" y="441.6" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="1102.0" y="451.6" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="1110.0" y1="463.6" x2="1294.0" y2="463.6" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="459.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="1112.0" y="479.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">Octicon</text>
+<text x="1112.0" y="501.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 55f46318</text>
+</g>
+<g id="github-surface#3e5d83f0" data-order="14" data-rade-dna="component|node|visual:vbox-contained|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="88.0" y="302.3" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="98.0" y="312.3" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="324.3" x2="290.0" y2="324.3" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="288.0" y="320.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="108.0" y="340.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">Octicon</text>
+<text x="108.0" y="362.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 0cc022d9</text>
+</g>
+<g id="github-surface#9e6ca1f9" data-order="19" data-rade-dna="component|node|visual:vbox-contained|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="1092.0" y="305.6" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="1102.0" y="315.6" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="1110.0" y1="327.6" x2="1294.0" y2="327.6" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="323.6" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="1112.0" y="343.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">Octicon</text>
+<text x="1112.0" y="365.6" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 0cc022d9</text>
+</g>
+<g id="github-surface#ec02fe63" data-order="40" data-rade-dna="component|node|a11y:landmark-descendant|c1db5c02|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="88.0" y="796.7" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="98.0" y="806.7" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="106.0" y1="818.7" x2="290.0" y2="818.7" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="288.0" y="814.7" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="108.0" y="834.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">Primer Brand Pillar Module Pillar Icon Myyvk</text>
+<text x="108.0" y="856.7" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 0ec54e3a</text>
+</g>
+<g id="github-surface#8d3f113a" data-order="41" data-rade-dna="component|node|a11y:landmark-descendant|17eadefd|image" data-slab-layer="05. Assets (The Decor)">
+<rect x="1092.0" y="791.3" width="220.0" height="56.0" rx="18" ry="18" fill="#0b1d18" fill-opacity="0.34" stroke="#62f2b1" stroke-width="1.8" />
+<rect x="1102.0" y="801.3" width="200.0" height="36.0" rx="12" ry="12" fill="none" stroke="#43856a" stroke-width="1" opacity="0.42" />
+<line x1="1110.0" y1="813.3" x2="1294.0" y2="813.3" stroke="#43856a" stroke-width="1.2" opacity="0.78" />
+<text x="1292.0" y="809.3" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="10" fill="#8ed8b2" letter-spacing="1.2">L05 DECOR</text>
+<text x="1112.0" y="829.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="15.0" fill="#ecfff5" font-weight="700">Duolingo</text>
+<text x="1112.0" y="851.3" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2" letter-spacing="0.4">image | 1050cc09</text>
+</g>
+</g>
+<g id="rade-legal" data-rade-dna="rade-legal" data-slab-layer="02. Root (The Slab)">
+<text x="1312" y="1338" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="12" fill="#6fdaa3">© 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89</text>
+<text x="1312" y="1356" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">5-Slab Taxonomy | Ambient Engine</text>
+<text x="1312" y="1374" text-anchor="end" font-family="Menlo, SFMono-Regular, Consolas, monospace" font-size="11" fill="#8ed8b2">Live Raid: 2026-03-21</text>
+</g>
+</svg>

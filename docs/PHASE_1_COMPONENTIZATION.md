@@ -55,7 +55,7 @@ Exact salt composition and stability rules are **UNKNOWN / NEEDS DECISION** unti
 
 - [x] **Heuristic Engine:** Implement `Slab03_Hybrid_Anchor` (modal + landmark pulses shipped; VBox pending).
 - [ ] **The Ref-Map:** Preserve cross-frame links (Plumbing) without merging Frame DNA.
-- [x] **Figma Bridge v0 / v0.2:** `src/core/figma_bridge_v0.py` + `ConstructionGraph.to_figma_bridge_v0_manifest()` emit legal-wrapped JSON with `component_id` / `stable_component_key`, `figma_suggested_name`, per-frame aggregates, `ref_map.wires` for Slab 04 plumbing, and empty `variant_axes` (reserved for Tier 2).
+- [x] **Figma Bridge v0 / v0.2.1:** `src/core/figma_bridge_v0.py` + `ConstructionGraph.to_figma_bridge_v0_manifest()` emit legal-wrapped JSON with `component_id` / `stable_component_key`, `figma_suggested_name`, per-frame aggregates (including `anchor_kinds_observed` from `slab03_anchor_kind`), `ref_map.wires` for Slab 04 plumbing, and empty `variant_axes` (reserved for Tier 2).
 - [ ] **Pilot Verification:** Run "Deep Raid" on Stripe and Apple to compare Component Library drift.
 
 ---

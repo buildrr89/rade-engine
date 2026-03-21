@@ -48,6 +48,12 @@ Lightweight decision log for scope, contracts, workflow, and security choices th
 - Decision: manifest version `0.2.0` adds `ref_map` with deterministic `wires` built from ConstructionGraph edges whose `edge_type` is Slab 04 plumbing (`triggers`, `routes_to`, `submits_to`, `controls`). Each wire resolves `source_frame_id` / `target_frame_id` from node `slab03_frame_id` (top-level or `functional_dna`) and sets `plumbing_scope` to `internal`, `external`, or unresolved variants when a frame is missing. Optional `metadata.action_type` on an edge overrides the default mapping from `edge_type` (e.g. `hover`).
 - Why: agents need cross-frame behavioral links without merging Slab 03 components; mirrors prototype “wires” in export shape.
 
+### 2026-03-21 - Figma Bridge manifest 0.2.1 (Slab 03 anchor DNA)
+
+- Status: accepted (proof slice)
+- Decision: bump `manifest_version` to `0.2.1`. Per-frame rows already expose `anchor_kinds_observed` derived from top-level or `functional_dna` `slab03_anchor_kind` (modal, landmark, landmark-descendant, `visual:vbox-contained`, etc.); the version bump marks that Slab 03 anchor taxonomy as part of the stable export contract alongside `0.2.0` `ref_map`.
+- Why: downstream Figma and review tooling need an explicit version step when anchor-kind semantics are guaranteed in the manifest, not only in SVG `data-rade-dna`.
+
 ### 2026-03-21 - Slab 03 landmark pulse and hybrid composition
 
 - Status: accepted

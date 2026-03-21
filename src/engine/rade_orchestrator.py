@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from typing import Any, Callable, Protocol
@@ -42,6 +43,34 @@ logger = logging.getLogger(__name__)
 LEAD_ARCHITECT = COMPLIANCE_LEAD_ARCHITECT
 IP_OWNER = COMPLIANCE_IP_OWNER
 LIST_CHILD_SAMPLE_LIMIT = 5
+_TOKEN_ATTRS_COLOR = ("color", "background_color", "backgroundColor")
+_TOKEN_ATTRS_TYPO = ("font_family", "fontFamily", "font_weight", "fontWeight")
+_TOKEN_ATTRS_SPACING = ("margin", "padding", "gap")
+
+_RGB_RE = re.compile(
+    r"rgba?\(\s*(?P<r>\d{1,3})\s*,\s*(?P<g>\d{1,3})\s*,\s*(?P<b>\d{1,3})"
+    r"(?:\s*,\s*(?P<a>[0-9.]+))?\s*\)",
+    flags=re.IGNORECASE,
+)
+
+
+def _normalize_color_value(value: str) -> str:
+    """
+    Normalize color tokens into deterministic string form.
+
+    - Converts `rgb(r,g,b)` / `rgba(r,g,b,a)` into `#rrggbb` (alpha ignored)
+    - Lowercases remaining values (e.g. `#fff`, `transparent`, `hsl(...)`)
+    """
+    v = value.strip().lower()
+    if not v:
+        return v
+    match = _RGB_RE.fullmatch(v)
+    if not match:
+        return v
+    r = min(max(int(match.group("r")), 0), 255)
+    g = min(max(int(match.group("g")), 0), 255)
+    b = min(max(int(match.group("b")), 0), 255)
+    return f"#{r:02x}{g:02x}{b:02x}"
 PRIORITY_TRAIT_TOKENS = {
     "button": 100,
     "link": 95,
@@ -228,7 +257,7 @@ class ConstructionGraph:
         }
 
     def to_figma_bridge_v0_manifest(self) -> JsonDict:
-        """Deterministic Figma-oriented component manifest (v0.2.0 + ref_map proof slice)."""
+        """Deterministic Figma-oriented component manifest (v0.2.2 + ref_map proof slice)."""
 
         from ..core.figma_bridge_v0 import build_figma_bridge_v0_manifest
 
@@ -706,7 +735,82 @@ class RadeOrchestrator:
             str(child_count),
             ",".join(traits),
         )
+        design_tokens = self._extract_design_tokens(element)
+        if design_tokens is not None:
+            metadata["design_tokens"] = design_tokens
+            metadata["token_pulse_id"] = stable_digest(
+                "token-pulse",
+                "|".join(design_tokens["color_tokens"]),
+                "|".join(design_tokens["typography_tokens"]),
+                "|".join(design_tokens["spacing_tokens"]),
+            )
         return metadata
+
+    def _extract_design_tokens(self, element: Any) -> JsonDict | None:
+        color_tokens: set[str] = set()
+        typography_tokens: set[str] = set()
+        spacing_tokens: set[str] = set()
+
+        style_value = self._normalize_text(
+            self._read_attribute(element, "style", "cssText")
+        )
+        if style_value:
+            style_tokens = self._parse_inline_style(style_value)
+            color_tokens.update(style_tokens["color_tokens"])
+            typography_tokens.update(style_tokens["typography_tokens"])
+            spacing_tokens.update(style_tokens["spacing_tokens"])
+
+        for attr_name in _TOKEN_ATTRS_COLOR:
+            value = self._normalize_text(self._read_attribute(element, attr_name))
+            if value:
+                color_tokens.add(
+                    f"{attr_name.replace('_', '-')}:{_normalize_color_value(value)}"
+                )
+
+        for attr_name in _TOKEN_ATTRS_TYPO:
+            value = self._normalize_text(self._read_attribute(element, attr_name))
+            if value:
+                typography_tokens.add(
+                    f"{attr_name.replace('_', '-')}:{value.lower()}"
+                )
+
+        for attr_name in _TOKEN_ATTRS_SPACING:
+            value = self._normalize_text(self._read_attribute(element, attr_name))
+            if value:
+                spacing_tokens.add(f"{attr_name}:{value.lower()}")
+
+        if not color_tokens and not typography_tokens and not spacing_tokens:
+            return None
+        return {
+            "color_tokens": sorted(color_tokens),
+            "typography_tokens": sorted(typography_tokens),
+            "spacing_tokens": sorted(spacing_tokens),
+        }
+
+    def _parse_inline_style(self, style_value: str) -> JsonDict:
+        color_tokens: set[str] = set()
+        typography_tokens: set[str] = set()
+        spacing_tokens: set[str] = set()
+        for declaration in style_value.split(";"):
+            if ":" not in declaration:
+                continue
+            raw_key, raw_value = declaration.split(":", 1)
+            key = raw_key.strip().lower()
+            value = raw_value.strip().lower()
+            if not key or not value:
+                continue
+            token = f"{key}:{value}"
+            if key in {"color", "background", "background-color", "border-color"}:
+                color_tokens.add(f"{key}:{_normalize_color_value(value)}")
+            elif key in {"font-family", "font-size", "font-weight", "line-height"}:
+                typography_tokens.add(token)
+            elif key in {"margin", "padding", "gap", "row-gap", "column-gap"}:
+                spacing_tokens.add(token)
+        return {
+            "color_tokens": sorted(color_tokens),
+            "typography_tokens": sorted(typography_tokens),
+            "spacing_tokens": sorted(spacing_tokens),
+        }
 
     def _select_children_for_traversal(
         self, node: FunctionalNode, children: list[Any]
