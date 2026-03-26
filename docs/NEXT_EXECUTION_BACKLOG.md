@@ -96,9 +96,14 @@
 
 ## Backlog
 
-### 18. UNKNOWN / NEEDS DECISION
+### 18. GitHub Action marketplace hardening
+
+- Status: implemented 2026-03-27
+- Result: hardened `action.yml` for external Marketplace-style use by resolving action code from `GITHUB_ACTION_PATH` and fixture input from `GITHUB_WORKSPACE`, plus explicit input-file existence failure. Added `tests/test_github_action_contract.py` to lock these path contracts.
+
+### 19. UNKNOWN / NEEDS DECISION
 
 - Risk reduced: UNKNOWN / NEEDS DECISION
-- Scope: define the next smallest proof slice after GitHub Action adoption telemetry
+- Scope: define the next smallest proof slice after GitHub Action marketplace hardening
 - Acceptance: explicit slice statement with deterministic proof gates
 - Does NOT include: unscoped platform expansion

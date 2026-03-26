@@ -48,6 +48,13 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Added `src/core/pr_score_diff.py` plus `scripts/pr_score_comment.py` to produce deterministic markdown comments with `reusability` and `accessibility_risk` deltas.
 - Added `tests/test_pr_score_diff.py` to lock comment marker/table format and score-delta computation.
 
+### Milestone: GitHub Action marketplace hardening
+
+- Hardened `action.yml` runtime pathing to use `GITHUB_ACTION_PATH` for RADE source imports and script execution.
+- Resolved fixture input via `GITHUB_WORKSPACE` so action consumers can run the action from their own repository checkout.
+- Added explicit input-file existence failure in the action step for deterministic early error behavior.
+- Added `tests/test_github_action_contract.py` to lock path-resolution contract.
+
 ### Milestone: Three real-world fixture pack
 
 - Added three public-page fixture snapshots under `examples/`: `python_org_homepage.json`, `mdn_homepage.json`, and `web_dev_homepage.json`.
@@ -108,10 +115,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - interactive HTML report: `render_html_report()` produces self-contained HTML with score bars, expandable findings/recommendations, category filters, and priority badges. `--html-output` on CLI and agent CLI. Golden fixture and 15 new tests. 137 total tests passing.
 - 2026-03-27 - public alpha onboarding: improved README quickstart (Makefile-first, multiline commands, HTML output), expanded CONTRIBUTING with prerequisites/quickstart/formatting/where-to-start, added `make proof` target running all 6 gates via `.venv/bin/python`, added `--html-output` to Makefile analyze and CI workflow, added checked-in HTML example for python.org, fixed README API entry point to wsgi.py. 138 total tests passing.
 - 2026-03-27 - GitHub Action CI/CD integration: added root `action.yml` and `.github/workflows/pr-score-diff.yml` to run RADE on PR base/head refs and post/update a deterministic score-diff comment for `reusability` and `accessibility_risk`. Added supporting helper module/script and regression tests.
+- 2026-03-27 - GitHub Action marketplace hardening: action now resolves code and scripts from `GITHUB_ACTION_PATH` and fixture input from `GITHUB_WORKSPACE` for external action consumers, with deterministic missing-input failure and path-contract regression coverage.
 
 ## Next immediate action
 
-Define slice #18 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+Define slice #19 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 

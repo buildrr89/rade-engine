@@ -45,14 +45,20 @@ runs:
       shell: bash
       run: |
         set -euo pipefail
+        export PYTHONPATH="${GITHUB_ACTION_PATH}"
+        INPUT_FILE="${GITHUB_WORKSPACE}/${{ inputs.input-path }}"
+        if [ ! -f "$INPUT_FILE" ]; then
+          echo "RADE action input file not found: $INPUT_FILE" >&2
+          exit 1
+        fi
         git checkout --quiet "${{ inputs.base-sha }}"
         python -m src.core.cli analyze \
-          --input "${{ inputs.input-path }}" \
+          --input "$INPUT_FILE" \
           --app-id "${{ inputs.app-id }}" \
           --json-output "$RUNNER_TEMP/rade-base.json"
         git checkout --quiet "${{ inputs.head-sha }}"
         python -m src.core.cli analyze \
-          --input "${{ inputs.input-path }}" \
+          --input "$INPUT_FILE" \
           --app-id "${{ inputs.app-id }}" \
           --json-output "$RUNNER_TEMP/rade-head.json"
 
@@ -60,7 +66,8 @@ runs:
       shell: bash
       run: |
         set -euo pipefail
-        python scripts/pr_score_comment.py \
+        export PYTHONPATH="${GITHUB_ACTION_PATH}"
+        python "${GITHUB_ACTION_PATH}/scripts/pr_score_comment.py" \
           --base-report "$RUNNER_TEMP/rade-base.json" \
           --head-report "$RUNNER_TEMP/rade-head.json" \
           --base-ref "${{ inputs.base-sha }}" \
