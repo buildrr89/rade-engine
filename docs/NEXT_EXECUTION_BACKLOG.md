@@ -179,3 +179,11 @@
 - Scope: lock that the action writes deterministic regression-flag output and retains explicit fail-path status assignment
 - Acceptance: contract test asserts `enabled:failed` + `should_fail=true` fail-path literals and `regression_detected` output emission
 - Does NOT include: runtime integration tests against live GitHub Actions
+
+### 30. CodeQL workflow baseline contract
+
+- Status: implemented 2026-03-27
+- Risk reduced: missing static-analysis coverage for public repository pull requests and main-branch pushes
+- Scope: add a minimal GitHub CodeQL workflow for Python and JavaScript with least-privilege permissions and deterministic trigger contract
+- Acceptance: `.github/workflows/codeql.yml` runs on PR + `main` push + weekly schedule, sets `security-events: write`, and repository contract tests lock required workflow snippets
+- Does NOT include: custom query packs, SARIF post-processing, or non-default CodeQL build strategies

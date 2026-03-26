@@ -37,6 +37,24 @@ def test_proof_workflow_contains_required_guardrails():
     )
 
 
+def test_codeql_workflow_contains_required_guardrails():
+    workflow = _read(".github/workflows/codeql.yml")
+    _assert_contains_all(
+        workflow,
+        [
+            "name: CodeQL",
+            "pull_request:",
+            "branches:\n      - main",
+            'cron: "0 6 * * 1"',
+            "security-events: write",
+            "matrix:\n        language: [python, javascript]",
+            "github/codeql-action/init@v3",
+            "github/codeql-action/autobuild@v3",
+            "github/codeql-action/analyze@v3",
+        ],
+    )
+
+
 def test_pull_request_template_covers_required_sections():
     template = _read(".github/pull_request_template.md")
     _assert_contains_all(

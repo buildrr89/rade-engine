@@ -32,12 +32,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Date: 2026-03-27
 - Status: Passed
 - Evidence:
-  - `.venv/bin/python -m pytest -q` -> `154 passed in 0.38s`
-  - `.venv/bin/python -m tests.runner` -> `154 passed, 0 failed`
+  - `.venv/bin/python -m pytest -q` -> `155 passed in 0.37s`
+  - `.venv/bin/python -m tests.runner` -> `155 passed, 0 failed`
   - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
   - `.venv/bin/python -m black --check src tests agent` -> `87 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:58885`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:59094`
   - `make proof` -> `All proof gates passed.`
 - `make analyze` -> `json: output/modernization_report.json`, `md: output/modernization_report.md`, `html: output/modernization_report.html`
 
@@ -91,6 +91,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Action now exports deterministic `regression-detected` (`true`/`false`) alongside gate/delta/reason outputs.
 - PR workflow summary now includes a `Regression detected` line sourced from action outputs.
 - Added contract assertions to lock output wiring and gate/flag consistency literals in `tests/test_github_action_contract.py`.
+
+### Milestone: CodeQL baseline workflow
+
+- Added `.github/workflows/codeql.yml` with a minimal CodeQL matrix for `python` and `javascript`.
+- Workflow triggers on pull requests to `main`, pushes to `main`, and weekly schedule; permissions are least-privilege with `security-events: write`.
+- Added repository contract coverage in `tests/test_repo_contracts.py` to lock the CodeQL workflow trigger/permission/action snippets.
 
 ### Milestone: Three real-world fixture pack
 
@@ -159,10 +165,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - PR workflow step-summary contract: PR workflow now consumes local action outputs via a stable step id and writes deterministic gate/delta lines to the GitHub Actions step summary.
 - 2026-03-27 - Action input/reason contract hardening: fail-on-regression input now enforces strict boolean-string values, action exports deterministic regression reason code, and PR workflow summary surfaces that reason for reviewer clarity.
 - 2026-03-27 - Regression-flag output and summary contract: action now exports explicit regression-detected flag and workflow summary includes that flag to reduce ambiguity for downstream consumers and reviewers.
+- 2026-03-27 - CodeQL baseline workflow: added GitHub CodeQL analysis for Python and JavaScript on PR/push/schedule with least-privilege permissions and contract-test coverage.
 
 ## Next immediate action
 
-Define slice #30 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+Define slice #31 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 
