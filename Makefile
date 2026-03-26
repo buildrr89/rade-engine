@@ -33,7 +33,7 @@ analyze:
 		--md-output $(OUTPUT_DIR)/modernization_report.md
 
 api:
-	./rade-devserver src.api.app:app --host 127.0.0.1 --port 8000
+	./rade-devserver src.api.wsgi:application --host 127.0.0.1 --port 8000
 
 worker:
 	$(PYTHON) -m src.worker.main

@@ -14,13 +14,13 @@ This backlog turns the GitHub scan into concrete repo work. The goal is to borro
 
 ### 1. Lock the report contract with pytest-style golden tests
 
-- Status: implemented in [tests/test_cli_contract.py](/Users/restolad/Desktop/RADE/tests/test_cli_contract.py)
+- Status: implemented in [tests/test_cli_contract.py](../tests/test_cli_contract.py)
 - Borrowed pattern: fixtures, golden files, and CLI-bound contract checks
 - Result: the deterministic report command now fails on JSON or Markdown drift
 
 ### 2. Standardize formatting and linting with Ruff and Black conventions
 
-- Status: implemented with [pyproject.toml](/Users/restolad/Desktop/RADE/pyproject.toml), [Makefile](/Users/restolad/Desktop/RADE/Makefile), and [README.md](/Users/restolad/Desktop/RADE/README.md)
+- Status: implemented with [pyproject.toml](../pyproject.toml), [Makefile](../Makefile), and [README.md](../README.md)
 - Borrowed pattern: one lint gate, one formatter, and fast local feedback
 - Result: the repo now has explicit lint and format commands for the Python surface
 
@@ -28,7 +28,7 @@ This backlog turns the GitHub scan into concrete repo work. The goal is to borro
 
 ### 3. Add browser smoke coverage for the web shell
 
-- Status: implemented in [web/scripts/test.mjs](/Users/restolad/Desktop/RADE/web/scripts/test.mjs), [web/package.json](/Users/restolad/Desktop/RADE/web/package.json), and [Makefile](/Users/restolad/Desktop/RADE/Makefile)
+- Status: implemented in [web/scripts/test.mjs](../web/scripts/test.mjs), [web/package.json](../web/package.json), and [Makefile](../Makefile)
 - Borrowed pattern: real-browser smoke checks with a reusable route server
 - Result: the root route and `/report` route now have deterministic browser coverage
 
