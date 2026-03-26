@@ -17,22 +17,44 @@ RADE accepts a structured JSON payload or a public URL, runs deterministic struc
 
 ## Try It
 
-Prerequisites: `uv`, Python `3.14.3`, Node `20.19.5`, and `pnpm`.
+Prerequisites: [uv](https://docs.astral.sh/uv/), Python 3.14.3, Node 20.19.5, and [pnpm](https://pnpm.io/).
 
 ```bash
-# Install
+# Install all dependencies
+make bootstrap
+# or manually:
 uv sync --dev
 .venv/bin/python -m playwright install chromium
 pnpm --dir web install
-
-# Analyze a public URL
-uv run python -m src.core.cli analyze   --url https://example.com   --json-output output/example_report.json   --md-output output/example_report.md
-
-# Or analyze a local JSON fixture
-uv run python -m src.core.cli analyze   --input examples/sample_ios_output.json   --app-id com.example.legacyapp   --json-output output/modernization_report.json   --md-output output/modernization_report.md
 ```
 
-See [examples/python_org_homepage_report.md](examples/python_org_homepage_report.md) for a checked-in report example.
+Run the sample analysis:
+
+```bash
+make analyze
+# produces output/modernization_report.{json,md,html}
+```
+
+Or use the CLI directly:
+
+```bash
+# Analyze a public URL
+uv run python -m src.core.cli analyze \
+  --url https://example.com \
+  --json-output output/example_report.json \
+  --md-output output/example_report.md \
+  --html-output output/example_report.html
+
+# Analyze a local JSON fixture
+uv run python -m src.core.cli analyze \
+  --input examples/sample_ios_output.json \
+  --app-id com.example.legacyapp \
+  --json-output output/modernization_report.json \
+  --md-output output/modernization_report.md \
+  --html-output output/modernization_report.html
+```
+
+See [examples/](examples/) for checked-in report examples (JSON, Markdown, and HTML).
 
 ## How It Works
 
@@ -44,7 +66,7 @@ Input (JSON or URL)
   -> Deduplication into ordered clusters
   -> Scoring (complexity, reusability, accessibility risk, migration risk)
   -> Standards-backed recommendations and roadmap
-  -> Scrubbed JSON + Markdown report output
+  -> Scrubbed JSON + Markdown + interactive HTML report output
 ```
 
 The analysis pipeline is fully deterministic: no LLM inference, no non-deterministic scoring, and no network calls during analysis itself.
@@ -76,27 +98,22 @@ See [docs/APP_SCOPE.md](docs/APP_SCOPE.md) for the current implementation bounda
 ## Development Setup
 
 ```bash
-# Python + web dependencies
-uv sync --dev
-.venv/bin/python -m playwright install chromium
-pnpm --dir web install
+make bootstrap          # install Python + web dependencies
+make proof              # run all 6 proof gates
+make analyze            # run sample analysis to output/
+make lint               # ruff + black check
+make format             # auto-fix formatting
+```
 
-# Proof gates
+The individual proof gates (also run by `make proof` and CI):
+
+```bash
 .venv/bin/python -m pytest -q
 .venv/bin/python -m tests.runner
 .venv/bin/ruff check src tests agent
 .venv/bin/python -m black --check src tests agent
 pnpm --dir web lint
 pnpm --dir web test
-```
-
-Or use the Makefile:
-
-```bash
-make bootstrap
-make test
-make lint
-make analyze
 ```
 
 ## Architecture
@@ -108,7 +125,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full architecture docum
 | CLI | `src/core/cli.py` | Primary analysis command |
 | Web collector | `src/collectors/web_dom_adapter.py` | Playwright ARIA snapshot collection |
 | Report engine | `src/core/report_generator.py` | Validation, scoring, recommendations, output |
-| API | `src/api/app.py` | `POST /analyze` with API key auth |
+| API | `src/api/wsgi.py` | `POST /analyze` with API key auth |
 | Scrubber | `src/scrubber/pii_scrubber.py` | PII removal preserving stable identifiers |
 | Blueprint (exploratory) | `src/demo/run_raid_visualizer.py` | SVG blueprint from accessibility trees |
 
@@ -127,9 +144,9 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full architecture docum
 
 Real-world analysis outputs from public websites:
 
-- [python.org homepage report](examples/python_org_homepage_report.md)
-- [MDN homepage report](examples/mdn_homepage_report.md)
-- [web.dev homepage report](examples/web_dev_homepage_report.md)
+- python.org: [Markdown](examples/python_org_homepage_report.md) · [JSON](examples/python_org_homepage_report.json) · [HTML](examples/python_org_homepage_report.html)
+- MDN: [Markdown](examples/mdn_homepage_report.md) · [JSON](examples/mdn_homepage_report.json)
+- web.dev: [Markdown](examples/web_dev_homepage_report.md) · [JSON](examples/web_dev_homepage_report.json)
 
 ## Legal
 

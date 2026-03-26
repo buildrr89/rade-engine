@@ -84,14 +84,12 @@
 - Status: implemented 2026-03-27
 - Result: `render_html_report()` in `src/core/report_generator.py` produces a self-contained HTML report with score-bar visualizations, expandable finding and recommendation cards, category filter buttons, priority badges, and responsive layout. `--html-output` flag added to CLI (`src/core/cli.py`) and agent CLI (`agent/cli.py`). `write_report()` and `analyze_file()` accept `html_output`. Golden fixture at `tests/golden/sample_modernization_report.html`. 14 new tests in `tests/test_html_report.py` plus 1 golden contract test in `tests/test_report_generator.py`. 137 total tests passing.
 
-## Backlog
-
 ### 16. Public alpha onboarding
 
-- Risk reduced: repository approachability (proof exists, but public readers still need a cleaner starting path)
-- Scope: tighten contributor onboarding, sample commands, checked-in examples, and repo-facing docs so a new reviewer can understand the proof slice quickly
-- Acceptance: a first-time reader can bootstrap the repo, run the proof commands, and understand what is implemented vs deferred without outside context
-- Does NOT include: hosted signup flows or billing
+- Status: implemented 2026-03-27
+- Result: README refactored with Makefile-first quickstart, multiline CLI commands, HTML output coverage, and corrected API entry point (`wsgi.py`). CONTRIBUTING expanded with prerequisites, clone-to-proof quickstart, formatting instructions, and where-to-start guidance. Makefile gains `make proof` target (all 6 gates via `.venv/bin/python`), `--html-output` in `make analyze`, and `*.html` in `make clean`. CI workflow updated to produce HTML output. Checked-in HTML example at `examples/python_org_homepage_report.html` with contract test. Examples section in README now links all three output formats. 138 total tests passing.
+
+## Backlog
 
 ### 17. GitHub Action
 

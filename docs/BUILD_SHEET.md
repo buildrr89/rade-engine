@@ -32,12 +32,14 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Date: 2026-03-27
 - Status: Passed
 - Evidence:
-  - `.venv/bin/python -m pytest -q` -> `137 passed in 0.41s`
-  - `.venv/bin/python -m tests.runner` -> `137 passed, 0 failed`
+  - `.venv/bin/python -m pytest -q` -> `138 passed in 0.41s`
+  - `.venv/bin/python -m tests.runner` -> `138 passed, 0 failed`
   - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
   - `.venv/bin/python -m black --check src tests agent` -> `84 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:56187`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:56432`
+  - `make proof` -> `All proof gates passed.`
+  - `make analyze` -> produces `output/modernization_report.{json,md,html}`
 
 ### Milestone: Three real-world fixture pack
 
@@ -97,10 +99,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-22 - Implement Playwright-backed `--url` collection with ARIA snapshot parsing, semantic DOM fallback, agent-shell forwarding, and real CLI proof against `https://example.com`. Full gates pass with 122 pytest cases and 122 custom-runner cases.
 - 2026-03-26 - public repo alignment: created `buildrr89/rade-engine`, switched repository posture to AGPL-3.0, updated public metadata/output wording, and re-generated checked-in proof artifacts to match the new public alpha story.
 - 2026-03-27 - interactive HTML report: `render_html_report()` produces self-contained HTML with score bars, expandable findings/recommendations, category filters, and priority badges. `--html-output` on CLI and agent CLI. Golden fixture and 15 new tests. 137 total tests passing.
+- 2026-03-27 - public alpha onboarding: improved README quickstart (Makefile-first, multiline commands, HTML output), expanded CONTRIBUTING with prerequisites/quickstart/formatting/where-to-start, added `make proof` target running all 6 gates via `.venv/bin/python`, added `--html-output` to Makefile analyze and CI workflow, added checked-in HTML example for python.org, fixed README API entry point to wsgi.py. 138 total tests passing.
 
 ## Next immediate action
 
-Build slice #16: public alpha onboarding (tighten contributor experience).
+Build slice #17: GitHub Action for CI/CD integration.
 
 ## Stop conditions
 
