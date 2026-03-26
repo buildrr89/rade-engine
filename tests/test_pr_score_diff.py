@@ -41,8 +41,23 @@ def test_render_pr_comment_has_stable_marker_and_table():
 
     assert "<!-- rade-pr-score-comment -->" in comment
     assert "Compared `base-sha` -> `head-sha`." in comment
+    assert "Regression gate status: `disabled`." in comment
     assert "| `reusability` | 80 | 75 | -5 |" in comment
     assert "| `accessibility_risk` | 30 | 35 | +5 |" in comment
+
+
+def test_render_pr_comment_includes_gate_status_value():
+    comment = render_pr_comment(
+        {
+            "reusability": {"base": 80, "head": 80, "delta": 0},
+            "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+        },
+        base_ref="base-sha",
+        head_ref="head-sha",
+        gate_status="enabled:passed",
+    )
+
+    assert "Regression gate status: `enabled:passed`." in comment
 
 
 def test_has_score_regression_true_when_reusability_drops():

@@ -38,13 +38,17 @@ def _format_delta(delta: int) -> str:
 
 
 def render_pr_comment(
-    diff: dict[str, dict[str, int]], base_ref: str, head_ref: str
+    diff: dict[str, dict[str, int]],
+    base_ref: str,
+    head_ref: str,
+    gate_status: str = "disabled",
 ) -> str:
     lines = [
         COMMENT_MARKER,
         "## RADE score diff",
         "",
         f"Compared `{base_ref}` -> `{head_ref}`.",
+        f"Regression gate status: `{gate_status}`.",
         "",
         "| Metric | Base | Head | Delta |",
         "|---|---:|---:|---:|",

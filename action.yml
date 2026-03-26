@@ -66,6 +66,42 @@ runs:
           --app-id "${{ inputs.app-id }}" \
           --json-output "$RUNNER_TEMP/rade-head.json"
 
+    - name: Evaluate regression gate status
+      id: regression
+      shell: bash
+      run: |
+        set -euo pipefail
+        export PYTHONPATH="${GITHUB_ACTION_PATH}"
+        python - <<'PY'
+        import os
+        from pathlib import Path
+        from src.core.pr_score_diff import build_score_diff, has_score_regression, load_report
+
+        enabled = os.environ["RADE_FAIL_ON_REGRESSION"] == "true"
+        base_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-base.json"))
+        head_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-head.json"))
+        diff = build_score_diff(base_report, head_report)
+        has_regression = has_score_regression(diff)
+
+        if enabled and has_regression:
+            status = "enabled:failed"
+            should_fail = "true"
+        elif enabled:
+            status = "enabled:passed"
+            should_fail = "false"
+        else:
+            status = "disabled"
+            should_fail = "false"
+
+        output_path = Path(os.environ["GITHUB_OUTPUT"])
+        output_path.write_text(
+            f"gate_status={status}\nshould_fail={should_fail}\n", encoding="utf-8"
+        )
+        print(f"RADE regression gate status: {status}")
+        PY
+      env:
+        RADE_FAIL_ON_REGRESSION: ${{ inputs.fail-on-regression }}
+
     - name: Build PR comment body
       shell: bash
       run: |
@@ -76,28 +112,8 @@ runs:
           --head-report "$RUNNER_TEMP/rade-head.json" \
           --base-ref "${{ inputs.base-sha }}" \
           --head-ref "${{ inputs.head-sha }}" \
+          --gate-status "${{ steps.regression.outputs.gate_status }}" \
           --output "$RUNNER_TEMP/rade-comment.md"
-
-    - name: Optional regression gate
-      if: ${{ inputs.fail-on-regression == 'true' }}
-      shell: bash
-      run: |
-        set -euo pipefail
-        export PYTHONPATH="${GITHUB_ACTION_PATH}"
-        python - <<'PY'
-        import os
-        from pathlib import Path
-        from src.core.pr_score_diff import build_score_diff, has_score_regression, load_report
-
-        base_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-base.json"))
-        head_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-head.json"))
-        diff = build_score_diff(base_report, head_report)
-        if has_score_regression(diff):
-            raise SystemExit(
-                "RADE regression gate failed: reusability decreased and/or accessibility_risk increased."
-            )
-        print("RADE regression gate passed.")
-        PY
 
     - name: Post or update PR comment
       uses: actions/github-script@v7
@@ -133,3 +149,10 @@ runs:
               body
             });
           }
+
+    - name: Enforce regression gate
+      if: ${{ steps.regression.outputs.should_fail == 'true' }}
+      shell: bash
+      run: |
+        echo "RADE regression gate failed: reusability decreased and/or accessibility_risk increased." >&2
+        exit 1

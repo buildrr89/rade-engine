@@ -106,9 +106,14 @@
 - Status: implemented 2026-03-27
 - Result: added optional `fail-on-regression` input in `action.yml`. When enabled, the action fails if `reusability` decreases or `accessibility_risk` increases between base/head reports, while still preserving deterministic score-diff behavior. Added regression-rule tests in `tests/test_pr_score_diff.py` and action contract assertions in `tests/test_github_action_contract.py`.
 
-### 20. UNKNOWN / NEEDS DECISION
+### 20. GitHub Action comment gate-status clarity
+
+- Status: implemented 2026-03-27
+- Result: action comment now includes explicit regression gate status (`disabled`, `enabled:passed`, or `enabled:failed`). Action flow now computes gate status before commenting, always posts/updates the PR comment, and then enforces failure when configured and regressed. Tests updated in `tests/test_pr_score_diff.py` and `tests/test_github_action_contract.py`.
+
+### 21. UNKNOWN / NEEDS DECISION
 
 - Risk reduced: UNKNOWN / NEEDS DECISION
-- Scope: define the next smallest proof slice after GitHub Action regression gating
+- Scope: define the next smallest proof slice after GitHub Action comment gate-status clarity
 - Acceptance: explicit slice statement with deterministic proof gates
 - Does NOT include: unscoped platform expansion

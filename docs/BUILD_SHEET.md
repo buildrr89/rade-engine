@@ -61,6 +61,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Added deterministic regression predicate `has_score_regression()` in `src/core/pr_score_diff.py`.
 - Added regression tests in `tests/test_pr_score_diff.py` and action contract assertions in `tests/test_github_action_contract.py`.
 
+### Milestone: GitHub Action gate-status comment clarity
+
+- Action now computes regression gate status before comment rendering and includes status text in PR comments.
+- Action order now ensures comment is posted/updated before final gate enforcement failure.
+- Added tests to lock gate-status comment text and action contract wiring.
+
 ### Milestone: Three real-world fixture pack
 
 - Added three public-page fixture snapshots under `examples/`: `python_org_homepage.json`, `mdn_homepage.json`, and `web_dev_homepage.json`.
@@ -123,10 +129,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - GitHub Action CI/CD integration: added root `action.yml` and `.github/workflows/pr-score-diff.yml` to run RADE on PR base/head refs and post/update a deterministic score-diff comment for `reusability` and `accessibility_risk`. Added supporting helper module/script and regression tests.
 - 2026-03-27 - GitHub Action marketplace hardening: action now resolves code and scripts from `GITHUB_ACTION_PATH` and fixture input from `GITHUB_WORKSPACE` for external action consumers, with deterministic missing-input failure and path-contract regression coverage.
 - 2026-03-27 - GitHub Action regression gate: optional `fail-on-regression` input now enforces CI failure when reusability regresses or accessibility risk increases; deterministic regression rule and action contract are test-locked.
+- 2026-03-27 - GitHub Action gate-status comment clarity: PR comments now include explicit regression gate status, and workflow ordering posts comment before optional failure enforcement.
 
 ## Next immediate action
 
-Define slice #20 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+Define slice #21 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 

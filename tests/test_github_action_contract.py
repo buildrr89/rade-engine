@@ -17,5 +17,9 @@ def test_action_exposes_optional_regression_gate_input_and_step():
 
     assert "fail-on-regression:" in action_text
     assert 'default: "false"' in action_text
-    assert "name: Optional regression gate" in action_text
-    assert "if: ${{ inputs.fail-on-regression == 'true' }}" in action_text
+    assert "name: Evaluate regression gate status" in action_text
+    assert "id: regression" in action_text
+    assert "--gate-status" in action_text
+    assert "steps.regression.outputs.gate_status" in action_text
+    assert "name: Enforce regression gate" in action_text
+    assert "steps.regression.outputs.should_fail == 'true'" in action_text
