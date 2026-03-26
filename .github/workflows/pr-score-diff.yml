@@ -22,6 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: RADE score diff comment
+        id: rade_score_diff
         uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -30,3 +31,15 @@ jobs:
           head-sha: ${{ env.HEAD_SHA }}
           input-path: examples/sample_ios_output.json
           app-id: com.example.legacyapp
+
+      - name: Publish RADE score summary
+        shell: bash
+        run: |
+          {
+            echo "## RADE score diff"
+            echo ""
+            echo "- Gate status: \`${{ steps.rade_score_diff.outputs.gate-status }}\`"
+            echo "- Should fail: \`${{ steps.rade_score_diff.outputs.should-fail }}\`"
+            echo "- Reusability delta: \`${{ steps.rade_score_diff.outputs.reusability-delta }}\`"
+            echo "- Accessibility risk delta: \`${{ steps.rade_score_diff.outputs.accessibility-risk-delta }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"

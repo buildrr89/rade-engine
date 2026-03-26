@@ -32,12 +32,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Date: 2026-03-27
 - Status: Passed
 - Evidence:
-  - `.venv/bin/python -m pytest -q` -> `147 passed in 0.40s`
-  - `.venv/bin/python -m tests.runner` -> `147 passed, 0 failed`
+  - `.venv/bin/python -m pytest -q` -> `148 passed in 0.39s`
+  - `.venv/bin/python -m tests.runner` -> `148 passed, 0 failed`
   - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
   - `.venv/bin/python -m black --check src tests agent` -> `87 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:57760`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:57948`
   - `make proof` -> `All proof gates passed.`
 - `make analyze` -> `json: output/modernization_report.json`, `md: output/modernization_report.md`, `html: output/modernization_report.html`
 
@@ -72,6 +72,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Added action outputs in `action.yml` for `gate-status`, `should-fail`, `reusability-delta`, and `accessibility-risk-delta`.
 - Regression-evaluation step now writes all four deterministic values to `$GITHUB_OUTPUT` alongside existing gate state.
 - Added output-contract assertions in `tests/test_github_action_contract.py`.
+
+### Milestone: PR workflow step-summary contract
+
+- `.github/workflows/pr-score-diff.yml` now pins the local action step to `id: rade_score_diff` and consumes deterministic outputs from that step.
+- Workflow now writes gate status, fail state, and both tracked deltas into `$GITHUB_STEP_SUMMARY` for deterministic reviewer visibility without parsing PR comment text.
+- Added workflow-output wiring assertions in `tests/test_github_action_contract.py`.
 
 ### Milestone: Three real-world fixture pack
 
@@ -137,10 +143,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - GitHub Action regression gate: optional `fail-on-regression` input now enforces CI failure when reusability regresses or accessibility risk increases; deterministic regression rule and action contract are test-locked.
 - 2026-03-27 - GitHub Action gate-status comment clarity: PR comments now include explicit regression gate status, and workflow ordering posts comment before optional failure enforcement.
 - 2026-03-27 - GitHub Action deterministic outputs contract: composite action now exports stable output keys for gate status/fail state and both tracked score deltas so downstream workflows can consume values without parsing comment markdown.
+- 2026-03-27 - PR workflow step-summary contract: PR workflow now consumes local action outputs via a stable step id and writes deterministic gate/delta lines to the GitHub Actions step summary.
 
 ## Next immediate action
 
-Define slice #23 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+Define slice #24 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 

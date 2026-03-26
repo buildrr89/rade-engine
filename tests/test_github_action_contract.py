@@ -39,3 +39,17 @@ def test_action_exposes_deterministic_outputs_contract():
     assert "steps.regression.outputs.accessibility_risk_delta" in action_text
     assert "reusability_delta=" in action_text
     assert "accessibility_risk_delta=" in action_text
+
+
+def test_pr_workflow_consumes_action_outputs_in_summary():
+    workflow_text = Path(".github/workflows/pr-score-diff.yml").read_text(
+        encoding="utf-8"
+    )
+
+    assert "id: rade_score_diff" in workflow_text
+    assert "name: Publish RADE score summary" in workflow_text
+    assert '>> "$GITHUB_STEP_SUMMARY"' in workflow_text
+    assert "steps.rade_score_diff.outputs.gate-status" in workflow_text
+    assert "steps.rade_score_diff.outputs.should-fail" in workflow_text
+    assert "steps.rade_score_diff.outputs.reusability-delta" in workflow_text
+    assert "steps.rade_score_diff.outputs.accessibility-risk-delta" in workflow_text

@@ -123,3 +123,11 @@
 - Scope: expose deterministic action outputs for `gate-status`, `should-fail`, `reusability-delta`, and `accessibility-risk-delta` from the existing regression-evaluation step
 - Acceptance: `action.yml` publishes stable output keys wired to `steps.regression.outputs.*`, regression step writes all output values to `$GITHUB_OUTPUT`, and contract tests lock the keys/wiring
 - Does NOT include: changing regression predicates, adding new tracked metrics, or broadening non-PR workflow scope
+
+### 23. PR workflow step-summary contract for Action outputs
+
+- Status: implemented 2026-03-27
+- Risk reduced: CI review ambiguity when Action output values are not visible in workflow summary
+- Scope: wire the PR workflow to consume the existing Action outputs and publish deterministic summary lines for gate status/fail state and both tracked deltas
+- Acceptance: `.github/workflows/pr-score-diff.yml` sets an explicit action step `id`, summary step writes all four values to `$GITHUB_STEP_SUMMARY`, and contract tests lock the output references
+- Does NOT include: changing comment rendering, changing regression rules, or adding new score metrics
