@@ -1,7 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
-from src.core.pr_score_diff import build_score_diff, render_pr_comment
+from src.core.pr_score_diff import (
+    build_score_diff,
+    has_score_regression,
+    render_pr_comment,
+)
 
 
 def _report(reusability: int, accessibility_risk: int) -> dict:
@@ -39,3 +43,30 @@ def test_render_pr_comment_has_stable_marker_and_table():
     assert "Compared `base-sha` -> `head-sha`." in comment
     assert "| `reusability` | 80 | 75 | -5 |" in comment
     assert "| `accessibility_risk` | 30 | 35 | +5 |" in comment
+
+
+def test_has_score_regression_true_when_reusability_drops():
+    assert has_score_regression(
+        {
+            "reusability": {"base": 80, "head": 70, "delta": -10},
+            "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+        }
+    )
+
+
+def test_has_score_regression_true_when_accessibility_risk_rises():
+    assert has_score_regression(
+        {
+            "reusability": {"base": 80, "head": 80, "delta": 0},
+            "accessibility_risk": {"base": 30, "head": 35, "delta": 5},
+        }
+    )
+
+
+def test_has_score_regression_false_when_scores_hold_or_improve():
+    assert not has_score_regression(
+        {
+            "reusability": {"base": 80, "head": 85, "delta": 5},
+            "accessibility_risk": {"base": 30, "head": 25, "delta": -5},
+        }
+    )

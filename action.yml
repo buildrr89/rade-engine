@@ -29,6 +29,10 @@ inputs:
     description: "Python runtime version used to run RADE CLI."
     required: false
     default: "3.14"
+  fail-on-regression:
+    description: "If true, fail when reusability drops or accessibility risk rises."
+    required: false
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -73,6 +77,27 @@ runs:
           --base-ref "${{ inputs.base-sha }}" \
           --head-ref "${{ inputs.head-sha }}" \
           --output "$RUNNER_TEMP/rade-comment.md"
+
+    - name: Optional regression gate
+      if: ${{ inputs.fail-on-regression == 'true' }}
+      shell: bash
+      run: |
+        set -euo pipefail
+        export PYTHONPATH="${GITHUB_ACTION_PATH}"
+        python - <<'PY'
+        import os
+        from pathlib import Path
+        from src.core.pr_score_diff import build_score_diff, has_score_regression, load_report
+
+        base_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-base.json"))
+        head_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-head.json"))
+        diff = build_score_diff(base_report, head_report)
+        if has_score_regression(diff):
+            raise SystemExit(
+                "RADE regression gate failed: reusability decreased and/or accessibility_risk increased."
+            )
+        print("RADE regression gate passed.")
+        PY
 
     - name: Post or update PR comment
       uses: actions/github-script@v7

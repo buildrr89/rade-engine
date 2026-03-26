@@ -61,3 +61,8 @@ def render_pr_comment(
         ]
     )
     return "\n".join(lines)
+
+
+def has_score_regression(diff: dict[str, dict[str, int]]) -> bool:
+    """Regression rule: reusability down OR accessibility risk up."""
+    return diff["reusability"]["delta"] < 0 or diff["accessibility_risk"]["delta"] > 0

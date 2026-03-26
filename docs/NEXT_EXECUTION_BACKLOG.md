@@ -101,9 +101,14 @@
 - Status: implemented 2026-03-27
 - Result: hardened `action.yml` for external Marketplace-style use by resolving action code from `GITHUB_ACTION_PATH` and fixture input from `GITHUB_WORKSPACE`, plus explicit input-file existence failure. Added `tests/test_github_action_contract.py` to lock these path contracts.
 
-### 19. UNKNOWN / NEEDS DECISION
+### 19. GitHub Action regression gate
+
+- Status: implemented 2026-03-27
+- Result: added optional `fail-on-regression` input in `action.yml`. When enabled, the action fails if `reusability` decreases or `accessibility_risk` increases between base/head reports, while still preserving deterministic score-diff behavior. Added regression-rule tests in `tests/test_pr_score_diff.py` and action contract assertions in `tests/test_github_action_contract.py`.
+
+### 20. UNKNOWN / NEEDS DECISION
 
 - Risk reduced: UNKNOWN / NEEDS DECISION
-- Scope: define the next smallest proof slice after GitHub Action marketplace hardening
+- Scope: define the next smallest proof slice after GitHub Action regression gating
 - Acceptance: explicit slice statement with deterministic proof gates
 - Does NOT include: unscoped platform expansion

@@ -55,6 +55,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Added explicit input-file existence failure in the action step for deterministic early error behavior.
 - Added `tests/test_github_action_contract.py` to lock path-resolution contract.
 
+### Milestone: GitHub Action regression gate
+
+- Added optional `fail-on-regression` action input to fail CI when `reusability` drops or `accessibility_risk` rises from base to head.
+- Added deterministic regression predicate `has_score_regression()` in `src/core/pr_score_diff.py`.
+- Added regression tests in `tests/test_pr_score_diff.py` and action contract assertions in `tests/test_github_action_contract.py`.
+
 ### Milestone: Three real-world fixture pack
 
 - Added three public-page fixture snapshots under `examples/`: `python_org_homepage.json`, `mdn_homepage.json`, and `web_dev_homepage.json`.
@@ -116,10 +122,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - public alpha onboarding: improved README quickstart (Makefile-first, multiline commands, HTML output), expanded CONTRIBUTING with prerequisites/quickstart/formatting/where-to-start, added `make proof` target running all 6 gates via `.venv/bin/python`, added `--html-output` to Makefile analyze and CI workflow, added checked-in HTML example for python.org, fixed README API entry point to wsgi.py. 138 total tests passing.
 - 2026-03-27 - GitHub Action CI/CD integration: added root `action.yml` and `.github/workflows/pr-score-diff.yml` to run RADE on PR base/head refs and post/update a deterministic score-diff comment for `reusability` and `accessibility_risk`. Added supporting helper module/script and regression tests.
 - 2026-03-27 - GitHub Action marketplace hardening: action now resolves code and scripts from `GITHUB_ACTION_PATH` and fixture input from `GITHUB_WORKSPACE` for external action consumers, with deterministic missing-input failure and path-contract regression coverage.
+- 2026-03-27 - GitHub Action regression gate: optional `fail-on-regression` input now enforces CI failure when reusability regresses or accessibility risk increases; deterministic regression rule and action contract are test-locked.
 
 ## Next immediate action
 
-Define slice #19 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+Define slice #20 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 
