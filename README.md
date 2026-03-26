@@ -81,6 +81,7 @@ RADE is in **early alpha**.
 - Deterministic scoring, recommendations, and roadmap generation
 - Interactive HTML report output (`--html-output`)
 - PII scrubbing with preserved structural identifiers
+- Marketplace-ready GitHub Action for PR score-diff comments
 
 **Exploratory or secondary surfaces:**
 - Accessibility-tree-to-SVG blueprint pipeline
@@ -91,7 +92,6 @@ RADE is in **early alpha**.
 **Not built yet:**
 - Hosted auth, tenants, and persisted history
 - Queue-backed execution
-- GitHub Action for CI/CD integration
 
 See [docs/APP_SCOPE.md](docs/APP_SCOPE.md) for the current implementation boundary.
 

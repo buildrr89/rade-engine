@@ -40,6 +40,7 @@ Current stage is a local proof slice with one real authenticated API surface, th
 - tested Neo4j Aura ingest library boundary for scrubbed construction graphs
 - sample proof runs from fixtures and shell smoke tests
 - API key auth middleware with constant-time comparison and fail-safe for unconfigured keys
+- GitHub Action boundary for PR score-diff comments (fixture-based RADE run on base/head refs)
 
 ## Implemented but explicitly not full product surfaces yet
 

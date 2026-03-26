@@ -67,6 +67,7 @@ Before write, report artifacts are scrubbed by `src/scrubber/pii_scrubber.py`.
 - `src/api/wsgi.py` is the served entrypoint for `/`, `/healthz`, and `POST /analyze`; it wraps the core `src/api/app.py` handler with API key auth middleware
 - `src/worker/main.py` emits staged telemetry but performs no real queue work
 - `web/lib/shell.mjs` serves the active web shell; `web/app/` is dormant scaffold only
+- Root `action.yml` defines a GitHub Action boundary that compares PR base/head fixture reports and posts score deltas for `reusability` and `accessibility_risk`
 
 ## Secondary blueprint path
 

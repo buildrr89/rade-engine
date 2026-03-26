@@ -1,0 +1,103 @@
+name: "RADE PR Score Diff"
+description: "Run RADE on PR base/head refs and comment reusability/accessibility score deltas."
+author: "Buildrr89"
+branding:
+  icon: "bar-chart-2"
+  color: "blue"
+inputs:
+  github-token:
+    description: "GitHub token used to read PR metadata and post comments."
+    required: true
+  pr-number:
+    description: "Pull request number."
+    required: true
+  base-sha:
+    description: "Base commit SHA for comparison."
+    required: true
+  head-sha:
+    description: "Head commit SHA for comparison."
+    required: true
+  input-path:
+    description: "Path to RADE input JSON fixture inside the repository."
+    required: false
+    default: "examples/sample_ios_output.json"
+  app-id:
+    description: "Application identifier passed to RADE CLI."
+    required: false
+    default: "com.example.legacyapp"
+  python-version:
+    description: "Python runtime version used to run RADE CLI."
+    required: false
+    default: "3.14"
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install RADE runtime dependencies
+      shell: bash
+      run: python -m pip install --disable-pip-version-check neo4j playwright pyyaml
+
+    - name: Generate base/head reports
+      shell: bash
+      run: |
+        set -euo pipefail
+        git checkout --quiet "${{ inputs.base-sha }}"
+        python -m src.core.cli analyze \
+          --input "${{ inputs.input-path }}" \
+          --app-id "${{ inputs.app-id }}" \
+          --json-output "$RUNNER_TEMP/rade-base.json"
+        git checkout --quiet "${{ inputs.head-sha }}"
+        python -m src.core.cli analyze \
+          --input "${{ inputs.input-path }}" \
+          --app-id "${{ inputs.app-id }}" \
+          --json-output "$RUNNER_TEMP/rade-head.json"
+
+    - name: Build PR comment body
+      shell: bash
+      run: |
+        set -euo pipefail
+        python scripts/pr_score_comment.py \
+          --base-report "$RUNNER_TEMP/rade-base.json" \
+          --head-report "$RUNNER_TEMP/rade-head.json" \
+          --base-ref "${{ inputs.base-sha }}" \
+          --head-ref "${{ inputs.head-sha }}" \
+          --output "$RUNNER_TEMP/rade-comment.md"
+
+    - name: Post or update PR comment
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require("fs");
+          const marker = "<!-- rade-pr-score-comment -->";
+          const issue_number = Number("${{ inputs.pr-number }}");
+          const body = fs.readFileSync(`${process.env.RUNNER_TEMP}/rade-comment.md`, "utf8");
+
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number,
+            per_page: 100
+          });
+
+          const existing = comments.find((comment) => comment.body && comment.body.includes(marker));
+
+          if (existing) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: existing.id,
+              body
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              body
+            });
+          }

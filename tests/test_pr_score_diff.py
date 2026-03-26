@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+from __future__ import annotations
+
+from src.core.pr_score_diff import build_score_diff, render_pr_comment
+
+
+def _report(reusability: int, accessibility_risk: int) -> dict:
+    return {
+        "scores": {
+            "reusability": {"value": reusability},
+            "accessibility_risk": {"value": accessibility_risk},
+        }
+    }
+
+
+def test_build_score_diff_tracks_expected_metrics():
+    base_report = _report(reusability=80, accessibility_risk=30)
+    head_report = _report(reusability=85, accessibility_risk=42)
+
+    diff = build_score_diff(base_report, head_report)
+
+    assert diff == {
+        "reusability": {"base": 80, "head": 85, "delta": 5},
+        "accessibility_risk": {"base": 30, "head": 42, "delta": 12},
+    }
+
+
+def test_render_pr_comment_has_stable_marker_and_table():
+    comment = render_pr_comment(
+        {
+            "reusability": {"base": 80, "head": 75, "delta": -5},
+            "accessibility_risk": {"base": 30, "head": 35, "delta": 5},
+        },
+        base_ref="base-sha",
+        head_ref="head-sha",
+    )
+
+    assert "<!-- rade-pr-score-comment -->" in comment
+    assert "Compared `base-sha` -> `head-sha`." in comment
+    assert "| `reusability` | 80 | 75 | -5 |" in comment
+    assert "| `accessibility_risk` | 30 | 35 | +5 |" in comment

@@ -39,7 +39,14 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
   - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:56432`
   - `make proof` -> `All proof gates passed.`
-  - `make analyze` -> produces `output/modernization_report.{json,md,html}`
+- `make analyze` -> produces `output/modernization_report.{json,md,html}`
+
+### Milestone: GitHub Action PR score diff
+
+- Added root `action.yml` (`RADE PR Score Diff`) with Marketplace metadata (`name`, `description`, `branding`) and composite steps to compare PR `base_sha` vs `head_sha`.
+- Added `.github/workflows/pr-score-diff.yml` to run on PR open/reopen/synchronize and invoke the local action.
+- Added `src/core/pr_score_diff.py` plus `scripts/pr_score_comment.py` to produce deterministic markdown comments with `reusability` and `accessibility_risk` deltas.
+- Added `tests/test_pr_score_diff.py` to lock comment marker/table format and score-delta computation.
 
 ### Milestone: Three real-world fixture pack
 
@@ -100,10 +107,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-26 - public repo alignment: created `buildrr89/rade-engine`, switched repository posture to AGPL-3.0, updated public metadata/output wording, and re-generated checked-in proof artifacts to match the new public alpha story.
 - 2026-03-27 - interactive HTML report: `render_html_report()` produces self-contained HTML with score bars, expandable findings/recommendations, category filters, and priority badges. `--html-output` on CLI and agent CLI. Golden fixture and 15 new tests. 137 total tests passing.
 - 2026-03-27 - public alpha onboarding: improved README quickstart (Makefile-first, multiline commands, HTML output), expanded CONTRIBUTING with prerequisites/quickstart/formatting/where-to-start, added `make proof` target running all 6 gates via `.venv/bin/python`, added `--html-output` to Makefile analyze and CI workflow, added checked-in HTML example for python.org, fixed README API entry point to wsgi.py. 138 total tests passing.
+- 2026-03-27 - GitHub Action CI/CD integration: added root `action.yml` and `.github/workflows/pr-score-diff.yml` to run RADE on PR base/head refs and post/update a deterministic score-diff comment for `reusability` and `accessibility_risk`. Added supporting helper module/script and regression tests.
 
 ## Next immediate action
 
-Build slice #17: GitHub Action for CI/CD integration.
+Define slice #18 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 

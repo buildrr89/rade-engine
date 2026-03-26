@@ -89,11 +89,16 @@
 - Status: implemented 2026-03-27
 - Result: README refactored with Makefile-first quickstart, multiline CLI commands, HTML output coverage, and corrected API entry point (`wsgi.py`). CONTRIBUTING expanded with prerequisites, clone-to-proof quickstart, formatting instructions, and where-to-start guidance. Makefile gains `make proof` target (all 6 gates via `.venv/bin/python`), `--html-output` in `make analyze`, and `*.html` in `make clean`. CI workflow updated to produce HTML output. Checked-in HTML example at `examples/python_org_homepage_report.html` with contract test. Examples section in README now links all three output formats. 138 total tests passing.
 
-## Backlog
-
 ### 17. GitHub Action
 
-- Risk reduced: developer adoption (no CI/CD integration exists)
-- Scope: GitHub Action that runs RADE on PRs and comments with a diff of accessibility/reusability scores
-- Acceptance: installable from GitHub Marketplace, runs on PR open/update, posts comment with scores
-- Does NOT include: Figma plugin, IDE extensions
+- Status: implemented 2026-03-27
+- Result: added marketplace-ready root `action.yml` (`RADE PR Score Diff`) and PR workflow `.github/workflows/pr-score-diff.yml` to run on PR open/reopen/synchronize. The action compares base/head commits by running `rade analyze` against the fixture input and posts/updates a PR comment with deterministic `reusability` and `accessibility_risk` score deltas. Added helper module `src/core/pr_score_diff.py`, comment builder script `scripts/pr_score_comment.py`, and tests in `tests/test_pr_score_diff.py`.
+
+## Backlog
+
+### 18. UNKNOWN / NEEDS DECISION
+
+- Risk reduced: UNKNOWN / NEEDS DECISION
+- Scope: define the next smallest proof slice after GitHub Action adoption telemetry
+- Acceptance: explicit slice statement with deterministic proof gates
+- Does NOT include: unscoped platform expansion
