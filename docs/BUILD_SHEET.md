@@ -32,12 +32,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Date: 2026-03-27
 - Status: Passed
 - Evidence:
-  - `.venv/bin/python -m pytest -q` -> `153 passed in 0.41s`
-  - `.venv/bin/python -m tests.runner` -> `153 passed, 0 failed`
+  - `.venv/bin/python -m pytest -q` -> `154 passed in 0.38s`
+  - `.venv/bin/python -m tests.runner` -> `154 passed, 0 failed`
   - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
   - `.venv/bin/python -m black --check src tests agent` -> `87 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:58734`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:58885`
   - `make proof` -> `All proof gates passed.`
 - `make analyze` -> `json: output/modernization_report.json`, `md: output/modernization_report.md`, `html: output/modernization_report.html`
 
@@ -85,6 +85,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Added deterministic `regression_reason()` helper in `src/core/pr_score_diff.py` with stable reason codes (`none`, `reusability_down`, `accessibility_risk_up`, `both`), plus regression-reason unit tests.
 - Action now exports `regression-reason`, and PR workflow summary now includes a regression-reason line sourced from Action outputs.
 - Added action/workflow contract assertions for input validation and regression-reason wiring in `tests/test_github_action_contract.py`.
+
+### Milestone: Regression-flag output and summary contract
+
+- Action now exports deterministic `regression-detected` (`true`/`false`) alongside gate/delta/reason outputs.
+- PR workflow summary now includes a `Regression detected` line sourced from action outputs.
+- Added contract assertions to lock output wiring and gate/flag consistency literals in `tests/test_github_action_contract.py`.
 
 ### Milestone: Three real-world fixture pack
 
@@ -152,10 +158,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - GitHub Action deterministic outputs contract: composite action now exports stable output keys for gate status/fail state and both tracked score deltas so downstream workflows can consume values without parsing comment markdown.
 - 2026-03-27 - PR workflow step-summary contract: PR workflow now consumes local action outputs via a stable step id and writes deterministic gate/delta lines to the GitHub Actions step summary.
 - 2026-03-27 - Action input/reason contract hardening: fail-on-regression input now enforces strict boolean-string values, action exports deterministic regression reason code, and PR workflow summary surfaces that reason for reviewer clarity.
+- 2026-03-27 - Regression-flag output and summary contract: action now exports explicit regression-detected flag and workflow summary includes that flag to reduce ambiguity for downstream consumers and reviewers.
 
 ## Next immediate action
 
-Define slice #27 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+Define slice #30 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 

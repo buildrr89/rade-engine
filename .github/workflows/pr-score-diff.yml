@@ -43,4 +43,5 @@ jobs:
             echo "- Reusability delta: \`${{ steps.rade_score_diff.outputs.reusability-delta }}\`"
             echo "- Accessibility risk delta: \`${{ steps.rade_score_diff.outputs.accessibility-risk-delta }}\`"
             echo "- Regression reason: \`${{ steps.rade_score_diff.outputs.regression-reason }}\`"
+            echo "- Regression detected: \`${{ steps.rade_score_diff.outputs.regression-detected }}\`"
           } >> "$GITHUB_STEP_SUMMARY"

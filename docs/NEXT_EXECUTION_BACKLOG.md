@@ -155,3 +155,27 @@
 - Scope: add deterministic regression-reason line to `.github/workflows/pr-score-diff.yml` step summary using Action outputs
 - Acceptance: workflow summary includes `steps.rade_score_diff.outputs.regression-reason` and contract tests lock the reference
 - Does NOT include: adding new workflow jobs or changing PR trigger conditions
+
+### 27. GitHub Action regression-detected output contract
+
+- Status: implemented 2026-03-27
+- Risk reduced: downstream drift when consumers infer regression presence indirectly from multiple fields
+- Scope: expose deterministic `regression-detected` output (`true`/`false`) from the existing regression predicate
+- Acceptance: `action.yml` publishes `regression-detected`, regression step writes `regression_detected=...` to `$GITHUB_OUTPUT`, and contract tests lock wiring
+- Does NOT include: changing regression predicates or gate-status values
+
+### 28. PR workflow regression-detected summary line
+
+- Status: implemented 2026-03-27
+- Risk reduced: reviewer ambiguity when summary lacks explicit regression presence flag
+- Scope: add `regression-detected` line to the PR workflow summary from Action outputs
+- Acceptance: `.github/workflows/pr-score-diff.yml` summary step references `steps.rade_score_diff.outputs.regression-detected` and contract tests lock it
+- Does NOT include: changes to workflow triggers, permissions, or jobs
+
+### 29. Gate/flag consistency contract lock
+
+- Status: implemented 2026-03-27
+- Risk reduced: contract drift between gate-status fail path and regression-flag output semantics
+- Scope: lock that the action writes deterministic regression-flag output and retains explicit fail-path status assignment
+- Acceptance: contract test asserts `enabled:failed` + `should_fail=true` fail-path literals and `regression_detected` output emission
+- Does NOT include: runtime integration tests against live GitHub Actions

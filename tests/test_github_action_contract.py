@@ -34,14 +34,17 @@ def test_action_exposes_deterministic_outputs_contract():
     assert "reusability-delta:" in action_text
     assert "accessibility-risk-delta:" in action_text
     assert "regression-reason:" in action_text
+    assert "regression-detected:" in action_text
     assert "steps.regression.outputs.gate_status" in action_text
     assert "steps.regression.outputs.should_fail" in action_text
     assert "steps.regression.outputs.reusability_delta" in action_text
     assert "steps.regression.outputs.accessibility_risk_delta" in action_text
     assert "steps.regression.outputs.regression_reason" in action_text
+    assert "steps.regression.outputs.regression_detected" in action_text
     assert "reusability_delta=" in action_text
     assert "accessibility_risk_delta=" in action_text
     assert "regression_reason=" in action_text
+    assert "regression_detected=" in action_text
 
 
 def test_pr_workflow_consumes_action_outputs_in_summary():
@@ -57,6 +60,7 @@ def test_pr_workflow_consumes_action_outputs_in_summary():
     assert "steps.rade_score_diff.outputs.reusability-delta" in workflow_text
     assert "steps.rade_score_diff.outputs.accessibility-risk-delta" in workflow_text
     assert "steps.rade_score_diff.outputs.regression-reason" in workflow_text
+    assert "steps.rade_score_diff.outputs.regression-detected" in workflow_text
 
 
 def test_action_validates_fail_on_regression_boolean_input():
@@ -64,3 +68,11 @@ def test_action_validates_fail_on_regression_boolean_input():
 
     assert 'if raw_gate not in {"true", "false"}:' in action_text
     assert "must be 'true' or 'false'" in action_text
+
+
+def test_action_keeps_gate_status_and_regression_flag_consistent():
+    action_text = Path("action.yml").read_text(encoding="utf-8")
+
+    assert 'status = "enabled:failed"' in action_text
+    assert 'should_fail = "true"' in action_text
+    assert "regression_detected={'true' if has_regression else 'false'}" in action_text
