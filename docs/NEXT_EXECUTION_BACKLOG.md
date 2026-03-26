@@ -111,9 +111,14 @@
 - Status: implemented 2026-03-27
 - Result: action comment now includes explicit regression gate status (`disabled`, `enabled:passed`, or `enabled:failed`). Action flow now computes gate status before commenting, always posts/updates the PR comment, and then enforces failure when configured and regressed. Tests updated in `tests/test_pr_score_diff.py` and `tests/test_github_action_contract.py`.
 
-### 21. UNKNOWN / NEEDS DECISION
+### 21. GitHub Action comment score-direction clarity
+
+- Status: implemented 2026-03-27
+- Result: PR comment now includes an explicit direction line clarifying that higher `reusability` is better and lower `accessibility_risk` is better. Existing score table and deterministic marker remain unchanged.
+
+### 22. UNKNOWN / NEEDS DECISION
 
 - Risk reduced: UNKNOWN / NEEDS DECISION
-- Scope: define the next smallest proof slice after GitHub Action comment gate-status clarity
+- Scope: define the next smallest proof slice after GitHub Action comment score-direction clarity
 - Acceptance: explicit slice statement with deterministic proof gates
 - Does NOT include: unscoped platform expansion

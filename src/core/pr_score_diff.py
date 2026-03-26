@@ -49,6 +49,7 @@ def render_pr_comment(
         "",
         f"Compared `{base_ref}` -> `{head_ref}`.",
         f"Regression gate status: `{gate_status}`.",
+        "Direction: higher `reusability` is better; lower `accessibility_risk` is better.",
         "",
         "| Metric | Base | Head | Delta |",
         "|---|---:|---:|---:|",

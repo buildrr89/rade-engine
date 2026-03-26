@@ -42,6 +42,10 @@ def test_render_pr_comment_has_stable_marker_and_table():
     assert "<!-- rade-pr-score-comment -->" in comment
     assert "Compared `base-sha` -> `head-sha`." in comment
     assert "Regression gate status: `disabled`." in comment
+    assert (
+        "Direction: higher `reusability` is better; lower `accessibility_risk` is better."
+        in comment
+    )
     assert "| `reusability` | 80 | 75 | -5 |" in comment
     assert "| `accessibility_risk` | 30 | 35 | +5 |" in comment
 
