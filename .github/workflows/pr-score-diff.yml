@@ -42,4 +42,5 @@ jobs:
             echo "- Should fail: \`${{ steps.rade_score_diff.outputs.should-fail }}\`"
             echo "- Reusability delta: \`${{ steps.rade_score_diff.outputs.reusability-delta }}\`"
             echo "- Accessibility risk delta: \`${{ steps.rade_score_diff.outputs.accessibility-risk-delta }}\`"
+            echo "- Regression reason: \`${{ steps.rade_score_diff.outputs.regression-reason }}\`"
           } >> "$GITHUB_STEP_SUMMARY"

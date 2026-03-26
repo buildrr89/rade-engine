@@ -46,6 +46,9 @@ outputs:
   accessibility-risk-delta:
     description: "Head minus base `accessibility_risk` score delta."
     value: ${{ steps.regression.outputs.accessibility_risk_delta }}
+  regression-reason:
+    description: "Stable regression reason code (`none`, `reusability_down`, `accessibility_risk_up`, or `both`)."
+    value: ${{ steps.regression.outputs.regression_reason }}
 runs:
   using: "composite"
   steps:
@@ -87,14 +90,29 @@ runs:
         export PYTHONPATH="${GITHUB_ACTION_PATH}"
         python - <<'PY'
         import os
+        import sys
         from pathlib import Path
-        from src.core.pr_score_diff import build_score_diff, has_score_regression, load_report
+        from src.core.pr_score_diff import (
+            build_score_diff,
+            has_score_regression,
+            load_report,
+            regression_reason,
+        )
 
-        enabled = os.environ["RADE_FAIL_ON_REGRESSION"] == "true"
+        raw_gate = os.environ["RADE_FAIL_ON_REGRESSION"]
+        if raw_gate not in {"true", "false"}:
+            print(
+                "RADE action input 'fail-on-regression' must be 'true' or 'false'.",
+                file=sys.stderr,
+            )
+            raise SystemExit(2)
+
+        enabled = raw_gate == "true"
         base_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-base.json"))
         head_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-head.json"))
         diff = build_score_diff(base_report, head_report)
         has_regression = has_score_regression(diff)
+        reason = regression_reason(diff)
 
         if enabled and has_regression:
             status = "enabled:failed"
@@ -113,6 +131,7 @@ runs:
                 f"should_fail={should_fail}\n"
                 f"reusability_delta={diff['reusability']['delta']}\n"
                 f"accessibility_risk_delta={diff['accessibility_risk']['delta']}\n"
+                f"regression_reason={reason}\n"
             ),
             encoding="utf-8",
         )

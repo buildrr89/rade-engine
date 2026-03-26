@@ -4,6 +4,7 @@ from __future__ import annotations
 from src.core.pr_score_diff import (
     build_score_diff,
     has_score_regression,
+    regression_reason,
     render_pr_comment,
 )
 
@@ -88,4 +89,52 @@ def test_has_score_regression_false_when_scores_hold_or_improve():
             "reusability": {"base": 80, "head": 85, "delta": 5},
             "accessibility_risk": {"base": 30, "head": 25, "delta": -5},
         }
+    )
+
+
+def test_regression_reason_none_when_scores_hold_or_improve():
+    assert (
+        regression_reason(
+            {
+                "reusability": {"base": 80, "head": 85, "delta": 5},
+                "accessibility_risk": {"base": 30, "head": 25, "delta": -5},
+            }
+        )
+        == "none"
+    )
+
+
+def test_regression_reason_reusability_down_when_only_reusability_drops():
+    assert (
+        regression_reason(
+            {
+                "reusability": {"base": 80, "head": 75, "delta": -5},
+                "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+            }
+        )
+        == "reusability_down"
+    )
+
+
+def test_regression_reason_accessibility_up_when_only_accessibility_risk_rises():
+    assert (
+        regression_reason(
+            {
+                "reusability": {"base": 80, "head": 80, "delta": 0},
+                "accessibility_risk": {"base": 30, "head": 31, "delta": 1},
+            }
+        )
+        == "accessibility_risk_up"
+    )
+
+
+def test_regression_reason_both_when_both_regression_conditions_trigger():
+    assert (
+        regression_reason(
+            {
+                "reusability": {"base": 80, "head": 75, "delta": -5},
+                "accessibility_risk": {"base": 30, "head": 31, "delta": 1},
+            }
+        )
+        == "both"
     )

@@ -131,3 +131,27 @@
 - Scope: wire the PR workflow to consume the existing Action outputs and publish deterministic summary lines for gate status/fail state and both tracked deltas
 - Acceptance: `.github/workflows/pr-score-diff.yml` sets an explicit action step `id`, summary step writes all four values to `$GITHUB_STEP_SUMMARY`, and contract tests lock the output references
 - Does NOT include: changing comment rendering, changing regression rules, or adding new score metrics
+
+### 24. GitHub Action strict regression-input contract
+
+- Status: implemented 2026-03-27
+- Risk reduced: ambiguous CI behavior when `fail-on-regression` receives non-boolean string values
+- Scope: enforce deterministic validation that `fail-on-regression` accepts only `"true"` or `"false"` in the action regression-evaluation step
+- Acceptance: invalid values exit deterministically with explicit error text and contract tests lock the validation branch
+- Does NOT include: changing regression predicates or introducing additional action inputs
+
+### 25. GitHub Action regression-reason output contract
+
+- Status: implemented 2026-03-27
+- Risk reduced: downstream drift from inferring regression cause by re-parsing deltas externally
+- Scope: expose deterministic `regression-reason` output with stable enum values (`none`, `reusability_down`, `accessibility_risk_up`, `both`)
+- Acceptance: score-diff helper exposes deterministic reason classifier, action exports `regression-reason`, and tests lock both classifier behavior and output wiring
+- Does NOT include: changing gate pass/fail status semantics or comment markdown structure
+
+### 26. PR workflow regression-reason summary line
+
+- Status: implemented 2026-03-27
+- Risk reduced: reviewer ambiguity when gate failure reason is not visible in workflow summary
+- Scope: add deterministic regression-reason line to `.github/workflows/pr-score-diff.yml` step summary using Action outputs
+- Acceptance: workflow summary includes `steps.rade_score_diff.outputs.regression-reason` and contract tests lock the reference
+- Does NOT include: adding new workflow jobs or changing PR trigger conditions
