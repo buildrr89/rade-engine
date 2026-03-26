@@ -32,14 +32,14 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Date: 2026-03-27
 - Status: Passed
 - Evidence:
-  - `.venv/bin/python -m pytest -q` -> `138 passed in 0.41s`
-  - `.venv/bin/python -m tests.runner` -> `138 passed, 0 failed`
+  - `.venv/bin/python -m pytest -q` -> `147 passed in 0.40s`
+  - `.venv/bin/python -m tests.runner` -> `147 passed, 0 failed`
   - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
-  - `.venv/bin/python -m black --check src tests agent` -> `84 files would be left unchanged.`
+  - `.venv/bin/python -m black --check src tests agent` -> `87 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:56432`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:57760`
   - `make proof` -> `All proof gates passed.`
-- `make analyze` -> produces `output/modernization_report.{json,md,html}`
+- `make analyze` -> `json: output/modernization_report.json`, `md: output/modernization_report.md`, `html: output/modernization_report.html`
 
 ### Milestone: GitHub Action PR score diff
 
@@ -66,6 +66,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Action now computes regression gate status before comment rendering and includes status text in PR comments.
 - Action order now ensures comment is posted/updated before final gate enforcement failure.
 - Added tests to lock gate-status comment text and action contract wiring.
+
+### Milestone: GitHub Action deterministic outputs contract
+
+- Added action outputs in `action.yml` for `gate-status`, `should-fail`, `reusability-delta`, and `accessibility-risk-delta`.
+- Regression-evaluation step now writes all four deterministic values to `$GITHUB_OUTPUT` alongside existing gate state.
+- Added output-contract assertions in `tests/test_github_action_contract.py`.
 
 ### Milestone: Three real-world fixture pack
 
@@ -130,10 +136,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - GitHub Action marketplace hardening: action now resolves code and scripts from `GITHUB_ACTION_PATH` and fixture input from `GITHUB_WORKSPACE` for external action consumers, with deterministic missing-input failure and path-contract regression coverage.
 - 2026-03-27 - GitHub Action regression gate: optional `fail-on-regression` input now enforces CI failure when reusability regresses or accessibility risk increases; deterministic regression rule and action contract are test-locked.
 - 2026-03-27 - GitHub Action gate-status comment clarity: PR comments now include explicit regression gate status, and workflow ordering posts comment before optional failure enforcement.
+- 2026-03-27 - GitHub Action deterministic outputs contract: composite action now exports stable output keys for gate status/fail state and both tracked score deltas so downstream workflows can consume values without parsing comment markdown.
 
 ## Next immediate action
 
-Define slice #21 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+Define slice #23 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 

@@ -23,3 +23,19 @@ def test_action_exposes_optional_regression_gate_input_and_step():
     assert "steps.regression.outputs.gate_status" in action_text
     assert "name: Enforce regression gate" in action_text
     assert "steps.regression.outputs.should_fail == 'true'" in action_text
+
+
+def test_action_exposes_deterministic_outputs_contract():
+    action_text = Path("action.yml").read_text(encoding="utf-8")
+
+    assert "outputs:" in action_text
+    assert "gate-status:" in action_text
+    assert "should-fail:" in action_text
+    assert "reusability-delta:" in action_text
+    assert "accessibility-risk-delta:" in action_text
+    assert "steps.regression.outputs.gate_status" in action_text
+    assert "steps.regression.outputs.should_fail" in action_text
+    assert "steps.regression.outputs.reusability_delta" in action_text
+    assert "steps.regression.outputs.accessibility_risk_delta" in action_text
+    assert "reusability_delta=" in action_text
+    assert "accessibility_risk_delta=" in action_text

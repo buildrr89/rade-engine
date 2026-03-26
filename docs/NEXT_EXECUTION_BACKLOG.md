@@ -116,9 +116,10 @@
 - Status: implemented 2026-03-27
 - Result: PR comment now includes an explicit direction line clarifying that higher `reusability` is better and lower `accessibility_risk` is better. Existing score table and deterministic marker remain unchanged.
 
-### 22. UNKNOWN / NEEDS DECISION
+### 22. GitHub Action deterministic outputs contract
 
-- Risk reduced: UNKNOWN / NEEDS DECISION
-- Scope: define the next smallest proof slice after GitHub Action comment score-direction clarity
-- Acceptance: explicit slice statement with deterministic proof gates
-- Does NOT include: unscoped platform expansion
+- Status: implemented 2026-03-27
+- Risk reduced: downstream workflow drift when score-diff results are needed outside PR comment text
+- Scope: expose deterministic action outputs for `gate-status`, `should-fail`, `reusability-delta`, and `accessibility-risk-delta` from the existing regression-evaluation step
+- Acceptance: `action.yml` publishes stable output keys wired to `steps.regression.outputs.*`, regression step writes all output values to `$GITHUB_OUTPUT`, and contract tests lock the keys/wiring
+- Does NOT include: changing regression predicates, adding new tracked metrics, or broadening non-PR workflow scope

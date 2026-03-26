@@ -33,6 +33,19 @@ inputs:
     description: "If true, fail when reusability drops or accessibility risk rises."
     required: false
     default: "false"
+outputs:
+  gate-status:
+    description: "Regression gate status (`disabled`, `enabled:passed`, or `enabled:failed`)."
+    value: ${{ steps.regression.outputs.gate_status }}
+  should-fail:
+    description: "Whether the action detected a regression that should fail the run."
+    value: ${{ steps.regression.outputs.should_fail }}
+  reusability-delta:
+    description: "Head minus base `reusability` score delta."
+    value: ${{ steps.regression.outputs.reusability_delta }}
+  accessibility-risk-delta:
+    description: "Head minus base `accessibility_risk` score delta."
+    value: ${{ steps.regression.outputs.accessibility_risk_delta }}
 runs:
   using: "composite"
   steps:
@@ -95,7 +108,13 @@ runs:
 
         output_path = Path(os.environ["GITHUB_OUTPUT"])
         output_path.write_text(
-            f"gate_status={status}\nshould_fail={should_fail}\n", encoding="utf-8"
+            (
+                f"gate_status={status}\n"
+                f"should_fail={should_fail}\n"
+                f"reusability_delta={diff['reusability']['delta']}\n"
+                f"accessibility_risk_delta={diff['accessibility_risk']['delta']}\n"
+            ),
+            encoding="utf-8",
         )
         print(f"RADE regression gate status: {status}")
         PY
