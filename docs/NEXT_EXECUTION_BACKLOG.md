@@ -187,3 +187,11 @@
 - Scope: add a minimal GitHub CodeQL workflow for Python and JavaScript with least-privilege permissions and deterministic trigger contract
 - Acceptance: `.github/workflows/codeql.yml` runs on PR + `main` push + weekly schedule, sets `security-events: write`, and repository contract tests lock required workflow snippets
 - Does NOT include: custom query packs, SARIF post-processing, or non-default CodeQL build strategies
+
+### 31. CodeQL workflow execution hardening
+
+- Status: implemented 2026-03-27
+- Risk reduced: duplicate or long-running CodeQL jobs that increase CI queue time and cost
+- Scope: add workflow-level concurrency cancellation and explicit job timeout to the existing CodeQL workflow
+- Acceptance: `.github/workflows/codeql.yml` includes `concurrency` with `cancel-in-progress: true`, `analyze` job includes deterministic `timeout-minutes`, and repository contract tests lock these snippets
+- Does NOT include: changing CodeQL query packs, language matrix, or trigger coverage

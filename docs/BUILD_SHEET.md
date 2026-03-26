@@ -32,12 +32,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Date: 2026-03-27
 - Status: Passed
 - Evidence:
-  - `.venv/bin/python -m pytest -q` -> `155 passed in 0.37s`
+  - `.venv/bin/python -m pytest -q` -> `155 passed in 0.43s`
   - `.venv/bin/python -m tests.runner` -> `155 passed, 0 failed`
   - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
   - `.venv/bin/python -m black --check src tests agent` -> `87 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:59094`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:59374`
   - `make proof` -> `All proof gates passed.`
 - `make analyze` -> `json: output/modernization_report.json`, `md: output/modernization_report.md`, `html: output/modernization_report.html`
 
@@ -97,6 +97,12 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - Added `.github/workflows/codeql.yml` with a minimal CodeQL matrix for `python` and `javascript`.
 - Workflow triggers on pull requests to `main`, pushes to `main`, and weekly schedule; permissions are least-privilege with `security-events: write`.
 - Added repository contract coverage in `tests/test_repo_contracts.py` to lock the CodeQL workflow trigger/permission/action snippets.
+
+### Milestone: CodeQL execution hardening
+
+- Added workflow-level concurrency to `.github/workflows/codeql.yml` with `cancel-in-progress: true` to avoid duplicate runs on rapid updates.
+- Added explicit `timeout-minutes: 45` to the CodeQL `analyze` job for deterministic runtime bounds.
+- Expanded `tests/test_repo_contracts.py` guardrails to lock concurrency and timeout snippets.
 
 ### Milestone: Three real-world fixture pack
 
@@ -166,10 +172,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - Action input/reason contract hardening: fail-on-regression input now enforces strict boolean-string values, action exports deterministic regression reason code, and PR workflow summary surfaces that reason for reviewer clarity.
 - 2026-03-27 - Regression-flag output and summary contract: action now exports explicit regression-detected flag and workflow summary includes that flag to reduce ambiguity for downstream consumers and reviewers.
 - 2026-03-27 - CodeQL baseline workflow: added GitHub CodeQL analysis for Python and JavaScript on PR/push/schedule with least-privilege permissions and contract-test coverage.
+- 2026-03-27 - CodeQL execution hardening: added concurrency cancellation and explicit timeout to reduce duplicate CodeQL runs and cap job runtime deterministically.
 
 ## Next immediate action
 
-Define slice #31 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+Define slice #32 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
 
 ## Stop conditions
 
