@@ -127,18 +127,15 @@ runs:
             status = "disabled"
             should_fail = "false"
 
-        output_path = Path(os.environ["GITHUB_OUTPUT"])
-        output_path.write_text(
-            (
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+            f.write(
                 f"gate_status={status}\n"
                 f"should_fail={should_fail}\n"
                 f"reusability_delta={diff['reusability']['delta']}\n"
                 f"accessibility_risk_delta={diff['accessibility_risk']['delta']}\n"
                 f"regression_reason={reason}\n"
                 f"regression_detected={'true' if has_regression else 'false'}\n"
-            ),
-            encoding="utf-8",
-        )
+            )
         print(f"RADE regression gate status: {status}")
         PY
       env:
