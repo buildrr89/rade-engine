@@ -57,6 +57,7 @@ RADE is in **early alpha**.
 - CLI analysis from local JSON fixtures or public URLs collected via Playwright
 - `POST /analyze` served through `src.api.wsgi:application` with static API key auth
 - Deterministic scoring, recommendations, and roadmap generation
+- Interactive HTML report output (`--html-output`)
 - PII scrubbing with preserved structural identifiers
 
 **Exploratory or secondary surfaces:**
@@ -68,7 +69,6 @@ RADE is in **early alpha**.
 **Not built yet:**
 - Hosted auth, tenants, and persisted history
 - Queue-backed execution
-- Interactive HTML reports
 - GitHub Action for CI/CD integration
 
 See [docs/APP_SCOPE.md](docs/APP_SCOPE.md) for the current implementation boundary.

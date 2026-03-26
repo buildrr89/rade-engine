@@ -39,6 +39,9 @@ def build_parser() -> argparse.ArgumentParser:
         "--md-output", type=Path, help="Where to write the Markdown report."
     )
     analyze.add_argument(
+        "--html-output", type=Path, help="Where to write the interactive HTML report."
+    )
+    analyze.add_argument(
         "--collector-timeout-ms",
         type=int,
         default=10_000,
@@ -60,7 +63,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 if not args.app_id:
                     parser.error("--app-id is required when using --input.")
                 report = analyze_file(
-                    args.input, args.app_id, args.json_output, args.md_output
+                    args.input,
+                    args.app_id,
+                    args.json_output,
+                    args.md_output,
+                    args.html_output,
                 )
             else:
                 app_id = args.app_id or derive_app_id_from_url(args.url)
@@ -68,7 +75,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                     args.url, timeout_ms=args.collector_timeout_ms
                 )
                 raw_report = analyze_payload(payload, app_id)
-                write_report(raw_report, args.json_output, args.md_output)
+                write_report(
+                    raw_report,
+                    args.json_output,
+                    args.md_output,
+                    args.html_output,
+                )
                 report = prepare_report_for_output(raw_report)
             run_status = "success"
             print(
@@ -82,6 +94,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 print(f"json: {args.json_output}")
             if args.md_output:
                 print(f"md: {args.md_output}")
+            if args.html_output:
+                print(f"html: {args.html_output}")
             return 0
         finally:
             duration_ms = int((perf_counter() - start) * 1000)

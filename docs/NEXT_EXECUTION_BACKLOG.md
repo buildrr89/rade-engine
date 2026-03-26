@@ -79,14 +79,12 @@
 - Status: implemented 2026-03-22
 - Result: [src/collectors/web_dom_adapter.py](../src/collectors/web_dom_adapter.py) now collects public unauthenticated `http/https` pages through Playwright ARIA snapshots, converts them into the RADE schema, and falls back to semantic DOM extraction if needed. [src/core/cli.py](../src/core/cli.py) and [agent/cli.py](../agent/cli.py) now accept `--url`, and [tests/test_web_dom_adapter.py](../tests/test_web_dom_adapter.py) plus [tests/test_cli_contract.py](../tests/test_cli_contract.py) cover the new path. Real proof command: `rade analyze --url https://example.com`.
 
-## Backlog
-
 ### 15. Interactive HTML report
 
-- Risk reduced: report usability (Markdown is not a product-quality deliverable)
-- Scope: upgrade report output to interactive HTML with expandable findings, score visualizations, and filterable recommendations. Use the web shell as base.
-- Acceptance: `--html-output` flag on CLI, report renders correctly in browser, all findings navigable
-- Does NOT include: hosted report viewer, persistent URLs, sharing
+- Status: implemented 2026-03-27
+- Result: `render_html_report()` in `src/core/report_generator.py` produces a self-contained HTML report with score-bar visualizations, expandable finding and recommendation cards, category filter buttons, priority badges, and responsive layout. `--html-output` flag added to CLI (`src/core/cli.py`) and agent CLI (`agent/cli.py`). `write_report()` and `analyze_file()` accept `html_output`. Golden fixture at `tests/golden/sample_modernization_report.html`. 14 new tests in `tests/test_html_report.py` plus 1 golden contract test in `tests/test_report_generator.py`. 137 total tests passing.
+
+## Backlog
 
 ### 16. Public alpha onboarding
 

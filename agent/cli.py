@@ -20,6 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
     scan.add_argument("--app-id")
     scan.add_argument("--json-output")
     scan.add_argument("--md-output")
+    scan.add_argument("--html-output")
     scan.add_argument("--collector-timeout-ms")
     return parser
 
@@ -41,6 +42,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             forwarded.extend(["--json-output", args.json_output])
         if args.md_output:
             forwarded.extend(["--md-output", args.md_output])
+        if args.html_output:
+            forwarded.extend(["--html-output", args.html_output])
         if args.collector_timeout_ms:
             forwarded.extend(["--collector-timeout-ms", args.collector_timeout_ms])
         return core_main(forwarded)

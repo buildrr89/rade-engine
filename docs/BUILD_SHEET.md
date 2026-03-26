@@ -29,16 +29,15 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 
 ## Latest proof
 
-- Date: 2026-03-26
+- Date: 2026-03-27
 - Status: Passed
 - Evidence:
-  - `.venv/bin/python -m pytest -q` -> `123 passed in 0.36s`
-  - `.venv/bin/python -m tests.runner` -> `123 passed, 0 failed`
+  - `.venv/bin/python -m pytest -q` -> `137 passed in 0.41s`
+  - `.venv/bin/python -m tests.runner` -> `137 passed, 0 failed`
   - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
-  - `.venv/bin/python -m black --check src tests agent` -> `83 files would be left unchanged.`
+  - `.venv/bin/python -m black --check src tests agent` -> `84 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:55042`
-  - `.venv/bin/python -m src.core.cli analyze --input examples/sample_ios_output.json --app-id com.example.legacyapp --json-output output/modernization_report.json --md-output output/modernization_report.md` -> `generated 2 screens and 3 recommendations`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:56187`
 
 ### Milestone: Three real-world fixture pack
 
@@ -97,10 +96,11 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-22 - Add three real-world web fixtures (`python.org`, `developer.mozilla.org`, `web.dev`) plus checked-in JSON/Markdown reports and deterministic regression coverage. 122 pytest cases and 118 custom-runner cases pass.
 - 2026-03-22 - Implement Playwright-backed `--url` collection with ARIA snapshot parsing, semantic DOM fallback, agent-shell forwarding, and real CLI proof against `https://example.com`. Full gates pass with 122 pytest cases and 122 custom-runner cases.
 - 2026-03-26 - public repo alignment: created `buildrr89/rade-engine`, switched repository posture to AGPL-3.0, updated public metadata/output wording, and re-generated checked-in proof artifacts to match the new public alpha story.
+- 2026-03-27 - interactive HTML report: `render_html_report()` produces self-contained HTML with score bars, expandable findings/recommendations, category filters, and priority badges. `--html-output` on CLI and agent CLI. Golden fixture and 15 new tests. 137 total tests passing.
 
 ## Next immediate action
 
-Build slice #15: interactive HTML report output.
+Build slice #16: public alpha onboarding (tighten contributor experience).
 
 ## Stop conditions
 

@@ -98,11 +98,33 @@ The Markdown report must use these sections in order:
 6. Recommendations
 7. Roadmap
 
+## HTML structure
+
+The HTML report is a self-contained single-file document with inline CSS and JavaScript. It must contain these sections in order:
+
+1. Title and metadata (header)
+2. Legal notice block
+3. Summary (card grid)
+4. Scorecard (with score bars)
+5. Screen inventory (table)
+6. Findings (expandable cards with category filter)
+7. Recommendations (expandable cards with category filter)
+8. Roadmap (table)
+
+The HTML report must include:
+- category filter buttons for findings and recommendations
+- expandable `<details>` elements for each finding and recommendation
+- priority badges with visual color coding
+- score bars with color coding (risk metrics: red/amber/green high-to-low; positive metrics: green/amber/red high-to-low)
+- `rule_id`, `recommendation_id`, and evidence references for traceability
+
 ## Rendering rule
 
 The Markdown report should be readable without the JSON file open next to it.
 
 The Markdown report should expose `rule_id` and `recommendation_id` for traceability.
+
+The HTML report should be viewable directly in a browser without any external dependencies.
 
 The title and metadata block must also surface the repository legal notice, attribution, AGPL license, terminology notice for `5-Slab Taxonomy` and `Ambient Engine`, and the Live Raid date.
 
