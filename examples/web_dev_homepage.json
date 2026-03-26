@@ -1,0 +1,476 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha"
+  },
+  "project_name": "web.dev Homepage Snapshot",
+  "platform": "web",
+  "screens": [
+    {
+      "screen_id": "web-dev-home",
+      "screen_name": "web.dev Home",
+      "elements": [
+        {
+          "element_id": "page-root",
+          "parent_id": null,
+          "element_type": "container",
+          "role": "screen",
+          "slab_layer": "01. OS Site (The Land)",
+          "label": "",
+          "accessibility_identifier": null,
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            0,
+            0,
+            1440,
+            3200
+          ],
+          "hierarchy_depth": 0,
+          "child_count": 3,
+          "text_present": false,
+          "traits": [
+            "page-shell"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "top-nav",
+          "parent_id": "page-root",
+          "element_type": "navigation",
+          "role": "navigation",
+          "slab_layer": "02. Root (The Slab)",
+          "label": "",
+          "accessibility_identifier": "upper-tabs",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            0,
+            0,
+            1440,
+            164
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 7,
+          "text_present": false,
+          "traits": [
+            "header"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "nav-baseline",
+          "parent_id": "top-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Baseline",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            628,
+            50,
+            88,
+            32
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "nav-how-to-use-baseline",
+          "parent_id": "top-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "How to use Baseline",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            732,
+            50,
+            170,
+            32
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "nav-blog",
+          "parent_id": "top-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Blog",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            922,
+            50,
+            60,
+            32
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "nav-case-studies",
+          "parent_id": "top-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Case Studies",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1000,
+            50,
+            116,
+            32
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "nav-search",
+          "parent_id": "top-nav",
+          "element_type": "combobox",
+          "role": "combobox",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Search",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1134,
+            42,
+            180,
+            40
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "search"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "language-switcher",
+          "parent_id": "top-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Language",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1328,
+            42,
+            88,
+            40
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "utility"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "sign-in",
+          "parent_id": "top-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Sign in",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1328,
+            90,
+            80,
+            32
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "utility-link"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "announcement-section",
+          "parent_id": "page-root",
+          "element_type": "section",
+          "role": "region",
+          "slab_layer": "02. Root (The Slab)",
+          "label": "",
+          "accessibility_identifier": "announcement",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            120,
+            220,
+            1200,
+            260
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 2,
+          "text_present": false,
+          "traits": [
+            "announcement"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "announcement-copy",
+          "parent_id": "announcement-section",
+          "element_type": "text",
+          "role": "heading",
+          "slab_layer": "05. Assets (The Decor)",
+          "label": "Chrome is back at Google I/O May 19-20!",
+          "accessibility_identifier": null,
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            152,
+            266,
+            540,
+            48
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "headline"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "announcement-register",
+          "parent_id": "announcement-section",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Register now",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            152,
+            334,
+            132,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "announcement-cta"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "platform-grid",
+          "parent_id": "page-root",
+          "element_type": "container",
+          "role": "region",
+          "slab_layer": "03. Containers (The Frame)",
+          "label": "",
+          "accessibility_identifier": "platform-grid",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            120,
+            620,
+            1200,
+            420
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 6,
+          "text_present": false,
+          "traits": [
+            "platform-grid"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "platform-html",
+          "parent_id": "platform-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "HTML",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            154,
+            744,
+            92,
+            40
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "platform-card-title"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "platform-css",
+          "parent_id": "platform-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "CSS",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            454,
+            744,
+            92,
+            40
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "platform-card-title"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "platform-javascript",
+          "parent_id": "platform-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "JavaScript",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            754,
+            744,
+            124,
+            40
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "platform-card-title"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "platform-html-learn-more",
+          "parent_id": "platform-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Learn more",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            154,
+            842,
+            112,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "platform-card-cta"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "platform-css-learn-more",
+          "parent_id": "platform-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Learn more",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            454,
+            842,
+            112,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "platform-card-cta"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        },
+        {
+          "element_id": "platform-javascript-learn-more",
+          "parent_id": "platform-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Learn more",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            754,
+            842,
+            112,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "platform-card-cta"
+          ],
+          "source": "public:web:web.dev:2026-03-22"
+        }
+      ]
+    }
+  ]
+}

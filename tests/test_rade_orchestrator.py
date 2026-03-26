@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 from contextlib import redirect_stdout
@@ -210,9 +210,7 @@ def test_orchestrator_persists_modal_slab03_frame_id() -> None:
     assert button["slab03_frame_id"] == dialog["slab03_frame_id"]
     assert button["slab03_anchor_kind"] == "a11y:dialog-descendant"
     assert button["functional_dna"]["slab03_frame_id"] == dialog["slab03_frame_id"]
-    assert (
-        button["functional_dna"]["slab03_anchor_kind"] == "a11y:dialog-descendant"
-    )
+    assert button["functional_dna"]["slab03_anchor_kind"] == "a11y:dialog-descendant"
     assert non_modal_sibling["slab03_frame_id"] is None
 
 

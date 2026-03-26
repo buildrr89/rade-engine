@@ -1,2 +1,2 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
-"""Thin API shell for RADE."""
+# SPDX-License-Identifier: AGPL-3.0-only
+"""Core API package for the authenticated WSGI surface."""

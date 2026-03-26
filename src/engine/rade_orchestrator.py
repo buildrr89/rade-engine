@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 import logging
@@ -8,16 +8,7 @@ from datetime import datetime, timezone
 from typing import Any, Callable, Protocol
 from urllib.parse import urlparse
 
-from ..core.compliance import (
-    IP_OWNER as COMPLIANCE_IP_OWNER,
-)
-from ..core.compliance import (
-    LEAD_ARCHITECT as COMPLIANCE_LEAD_ARCHITECT,
-)
-from ..core.compliance import (
-    clear_terminal,
-    emit_terminal_banner,
-)
+from ..core.compliance import clear_terminal, emit_terminal_banner
 from ..core.fingerprint import fingerprint_node
 from ..core.layering import ASSETS_LAYER, layer_element
 from ..core.models import build_node_ref, stable_digest
@@ -32,7 +23,7 @@ def _bounding_box_from_bounds(bounds: list[int] | None) -> JsonDict | None:
         return None
     try:
         x, y, w, h = (int(bounds[i]) for i in range(4))
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return None
     if w <= 0 or h <= 0:
         return None
@@ -40,8 +31,6 @@ def _bounding_box_from_bounds(bounds: list[int] | None) -> JsonDict | None:
 
 
 logger = logging.getLogger(__name__)
-LEAD_ARCHITECT = COMPLIANCE_LEAD_ARCHITECT
-IP_OWNER = COMPLIANCE_IP_OWNER
 LIST_CHILD_SAMPLE_LIMIT = 5
 _TOKEN_ATTRS_COLOR = ("color", "background_color", "backgroundColor")
 _TOKEN_ATTRS_TYPO = ("font_family", "fontFamily", "font_weight", "fontWeight")
@@ -71,6 +60,8 @@ def _normalize_color_value(value: str) -> str:
     g = min(max(int(match.group("g")), 0), 255)
     b = min(max(int(match.group("b")), 0), 255)
     return f"#{r:02x}{g:02x}{b:02x}"
+
+
 PRIORITY_TRAIT_TOKENS = {
     "button": 100,
     "link": 95,
@@ -770,9 +761,7 @@ class RadeOrchestrator:
         for attr_name in _TOKEN_ATTRS_TYPO:
             value = self._normalize_text(self._read_attribute(element, attr_name))
             if value:
-                typography_tokens.add(
-                    f"{attr_name.replace('_', '-')}:{value.lower()}"
-                )
+                typography_tokens.add(f"{attr_name.replace('_', '-')}:{value.lower()}")
 
         for attr_name in _TOKEN_ATTRS_SPACING:
             value = self._normalize_text(self._read_attribute(element, attr_name))

@@ -1,5 +1,5 @@
 # RADE Cursor Rules
-© 2026 RADE Project. All Rights Reserved.
+Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.
 
 - Read truth in this order: `README.md`, `PRD.md`, `docs/TRUTH_HIERARCHY.md`, `docs/APP_SCOPE.md`, `docs/HARD_RISKS.md`, `docs/ARCHITECTURE.md`, `docs/BUILD_SHEET.md`, `AGENTS.md`, `.cursor/rules.md`.
 - Prioritize semantic accessibility nodes over screen coordinates.

@@ -1,0 +1,596 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha"
+  },
+  "project_name": "MDN Homepage Snapshot",
+  "platform": "web",
+  "screens": [
+    {
+      "screen_id": "mdn-home",
+      "screen_name": "MDN Web Docs Home",
+      "elements": [
+        {
+          "element_id": "page-root",
+          "parent_id": null,
+          "element_type": "container",
+          "role": "screen",
+          "slab_layer": "01. OS Site (The Land)",
+          "label": "",
+          "accessibility_identifier": null,
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            0,
+            0,
+            1440,
+            2600
+          ],
+          "hierarchy_depth": 0,
+          "child_count": 4,
+          "text_present": false,
+          "traits": [
+            "page-shell"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "top-nav",
+          "parent_id": "page-root",
+          "element_type": "navigation",
+          "role": "navigation",
+          "slab_layer": "02. Root (The Slab)",
+          "label": "",
+          "accessibility_identifier": "site-navigation",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            0,
+            0,
+            1440,
+            164
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 8,
+          "text_present": false,
+          "traits": [
+            "header"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-html",
+          "parent_id": "top-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "HTML",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            454,
+            44,
+            76,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-css",
+          "parent_id": "top-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "CSS",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            548,
+            44,
+            72,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-javascript",
+          "parent_id": "top-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "JavaScript",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            638,
+            44,
+            120,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-web-apis",
+          "parent_id": "top-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Web APIs",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            774,
+            44,
+            112,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-blog",
+          "parent_id": "top-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Blog",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            978,
+            44,
+            66,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav-link"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-search",
+          "parent_id": "top-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Search the site",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1070,
+            44,
+            144,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "utility"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "theme-toggle",
+          "parent_id": "top-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Theme",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1234,
+            44,
+            80,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "utility"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "language-switcher",
+          "parent_id": "top-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "English (US)",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1324,
+            44,
+            116,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "utility"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-section",
+          "parent_id": "page-root",
+          "element_type": "section",
+          "role": "region",
+          "slab_layer": "02. Root (The Slab)",
+          "label": "",
+          "accessibility_identifier": "hero",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            112,
+            220,
+            1216,
+            420
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 4,
+          "text_present": false,
+          "traits": [
+            "hero"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-heading",
+          "parent_id": "hero-section",
+          "element_type": "text",
+          "role": "heading",
+          "slab_layer": "05. Assets (The Decor)",
+          "label": "Resources for Developers, by Developers _",
+          "accessibility_identifier": null,
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            140,
+            280,
+            620,
+            72
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "headline"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-link-css",
+          "parent_id": "hero-section",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "CSS",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            168,
+            384,
+            56,
+            32
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "hero-topic"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-link-html",
+          "parent_id": "hero-section",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "HTML",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            246,
+            384,
+            64,
+            32
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "hero-topic"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-link-javascript",
+          "parent_id": "hero-section",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "JavaScript",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            334,
+            384,
+            120,
+            32
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "hero-topic"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-search",
+          "parent_id": "hero-section",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Search",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            140,
+            452,
+            120,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "hero-action"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "featured-articles",
+          "parent_id": "page-root",
+          "element_type": "container",
+          "role": "region",
+          "slab_layer": "03. Containers (The Frame)",
+          "label": "",
+          "accessibility_identifier": "featured-articles",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            112,
+            760,
+            1216,
+            560
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 4,
+          "text_present": false,
+          "traits": [
+            "article-grid"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "article-mdn-20",
+          "parent_id": "featured-articles",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Celebrating 20 years of MDN",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            152,
+            860,
+            248,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "article-card"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "article-highlight-api",
+          "parent_id": "featured-articles",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "CSS Custom Highlight API",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            452,
+            860,
+            248,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "article-card"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "article-server-timing",
+          "parent_id": "featured-articles",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Server timing",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            752,
+            860,
+            248,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "article-card"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "article-resource-management",
+          "parent_id": "featured-articles",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "JavaScript resource management",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1052,
+            860,
+            248,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "article-card"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "spotlight-section",
+          "parent_id": "page-root",
+          "element_type": "section",
+          "role": "region",
+          "slab_layer": "02. Root (The Slab)",
+          "label": "",
+          "accessibility_identifier": "contributor-spotlight",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            112,
+            1480,
+            1216,
+            300
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 2,
+          "text_present": false,
+          "traits": [
+            "spotlight"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "spotlight-profile",
+          "parent_id": "spotlight-section",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Shrinivass Arunachalam Balasubramanian",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            152,
+            1560,
+            340,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "spotlight-link"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        },
+        {
+          "element_id": "spotlight-get-involved",
+          "parent_id": "spotlight-section",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Get involved",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            152,
+            1660,
+            146,
+            40
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "spotlight-cta"
+          ],
+          "source": "public:web:developer.mozilla.org:2026-03-22"
+        }
+      ]
+    }
+  ]
+}

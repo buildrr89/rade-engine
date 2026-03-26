@@ -6,9 +6,11 @@
 - Project: Legacy Repair App
 - Platform: ios
 - Standards pack: 2026-Q1
-- Legal notice: © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
-- Ownership: Exclusive intellectual property of Trung Nguyen (Buildrr89).
-- Proprietary systems: The 5-Slab Taxonomy and Ambient Engine are the exclusive intellectual property of Trung Nguyen (Buildrr89).
+- Legal notice: Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.
+- Attribution: Buildrr89
+- License: AGPL-3.0-only
+- Project status: early alpha
+- Project terms: The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.
 - Live Raid date: 2026-03-18
 
 ## Summary

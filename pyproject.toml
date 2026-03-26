@@ -1,11 +1,14 @@
 [project]
 name = "rade"
 version = "0.1.0"
-description = "RADE bootstrap workspace"
+description = "Deterministic interface analysis engine — structural deduplication, accessibility gaps, and migration risk scoring"
 readme = "README.md"
+license = { text = "AGPL-3.0-only" }
 requires-python = "==3.14.3"
 dependencies = [
     "neo4j>=6.1.0",
+    "playwright>=1.54.0",
+    "PyYAML>=6.0.2",
 ]
 
 [dependency-groups]

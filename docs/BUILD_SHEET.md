@@ -2,19 +2,19 @@
 
 ## Current objective
 
-Keep the deterministic report path and the exploratory blueprint path aligned with the actual repo state while the API, worker, and web surfaces remain thin shells.
+Keep the deterministic report path, the first Playwright collector path, and the exploratory blueprint path aligned with the actual repo state. The API now serves `POST /analyze` as a real analysis surface. Worker and web surfaces remain thin shells.
 
 ## Why this is the current objective
 
-It keeps the proven core honest: report generation is the shipped proof slice, the blueprint path is a tested secondary track, and the shell entrypoints must not pretend to be more complete than they are.
+It keeps the proven core honest: report generation is the shipped proof slice, the Playwright URL collector is the smallest real acquisition surface, the blueprint path is a tested secondary track, and the shell entrypoints must not pretend to be more complete than they are.
 
 ## Current story
 
-As a product team, I want to analyze an authorized fixture and get a prioritized, evidence-backed modernization report without guessing what is actually implemented in the repo.
+As a product team, I want to analyze an authorized fixture or a public web page and get a prioritized, evidence-backed modernization report without guessing what is actually implemented in the repo.
 
 ## Current proof slice
 
-Fixture input -> normalize -> fingerprint -> deduplicate -> score -> recommend -> JSON and Markdown output.
+Fixture input or `--url` collection -> normalize -> fingerprint -> deduplicate -> score -> recommend -> JSON and Markdown output.
 
 ## Secondary proof slice
 
@@ -25,29 +25,53 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 - What must work: the sample command should complete and write both report files
 - What must be observed: stable report content and deterministic recommendation order
 - What counts as success: the same input yields the same output except `generated_at`
-- What does not need to exist yet: hosted auth, queues, persistent history, API-triggered analysis, or full collector coverage
+- What does not need to exist yet: hosted auth, queues, persistent history, or full collector coverage
 
 ## Latest proof
 
-- Date: 2026-03-21
+- Date: 2026-03-26
 - Status: Passed
 - Evidence:
-  - `./rade-proof` -> `63 passed, 0 failed`
-  - `uv run python -m src.core.cli analyze --input examples/sample_ios_output.json --app-id com.example.legacyapp --json-output output/modernization_report.json --md-output output/modernization_report.md` -> `generated 2 screens and 3 recommendations`
-  - `uv run pytest tests/test_demo_runner.py -q` -> `9 passed in 0.15s`
-  - `uv run pytest tests/test_sole_architect_compliance.py tests/test_recursive_safety.py tests/test_report_generator.py tests/test_fingerprint.py -q` -> `11 passed in 0.22s`
-  - `uv run ruff check --fix src tests agent` -> `All checks passed!`
-  - `uv run ruff check src tests agent` -> `All checks passed!`
-  - `uv run black src tests agent` -> `72 files left unchanged.`
-  - `uv run black --check src tests agent` -> `72 files would be left unchanged.`
-  - `node web/scripts/lint.mjs` -> `RADE web shell lint passed`
+  - `.venv/bin/python -m pytest -q` -> `123 passed in 0.36s`
+  - `.venv/bin/python -m tests.runner` -> `123 passed, 0 failed`
+  - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
+  - `.venv/bin/python -m black --check src tests agent` -> `83 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:55042`
+  - `.venv/bin/python -m src.core.cli analyze --input examples/sample_ios_output.json --app-id com.example.legacyapp --json-output output/modernization_report.json --md-output output/modernization_report.md` -> `generated 2 screens and 3 recommendations`
+
+### Milestone: Three real-world fixture pack
+
+- Added three public-page fixture snapshots under `examples/`: `python_org_homepage.json`, `mdn_homepage.json`, and `web_dev_homepage.json`.
+- Added matching checked-in report artifacts under `examples/` for each fixture (`*_report.json` and `*_report.md`) using a fixed `generated_at` of `2026-03-22T00:00:00Z`.
+- Added `tests/test_real_world_fixtures.py` to prove the checked-in reports still match pipeline output and remain deterministic.
+
+### Milestone: Web DOM collector (Playwright)
+
+- `src/collectors/web_dom_adapter.py` now collects public unauthenticated pages through Playwright, parses ARIA snapshots, and converts them into the RADE project schema.
+- `src/core/cli.py` now accepts `--url` as an alternative to `--input` and derives `app_id` from the URL when one is not supplied.
+- `agent/cli.py` forwards the same `--url` path through the agent shell.
+- `tests/test_web_dom_adapter.py` and the new URL path in `tests/test_cli_contract.py` prove deterministic conversion and CLI output.
+
+### Milestone: API auth boundary
+
+- `src/api/wsgi.py` is the served API entry point for `POST /analyze`: it wraps the core `src/api/app.py` handler with auth middleware and returns scrubbed reports.
+- `src/api/auth.py` provides `ApiKeyMiddleware`: static API key auth via `RADE_API_KEY` env var, constant-time comparison, fail-safe 503 if unconfigured.
+- `src/api/app.py` remains the core handler beneath the served auth boundary.
+
+### Previous milestones (same cycle)
+
+- POST /analyze endpoint with 8 contract tests
+- Compliance scan scope fix, capsys fixture support, black formatting restoration
+- BUILD_SHEET corrected from `63 passed` to actual count
 
 ## Current blocker
 
-No blocker on the deterministic report slice, exploratory blueprint test slice, or current lint/format gates. Python lint is clean across `src`, `tests`, and `agent`, and the official `pnpm --dir web lint` command now runs successfully.
+No blocker on the deterministic report slice, exploratory blueprint test slice, or current lint/format gates.
 
-GitHub-enforced branch protection is currently blocked on this private repository because GitHub returned: `Upgrade to GitHub Pro or make this repository public to enable this feature.`
+Public GitHub repository is now created at `https://github.com/buildrr89/rade-engine`. Local docs and generated metadata are aligned to that public repository identity.
+
+The ignored `rade-repo/` subtree remains outside canonical repo truth and should stay ignored or removed to avoid future compliance test contamination.
 
 ## Decision log
 
@@ -57,7 +81,7 @@ GitHub-enforced branch protection is currently blocked on this private repositor
 - 2026-03-18 - Replace faux tool branding with repo-owned `rade-proof` and `rade-devserver` launchers
 - 2026-03-18 - Scrub report artifacts at write time while preserving stable structural identifiers
 - 2026-03-19 - Default to PR-only changes on a protected `main` branch once GitHub settings are enabled
-- 2026-03-19 - GitHub branch protection could not be enabled on this private repository because the current plan returned HTTP 403 for protection APIs
+- 2026-03-19 - Historical note: branch protection could not be enabled on the earlier private repository because the current plan returned HTTP 403 for protection APIs
 - 2026-03-19 - Harden input validation to reject self-parent references and non-string labels or traits before normalization
 - 2026-03-19 - Enforce proof workflow and template coverage with repository contract tests
 - 2026-03-19 - Reinforce the artifact scrub boundary with Markdown regression coverage
@@ -65,10 +89,18 @@ GitHub-enforced branch protection is currently blocked on this private repositor
 - 2026-03-21 - Document the blueprint / graph path as an implemented secondary proof slice rather than the main product workflow
 - 2026-03-21 - Document API, worker, repo connector, and web surfaces as shells or stubs unless a proof command exercises real business behavior
 - 2026-03-21 - Restore repo-wide Python import/format compliance and re-verify the official web lint command
+- 2026-03-22 - Restore proof credibility: fix compliance scan scope, add capsys to custom runner, fix black drift on 7 files. Actual test count is 100, not 63.
+- 2026-03-22 - Resolve PRD open decisions: `POST /analyze` is the next execution surface, blueprint path stays internal, repo connector stays as stub
+- 2026-03-22 - Populate execution backlog with 7 ordered proof slices from `POST /analyze` through GitHub Action
+- 2026-03-22 - Implement `POST /analyze` endpoint: 8 contract tests, 108 total tests passing. API is now a real surface, no longer a shell.
+- 2026-03-22 - Add API auth middleware and WSGI entry point. 8 auth tests, 116 total tests passing.
+- 2026-03-22 - Add three real-world web fixtures (`python.org`, `developer.mozilla.org`, `web.dev`) plus checked-in JSON/Markdown reports and deterministic regression coverage. 122 pytest cases and 118 custom-runner cases pass.
+- 2026-03-22 - Implement Playwright-backed `--url` collection with ARIA snapshot parsing, semantic DOM fallback, agent-shell forwarding, and real CLI proof against `https://example.com`. Full gates pass with 122 pytest cases and 122 custom-runner cases.
+- 2026-03-26 - public repo alignment: created `buildrr89/rade-engine`, switched repository posture to AGPL-3.0, updated public metadata/output wording, and re-generated checked-in proof artifacts to match the new public alpha story.
 
 ## Next immediate action
 
-Implement one real non-shell execution surface by reusing the existing report pipeline, preferably `POST /analyze` on the WSGI app or the first queue-backed worker claim cycle.
+Build slice #15: interactive HTML report output.
 
 ## Stop conditions
 

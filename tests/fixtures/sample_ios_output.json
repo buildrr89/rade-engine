@@ -1,11 +1,11 @@
 {
   "rade_legal": {
-    "header_notice": "\u00a9 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.",
-    "lead_architect": "Trung Nguyen - BUILDRR89",
-    "classification": "Confidential Construction Data Model",
-    "ownership": "Exclusive intellectual property of Trung Nguyen (Buildrr89)",
-    "proprietary_systems": "The 5-Slab Taxonomy and Ambient Engine are the exclusive intellectual property of Trung Nguyen (Buildrr89).",
-    "visible_svg_watermark": "\u00a9 2026 RADE Project | Lead Architect: Trung Nguyen - BUILDRR89"
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha"
   },
   "project_name": "Legacy Repair App",
   "platform": "ios",

@@ -1,6 +1,6 @@
 # Phase 1: Componentization & Frame Intelligence
 
-**Lead Architect:** Trung Nguyen - BUILDRR89  
+**Attribution:** Buildrr89  
 **Status:** Planning / RFC  
 **Version:** 0.1-alpha
 
@@ -39,7 +39,7 @@ We will promote recurring **DNA PatternHashes** into **Component Candidates**.
 
 - **Tier 1 (Exact):** Identical Slab 03/04 structure across multiple views.
 - **Tier 2 (Variant):** Same Frame, different Decor (Slab 05).
-- **Tier 3 (Manual):** High structural complexity, requires Lead Architect review.
+- **Tier 3 (Manual):** High structural complexity, requires manual review.
 
 ### 2.1 Commercialization: PatternHash salt (brand isolation)
 
@@ -60,4 +60,4 @@ Exact salt composition and stability rules are **UNKNOWN / NEEDS DECISION** unti
 
 ---
 
-© 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89.
+Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.

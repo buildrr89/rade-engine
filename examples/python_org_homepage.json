@@ -1,0 +1,404 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha"
+  },
+  "project_name": "Python.org Homepage Snapshot",
+  "platform": "web",
+  "screens": [
+    {
+      "screen_id": "python-org-home",
+      "screen_name": "Python.org Home",
+      "elements": [
+        {
+          "element_id": "page-root",
+          "parent_id": null,
+          "element_type": "container",
+          "role": "screen",
+          "slab_layer": "01. OS Site (The Land)",
+          "label": "",
+          "accessibility_identifier": null,
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            0,
+            0,
+            1440,
+            2200
+          ],
+          "hierarchy_depth": 0,
+          "child_count": 3,
+          "text_present": false,
+          "traits": [
+            "page-shell"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "header-nav",
+          "parent_id": "page-root",
+          "element_type": "navigation",
+          "role": "navigation",
+          "slab_layer": "02. Root (The Slab)",
+          "label": "",
+          "accessibility_identifier": "main-navigation",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            0,
+            0,
+            1440,
+            180
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 6,
+          "text_present": false,
+          "traits": [
+            "header"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-about",
+          "parent_id": "header-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "About",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            520,
+            96,
+            92,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-downloads",
+          "parent_id": "header-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Downloads",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            626,
+            96,
+            116,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-documentation",
+          "parent_id": "header-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Documentation",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            758,
+            96,
+            146,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "nav-community",
+          "parent_id": "header-nav",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Community",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            920,
+            96,
+            124,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "nav"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "search-field",
+          "parent_id": "header-nav",
+          "element_type": "searchbox",
+          "role": "searchbox",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Search This Site",
+          "accessibility_identifier": "search-the-site",
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1084,
+            84,
+            184,
+            48
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "search"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "search-go",
+          "parent_id": "header-nav",
+          "element_type": "button",
+          "role": "button",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "GO",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1280,
+            84,
+            64,
+            48
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "search-action"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-section",
+          "parent_id": "page-root",
+          "element_type": "section",
+          "role": "region",
+          "slab_layer": "02. Root (The Slab)",
+          "label": "",
+          "accessibility_identifier": "hero",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            120,
+            220,
+            1200,
+            420
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 2,
+          "text_present": false,
+          "traits": [
+            "hero"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-heading",
+          "parent_id": "hero-section",
+          "element_type": "text",
+          "role": "heading",
+          "slab_layer": "05. Assets (The Decor)",
+          "label": "Functions Defined",
+          "accessibility_identifier": null,
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            184,
+            340,
+            420,
+            56
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "headline"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "hero-learn-more",
+          "parent_id": "hero-section",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "More about defining functions in Python 3",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            184,
+            436,
+            420,
+            36
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "hero-cta"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "resource-grid",
+          "parent_id": "page-root",
+          "element_type": "container",
+          "role": "region",
+          "slab_layer": "03. Containers (The Frame)",
+          "label": "",
+          "accessibility_identifier": "resource-grid",
+          "interactive": false,
+          "visible": true,
+          "bounds": [
+            120,
+            720,
+            1200,
+            260
+          ],
+          "hierarchy_depth": 1,
+          "child_count": 4,
+          "text_present": false,
+          "traits": [
+            "resource-grid"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "resource-get-started",
+          "parent_id": "resource-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Start with our Beginner's Guide",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            154,
+            812,
+            234,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "resource-card"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "resource-download",
+          "parent_id": "resource-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "Python 3.14.3",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            454,
+            812,
+            176,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "resource-card"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "resource-docs",
+          "parent_id": "resource-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "docs.python.org",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            754,
+            812,
+            176,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "resource-card"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        },
+        {
+          "element_id": "resource-jobs",
+          "parent_id": "resource-grid",
+          "element_type": "link",
+          "role": "link",
+          "slab_layer": "04. Links/Events (Wires & Plumbing)",
+          "label": "jobs.python.org",
+          "accessibility_identifier": null,
+          "interactive": true,
+          "visible": true,
+          "bounds": [
+            1054,
+            812,
+            176,
+            44
+          ],
+          "hierarchy_depth": 2,
+          "child_count": 0,
+          "text_present": true,
+          "traits": [
+            "resource-card"
+          ],
+          "source": "public:web:python.org:2026-03-22"
+        }
+      ]
+    }
+  ]
+}

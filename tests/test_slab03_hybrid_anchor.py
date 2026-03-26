@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 from src.core.slab03_hybrid_anchor import (
@@ -79,7 +79,12 @@ def test_element_type_alertdialog_is_modal_root() -> None:
 def test_vbox_tertiary_sweeps_floating_fab_into_main_landmark() -> None:
     """FAB is a DOM sibling of main but geometrically over main → vbox frame match."""
     elements = [
-        {"element_id": "screen", "parent_id": None, "role": "screen", "bounds": [0, 0, 400, 800]},
+        {
+            "element_id": "screen",
+            "parent_id": None,
+            "role": "screen",
+            "bounds": [0, 0, 400, 800],
+        },
         {
             "element_id": "main-root",
             "parent_id": "screen",
@@ -104,13 +109,20 @@ def test_vbox_tertiary_sweeps_floating_fab_into_main_landmark() -> None:
     assert by_id["fab"]["slab03_frame_id"] == main_frame
     assert by_id["fab"]["slab03_anchor_kind"] == "visual:vbox-contained"
     assert by_id["fab"]["slab03_landmark_kind"] == "main"
-    assert by_id["fab"]["slab03_figma_alias"] == by_id["main-root"]["slab03_figma_alias"]
+    assert (
+        by_id["fab"]["slab03_figma_alias"] == by_id["main-root"]["slab03_figma_alias"]
+    )
 
 
 def test_vbox_prefers_smallest_containing_landmark() -> None:
     """When center lies in nested landmark rects, smallest area wins."""
     elements = [
-        {"element_id": "screen", "parent_id": None, "role": "screen", "bounds": [0, 0, 400, 900]},
+        {
+            "element_id": "screen",
+            "parent_id": None,
+            "role": "screen",
+            "bounds": [0, 0, 400, 900],
+        },
         {
             "element_id": "main-root",
             "parent_id": "screen",
@@ -145,7 +157,12 @@ def test_vbox_prefers_smallest_containing_landmark() -> None:
 
 def test_vbox_does_not_override_modal_subtree_even_if_inside_main_bounds() -> None:
     elements = [
-        {"element_id": "screen", "parent_id": None, "role": "screen", "bounds": [0, 0, 400, 800]},
+        {
+            "element_id": "screen",
+            "parent_id": None,
+            "role": "screen",
+            "bounds": [0, 0, 400, 800],
+        },
         {
             "element_id": "main-root",
             "parent_id": "screen",

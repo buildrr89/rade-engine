@@ -104,8 +104,7 @@ The Markdown report should be readable without the JSON file open next to it.
 
 The Markdown report should expose `rule_id` and `recommendation_id` for traceability.
 
-The title and metadata block must also state that the `5-Slab Taxonomy` and `Ambient Engine`
-are the exclusive intellectual property of Trung Nguyen (Buildrr89) and surface the Live Raid date.
+The title and metadata block must also surface the repository legal notice, attribution, AGPL license, terminology notice for `5-Slab Taxonomy` and `Ambient Engine`, and the Live Raid date.
 
 ## Stable identifiers & references
 
