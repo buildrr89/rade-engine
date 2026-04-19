@@ -1,0 +1,241 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha",
+    "live_raid_date": "2026-03-22"
+  },
+  "diff_version": "1.0.0",
+  "base_report": {
+    "report_version": "1.0",
+    "generated_at": "2026-03-22T00:00:00Z",
+    "app_id": "org.python.www",
+    "project_name": "Python.org Homepage Snapshot",
+    "platform": "web"
+  },
+  "head_report": {
+    "report_version": "1.0",
+    "generated_at": "2026-03-22T00:00:00Z",
+    "app_id": "dev.web.homepage",
+    "project_name": "web.dev Homepage Snapshot",
+    "platform": "web"
+  },
+  "summary": {
+    "score_changes": {
+      "improved": [
+        "reusability"
+      ],
+      "regressed": [
+        "complexity",
+        "migration_risk"
+      ],
+      "unchanged": [
+        "accessibility_risk"
+      ]
+    },
+    "recommendation_changes": {
+      "added": 3,
+      "removed": 3,
+      "unchanged": 0
+    },
+    "duplicate_cluster_changes": {
+      "added": 2,
+      "removed": 1,
+      "changed": 1,
+      "unchanged": 0
+    }
+  },
+  "scores": {
+    "complexity": {
+      "direction": "lower_is_better",
+      "base": 83,
+      "head": 98,
+      "delta": 15,
+      "status": "regressed"
+    },
+    "reusability": {
+      "direction": "higher_is_better",
+      "base": 98,
+      "head": 100,
+      "delta": 2,
+      "status": "improved"
+    },
+    "accessibility_risk": {
+      "direction": "lower_is_better",
+      "base": 100,
+      "head": 100,
+      "delta": 0,
+      "status": "unchanged"
+    },
+    "migration_risk": {
+      "direction": "lower_is_better",
+      "base": 71,
+      "head": 79,
+      "delta": 8,
+      "status": "regressed"
+    }
+  },
+  "recommendations": {
+    "added": [
+      {
+        "recommendation_id": "rec-accessibility_missing_identifier-ba3a2f81",
+        "rule_id": "accessibility_missing_identifier",
+        "category": "accessibility",
+        "target": "interactive_nodes_without_accessibility_identifier",
+        "priority": "P1"
+      },
+      {
+        "recommendation_id": "rec-component_reuse_interactive_cluster-18446b4d",
+        "rule_id": "component_reuse_interactive_cluster",
+        "category": "component_reuse",
+        "target": "link",
+        "priority": "P2"
+      },
+      {
+        "recommendation_id": "rec-migration_sequence_accessibility_before_reuse-4783a0bb",
+        "rule_id": "migration_sequence_accessibility_before_reuse",
+        "category": "migration_sequencing",
+        "target": "accessibility-before-reuse",
+        "priority": "P1"
+      }
+    ],
+    "removed": [
+      {
+        "recommendation_id": "rec-accessibility_missing_identifier-70884120",
+        "rule_id": "accessibility_missing_identifier",
+        "category": "accessibility",
+        "target": "interactive_nodes_without_accessibility_identifier",
+        "priority": "P1"
+      },
+      {
+        "recommendation_id": "rec-component_reuse_interactive_cluster-d3c2246a",
+        "rule_id": "component_reuse_interactive_cluster",
+        "category": "component_reuse",
+        "target": "link",
+        "priority": "P2"
+      },
+      {
+        "recommendation_id": "rec-migration_sequence_accessibility_before_reuse-29b66fc7",
+        "rule_id": "migration_sequence_accessibility_before_reuse",
+        "category": "migration_sequencing",
+        "target": "accessibility-before-reuse",
+        "priority": "P1"
+      }
+    ],
+    "unchanged": []
+  },
+  "duplicate_clusters": {
+    "added": [
+      {
+        "fingerprint": "59437a97d18ace13",
+        "count": 3,
+        "interactive": true,
+        "screen_ids": [
+          "web-dev-home"
+        ],
+        "screen_names": [
+          "web.dev Home"
+        ],
+        "node_refs": [
+          "web-dev-home#platform-html",
+          "web-dev-home#platform-css",
+          "web-dev-home#platform-javascript"
+        ],
+        "element_types": [
+          "link"
+        ],
+        "roles": [
+          "link"
+        ],
+        "representative_node_ref": "web-dev-home#platform-html"
+      },
+      {
+        "fingerprint": "b871c4c6b83d0ef0",
+        "count": 3,
+        "interactive": true,
+        "screen_ids": [
+          "web-dev-home"
+        ],
+        "screen_names": [
+          "web.dev Home"
+        ],
+        "node_refs": [
+          "web-dev-home#platform-html-learn-more",
+          "web-dev-home#platform-css-learn-more",
+          "web-dev-home#platform-javascript-learn-more"
+        ],
+        "element_types": [
+          "link"
+        ],
+        "roles": [
+          "link"
+        ],
+        "representative_node_ref": "web-dev-home#platform-html-learn-more"
+      }
+    ],
+    "removed": [
+      {
+        "fingerprint": "52a6cab3351e0d62",
+        "count": 4,
+        "interactive": true,
+        "screen_ids": [
+          "python-org-home"
+        ],
+        "screen_names": [
+          "Python.org Home"
+        ],
+        "node_refs": [
+          "python-org-home#resource-get-started",
+          "python-org-home#resource-download",
+          "python-org-home#resource-docs",
+          "python-org-home#resource-jobs"
+        ],
+        "element_types": [
+          "link"
+        ],
+        "roles": [
+          "link"
+        ],
+        "representative_node_ref": "python-org-home#resource-get-started"
+      }
+    ],
+    "changed": [
+      {
+        "fingerprint": "784bfa8762478fdc",
+        "base_count": 4,
+        "head_count": 4,
+        "delta": 0,
+        "status": "changed",
+        "interactive": true,
+        "base_node_refs": [
+          "python-org-home#nav-about",
+          "python-org-home#nav-downloads",
+          "python-org-home#nav-documentation",
+          "python-org-home#nav-community"
+        ],
+        "head_node_refs": [
+          "web-dev-home#nav-baseline",
+          "web-dev-home#nav-how-to-use-baseline",
+          "web-dev-home#nav-blog",
+          "web-dev-home#nav-case-studies"
+        ],
+        "node_refs_added": [
+          "web-dev-home#nav-baseline",
+          "web-dev-home#nav-blog",
+          "web-dev-home#nav-case-studies",
+          "web-dev-home#nav-how-to-use-baseline"
+        ],
+        "node_refs_removed": [
+          "python-org-home#nav-about",
+          "python-org-home#nav-community",
+          "python-org-home#nav-documentation",
+          "python-org-home#nav-downloads"
+        ]
+      }
+    ],
+    "unchanged": []
+  }
+}

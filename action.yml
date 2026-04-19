@@ -1,5 +1,5 @@
 name: "RADE PR Score Diff"
-description: "Run RADE on PR base/head refs and comment reusability/accessibility score deltas."
+description: "Run deterministic UI score diffs on PR base/head refs and comment reusability/accessibility deltas."
 author: "Buildrr89"
 branding:
   icon: "bar-chart-2"

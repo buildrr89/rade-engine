@@ -195,3 +195,19 @@
 - Scope: add workflow-level concurrency cancellation and explicit job timeout to the existing CodeQL workflow
 - Acceptance: `.github/workflows/codeql.yml` includes `concurrency` with `cancel-in-progress: true`, `analyze` job includes deterministic `timeout-minutes`, and repository contract tests lock these snippets
 - Does NOT include: changing CodeQL query packs, language matrix, or trigger coverage
+
+### 32. Deterministic report diff workflow
+
+- Status: implemented 2026-04-10
+- Risk reduced: one-shot report output that cannot show deterministic interface evolution over time
+- Scope: add a local CLI workflow that compares two existing RADE JSON reports, reuses the existing score-diff semantics, highlights recommendation additions/removals and duplicate-cluster changes, and writes deterministic JSON plus Markdown diff artifacts
+- Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
+- Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
+
+### 33. Same-surface before/after diff fixture pack
+
+- Status: implemented 2026-04-10
+- Risk reduced: report diff proof can look less truthful when it only compares unrelated public pages instead of a before/after evolution of the same interface family
+- Scope: add a small checked-in before/after fixture pair for the same app surface, generate deterministic RADE reports for both runs, generate a checked-in diff artifact between those reports, and lock the pair in fixture regression tests
+- Acceptance: `examples/legacy_repair_before.json` and `examples/legacy_repair_after.json` exist as the same-app before/after pair; checked-in reports exist for both fixtures with fixed timestamps; `examples/legacy_repair_same_surface_report_diff.json` and `.md` capture the deterministic diff between those reports; regression tests prove the checked-in reports still match pipeline output and the same-surface diff artifact still matches `build_report_diff()`
+- Does NOT include: new collector surfaces, new diff semantics, hosted persistence, auth changes, tenant concepts, queues, or LLM-generated comparison logic

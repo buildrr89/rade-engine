@@ -2,13 +2,15 @@
 
 ## Purpose
 
-This document defines the current executable architecture and the boundaries between the primary proof path and secondary experimental paths.
+This document defines the current executable architecture for RADE's deterministic UI intelligence wedge and the boundaries between the primary proof path and secondary experimental paths.
 
 ## Architecture at a glance
 
 - Primary path: deterministic report generation from a structured JSON payload or a Playwright-collected public web page.
 - Secondary path: accessibility-like tree collection -> construction graph -> blueprint SVG / scrubbed graph ingest helpers.
 - Thin shells: worker, web, and agent surfaces exist to keep entrypoints explicit without claiming hosted product completeness. The served API surface is real, but intentionally narrow.
+
+The current wedge is proof-backed interface analysis for repeated structure, accessibility gaps, and modernization risk. The architecture is designed to keep those outputs deterministic and traceable while preserving a broader path toward interface intelligence infrastructure.
 
 ## Primary proof path
 
@@ -17,6 +19,7 @@ This document defines the current executable architecture and the boundaries bet
 `src/core/cli.py` is the main entrypoint.
 
 - Input is either a local JSON payload or a public `http/https` URL passed through `src/collectors/web_dom_adapter.py`.
+- The same CLI also accepts two existing RADE JSON reports for deterministic report-to-report comparison.
 - `src/core/schemas.py` validates required fields, uniqueness, parent references, slab layers, and scalar types.
 - Only `ios`, `android`, and `web` are valid platforms.
 - The web collector uses Playwright `locator("body").aria_snapshot()` as the primary collection source and falls back to a semantic DOM walk when the ARIA snapshot is empty.
@@ -55,11 +58,22 @@ Current recommendations are standards-backed and derived from current determinis
 
 - JSON report
 - Markdown report
+- HTML report
 
 Before write, report artifacts are scrubbed by `src/scrubber/pii_scrubber.py`.
 
 - stable identifiers such as `node_ref`, `rule_id`, `recommendation_id`, and fingerprints are intentionally preserved
 - emitted artifacts receive public repository metadata from `src/core/compliance.py`
+
+### 4b. Diff boundary
+
+`src/core/report_diff.py` compares two existing RADE JSON reports.
+
+- score deltas reuse the directional semantics from `src/core/pr_score_diff.py`
+- all four current scores are compared deterministically: `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`
+- recommendation additions and removals are traced by stable `recommendation_id`
+- repeated-structure changes are traced by duplicate-cluster `fingerprint` and node references
+- output artifacts are local JSON and Markdown files, not hosted history or persistence claims
 
 ### 5. Supporting runtime surfaces
 

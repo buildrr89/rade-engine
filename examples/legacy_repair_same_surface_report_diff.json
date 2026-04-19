@@ -1,0 +1,236 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha",
+    "live_raid_date": "2026-04-10"
+  },
+  "diff_version": "1.0.0",
+  "base_report": {
+    "report_version": "1.0",
+    "generated_at": "2026-03-22T00:00:00Z",
+    "app_id": "com.example.legacyapp",
+    "project_name": "Legacy Repair App",
+    "platform": "ios"
+  },
+  "head_report": {
+    "report_version": "1.0",
+    "generated_at": "2026-04-10T00:00:00Z",
+    "app_id": "com.example.legacyapp",
+    "project_name": "Legacy Repair App",
+    "platform": "ios"
+  },
+  "summary": {
+    "score_changes": {
+      "improved": [
+        "reusability",
+        "accessibility_risk",
+        "migration_risk"
+      ],
+      "regressed": [],
+      "unchanged": [
+        "complexity"
+      ]
+    },
+    "recommendation_changes": {
+      "added": 0,
+      "removed": 2,
+      "unchanged": 1
+    },
+    "duplicate_cluster_changes": {
+      "added": 1,
+      "removed": 0,
+      "changed": 0,
+      "unchanged": 4
+    }
+  },
+  "scores": {
+    "complexity": {
+      "direction": "lower_is_better",
+      "base": 58,
+      "head": 58,
+      "delta": 0,
+      "status": "unchanged"
+    },
+    "reusability": {
+      "direction": "higher_is_better",
+      "base": 86,
+      "head": 100,
+      "delta": 14,
+      "status": "improved"
+    },
+    "accessibility_risk": {
+      "direction": "lower_is_better",
+      "base": 70,
+      "head": 0,
+      "delta": -70,
+      "status": "improved"
+    },
+    "migration_risk": {
+      "direction": "lower_is_better",
+      "base": 59,
+      "head": 29,
+      "delta": -30,
+      "status": "improved"
+    }
+  },
+  "recommendations": {
+    "added": [],
+    "removed": [
+      {
+        "recommendation_id": "rec-accessibility_missing_identifier-8c7b61bc",
+        "rule_id": "accessibility_missing_identifier",
+        "category": "accessibility",
+        "target": "interactive_nodes_without_accessibility_identifier",
+        "priority": "P1"
+      },
+      {
+        "recommendation_id": "rec-migration_sequence_accessibility_before_reuse-536109ca",
+        "rule_id": "migration_sequence_accessibility_before_reuse",
+        "category": "migration_sequencing",
+        "target": "accessibility-before-reuse",
+        "priority": "P1"
+      }
+    ],
+    "unchanged": [
+      {
+        "recommendation_id": "rec-component_reuse_interactive_cluster-df13c83b",
+        "rule_id": "component_reuse_interactive_cluster",
+        "category": "component_reuse",
+        "target": "button",
+        "priority": "P2"
+      }
+    ]
+  },
+  "duplicate_clusters": {
+    "added": [
+      {
+        "fingerprint": "49feb0c0396f4dff",
+        "count": 2,
+        "interactive": true,
+        "screen_ids": [
+          "analysis-review",
+          "project-overview"
+        ],
+        "screen_names": [
+          "Analysis Review",
+          "Project Overview"
+        ],
+        "node_refs": [
+          "project-overview#secondary-cta",
+          "analysis-review#help-link"
+        ],
+        "element_types": [
+          "button"
+        ],
+        "roles": [
+          "button"
+        ],
+        "representative_node_ref": "project-overview#secondary-cta"
+      }
+    ],
+    "removed": [],
+    "changed": [],
+    "unchanged": [
+      {
+        "fingerprint": "1f5e3a09d73ab0e5",
+        "count": 2,
+        "interactive": false,
+        "screen_ids": [
+          "analysis-review",
+          "project-overview"
+        ],
+        "screen_names": [
+          "Analysis Review",
+          "Project Overview"
+        ],
+        "node_refs": [
+          "project-overview#overview-root",
+          "analysis-review#review-root"
+        ],
+        "element_types": [
+          "container"
+        ],
+        "roles": [
+          "screen"
+        ],
+        "representative_node_ref": "project-overview#overview-root"
+      },
+      {
+        "fingerprint": "25610e7cc32de585",
+        "count": 2,
+        "interactive": true,
+        "screen_ids": [
+          "analysis-review",
+          "project-overview"
+        ],
+        "screen_names": [
+          "Analysis Review",
+          "Project Overview"
+        ],
+        "node_refs": [
+          "project-overview#primary-cta",
+          "analysis-review#primary-cta"
+        ],
+        "element_types": [
+          "button"
+        ],
+        "roles": [
+          "button"
+        ],
+        "representative_node_ref": "project-overview#primary-cta"
+      },
+      {
+        "fingerprint": "a496216494dae1c6",
+        "count": 2,
+        "interactive": false,
+        "screen_ids": [
+          "analysis-review",
+          "project-overview"
+        ],
+        "screen_names": [
+          "Analysis Review",
+          "Project Overview"
+        ],
+        "node_refs": [
+          "project-overview#overview-card",
+          "analysis-review#review-card"
+        ],
+        "element_types": [
+          "card"
+        ],
+        "roles": [
+          "summary"
+        ],
+        "representative_node_ref": "project-overview#overview-card"
+      },
+      {
+        "fingerprint": "b46db7ef275aa926",
+        "count": 2,
+        "interactive": false,
+        "screen_ids": [
+          "analysis-review",
+          "project-overview"
+        ],
+        "screen_names": [
+          "Analysis Review",
+          "Project Overview"
+        ],
+        "node_refs": [
+          "project-overview#overview-title",
+          "analysis-review#review-title"
+        ],
+        "element_types": [
+          "text"
+        ],
+        "roles": [
+          "heading"
+        ],
+        "representative_node_ref": "project-overview#overview-title"
+      }
+    ]
+  }
+}

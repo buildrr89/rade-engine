@@ -1,34 +1,65 @@
 # PRD
 
-Status: current product definition for the repository state as of 2026-03-22.
+Status: current product definition for the repository state as of 2026-04-10.
 
 ## Product Definition
 
-RADE is a software-interface analysis workspace for authorized inputs.
+RADE is a deterministic UI intelligence engine for authorized inputs.
 
-The current product promise is narrow:
+The current product promise is intentionally narrow:
 
 - accept a structured interface payload or a public web URL
 - analyze it deterministically
-- identify repeated structure and accessibility gaps
-- emit evidence-backed modernization recommendations
-- write traceable JSON and Markdown artifacts
+- identify repeated structure, accessibility gaps, and migration / modernization risk
+- emit evidence-backed outputs with stable identifiers
+- keep every result reviewable, reproducible, and auditable
 
-The repo also carries an exploratory blueprint path that turns accessibility-like trees into structural SVG output and scrubbed graph rows, but that path is not yet the primary user workflow. The repository is shared publicly as an early alpha technical thesis and collaboration surface, not as a claim of hosted product completeness.
+The current repo is a usable first wedge, not a claim of hosted product completeness.
+
+## Current Wedge
+
+RADE's first commercial wedge is proof-backed interface analysis for:
+
+- repeated structure
+- accessibility gaps
+- migration / modernization risk
+
+This wedge is immediately useful for:
+
+- frontend teams
+- agencies
+- design-system work
+- modernization efforts
+- accessibility audits
+
+## Broader Thesis
+
+The longer-term thesis is broader than the current wedge:
+
+- interfaces contain market intelligence
+- repeated UI structures and interaction patterns can be collected and normalized
+- design conventions can be observed over time
+- that can become an intelligence layer for understanding how software is built and how interface patterns evolve
+
+The current repository does not claim that full system exists yet. It establishes the deterministic inspection and artifact boundary that such a system would need.
 
 ## Primary User
 
-- product, design, and engineering teams reviewing an existing interface
+- frontend, product, design, and engineering teams reviewing an existing interface
+- agencies and consultants scoping interface modernization work
+- design-system and accessibility owners who need traceable structural evidence
 
 ## Current User Problem
 
-- they need a repeatable way to inspect structure, duplication, and accessibility gaps without relying on ad hoc screenshots or taste-based review
+- they need a repeatable way to inspect repeated structure, accessibility gaps, and modernization risk without relying on ad hoc screenshots, subjective review, or unverifiable AI summaries
 
 ## Current Jobs To Be Done
 
 1. Run a deterministic analysis over an authorized fixture or a public unauthenticated web page.
-2. Produce a stable report with explicit evidence and stable identifiers.
-3. Preserve proof and redaction boundaries so outputs can be reviewed safely.
+2. Produce stable artifacts with explicit evidence and stable identifiers.
+3. Compare two existing RADE runs and identify what changed in scores, recommendations, and repeated structure.
+4. Identify repeated structures, accessibility gaps, and modernization risk in a format teams can review and diff.
+5. Preserve proof and redaction boundaries so outputs can be reviewed safely.
 
 ## Functional Requirements In Current Scope
 
@@ -39,9 +70,10 @@ The repo also carries an exploratory blueprint path that turns accessibility-lik
 5. Deduplicate repeated nodes into ordered duplicate clusters.
 6. Score the project on complexity, reusability, accessibility risk, and migration risk.
 7. Generate deterministic recommendations and a roadmap from current standards references.
-8. Write JSON and Markdown reports with public repository metadata and scrubbed strings.
-9. Expose thin smoke surfaces for API, web, worker, and agent entrypoints.
-10. Preserve an exploratory blueprint / graph path for structural SVG and Neo4j Aura ingest proofs.
+8. Write JSON, Markdown, and HTML reports with public repository metadata and scrubbed strings.
+9. Compare two existing RADE JSON reports into deterministic JSON and Markdown diff artifacts.
+10. Expose thin smoke surfaces for API, web, worker, and agent entrypoints.
+11. Preserve an exploratory blueprint / graph path for structural SVG and Neo4j Aura ingest proofs.
 
 ## Non-Functional Requirements In Current Scope
 
@@ -49,12 +81,15 @@ The repo also carries an exploratory blueprint path that turns accessibility-lik
 - proof-first workflow: changes are not complete without executable evidence
 - explicit unknowns: use `UNKNOWN / NEEDS DECISION` instead of inferred behavior
 - scrubbed artifacts: emitted reports and graph payloads must neutralize sensitive strings at the appropriate boundary
+- traceability: findings, recommendations, and evidence must remain reviewable by humans and tooling
 
 ## Current Implemented Features
 
 - CLI analysis command in `src/core/cli.py`
+- CLI report diff command in `src/core/cli.py`
 - Playwright-backed web collector in `src/collectors/web_dom_adapter.py`
-- JSON and Markdown report generation in `src/core/report_generator.py`
+- JSON, Markdown, and HTML report generation in `src/core/report_generator.py`
+- deterministic report diff generation in `src/core/report_diff.py`
 - standards-backed recommendation engine in `src/core/recommendation_engine.py`
 - roadmap generation in `src/core/roadmap_generator.py`
 - report scrubber and edge scrubber in `src/scrubber/`
@@ -74,10 +109,12 @@ The repo also carries an exploratory blueprint path that turns accessibility-lik
 - end-to-end Appium / AWS Device Farm integration
 - authenticated/private-page web collection, anti-bot bypass, and SPA-specific collector logic
 - production claims around scale, latency, or multi-tenant isolation
+- AI-driven scoring, ranking, or recommendation generation
 
 ## Success Criteria For The Current Stage
 
-- the sample fixture produces stable JSON and Markdown reports
+- the sample fixture produces stable JSON, Markdown, and HTML reports
+- two existing RADE JSON reports can be compared into deterministic JSON and Markdown diff artifacts
 - `rade analyze --url https://example.com` produces a valid deterministic report from a public page
 - report IDs and evidence remain deterministic
 - report artifacts are scrubbed without losing structural traceability
@@ -98,13 +135,14 @@ The repo also carries an exploratory blueprint path that turns accessibility-lik
 - `tests/test_web_dom_adapter.py`
 - `.github/workflows/proof.yml`
 
-## DECIDED (2026-03-22)
+## DECIDED (2026-04-10)
 
-- The next real execution surface is `POST /analyze` on the WSGI app. Rationale: it reuses the proven CLI pipeline, gives the first honest user-facing workflow, and is materially smaller than queue + worker + persistence. The worker queue path is deferred until batch/team demand is validated.
-- The blueprint / graph path remains an internal proof track for now. It may be promoted to a first-class product surface after the API proof is stable and design-partner feedback indicates demand.
-- Repo/build scanning stays as a deterministic metadata stub. It will not expand into a code-aware connector until the API proof is stable and documented.
+- The first public wedge is deterministic interface analysis for repeated structure, accessibility gaps, and migration / modernization risk. It is no longer framed as an unresolved choice between accessibility-only and modernization-only positioning.
+- The bigger thesis remains present, but secondary: RADE starts as a deterministic UI intelligence engine with evidence-backed outputs, not as a broad market-intelligence platform claim.
+- The blueprint / graph path remains an implemented secondary proof track. It supports the broader thesis, but it is not the primary entry workflow.
+- Repo/build scanning stays as a deterministic metadata stub. It will not expand into a code-aware connector until the current proof path is stable and justified by demand.
 
 ## UNKNOWN / NEEDS DECISION
 
-- whether the first commercial wedge is accessibility compliance audits or design system modernization (to be resolved by design-partner feedback in the first 30 days)
+- which downstream execution surface should be prioritized after the current wedge: richer API workflows, fixture diffing, or deeper collector coverage
 - pricing model validation: free tier limits, Pro price point, Team tier viability

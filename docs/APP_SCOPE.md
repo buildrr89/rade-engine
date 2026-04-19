@@ -8,18 +8,29 @@ If `PRD.md` is broader, this file wins for implementation decisions until the sc
 
 ## Product summary
 
-RADE helps teams analyze authorized software interfaces and get evidence-backed modernization recommendations from deterministic structural analysis.
+RADE helps teams analyze authorized software interfaces and get proof-backed structural intelligence: repeated structure, accessibility gaps, and migration / modernization risk from deterministic analysis.
 
 ## Current stage
 
 Current stage is a local proof slice with one real authenticated API surface, thin worker/web shells, and one exploratory blueprint / graph track.
 
-- Primary proof path: JSON payload or Playwright-collected public web page -> validated project model -> scores and recommendations -> JSON / Markdown report.
+- Primary proof path: JSON payload or Playwright-collected public web page -> validated project model -> scores and recommendations -> JSON / Markdown / HTML report.
 - Secondary implemented surfaces: worker shell, web shell, agent wrapper, repo metadata stub, SVG blueprint demo, and Neo4j Aura ingest library boundary.
+
+## Current wedge
+
+The current wedge is proof-backed interface analysis for:
+
+- repeated structure
+- accessibility gaps
+- migration / modernization risk
+
+This is the practical entry point for frontend teams, agencies, design-system work, modernization efforts, and accessibility audits.
 
 ## Target user
 
-- Primary user: product, design, and engineering teams owning an app or project
+- Primary user: frontend, product, design, and engineering teams owning an app or project
+- Also relevant: agencies, design-system maintainers, and accessibility reviewers working on existing interfaces
 - Their urgent problem: they need a structured way to understand duplicated structure, accessibility gaps, and what to fix first
 - Current workaround: manual review, screenshots, ad hoc audits, and scattered design feedback
 
@@ -27,12 +38,14 @@ Current stage is a local proof slice with one real authenticated API surface, th
 
 - local JSON upload scan through the CLI, agent wrapper, and `POST /analyze` API endpoint
 - public unauthenticated `http/https` URL scan through the CLI and agent wrapper via Playwright web collection
+- local report-to-report comparison through the CLI using two existing RADE JSON artifacts
 - schema validation for projects, screens, nodes, parent references, bounds, and slab layers
 - deterministic normalization, slab-layer inference, and structural fingerprinting
 - deduplication of repeated interface structure
 - deterministic scores for complexity, reusability, accessibility risk, and migration risk
 - standards-backed recommendations and roadmap generation
-- JSON and Markdown report generation
+- JSON, Markdown, and HTML report generation
+- deterministic JSON and Markdown report-diff artifact generation from existing RADE reports
 - report-artifact scrubbing that preserves stable identifiers
 - public repository metadata on generated JSON, Markdown, and blueprint SVG artifacts
 - demo SVG blueprint generation from accessibility-like trees
@@ -68,6 +81,7 @@ Current stage is a local proof slice with one real authenticated API surface, th
 ## Current boundaries
 
 - Platform(s): Python CLI, local analysis from JSON or public URLs, hosted API (`POST /analyze` with API key auth), and shell web/worker surfaces
+- Comparison boundary: existing RADE JSON reports can be compared locally through the CLI without adding storage or hosted history
 - Active web runtime: `web/lib/shell.mjs`; `web/app/` is dormant scaffold only
 - Geography: none
 - Integrations allowed in the current slice: local file input, public unauthenticated web-page collection through Playwright, sample fixture output, local repo metadata extraction, test-only Neo4j Aura ingest boundary
@@ -79,6 +93,7 @@ Current stage is a local proof slice with one real authenticated API surface, th
 ## Non-goals
 
 - taste-based "ultimate UI" output
+- vague screenshot-only AI audit summaries
 - claiming enterprise completeness before proof
 - expanding collectors before the core is stable
 - building unrelated platform surface area
@@ -87,7 +102,8 @@ Current stage is a local proof slice with one real authenticated API surface, th
 
 - a sample iOS fixture produces the same report structure on every run except `generated_at`
 - the report contains deterministic scores and evidence-backed recommendations
-- the report is readable as both JSON and Markdown
+- the report is readable as JSON, Markdown, and HTML
+- the same pair of existing RADE JSON reports produces the same diff artifact on every run
 - shell surfaces remain truthful about being shells
 - the blueprint demo remains deterministic for the demo input set
 

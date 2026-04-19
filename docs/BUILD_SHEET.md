@@ -2,7 +2,7 @@
 
 ## Current objective
 
-Keep the deterministic report path, the first Playwright collector path, and the exploratory blueprint path aligned with the actual repo state. The API now serves `POST /analyze` as a real analysis surface. Worker and web surfaces remain thin shells.
+Keep the deterministic UI intelligence wedge honest across single runs and run-to-run comparison: repeated-structure analysis, accessibility gap detection, modernization-risk scoring, and deterministic report diffs must stay aligned with the actual repo state. The API now serves `POST /analyze` as a real analysis surface. Worker and web surfaces remain thin shells.
 
 ## Why this is the current objective
 
@@ -10,11 +10,11 @@ It keeps the proven core honest: report generation is the shipped proof slice, t
 
 ## Current story
 
-As a product team, I want to analyze an authorized fixture or a public web page and get a prioritized, evidence-backed modernization report without guessing what is actually implemented in the repo.
+As a frontend, accessibility, or modernization team, I want to analyze an authorized fixture or a public web page, then compare two RADE runs and see what changed in repeated structure, accessibility gaps, and modernization risk without guessing what is actually implemented in the repo.
 
 ## Current proof slice
 
-Fixture input or `--url` collection -> normalize -> fingerprint -> deduplicate -> score -> recommend -> JSON and Markdown output.
+Fixture input or `--url` collection -> normalize -> fingerprint -> deduplicate -> score -> recommend -> JSON, Markdown, and HTML output. Existing RADE JSON report + existing RADE JSON report -> deterministic JSON and Markdown diff output.
 
 ## Secondary proof slice
 
@@ -22,24 +22,38 @@ Accessibility-like tree -> construction graph -> deterministic SVG blueprint -> 
 
 ## Expected proof
 
-- What must work: the sample command should complete and write both report files
+- What must work: the sample command should complete and write all three report files
 - What must be observed: stable report content and deterministic recommendation order
 - What counts as success: the same input yields the same output except `generated_at`
 - What does not need to exist yet: hosted auth, queues, persistent history, or full collector coverage
 
 ## Latest proof
 
-- Date: 2026-03-27
+- Date: 2026-04-10
 - Status: Passed
 - Evidence:
-  - `.venv/bin/python -m pytest -q` -> `155 passed in 0.43s`
-  - `.venv/bin/python -m tests.runner` -> `155 passed, 0 failed`
+  - `.venv/bin/python -m pytest -q` -> `168 passed in 0.39s`
+  - `.venv/bin/python -m tests.runner` -> `168 passed, 0 failed`
   - `.venv/bin/ruff check src tests agent` -> `All checks passed!`
-  - `.venv/bin/python -m black --check src tests agent` -> `87 files would be left unchanged.`
+  - `.venv/bin/python -m black --check src tests agent` -> `89 files would be left unchanged.`
   - `pnpm --dir web lint` -> `RADE web shell lint passed`
-  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:59374`
+  - `pnpm --dir web test` -> `RADE web shell smoke test passed against http://127.0.0.1:52002`
   - `make proof` -> `All proof gates passed.`
-- `make analyze` -> `json: output/modernization_report.json`, `md: output/modernization_report.md`, `html: output/modernization_report.html`
+- `.venv/bin/python -m src.core.cli diff --base-report examples/legacy_repair_before_report.json --head-report examples/legacy_repair_after_report.json` -> `RADE | BUILDRR89 | EARLY ALPHA`, `generated report diff`, `json: output/report_diff.json`, `md: output/report_diff.md`
+
+### Milestone: Deterministic report diff workflow
+
+- Added `rade diff` to `src/core/cli.py` to compare two existing RADE JSON reports and emit deterministic JSON/Markdown diff artifacts.
+- Added `src/core/report_diff.py` to reuse score-direction semantics from `src/core/pr_score_diff.py`, compare all four current scores, compare recommendation additions/removals, and compare duplicate-cluster changes by stable fingerprints and node refs.
+- Added golden diff fixtures and CLI/report-diff tests covering deterministic output and invalid-input error paths.
+- Added checked-in example diff artifacts under `examples/` by comparing `python_org_homepage_report.json` and `web_dev_homepage_report.json`.
+
+### Milestone: Same-surface before/after diff fixture pack
+
+- Added a small same-app fixture pair under `examples/`: `legacy_repair_before.json` and `legacy_repair_after.json`.
+- Added checked-in deterministic RADE reports for both runs: `legacy_repair_before_report.json/.md` and `legacy_repair_after_report.json/.md`.
+- Added checked-in same-surface diff artifacts: `legacy_repair_same_surface_report_diff.json` and `legacy_repair_same_surface_report_diff.md`.
+- Expanded `tests/test_real_world_fixtures.py` to lock the before/after reports and prove the checked-in same-surface diff still matches `build_report_diff()` while preserving the same `app_id` and `project_name`.
 
 ### Milestone: GitHub Action PR score diff
 
@@ -173,10 +187,13 @@ The ignored `rade-repo/` subtree remains outside canonical repo truth and should
 - 2026-03-27 - Regression-flag output and summary contract: action now exports explicit regression-detected flag and workflow summary includes that flag to reduce ambiguity for downstream consumers and reviewers.
 - 2026-03-27 - CodeQL baseline workflow: added GitHub CodeQL analysis for Python and JavaScript on PR/push/schedule with least-privilege permissions and contract-test coverage.
 - 2026-03-27 - CodeQL execution hardening: added concurrency cancellation and explicit timeout to reduce duplicate CodeQL runs and cap job runtime deterministically.
+- 2026-04-10 - repositioned the public repo surface around the deterministic UI intelligence wedge: repeated structure, accessibility gaps, and modernization risk. Rewrote README, tightened canonical docs, and improved contributor entry without changing implementation scope.
+- 2026-04-10 - implemented slice #32: local deterministic report diff workflow with JSON/Markdown artifacts, stable recommendation and duplicate-cluster change tracking, checked-in example diff artifacts, and proof coverage.
+- 2026-04-10 - implemented slice #33: added a same-surface legacy-repair before/after fixture pair, checked-in reports for both runs, a deterministic same-surface diff artifact, and regression tests that lock the pair against the current pipeline.
 
 ## Next immediate action
 
-Define slice #32 in `docs/NEXT_EXECUTION_BACKLOG.md` (currently `UNKNOWN / NEEDS DECISION`) before implementation.
+UNKNOWN / NEEDS DECISION
 
 ## Stop conditions
 

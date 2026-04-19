@@ -2,18 +2,27 @@
 from __future__ import annotations
 
 from src.core.pr_score_diff import (
+    ALL_SCORE_NAMES,
     build_score_diff,
+    classify_score_delta,
     has_score_regression,
     regression_reason,
     render_pr_comment,
 )
 
 
-def _report(reusability: int, accessibility_risk: int) -> dict:
+def _report(
+    reusability: int,
+    accessibility_risk: int,
+    complexity: int = 60,
+    migration_risk: int = 50,
+) -> dict:
     return {
         "scores": {
+            "complexity": {"value": complexity},
             "reusability": {"value": reusability},
             "accessibility_risk": {"value": accessibility_risk},
+            "migration_risk": {"value": migration_risk},
         }
     }
 
@@ -28,6 +37,32 @@ def test_build_score_diff_tracks_expected_metrics():
         "reusability": {"base": 80, "head": 85, "delta": 5},
         "accessibility_risk": {"base": 30, "head": 42, "delta": 12},
     }
+
+
+def test_build_score_diff_accepts_full_score_set():
+    base_report = _report(
+        reusability=80, accessibility_risk=30, complexity=55, migration_risk=40
+    )
+    head_report = _report(
+        reusability=82, accessibility_risk=25, complexity=60, migration_risk=45
+    )
+
+    diff = build_score_diff(base_report, head_report, score_names=ALL_SCORE_NAMES)
+
+    assert diff == {
+        "complexity": {"base": 55, "head": 60, "delta": 5},
+        "reusability": {"base": 80, "head": 82, "delta": 2},
+        "accessibility_risk": {"base": 30, "head": 25, "delta": -5},
+        "migration_risk": {"base": 40, "head": 45, "delta": 5},
+    }
+
+
+def test_classify_score_delta_respects_score_direction():
+    assert classify_score_delta("reusability", 2) == "improved"
+    assert classify_score_delta("reusability", -2) == "regressed"
+    assert classify_score_delta("migration_risk", -2) == "improved"
+    assert classify_score_delta("migration_risk", 2) == "regressed"
+    assert classify_score_delta("accessibility_risk", 0) == "unchanged"
 
 
 def test_render_pr_comment_has_stable_marker_and_table():

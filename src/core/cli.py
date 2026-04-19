@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+from json import JSONDecodeError
 from pathlib import Path
 from time import perf_counter
 from typing import Sequence
@@ -9,6 +10,12 @@ from typing import Sequence
 from ..collectors.web_dom_adapter import collect_from_web_dom, derive_app_id_from_url
 from .compliance import emit_terminal_banner
 from .metrics import increment_counter, publish_metrics, record_duration
+from .report_diff import (
+    build_report_diff,
+    load_diffable_report,
+    report_diff_error,
+    write_report_diff,
+)
 from .report_generator import (
     analyze_file,
     analyze_payload,
@@ -46,6 +53,28 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=10_000,
         help="Timeout for Playwright page collection when using --url.",
+    )
+
+    diff = subparsers.add_parser(
+        "diff", help="Compare two RADE JSON reports and write diff artifacts."
+    )
+    diff.add_argument(
+        "--base-report", type=Path, required=True, help="Path to the base JSON report."
+    )
+    diff.add_argument(
+        "--head-report", type=Path, required=True, help="Path to the head JSON report."
+    )
+    diff.add_argument(
+        "--json-output",
+        type=Path,
+        default=Path("output/report_diff.json"),
+        help="Where to write the JSON diff artifact.",
+    )
+    diff.add_argument(
+        "--md-output",
+        type=Path,
+        default=Path("output/report_diff.md"),
+        help="Where to write the Markdown diff artifact.",
     )
 
     return parser
@@ -107,6 +136,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                 increment_counter("proof_runs.failure")
             record_duration("proof_runs.duration", duration_ms)
             publish_metrics(run_id=run_id, component="cli", job_status=run_status)
+    if args.command == "diff":
+        for path in (args.base_report, args.head_report):
+            try:
+                report = load_diffable_report(path)
+            except (FileNotFoundError, JSONDecodeError, ValueError) as exc:
+                parser.error(report_diff_error(path, exc))
+            if path == args.base_report:
+                base_report = report
+            else:
+                head_report = report
+
+        diff = build_report_diff(base_report, head_report)
+        write_report_diff(diff, json_output=args.json_output, md_output=args.md_output)
+        print("generated report diff")
+        print(f"json: {args.json_output}")
+        print(f"md: {args.md_output}")
+        return 0
     return 1
 
 

@@ -1,7 +1,7 @@
 [project]
 name = "rade"
 version = "0.1.0"
-description = "Deterministic interface analysis engine — structural deduplication, accessibility gaps, and migration risk scoring"
+description = "Deterministic UI intelligence engine for repeated structure, accessibility gaps, and modernization risk"
 readme = "README.md"
 license = { text = "AGPL-3.0-only" }
 requires-python = "==3.14.3"

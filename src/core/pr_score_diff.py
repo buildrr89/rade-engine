@@ -7,7 +7,19 @@ import json
 from pathlib import Path
 
 COMMENT_MARKER = "<!-- rade-pr-score-comment -->"
+ALL_SCORE_NAMES = (
+    "complexity",
+    "reusability",
+    "accessibility_risk",
+    "migration_risk",
+)
 TRACKED_SCORES = ("reusability", "accessibility_risk")
+SCORE_DIRECTIONS = {
+    "complexity": "lower_is_better",
+    "reusability": "higher_is_better",
+    "accessibility_risk": "lower_is_better",
+    "migration_risk": "lower_is_better",
+}
 
 
 def load_report(path: Path) -> dict:
@@ -18,9 +30,13 @@ def extract_score(report: dict, score_name: str) -> int:
     return int(report["scores"][score_name]["value"])
 
 
-def build_score_diff(base_report: dict, head_report: dict) -> dict[str, dict[str, int]]:
+def build_score_diff(
+    base_report: dict,
+    head_report: dict,
+    score_names: tuple[str, ...] = TRACKED_SCORES,
+) -> dict[str, dict[str, int]]:
     diff: dict[str, dict[str, int]] = {}
-    for score_name in TRACKED_SCORES:
+    for score_name in score_names:
         base_value = extract_score(base_report, score_name)
         head_value = extract_score(head_report, score_name)
         diff[score_name] = {
@@ -31,10 +47,19 @@ def build_score_diff(base_report: dict, head_report: dict) -> dict[str, dict[str
     return diff
 
 
-def _format_delta(delta: int) -> str:
+def format_delta(delta: int) -> str:
     if delta > 0:
         return f"+{delta}"
     return str(delta)
+
+
+def classify_score_delta(score_name: str, delta: int) -> str:
+    if delta == 0:
+        return "unchanged"
+    direction = SCORE_DIRECTIONS[score_name]
+    if direction == "higher_is_better":
+        return "improved" if delta > 0 else "regressed"
+    return "improved" if delta < 0 else "regressed"
 
 
 def render_pr_comment(
@@ -57,7 +82,7 @@ def render_pr_comment(
     for score_name in TRACKED_SCORES:
         values = diff[score_name]
         lines.append(
-            f"| `{score_name}` | {values['base']} | {values['head']} | {_format_delta(values['delta'])} |"
+            f"| `{score_name}` | {values['base']} | {values['head']} | {format_delta(values['delta'])} |"
         )
     lines.extend(
         [
