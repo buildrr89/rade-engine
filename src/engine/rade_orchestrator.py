@@ -23,7 +23,7 @@ def _bounding_box_from_bounds(bounds: list[int] | None) -> JsonDict | None:
         return None
     try:
         x, y, w, h = (int(bounds[i]) for i in range(4))
-    except TypeError, ValueError:
+    except (TypeError, ValueError):
         return None
     if w <= 0 or h <= 0:
         return None
@@ -1116,12 +1116,12 @@ class RadeOrchestrator:
             if all(key in value for key in keys):
                 try:
                     return [int(float(value[key])) for key in keys]
-                except TypeError, ValueError:
+                except (TypeError, ValueError):
                     return None
         if isinstance(value, (list, tuple)) and len(value) == 4:
             try:
                 return [int(float(item)) for item in value]
-            except TypeError, ValueError:
+            except (TypeError, ValueError):
                 return None
         if isinstance(value, str):
             cleaned = value.replace("{", "").replace("}", "").replace(",", " ")
@@ -1129,7 +1129,7 @@ class RadeOrchestrator:
             if len(parts) == 4:
                 try:
                     return [int(float(part)) for part in parts]
-                except TypeError, ValueError:
+                except (TypeError, ValueError):
                     return None
         return None
 

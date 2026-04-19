@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 44. Wheel smoke test + Python 3.12/3.13 syntax fix
+
+- Status: implemented 2026-04-20
+- Risk reduced: `pyproject.toml` advertises `requires-python = ">=3.12"` and ships 3.12/3.13/3.14 classifiers, but nothing in CI actually verified the wheel installs and the `rade` CLI runs on any version other than the 3.14 dev environment. A local smoke test against a clean 3.12 venv surfaced six real `except A, B:` Python-2 syntax sites in `src/engine/rade_orchestrator.py` and `src/core/slab03_hybrid_anchor.py` that Python 3.14 silently accepts (PEP 758 relaxed the parse rule) but 3.12 and 3.13 reject at import time. In other words, the package as shipped before this slice was broken for two of its three advertised Python versions.
+- Scope: (a) fix all six `except TypeError, ValueError:` → `except (TypeError, ValueError):` sites so the package actually parses on 3.12/3.13; (b) add `.github/workflows/wheel-smoke.yml` that on PR / push-to-main builds `dist/*.whl`, installs it into clean `.venv-smoke` venvs on 3.12, 3.13, and 3.14 in a matrix, runs `rade --help / analyze --help / diff --help / badge --help`, installs the `[graph]` extra and verifies `neo4j` imports, and separately verifies a base install does NOT pull `neo4j`.
+- Acceptance: full pytest suite still passes (206); `uv build` → `uv pip install dist/rade_engine-0.1.0-py3-none-any.whl` → `rade --help` works on a clean Python 3.12 venv locally; workflow uses env-var indirection for matrix value interpolation per the workflow-injection security pattern
+- Does NOT include: publishing to PyPI, reworking the internal package layout, adding 3.11 or earlier support, or wiring the smoke test into the existing pr-score-diff workflow
+
 ### 43. README docs pass for axe gate and graph extra
 
 - Status: implemented 2026-04-20

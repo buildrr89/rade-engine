@@ -200,7 +200,7 @@ def _parse_bounds_rect(element: JsonDict) -> tuple[int, int, int, int] | None:
             y = int(float(bbox["y"]))
             w = int(float(bbox["width"]))
             h = int(float(bbox["height"]))
-        except KeyError, TypeError, ValueError:
+        except (KeyError, TypeError, ValueError):
             pass
         else:
             if w > 0 and h > 0:
@@ -209,7 +209,7 @@ def _parse_bounds_rect(element: JsonDict) -> tuple[int, int, int, int] | None:
     if isinstance(raw, (list, tuple)) and len(raw) == 4:
         try:
             x, y, w, h = (int(float(raw[i])) for i in range(4))
-        except TypeError, ValueError:
+        except (TypeError, ValueError):
             return None
         if w > 0 and h > 0:
             return (x, y, w, h)

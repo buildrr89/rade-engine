@@ -29,12 +29,31 @@ from v0.1.0 onward.
   indirection for all interpolated output values to comply with the
   GitHub Actions workflow-injection security pattern (slice #42).
 
+### Fixed
+
+- Six `except A, B:` Python-2 tuple-less syntax sites in
+  `src/engine/rade_orchestrator.py` and
+  `src/core/slab03_hybrid_anchor.py` that parsed silently on Python
+  3.14 (thanks to PEP 758) but failed at import time on Python 3.12
+  and 3.13. The package advertised `>=3.12` but was effectively
+  broken on two of its three advertised versions until this fix
+  (slice #44).
+
 ### Documentation
 
 - README gains a dedicated `## GitHub Action` section with a working
   YAML example covering both `fail-on-regression` and
   `fail-on-axe-regression`, plus an inventory of the 9 deterministic
   outputs (slice #43).
+
+### CI
+
+- New `.github/workflows/wheel-smoke.yml` matrix-builds the wheel and
+  installs it into clean venvs on Python 3.12, 3.13, and 3.14, then
+  verifies the `rade` CLI runs, the `[graph]` extra installs
+  `neo4j`, and the base install does NOT pull `neo4j`. Guards
+  against both future tuple-less-except drift and accidental
+  re-promotion of `neo4j` to a base dependency (slice #44).
 
 ## [0.1.0] — pending tag
 
