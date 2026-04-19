@@ -193,9 +193,9 @@ class RadeGraphIngestor:
             else:
                 try:
                     from neo4j import GraphDatabase
-                except Exception as exc:  # pragma: no cover - exercised when missing
-                    raise RuntimeError(
-                        "Neo4j driver is required to connect to Aura"
+                except ImportError as exc:  # pragma: no cover - exercised when missing
+                    raise ImportError(
+                        "Install rade-engine[graph] to use the Neo4j ingest path."
                     ) from exc
                 driver = GraphDatabase.driver(
                     self.connection.uri,

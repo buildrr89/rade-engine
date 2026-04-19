@@ -46,6 +46,12 @@ uvx rade analyze --url https://example.com --json-output report.json --md-output
 
 Installing also gives you the `rade` CLI on your PATH. The Playwright-backed `--url` path additionally requires `playwright install chromium` the first time.
 
+The optional Neo4j Aura ingest path is gated behind an extra so the default install stays light:
+
+```bash
+pip install 'rade-engine[graph]'
+```
+
 ## Quick Start (from source)
 
 Prerequisites:

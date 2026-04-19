@@ -33,10 +33,12 @@ classifiers = [
     "Topic :: Software Development :: Testing",
 ]
 dependencies = [
-    "neo4j>=6.1.0",
     "playwright>=1.54.0",
     "PyYAML>=6.0.2",
 ]
+
+[project.optional-dependencies]
+graph = ["neo4j>=6.1.0"]
 
 [project.urls]
 Homepage = "https://github.com/buildrr89/rade-engine"

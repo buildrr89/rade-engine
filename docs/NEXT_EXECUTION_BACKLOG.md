@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 37. Optional `graph` extra for Neo4j driver
+
+- Status: implemented 2026-04-19
+- Risk reduced: every `pip install rade-engine` pulled in the ~40MB neo4j driver even though the Neo4j Aura ingest path is an exploratory/secondary surface — a poor first-install experience for accessibility-focused users who will never touch the graph path
+- Scope: move `neo4j>=6.1.0` out of base `[project.dependencies]` into `[project.optional-dependencies] graph`; the single `from neo4j import GraphDatabase` site in `src/database/graph_ingestor.py` was already lazy and now raises `ImportError("Install rade-engine[graph] to use the Neo4j ingest path.")` when the driver is absent. README install section now documents the `pip install 'rade-engine[graph]'` path for Neo4j ingest users.
+- Acceptance: `tests/test_neo4j_optional.py` proves `src.core.cli` and `src.database.graph_ingestor` import cleanly with `neo4j` shadowed out of `sys.modules`, and that `RadeGraphIngestor._session()` raises a clear `ImportError` pointing at the extra; full pytest suite stays green; existing `test_graph_ingestor.py` continues to exercise the ingest surface through the injected driver seam
+- Does NOT include: rewriting the ingest surface, adding new graph features, removing the ingest code, or renaming the existing module layout
+
 ### 36. Packaging, PyPI publish, and hosted demo
 
 - Status: implemented 2026-04-19
