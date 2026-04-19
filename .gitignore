@@ -23,3 +23,7 @@ output/*
 !output/.gitkeep
 *.figma_bridge_v0_manifest.json
 .private/
+dist/
+build/
+*.egg-info/
+public/

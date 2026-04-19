@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 36. Packaging, PyPI publish, and hosted demo
+
+- Status: implemented 2026-04-19
+- Risk reduced: install friction (requiring clone + `uv sync`) and the lack of a hosted shareable artifact were the biggest remaining blockers to public-alpha adoption
+- Scope: flip `pyproject.toml` to a real installable wheel under the PyPI name `rade-engine`, expose a `rade` console script, add a GitHub Actions workflow that publishes tagged releases to PyPI via OIDC trusted-publishing (no long-lived token), add a GitHub Pages workflow that rebuilds a live HTML report + SVG badges from the checked-in fixture on every push to main, and ship paste-ready HN/Reddit/Twitter launch copy in `docs/LAUNCH_POST.md`. The PyPI workflow requires a one-time trusted-publisher setup on pypi.org; no further per-release secrets are needed.
+- Acceptance: `uv build` produces `rade_engine-0.1.0-py3-none-any.whl` and installing it exposes a working `rade --help`; `pytest` still passes against the new packaging; `.github/workflows/publish-pypi.yml` and `.github/workflows/deploy-pages.yml` are present with least-privilege permissions and pinned action SHAs where practical; README features `pip install rade-engine` as the primary install path; launch copy exists and is honest about current scope
+- Does NOT include: rewriting the internal module layout into a `rade/` package, publishing the actual release (that happens when the maintainer tags `v0.1.0` and enables PyPI trusted publishing), or building a hosted dashboard
+
 ### 35. axe-core accessibility findings integration
 
 - Status: implemented 2026-04-19

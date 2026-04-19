@@ -1,0 +1,72 @@
+name: Deploy example report to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "examples/**"
+      - "src/**"
+      - "pyproject.toml"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Build site directory
+        run: |
+          set -euxo pipefail
+          mkdir -p public
+          uv run --python 3.12 python -m src.core.cli analyze \
+            --input examples/python_org_homepage.json \
+            --app-id org.python.www \
+            --html-output public/index.html \
+            --json-output public/report.json \
+            --md-output public/report.md
+          uv run --python 3.12 python -m src.core.cli badge \
+            --report public/report.json \
+            --metric reusability \
+            --svg-output public/reusability.svg \
+            --endpoint-output public/reusability.shields.json
+          uv run --python 3.12 python -m src.core.cli badge \
+            --report public/report.json \
+            --metric accessibility_risk \
+            --svg-output public/accessibility_risk.svg \
+            --endpoint-output public/accessibility_risk.shields.json
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

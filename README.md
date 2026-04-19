@@ -36,7 +36,17 @@ RADE exists to turn interface inspection into a deterministic, traceable workflo
 - Embeddable SVG score badges and shields.io endpoint JSON for live score display in your README
 - Optional axe-core integration that embeds Deque-backed WCAG violations in the same report (enable with `--axe`)
 
-## Quick Start
+## Install
+
+```bash
+pip install rade-engine
+# or, with uv, run it one-off with zero install:
+uvx rade analyze --url https://example.com --json-output report.json --md-output report.md
+```
+
+Installing also gives you the `rade` CLI on your PATH. The Playwright-backed `--url` path additionally requires `playwright install chromium` the first time.
+
+## Quick Start (from source)
 
 Prerequisites:
 

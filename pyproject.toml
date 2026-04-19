@@ -1,15 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
 [project]
-name = "rade"
+name = "rade-engine"
 version = "0.1.0"
 description = "Deterministic UI intelligence engine for repeated structure, accessibility gaps, and modernization risk"
 readme = "README.md"
 license = { text = "AGPL-3.0-only" }
-requires-python = "==3.14.3"
+requires-python = ">=3.12"
+authors = [
+    { name = "Buildrr89" },
+]
+keywords = [
+    "accessibility",
+    "axe-core",
+    "deterministic-analysis",
+    "modernization",
+    "ui-audit",
+    "wcag",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
 dependencies = [
     "neo4j>=6.1.0",
     "playwright>=1.54.0",
     "PyYAML>=6.0.2",
 ]
+
+[project.urls]
+Homepage = "https://github.com/buildrr89/rade-engine"
+Repository = "https://github.com/buildrr89/rade-engine"
+Issues = "https://github.com/buildrr89/rade-engine/issues"
+
+[project.scripts]
+rade = "src.core.cli:main"
 
 [dependency-groups]
 dev = [
@@ -18,17 +53,25 @@ dev = [
     "pytest",
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/",
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+]
+
 [tool.black]
 line-length = 88
-target-version = ["py314"]
+target-version = ["py312"]
 
 [tool.ruff]
 line-length = 88
-target-version = "py314"
+target-version = "py312"
 src = ["src", "tests", "agent"]
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]
-
-[tool.uv]
-package = false
