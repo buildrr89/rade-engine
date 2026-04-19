@@ -45,6 +45,20 @@ from v0.1.0 onward.
   YAML example covering both `fail-on-regression` and
   `fail-on-axe-regression`, plus an inventory of the 9 deterministic
   outputs (slice #43).
+- README Contributing section now cross-links `CHANGELOG.md` so
+  contributors can find release-by-release context without knowing
+  the filename (slice #45).
+
+### Tests
+
+- New `tests/fixtures/axe_gate_base.json` and
+  `tests/fixtures/axe_gate_head.json` provide a byte-stable golden
+  case for the slice #41 axe regression gate: base has one pre-existing
+  `moderate` rule, head adds a newly-introduced `critical` rule. The
+  paired `tests/test_axe_gate_fixtures.py` asserts the gate fires with
+  reason `critical_introduced`, the PR comment reflects the gate
+  status, and the diff is deterministic across repeated calls (slice
+  #46).
 
 ### CI
 

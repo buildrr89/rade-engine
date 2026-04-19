@@ -1,0 +1,56 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha",
+    "live_raid_date": "2026-04-20"
+  },
+  "report_version": "1.0.0",
+  "generated_at": "2026-04-20T00:00:00Z",
+  "scores": {
+    "complexity": {
+      "value": 60
+    },
+    "reusability": {
+      "value": 80
+    },
+    "accessibility_risk": {
+      "value": 30
+    },
+    "migration_risk": {
+      "value": 50
+    }
+  },
+  "accessibility_violations": {
+    "findings": [
+      {
+        "rule_id": "image-alt",
+        "impact": "moderate"
+      },
+      {
+        "rule_id": "color-contrast",
+        "impact": "critical"
+      }
+    ],
+    "summary": {
+      "total": 2,
+      "by_impact": {
+        "critical": 1,
+        "serious": 0,
+        "moderate": 1,
+        "minor": 0
+      },
+      "by_rule": {
+        "color-contrast": 1,
+        "image-alt": 1
+      },
+      "engine": "axe-core",
+      "engine_versions": [
+        "4.10.2"
+      ]
+    }
+  }
+}

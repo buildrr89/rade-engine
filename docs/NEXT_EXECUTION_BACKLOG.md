@@ -204,6 +204,22 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 45. Link CHANGELOG from README
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #40 shipped `CHANGELOG.md` but it was reachable only by knowing the filename. The Contributing section was the natural place to cross-link it so contributors actually find release-by-release context.
+- Scope: single bullet added to README Contributing section pointing at `CHANGELOG.md`.
+- Acceptance: README links to `CHANGELOG.md`; no other changes
+- Does NOT include: generating release notes automatically, splitting the changelog by version, or restructuring the README
+
+### 46. Golden axe-gate fixture pair
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #41 shipped `has_axe_regression()` and the `fail-on-axe-regression` Action input, but no checked-in fixture exercised the gate end-to-end. All axe-gate test cases built reports inline in `tests/test_pr_score_diff.py`, meaning a regression that changed the on-disk report shape or the `accessibility_violations` serialization could silently bypass the gate without any test noticing. A checked-in pair locks the gate against that drift.
+- Scope: add `tests/fixtures/axe_gate_base.json` (one pre-existing `moderate` `image-alt` violation) and `tests/fixtures/axe_gate_head.json` (same `moderate` finding plus a newly-introduced `critical` `color-contrast` rule). Both files carry the required `rade_legal` header for compliance. New `tests/test_axe_gate_fixtures.py` loads the pair via `load_report()`, asserts the exact delta shape, asserts the gate fires with reason `critical_introduced`, verifies the rendered PR comment line for the `Axe regression gate status: enabled:failed` case, and asserts build determinism across repeated calls.
+- Acceptance: full pytest suite stays green at 210 passing; the two JSON fixtures pass the sole-architect JSON compliance check; the rendered comment contains the expected `Newly introduced critical rules: color-contrast` line; fixtures are stable byte-for-byte across repeated `build_axe_diff()` calls
+- Does NOT include: generating the fixtures from a live Playwright run, adding a matching CLI-level e2e test, or exercising the `enabled:passed` / `none` / `serious_introduced` gate branches (already covered by inline tests in `test_pr_score_diff.py`)
+
 ### 44. Wheel smoke test + Python 3.12/3.13 syntax fix
 
 - Status: implemented 2026-04-20

@@ -253,6 +253,7 @@ Contributions are welcome, but the repo is proof-first.
 - Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, workflow, and exact proof expectations
 - Use [docs/APP_SCOPE.md](docs/APP_SCOPE.md) and [docs/TRUTH_HIERARCHY.md](docs/TRUTH_HIERARCHY.md) before broadening behavior
 - Favor small, reversible changes that improve the engine, collectors, scoring, reports, docs, or examples
+- Release-by-release changes are tracked in [CHANGELOG.md](CHANGELOG.md)
 
 If you want to fork it, the natural extension points are visible in the repo: collectors, scoring rules, report generation, API boundaries, fixtures, and CI workflows.
 
