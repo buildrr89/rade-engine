@@ -3,8 +3,11 @@ from __future__ import annotations
 
 from src.core.pr_score_diff import (
     ALL_SCORE_NAMES,
+    axe_regression_reason,
+    build_axe_diff,
     build_score_diff,
     classify_score_delta,
+    has_axe_regression,
     has_score_regression,
     regression_reason,
     render_pr_comment,
@@ -161,6 +164,312 @@ def test_regression_reason_accessibility_up_when_only_accessibility_risk_rises()
         )
         == "accessibility_risk_up"
     )
+
+
+def _axe_report(
+    reusability: int = 80,
+    accessibility_risk: int = 30,
+    *,
+    by_impact: dict | None = None,
+    by_rule: dict | None = None,
+    rule_impacts: dict[str, str] | None = None,
+) -> dict:
+    if by_impact is None:
+        by_impact = {"critical": 0, "serious": 0, "moderate": 0, "minor": 0}
+    if by_rule is None:
+        by_rule = {}
+    if rule_impacts is None:
+        rule_impacts = {}
+    findings = []
+    for rule_id, count in by_rule.items():
+        impact = rule_impacts.get(rule_id, "moderate")
+        for _ in range(count):
+            findings.append({"rule_id": rule_id, "impact": impact})
+    total = sum(by_impact.values())
+    return {
+        "scores": {
+            "complexity": {"value": 60},
+            "reusability": {"value": reusability},
+            "accessibility_risk": {"value": accessibility_risk},
+            "migration_risk": {"value": 50},
+        },
+        "accessibility_violations": {
+            "findings": findings,
+            "summary": {
+                "total": total,
+                "by_impact": by_impact,
+                "by_rule": by_rule,
+                "engine": "axe-core",
+                "engine_versions": ["4.10.2"],
+            },
+        },
+    }
+
+
+def _plain_report(reusability: int = 80, accessibility_risk: int = 30) -> dict:
+    return _report(reusability=reusability, accessibility_risk=accessibility_risk)
+
+
+def test_build_axe_diff_present_on_both_sides():
+    base = _axe_report(
+        by_impact={"critical": 1, "serious": 2, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 2, "image-alt": 1},
+    )
+    head = _axe_report(
+        by_impact={"critical": 0, "serious": 2, "moderate": 1, "minor": 0},
+        by_rule={"color-contrast": 2, "label": 1},
+    )
+
+    diff = build_axe_diff(base, head)
+
+    assert diff["present"] is True
+    assert diff["base_present"] is True
+    assert diff["head_present"] is True
+    assert diff["base_total"] == 3
+    assert diff["head_total"] == 3
+    assert diff["delta_total"] == 0
+    assert diff["delta_by_impact"] == {
+        "critical": -1,
+        "serious": 0,
+        "moderate": 1,
+        "minor": 0,
+    }
+    assert diff["newly_introduced_rule_ids"] == ["label"]
+    assert diff["fully_resolved_rule_ids"] == ["image-alt"]
+
+
+def test_build_axe_diff_head_only():
+    base = _plain_report()
+    head = _axe_report(
+        by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 1},
+    )
+
+    diff = build_axe_diff(base, head)
+
+    assert diff["present"] is True
+    assert diff["base_present"] is False
+    assert diff["head_present"] is True
+    assert diff["base_total"] == 0
+    assert diff["head_total"] == 1
+    assert diff["newly_introduced_rule_ids"] == ["color-contrast"]
+    assert diff["fully_resolved_rule_ids"] == []
+
+
+def test_build_axe_diff_base_only():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 1, "moderate": 0, "minor": 0},
+        by_rule={"image-alt": 1},
+    )
+    head = _plain_report()
+
+    diff = build_axe_diff(base, head)
+
+    assert diff["present"] is True
+    assert diff["base_present"] is True
+    assert diff["head_present"] is False
+    assert diff["base_total"] == 1
+    assert diff["head_total"] == 0
+    assert diff["newly_introduced_rule_ids"] == []
+    assert diff["fully_resolved_rule_ids"] == ["image-alt"]
+
+
+def test_build_axe_diff_absent_on_both_sides():
+    diff = build_axe_diff(_plain_report(), _plain_report())
+    assert diff == {"present": False}
+
+
+def test_build_axe_diff_is_deterministic():
+    base = _axe_report(
+        by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 1, "image-alt": 1},
+    )
+    head = _axe_report(
+        by_impact={"critical": 0, "serious": 1, "moderate": 0, "minor": 0},
+        by_rule={"label": 1, "color-contrast": 1},
+    )
+    first = build_axe_diff(base, head)
+    second = build_axe_diff(base, head)
+    assert first == second
+
+
+def test_render_pr_comment_omits_axe_section_when_absent():
+    comment = render_pr_comment(
+        {
+            "reusability": {"base": 80, "head": 80, "delta": 0},
+            "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+        },
+        base_ref="base-sha",
+        head_ref="head-sha",
+        axe_diff={"present": False},
+    )
+
+    assert "Accessibility violations (axe-core)" not in comment
+
+
+def test_render_pr_comment_includes_axe_section_when_present():
+    axe_diff = build_axe_diff(
+        _axe_report(
+            by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+            by_rule={"image-alt": 1},
+        ),
+        _axe_report(
+            by_impact={"critical": 0, "serious": 1, "moderate": 0, "minor": 0},
+            by_rule={"label": 1},
+        ),
+    )
+    comment = render_pr_comment(
+        {
+            "reusability": {"base": 80, "head": 80, "delta": 0},
+            "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+        },
+        base_ref="base-sha",
+        head_ref="head-sha",
+        axe_diff=axe_diff,
+    )
+
+    assert "### Accessibility violations (axe-core)" in comment
+    assert "Newly introduced rule IDs: `label`." in comment
+    assert "Fully resolved rule IDs: `image-alt`." in comment
+    assert "| `critical` | 1 | 0 | -1 |" in comment
+    assert "| `serious` | 0 | 1 | +1 |" in comment
+
+
+def test_render_pr_comment_axe_section_stable_across_runs():
+    axe_diff = build_axe_diff(
+        _axe_report(
+            by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+            by_rule={"color-contrast": 1},
+        ),
+        _axe_report(
+            by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+            by_rule={"color-contrast": 1},
+        ),
+    )
+    first = render_pr_comment(
+        {
+            "reusability": {"base": 80, "head": 80, "delta": 0},
+            "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+        },
+        base_ref="base-sha",
+        head_ref="head-sha",
+        axe_diff=axe_diff,
+    )
+    second = render_pr_comment(
+        {
+            "reusability": {"base": 80, "head": 80, "delta": 0},
+            "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+        },
+        base_ref="base-sha",
+        head_ref="head-sha",
+        axe_diff=axe_diff,
+    )
+    assert first == second
+
+
+def test_has_axe_regression_false_when_absent():
+    assert has_axe_regression({"present": False}) is False
+    assert axe_regression_reason({"present": False}) == "none"
+
+
+def test_has_axe_regression_false_when_no_new_serious_or_critical():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 1, "minor": 0},
+        by_rule={"image-alt": 1},
+        rule_impacts={"image-alt": "moderate"},
+    )
+    head = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 2, "minor": 0},
+        by_rule={"image-alt": 1, "duplicate-id": 1},
+        rule_impacts={"image-alt": "moderate", "duplicate-id": "moderate"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is False
+    assert axe_regression_reason(diff) == "none"
+
+
+def test_has_axe_regression_fires_on_newly_introduced_critical():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 0, "minor": 0}
+    )
+    head = _axe_report(
+        by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 1},
+        rule_impacts={"color-contrast": "critical"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is True
+    assert axe_regression_reason(diff) == "critical_introduced"
+    assert diff["newly_introduced_by_impact"]["critical"] == ["color-contrast"]
+
+
+def test_has_axe_regression_fires_on_newly_introduced_serious():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 0, "minor": 0}
+    )
+    head = _axe_report(
+        by_impact={"critical": 0, "serious": 1, "moderate": 0, "minor": 0},
+        by_rule={"label": 1},
+        rule_impacts={"label": "serious"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is True
+    assert axe_regression_reason(diff) == "serious_introduced"
+
+
+def test_has_axe_regression_both_when_critical_and_serious_introduced():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 0, "minor": 0}
+    )
+    head = _axe_report(
+        by_impact={"critical": 1, "serious": 1, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 1, "label": 1},
+        rule_impacts={"color-contrast": "critical", "label": "serious"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is True
+    assert axe_regression_reason(diff) == "both"
+
+
+def test_has_axe_regression_ignores_pre_existing_critical_rule():
+    """A rule that was already critical in base should not trigger the gate
+    even when its count grows in head."""
+    base = _axe_report(
+        by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 1},
+        rule_impacts={"color-contrast": "critical"},
+    )
+    head = _axe_report(
+        by_impact={"critical": 2, "serious": 0, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 2},
+        rule_impacts={"color-contrast": "critical"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is False
+    assert axe_regression_reason(diff) == "none"
+
+
+def test_render_pr_comment_includes_axe_gate_status_line_when_present():
+    axe_diff = build_axe_diff(
+        _axe_report(by_impact={"critical": 0, "serious": 0, "moderate": 0, "minor": 0}),
+        _axe_report(
+            by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+            by_rule={"color-contrast": 1},
+            rule_impacts={"color-contrast": "critical"},
+        ),
+    )
+    comment = render_pr_comment(
+        {
+            "reusability": {"base": 80, "head": 80, "delta": 0},
+            "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+        },
+        base_ref="base-sha",
+        head_ref="head-sha",
+        axe_diff=axe_diff,
+        axe_gate_status="enabled:failed",
+    )
+    assert "Axe regression gate status: `enabled:failed`." in comment
+    assert "Newly introduced `critical` rules: `color-contrast`." in comment
 
 
 def test_regression_reason_both_when_both_regression_conditions_trigger():

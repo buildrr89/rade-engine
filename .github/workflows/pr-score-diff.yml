@@ -34,14 +34,27 @@ jobs:
 
       - name: Publish RADE score summary
         shell: bash
+        env:
+          GATE_STATUS: ${{ steps.rade_score_diff.outputs.gate-status }}
+          SHOULD_FAIL: ${{ steps.rade_score_diff.outputs.should-fail }}
+          REUSABILITY_DELTA: ${{ steps.rade_score_diff.outputs.reusability-delta }}
+          ACCESSIBILITY_RISK_DELTA: ${{ steps.rade_score_diff.outputs.accessibility-risk-delta }}
+          REGRESSION_REASON: ${{ steps.rade_score_diff.outputs.regression-reason }}
+          REGRESSION_DETECTED: ${{ steps.rade_score_diff.outputs.regression-detected }}
+          AXE_GATE_STATUS: ${{ steps.rade_score_diff.outputs.axe-gate-status }}
+          AXE_REGRESSION_REASON: ${{ steps.rade_score_diff.outputs.axe-regression-reason }}
+          AXE_REGRESSION_DETECTED: ${{ steps.rade_score_diff.outputs.axe-regression-detected }}
         run: |
           {
             echo "## RADE score diff"
             echo ""
-            echo "- Gate status: \`${{ steps.rade_score_diff.outputs.gate-status }}\`"
-            echo "- Should fail: \`${{ steps.rade_score_diff.outputs.should-fail }}\`"
-            echo "- Reusability delta: \`${{ steps.rade_score_diff.outputs.reusability-delta }}\`"
-            echo "- Accessibility risk delta: \`${{ steps.rade_score_diff.outputs.accessibility-risk-delta }}\`"
-            echo "- Regression reason: \`${{ steps.rade_score_diff.outputs.regression-reason }}\`"
-            echo "- Regression detected: \`${{ steps.rade_score_diff.outputs.regression-detected }}\`"
+            echo "- Gate status: \`${GATE_STATUS}\`"
+            echo "- Should fail: \`${SHOULD_FAIL}\`"
+            echo "- Reusability delta: \`${REUSABILITY_DELTA}\`"
+            echo "- Accessibility risk delta: \`${ACCESSIBILITY_RISK_DELTA}\`"
+            echo "- Regression reason: \`${REGRESSION_REASON}\`"
+            echo "- Regression detected: \`${REGRESSION_DETECTED}\`"
+            echo "- Axe gate status: \`${AXE_GATE_STATUS}\`"
+            echo "- Axe regression reason: \`${AXE_REGRESSION_REASON}\`"
+            echo "- Axe regression detected: \`${AXE_REGRESSION_DETECTED}\`"
           } >> "$GITHUB_STEP_SUMMARY"

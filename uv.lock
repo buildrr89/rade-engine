@@ -313,9 +313,13 @@ name = "rade-engine"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "neo4j" },
     { name = "playwright" },
     { name = "pyyaml" },
+]
+
+[package.optional-dependencies]
+graph = [
+    { name = "neo4j" },
 ]
 
 [package.dev-dependencies]
@@ -327,10 +331,11 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "neo4j", specifier = ">=6.1.0" },
+    { name = "neo4j", marker = "extra == 'graph'", specifier = ">=6.1.0" },
     { name = "playwright", specifier = ">=1.54.0" },
     { name = "pyyaml", specifier = ">=6.0.2" },
 ]
+provides-extras = ["graph"]
 
 [package.metadata.requires-dev]
 dev = [

@@ -204,6 +204,94 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 45. Link CHANGELOG from README
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #40 shipped `CHANGELOG.md` but it was reachable only by knowing the filename. The Contributing section was the natural place to cross-link it so contributors actually find release-by-release context.
+- Scope: single bullet added to README Contributing section pointing at `CHANGELOG.md`.
+- Acceptance: README links to `CHANGELOG.md`; no other changes
+- Does NOT include: generating release notes automatically, splitting the changelog by version, or restructuring the README
+
+### 47. Professional-repo polish: CI status badges in README
+
+- Status: implemented 2026-04-19
+- Risk reduced: the README advertised only the `Proof` workflow badge, leaving the `wheel-smoke` (Python 3.12/3.13/3.14 install verification from slice #44) and `CodeQL` (security scanning) workflows invisible at the repo landing page. A public-alpha PyPI candidate should surface its full CI signal — missing badges erode credibility and hide the guardrails that actually ship with the package. Adding License and Python-version badges also makes the install surface readable at a glance.
+- Scope: in `README.md`, replace the single `![Proof]` image with a five-badge block: Proof (clickable to its workflow), Wheel smoke (clickable to `wheel-smoke.yml`), CodeQL (clickable to `codeql.yml`), a static License: AGPL-3.0 badge linking to `LICENSE`, and a static Python 3.12 | 3.13 | 3.14 badge linking to `pyproject.toml`. All three workflow badges point at workflow files that already exist in `.github/workflows/`.
+- Acceptance: 210 pytest pass unchanged; all three referenced workflows exist on disk; each badge image URL is paired with a clickable link target; no code changes
+- Does NOT include: Codecov/coverage badges (no coverage tool wired yet), PyPI version badge (package not yet published), downloads badge, or per-OS matrix badges
+
+### 46. Golden axe-gate fixture pair
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #41 shipped `has_axe_regression()` and the `fail-on-axe-regression` Action input, but no checked-in fixture exercised the gate end-to-end. All axe-gate test cases built reports inline in `tests/test_pr_score_diff.py`, meaning a regression that changed the on-disk report shape or the `accessibility_violations` serialization could silently bypass the gate without any test noticing. A checked-in pair locks the gate against that drift.
+- Scope: add `tests/fixtures/axe_gate_base.json` (one pre-existing `moderate` `image-alt` violation) and `tests/fixtures/axe_gate_head.json` (same `moderate` finding plus a newly-introduced `critical` `color-contrast` rule). Both files carry the required `rade_legal` header for compliance. New `tests/test_axe_gate_fixtures.py` loads the pair via `load_report()`, asserts the exact delta shape, asserts the gate fires with reason `critical_introduced`, verifies the rendered PR comment line for the `Axe regression gate status: enabled:failed` case, and asserts build determinism across repeated calls.
+- Acceptance: full pytest suite stays green at 210 passing; the two JSON fixtures pass the sole-architect JSON compliance check; the rendered comment contains the expected `Newly introduced critical rules: color-contrast` line; fixtures are stable byte-for-byte across repeated `build_axe_diff()` calls
+- Does NOT include: generating the fixtures from a live Playwright run, adding a matching CLI-level e2e test, or exercising the `enabled:passed` / `none` / `serious_introduced` gate branches (already covered by inline tests in `test_pr_score_diff.py`)
+
+### 44. Wheel smoke test + Python 3.12/3.13 syntax fix
+
+- Status: implemented 2026-04-20
+- Risk reduced: `pyproject.toml` advertises `requires-python = ">=3.12"` and ships 3.12/3.13/3.14 classifiers, but nothing in CI actually verified the wheel installs and the `rade` CLI runs on any version other than the 3.14 dev environment. A local smoke test against a clean 3.12 venv surfaced six real `except A, B:` Python-2 syntax sites in `src/engine/rade_orchestrator.py` and `src/core/slab03_hybrid_anchor.py` that Python 3.14 silently accepts (PEP 758 relaxed the parse rule) but 3.12 and 3.13 reject at import time. In other words, the package as shipped before this slice was broken for two of its three advertised Python versions.
+- Scope: (a) fix all six `except TypeError, ValueError:` → `except (TypeError, ValueError):` sites so the package actually parses on 3.12/3.13; (b) add `.github/workflows/wheel-smoke.yml` that on PR / push-to-main builds `dist/*.whl`, installs it into clean `.venv-smoke` venvs on 3.12, 3.13, and 3.14 in a matrix, runs `rade --help / analyze --help / diff --help / badge --help`, installs the `[graph]` extra and verifies `neo4j` imports, and separately verifies a base install does NOT pull `neo4j`.
+- Acceptance: full pytest suite still passes (206); `uv build` → `uv pip install dist/rade_engine-0.1.0-py3-none-any.whl` → `rade --help` works on a clean Python 3.12 venv locally; workflow uses env-var indirection for matrix value interpolation per the workflow-injection security pattern
+- Does NOT include: publishing to PyPI, reworking the internal package layout, adding 3.11 or earlier support, or wiring the smoke test into the existing pr-score-diff workflow
+
+### 43. README docs pass for axe gate and graph extra
+
+- Status: implemented 2026-04-20
+- Risk reduced: slices #37 and #41 shipped user-facing surfaces (the `[graph]` pip extra and the `fail-on-axe-regression` Action input) that were reachable only by reading the backlog or the code. External consumers had no canonical doc showing how to wire either one. That's a credibility problem on a public-alpha repo.
+- Scope: add a dedicated `## GitHub Action` section to `README.md` with a minimal working YAML example that uses both `fail-on-regression` and `fail-on-axe-regression`, and an inventory of the 9 deterministic outputs. Tighten the existing Features bullet to mention the axe gate, and the Output Artifacts bullet to mention the `Accessibility violations (axe-core)` PR subsection when fixtures include axe output. The `[graph]` extra callout from slice #37 already exists in the Install section and needs no further edits.
+- Acceptance: README carries a `## GitHub Action` section with a copy-pasteable YAML snippet pinning a release tag; mentions `fail-on-axe-regression` and the three new outputs; explicitly states the gate semantics (newly-introduced critical/serious only); test suite unchanged (206 passing)
+- Does NOT include: a standalone Action README inside a `docs/` directory, marketplace listing copy, per-input tables, or any code changes
+
+### 42. PR workflow step-summary surfaces axe gate outputs
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #41 exposed three new Action outputs (`axe-gate-status`, `axe-regression-detected`, `axe-regression-reason`) but the PR workflow's GITHUB_STEP_SUMMARY still only rendered the score-gate lines. Without surfacing axe outputs in the step summary, reviewers scanning the Actions tab would miss whether the axe gate fired at all — breaking the visibility invariant that #23/#26/#28 established for the score gate.
+- Scope: extend `.github/workflows/pr-score-diff.yml` to emit three additional summary lines for the axe outputs. Switch all output interpolation to env-var indirection to comply with the workflow-injection security pattern even though the values are Action-owned status codes (not user-controlled). Contract test in `tests/test_github_action_contract.py` asserts the three new `steps.rade_score_diff.outputs.axe-*` references are wired through.
+- Acceptance: workflow file contains exactly three new `echo` lines for axe gate status / regression reason / regression detected; env-var indirection is used for all interpolations; `tests/test_github_action_contract.py::test_pr_workflow_consumes_action_outputs_in_summary` asserts the new wiring; 206 tests stay green
+- Does NOT include: new Action inputs, new Action outputs, score-gate direction changes, or per-impact gate configuration
+
+### 41. Opt-in axe-core regression gate on the GitHub Action
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #38 made axe deltas visible in the PR comment but left them toothless — teams that want axe to actually block merges had no lever. Gating on total count is too noisy (any new `minor` finding would fire); gating on newly-introduced `critical`/`serious` rules matches how real a11y programs operate and avoids punishing pre-existing debt.
+- Scope: extend `build_axe_diff()` with a `newly_introduced_by_impact` bucketing derived from head-side findings, plus `has_axe_regression()` and `axe_regression_reason()` helpers. Add a new `fail-on-axe-regression` Action input (default `"false"`) that gates independently of the existing `fail-on-regression` score gate — both gates are OR'd into `should-fail`. Add three new deterministic outputs: `axe-gate-status`, `axe-regression-detected`, `axe-regression-reason`. The PR comment's `Accessibility violations (axe-core)` subsection now leads with an `Axe regression gate status` line and lists newly-introduced critical/serious rules explicitly.
+- Acceptance: new cases in `tests/test_pr_score_diff.py` cover (a) gate fires on newly-introduced critical, (b) fires on newly-introduced serious, (c) fires on both with reason `"both"`, (d) does not fire when only `moderate`/`minor` are introduced, (e) does not fire when a pre-existing `critical` rule's count grows without introducing new rule IDs, (f) absent-on-both-sides stays `none`. `tests/test_github_action_contract.py` asserts the new input, outputs, and input-validation predicate. All 206 tests pass; existing golden-output tests are unchanged.
+- Does NOT include: per-impact thresholds exposed as Action inputs, node-target-level gating, rescoring `accessibility_risk` against axe findings, or changing the score-gate direction rules
+
+### 40. CHANGELOG.md for public-alpha release
+
+- Status: implemented 2026-04-20
+- Risk reduced: PyPI v0.1.0 is pending a maintainer tag, and without a curated changelog the first external release notes would be raw `git log` output — unreadable for adopters and hostile to downstream security reviewers who need to see what actually changed between slices.
+- Scope: add `CHANGELOG.md` at the repo root covering the path from slice #1 shell through slices #32–#39 under an `[Unreleased]` / `[0.1.0]` pair, grouped by Keep-a-Changelog sections (Added / Changed / Security). Include the file in the hatch sdist include list so it ships with the wheel.
+- Acceptance: `CHANGELOG.md` exists, reflects the as-shipped state of the branch (slices #32–#39), and does not claim features beyond what the code supports; `pyproject.toml` sdist includes `CHANGELOG.md`; test suite stays green
+- Does NOT include: a release-notes automation (towncrier / release-drafter), v0.1.0 tagging, or backfilling entries for every historical slice below #32
+
+### 39. Drop neo4j from GitHub Action runtime install
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #37 made `neo4j` an optional extra at the package level, but `action.yml`'s runtime-deps step still `pip install`ed it on every PR run — wasting ~40MB of bandwidth and cold-start time for every Action consumer, who by definition never exercises the Neo4j Aura ingest path from inside the Action.
+- Scope: remove `neo4j` from the `Install RADE runtime dependencies` step in `action.yml`. No new inputs, no test changes — the graph ingest path is not reachable from the Action's CLI invocation, so dropping the driver there has no runtime effect.
+- Acceptance: full test suite stays green; `action.yml` contract tests still pass; Action runtime install is now `playwright pyyaml` only
+- Does NOT include: switching the Action to install from PyPI, pinning transitive deps, or changing the Action's CLI surface
+
+### 38. axe-core violations in PR score-diff comment
+
+- Status: implemented 2026-04-20
+- Risk reduced: `--axe` is the headline credibility feature, but the PR score-diff comment was structural-only. Teams reviewing PRs could not see axe findings where they actually decide — making the axe surface effectively invisible to the adoption audience.
+- Scope: add `build_axe_diff(base_report, head_report)` to `src/core/pr_score_diff.py` that returns a deterministic, rule-id-granularity delta: per-impact counts (critical/serious/moderate/minor), total delta, and sorted `newly_introduced_rule_ids` / `fully_resolved_rule_ids` sets. Handles both-sides-have-axe, head-only, base-only, and neither-side. `render_pr_comment()` gains an optional `axe_diff` parameter; when present, a dedicated `### Accessibility violations (axe-core)` subsection is appended below the score table. `scripts/pr_score_comment.py` now computes the axe diff and threads it through. When neither side has axe data, the section is omitted entirely — the existing comment shape is unchanged.
+- Acceptance: `tests/test_pr_score_diff.py` covers both-sides-have-axe, head-only, base-only, neither-side, determinism across repeated calls, and the comment-with-axe vs comment-without-axe rendering contracts; all previously-green tests still pass (198 total); regression gate is unchanged — axe deltas are reported, not enforced, in this slice
+- Does NOT include: turning axe into a gate, new Action inputs, rescoring `accessibility_risk` against axe violations, node-target-level pairing, or score-direction changes
+
+### 37. Optional `graph` extra for Neo4j driver
+
+- Status: implemented 2026-04-19
+- Risk reduced: every `pip install rade-engine` pulled in the ~40MB neo4j driver even though the Neo4j Aura ingest path is an exploratory/secondary surface — a poor first-install experience for accessibility-focused users who will never touch the graph path
+- Scope: move `neo4j>=6.1.0` out of base `[project.dependencies]` into `[project.optional-dependencies] graph`; the single `from neo4j import GraphDatabase` site in `src/database/graph_ingestor.py` was already lazy and now raises `ImportError("Install rade-engine[graph] to use the Neo4j ingest path.")` when the driver is absent. README install section now documents the `pip install 'rade-engine[graph]'` path for Neo4j ingest users.
+- Acceptance: `tests/test_neo4j_optional.py` proves `src.core.cli` and `src.database.graph_ingestor` import cleanly with `neo4j` shadowed out of `sys.modules`, and that `RadeGraphIngestor._session()` raises a clear `ImportError` pointing at the extra; full pytest suite stays green; existing `test_graph_ingestor.py` continues to exercise the ingest surface through the injected driver seam
+- Does NOT include: rewriting the ingest surface, adding new graph features, removing the ingest code, or renaming the existing module layout
+
 ### 36. Packaging, PyPI publish, and hosted demo
 
 - Status: implemented 2026-04-19

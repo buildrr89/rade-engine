@@ -4,7 +4,12 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from src.core.pr_score_diff import build_score_diff, load_report, render_pr_comment
+from src.core.pr_score_diff import (
+    build_axe_diff,
+    build_score_diff,
+    load_report,
+    render_pr_comment,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -17,6 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--base-ref", required=True)
     parser.add_argument("--head-ref", required=True)
     parser.add_argument("--gate-status", default="disabled")
+    parser.add_argument("--axe-gate-status", default="disabled")
     parser.add_argument("--output", type=Path, required=True)
     return parser
 
@@ -26,8 +32,14 @@ def main() -> int:
     base_report = load_report(args.base_report)
     head_report = load_report(args.head_report)
     diff = build_score_diff(base_report, head_report)
+    axe_diff = build_axe_diff(base_report, head_report)
     comment = render_pr_comment(
-        diff, args.base_ref, args.head_ref, gate_status=args.gate_status
+        diff,
+        args.base_ref,
+        args.head_ref,
+        gate_status=args.gate_status,
+        axe_diff=axe_diff,
+        axe_gate_status=args.axe_gate_status,
     )
     args.output.write_text(comment, encoding="utf-8")
     print(f"wrote: {args.output}")

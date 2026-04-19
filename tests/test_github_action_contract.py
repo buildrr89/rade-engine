@@ -61,6 +61,9 @@ def test_pr_workflow_consumes_action_outputs_in_summary():
     assert "steps.rade_score_diff.outputs.accessibility-risk-delta" in workflow_text
     assert "steps.rade_score_diff.outputs.regression-reason" in workflow_text
     assert "steps.rade_score_diff.outputs.regression-detected" in workflow_text
+    assert "steps.rade_score_diff.outputs.axe-gate-status" in workflow_text
+    assert "steps.rade_score_diff.outputs.axe-regression-reason" in workflow_text
+    assert "steps.rade_score_diff.outputs.axe-regression-detected" in workflow_text
 
 
 def test_action_validates_fail_on_regression_boolean_input():
@@ -68,6 +71,24 @@ def test_action_validates_fail_on_regression_boolean_input():
 
     assert 'if raw_gate not in {"true", "false"}:' in action_text
     assert "must be 'true' or 'false'" in action_text
+
+
+def test_action_exposes_axe_regression_gate_input_and_outputs():
+    action_text = Path("action.yml").read_text(encoding="utf-8")
+
+    assert "fail-on-axe-regression:" in action_text
+    assert "axe-gate-status:" in action_text
+    assert "axe-regression-detected:" in action_text
+    assert "axe-regression-reason:" in action_text
+    assert "steps.regression.outputs.axe_gate_status" in action_text
+    assert "steps.regression.outputs.axe_regression_detected" in action_text
+    assert "steps.regression.outputs.axe_regression_reason" in action_text
+    assert "axe_gate_status=" in action_text
+    assert "axe_regression_reason=" in action_text
+    assert "axe_regression_detected=" in action_text
+    assert "--axe-gate-status" in action_text
+    assert "RADE_FAIL_ON_AXE_REGRESSION:" in action_text
+    assert 'if raw_axe_gate not in {"true", "false"}:' in action_text
 
 
 def test_action_keeps_gate_status_and_regression_flag_consistent():

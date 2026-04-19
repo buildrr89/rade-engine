@@ -4,7 +4,11 @@
 
 For frontend teams, agencies, design-system work, modernization efforts, and accessibility audits: analyze a public web page or structured UI payload and get proof-backed JSON, Markdown, and HTML outputs you can review, diff, and trust.
 
-![Proof](https://github.com/buildrr89/rade-engine/actions/workflows/proof.yml/badge.svg)
+[![Proof](https://github.com/buildrr89/rade-engine/actions/workflows/proof.yml/badge.svg)](https://github.com/buildrr89/rade-engine/actions/workflows/proof.yml)
+[![Wheel smoke](https://github.com/buildrr89/rade-engine/actions/workflows/wheel-smoke.yml/badge.svg)](https://github.com/buildrr89/rade-engine/actions/workflows/wheel-smoke.yml)
+[![CodeQL](https://github.com/buildrr89/rade-engine/actions/workflows/codeql.yml/badge.svg)](https://github.com/buildrr89/rade-engine/actions/workflows/codeql.yml)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14-blue.svg)](pyproject.toml)
 
 Fastest way to understand the project:
 
@@ -32,7 +36,7 @@ RADE exists to turn interface inspection into a deterministic, traceable workflo
 - JSON, Markdown, and interactive HTML reports from the same engine run
 - Deterministic report-to-report diffs for tracking interface change over time
 - Scrubbed artifacts that preserve structural traceability without pretending the repo is a hosted platform
-- A GitHub Action boundary for deterministic PR score diffs when your repository stores RADE fixtures
+- A GitHub Action boundary for deterministic PR score diffs when your repository stores RADE fixtures, with an opt-in axe-core regression gate that blocks newly introduced `critical` or `serious` violations
 - Embeddable SVG score badges and shields.io endpoint JSON for live score display in your README
 - Optional axe-core integration that embeds Deque-backed WCAG violations in the same report (enable with `--axe`)
 
@@ -45,6 +49,12 @@ uvx rade analyze --url https://example.com --json-output report.json --md-output
 ```
 
 Installing also gives you the `rade` CLI on your PATH. The Playwright-backed `--url` path additionally requires `playwright install chromium` the first time.
+
+The optional Neo4j Aura ingest path is gated behind an extra so the default install stays light:
+
+```bash
+pip install 'rade-engine[graph]'
+```
 
 ## Quick Start (from source)
 
@@ -134,6 +144,42 @@ Supported metrics: `complexity`, `reusability`, `accessibility_risk`, `migration
 4. Use the JSON outputs for automation, diffing, or downstream scoring checks.
 5. If your workflow stores fixtures in git, use the GitHub Action to compare score deltas on pull requests.
 
+## GitHub Action
+
+The repository ships a composite Action at the root (`action.yml`) that runs RADE against a checked-in input fixture on the base and head refs of a pull request, then posts or updates a single PR comment with the deterministic score deltas. Two gates are available and independent — either, both, or neither can be enabled.
+
+```yaml
+# .github/workflows/rade.yml
+name: RADE
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  rade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: buildrr89/rade-engine@v0.1.0  # pin to a release tag
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-number: ${{ github.event.pull_request.number }}
+          base-sha: ${{ github.event.pull_request.base.sha }}
+          head-sha: ${{ github.event.pull_request.head.sha }}
+          input-path: examples/sample_ios_output.json
+          app-id: com.example.legacyapp
+          # optional score gate: fail when reusability drops or accessibility_risk rises
+          fail-on-regression: "false"
+          # optional axe gate (slice #41): fail when new critical/serious axe rules are introduced.
+          # Requires fixtures that already carry an `accessibility_violations` block.
+          fail-on-axe-regression: "false"
+```
+
+Outputs exposed for downstream steps: `gate-status`, `should-fail`, `reusability-delta`, `accessibility-risk-delta`, `regression-reason`, `regression-detected`, and their axe counterparts `axe-gate-status`, `axe-regression-detected`, `axe-regression-reason`. The axe gate fires only on rule IDs that were absent from the base report and present with `critical` or `serious` impact in the head — pre-existing violations and new `moderate`/`minor` findings do not trigger it.
+
 ## Output Artifacts
 
 - `JSON report`
@@ -147,7 +193,7 @@ Supported metrics: `complexity`, `reusability`, `accessibility_risk`, `migration
 - `Markdown report diff`
   Review-friendly change log for before/after interface runs.
 - `GitHub Action comment`
-  Deterministic base/head score deltas for `reusability` and `accessibility_risk` when run on fixture-backed pull requests.
+  Deterministic base/head score deltas for `reusability` and `accessibility_risk` when run on fixture-backed pull requests. If the fixtures include axe-core output (`--axe`), the comment also carries an `Accessibility violations (axe-core)` subsection with per-impact counts and newly-introduced / fully-resolved rule IDs.
 
 See [examples/](examples/) for checked-in report artifacts from public websites.
 
@@ -211,6 +257,7 @@ Contributions are welcome, but the repo is proof-first.
 - Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, workflow, and exact proof expectations
 - Use [docs/APP_SCOPE.md](docs/APP_SCOPE.md) and [docs/TRUTH_HIERARCHY.md](docs/TRUTH_HIERARCHY.md) before broadening behavior
 - Favor small, reversible changes that improve the engine, collectors, scoring, reports, docs, or examples
+- Release-by-release changes are tracked in [CHANGELOG.md](CHANGELOG.md)
 
 If you want to fork it, the natural extension points are visible in the repo: collectors, scoring rules, report generation, API boundaries, fixtures, and CI workflows.
 

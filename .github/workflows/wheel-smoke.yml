@@ -1,0 +1,77 @@
+name: Wheel smoke
+
+on:
+  pull_request:
+    paths:
+      - "pyproject.toml"
+      - "src/**"
+      - "agent/**"
+      - ".github/workflows/wheel-smoke.yml"
+  push:
+    branches: [main]
+    paths:
+      - "pyproject.toml"
+      - "src/**"
+      - "agent/**"
+      - ".github/workflows/wheel-smoke.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wheel-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Install wheel on Python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.12", "3.13", "3.14"]
+    env:
+      PYTHON_VERSION: ${{ matrix.python }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install "${PYTHON_VERSION}"
+
+      - name: Build distributions
+        run: uv build
+
+      - name: Install wheel into a clean venv
+        run: |
+          uv venv --python "${PYTHON_VERSION}" .venv-smoke
+          uv pip install --python .venv-smoke/bin/python dist/rade_engine-*.whl
+
+      - name: Verify rade CLI is reachable
+        run: |
+          ./.venv-smoke/bin/rade --help
+          ./.venv-smoke/bin/rade analyze --help
+          ./.venv-smoke/bin/rade diff --help
+          ./.venv-smoke/bin/rade badge --help
+
+      - name: Verify graph extra installs neo4j driver
+        run: |
+          uv pip install --python .venv-smoke/bin/python --force-reinstall "dist/rade_engine-0.1.0-py3-none-any.whl[graph]"
+          ./.venv-smoke/bin/python -c "import neo4j; print('neo4j ok', neo4j.__version__)"
+
+      - name: Verify base install does not pull neo4j
+        run: |
+          uv venv --python "${PYTHON_VERSION}" .venv-base-only
+          uv pip install --python .venv-base-only/bin/python dist/rade_engine-*.whl
+          ./.venv-base-only/bin/python - <<'PY'
+          import importlib.util
+          assert importlib.util.find_spec("neo4j") is None, (
+              "neo4j was pulled by the base install path — it must be gated by [graph]"
+          )
+          print("base install is neo4j-free")
+          PY
