@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 34. Deterministic SVG score badges
+
+- Status: implemented 2026-04-19
+- Risk reduced: public-alpha adoption is limited when score artifacts cannot be embedded as shareable README badges alongside existing JSON/Markdown/HTML reports
+- Scope: add a `rade badge` CLI command that reads a RADE JSON report and writes a deterministic, compliance-compliant SVG badge for any of the four tracked score metrics, plus an optional shields.io dynamic endpoint JSON payload. Ship checked-in sample badges for `examples/python_org_homepage_report.json` and cover the new surface with contract tests.
+- Acceptance: `rade badge --report <report.json> --metric <metric> --svg-output <svg> [--endpoint-output <json>]` produces byte-deterministic SVG and shields endpoint artifacts; color direction respects `reusability` (higher is better) versus `accessibility_risk`/`complexity`/`migration_risk` (lower is better); all emitted artifacts pass the sole-architect legal-metadata compliance tests; unknown metrics, invalid reports, and missing outputs fail deterministically; CLI contract tests cover the golden path and error paths
+- Does NOT include: a hosted badge service, dynamic badge generation without a stored report, trend/spark visualizations, or non-shields badge formats
+
 ### 33. Same-surface before/after diff fixture pack
 
 - Status: implemented 2026-04-10

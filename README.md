@@ -33,6 +33,7 @@ RADE exists to turn interface inspection into a deterministic, traceable workflo
 - Deterministic report-to-report diffs for tracking interface change over time
 - Scrubbed artifacts that preserve structural traceability without pretending the repo is a hosted platform
 - A GitHub Action boundary for deterministic PR score diffs when your repository stores RADE fixtures
+- Embeddable SVG score badges and shields.io endpoint JSON for live score display in your README
 
 ## Quick Start
 
@@ -89,6 +90,18 @@ uv run python -m src.core.cli analyze \
   --md-output output/modernization_report.md \
   --html-output output/modernization_report.html
 ```
+
+Generate an embeddable SVG score badge from a RADE report:
+
+```bash
+uv run python -m src.core.cli badge \
+  --report examples/python_org_homepage_report.json \
+  --metric reusability \
+  --svg-output output/reusability_badge.svg \
+  --endpoint-output output/reusability_badge.shields.json
+```
+
+Supported metrics: `complexity`, `reusability`, `accessibility_risk`, `migration_risk`. Commit the SVG into your repo, or host the `*.shields.json` output and embed a live badge via `https://img.shields.io/endpoint?url=<raw-json-url>`. Sample artifacts are checked in at [examples/python_org_homepage_reusability.svg](examples/python_org_homepage_reusability.svg).
 
 ## Example Workflow
 

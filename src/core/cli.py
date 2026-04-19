@@ -8,6 +8,7 @@ from time import perf_counter
 from typing import Sequence
 
 from ..collectors.web_dom_adapter import collect_from_web_dom, derive_app_id_from_url
+from .badge import SUPPORTED_METRICS, BadgeError, write_badge
 from .compliance import emit_terminal_banner
 from .metrics import increment_counter, publish_metrics, record_duration
 from .report_diff import (
@@ -75,6 +76,30 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=Path("output/report_diff.md"),
         help="Where to write the Markdown diff artifact.",
+    )
+
+    badge = subparsers.add_parser(
+        "badge",
+        help="Render a deterministic SVG score badge from a RADE JSON report.",
+    )
+    badge.add_argument(
+        "--report", type=Path, required=True, help="Path to a RADE JSON report."
+    )
+    badge.add_argument(
+        "--metric",
+        choices=SUPPORTED_METRICS,
+        required=True,
+        help="Which score to render.",
+    )
+    badge.add_argument(
+        "--svg-output",
+        type=Path,
+        help="Where to write the SVG badge.",
+    )
+    badge.add_argument(
+        "--endpoint-output",
+        type=Path,
+        help="Where to write a shields.io dynamic endpoint JSON.",
     )
 
     return parser
@@ -152,6 +177,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         print("generated report diff")
         print(f"json: {args.json_output}")
         print(f"md: {args.md_output}")
+        return 0
+    if args.command == "badge":
+        if args.svg_output is None and args.endpoint_output is None:
+            parser.error("--svg-output or --endpoint-output is required.")
+        try:
+            value = write_badge(
+                args.report,
+                args.metric,
+                svg_output=args.svg_output,
+                endpoint_output=args.endpoint_output,
+            )
+        except BadgeError as exc:
+            parser.error(str(exc))
+        print(f"generated badge for {args.metric}: {value}/100")
+        if args.svg_output:
+            print(f"svg: {args.svg_output}")
+        if args.endpoint_output:
+            print(f"endpoint: {args.endpoint_output}")
         return 0
     return 1
 
