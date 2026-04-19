@@ -5,7 +5,6 @@ import json
 from pathlib import Path
 
 import pytest
-
 from src.core.report_generator import analyze_payload, prepare_report_for_output
 from src.engine.axe_adapter import (
     AxeRunError,

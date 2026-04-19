@@ -212,6 +212,14 @@
 - Acceptance: README links to `CHANGELOG.md`; no other changes
 - Does NOT include: generating release notes automatically, splitting the changelog by version, or restructuring the README
 
+### 48. Unbreak the proof workflow on main (sitecustomize stdout pollution)
+
+- Status: implemented 2026-04-19
+- Risk reduced: `proof` has been red on `main` since at least March because `sitecustomize.py` unconditionally prints the terminal banner on every Python process start. `uv run <python>` introspects the venv's interpreter by parsing its stdout as JSON; the banner appears before the JSON response and corrupts uv's parse (`Querying Python at \`.venv/bin/python3\` returned an invalid response: expected value at line 1 column 1`). Every new slice was merging against a broken signal — we had no protection against a real proof regression because proof was already red for an unrelated reason. This slice makes the `proof` badge on the README honest again.
+- Scope: gate the `emit_terminal_banner()` call in `sitecustomize.py` on `sys.stdout.isatty()`. CLI entry points (`agent/cli.py`, `tests/runner.py`, `src/core/cli.py`) already call `emit_terminal_banner()` explicitly for user-facing invocations, so this only suppresses the banner during non-interactive subprocess introspection. No other code paths change.
+- Acceptance: full 210-test suite still passes; `./rade-proof` runs to completion locally printing `210 passed, 0 failed` (previously failed immediately on uv bootstrap); the `proof` workflow on the PR goes green for the first time in months
+- Does NOT include: removing the banner entirely, refactoring the compliance module, adding a new env var to control banner emission, or fixing any of the `[RADE DIAG]` stderr lines that also appear in proof output
+
 ### 47. Professional-repo polish: CI status badges in README
 
 - Status: implemented 2026-04-19

@@ -15,7 +15,7 @@ def _git_remote_url(base_path: Path) -> str | None:
             text=True,
             cwd=str(base_path),
         )
-    except subprocess.CalledProcessError, FileNotFoundError:
+    except (subprocess.CalledProcessError, FileNotFoundError):
         return None
     url = result.stdout.strip()
     return url or None

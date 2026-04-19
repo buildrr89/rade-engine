@@ -31,6 +31,12 @@ from v0.1.0 onward.
 
 ### Fixed
 
+- `sitecustomize.py` no longer prints the terminal banner to stdout
+  during non-interactive Python starts. `uv run` parses `python`'s
+  stdout as JSON when introspecting a venv; the unconditional banner
+  corrupted that parse and broke the `proof` workflow on `main` for
+  months. Banner now emits only when `sys.stdout.isatty()`; CLI entry
+  points still emit it explicitly for user-facing runs (slice #48).
 - Six `except A, B:` Python-2 tuple-less syntax sites in
   `src/engine/rade_orchestrator.py` and
   `src/core/slab03_hybrid_anchor.py` that parsed silently on Python
