@@ -61,6 +61,9 @@ def test_pr_workflow_consumes_action_outputs_in_summary():
     assert "steps.rade_score_diff.outputs.accessibility-risk-delta" in workflow_text
     assert "steps.rade_score_diff.outputs.regression-reason" in workflow_text
     assert "steps.rade_score_diff.outputs.regression-detected" in workflow_text
+    assert "steps.rade_score_diff.outputs.axe-gate-status" in workflow_text
+    assert "steps.rade_score_diff.outputs.axe-regression-reason" in workflow_text
+    assert "steps.rade_score_diff.outputs.axe-regression-detected" in workflow_text
 
 
 def test_action_validates_fail_on_regression_boolean_input():

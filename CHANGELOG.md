@@ -24,6 +24,10 @@ from v0.1.0 onward.
 - GitHub Action runtime no longer installs the `neo4j` driver; only
   `playwright` and `pyyaml` are pulled, matching the base package surface
   (slice #39).
+- PR workflow step summary now surfaces the three axe gate outputs
+  alongside the existing score gate outputs, and switches to env-var
+  indirection for all interpolated output values to comply with the
+  GitHub Actions workflow-injection security pattern (slice #42).
 
 ## [0.1.0] — pending tag
 

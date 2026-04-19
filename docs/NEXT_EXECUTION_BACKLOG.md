@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 42. PR workflow step-summary surfaces axe gate outputs
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #41 exposed three new Action outputs (`axe-gate-status`, `axe-regression-detected`, `axe-regression-reason`) but the PR workflow's GITHUB_STEP_SUMMARY still only rendered the score-gate lines. Without surfacing axe outputs in the step summary, reviewers scanning the Actions tab would miss whether the axe gate fired at all — breaking the visibility invariant that #23/#26/#28 established for the score gate.
+- Scope: extend `.github/workflows/pr-score-diff.yml` to emit three additional summary lines for the axe outputs. Switch all output interpolation to env-var indirection to comply with the workflow-injection security pattern even though the values are Action-owned status codes (not user-controlled). Contract test in `tests/test_github_action_contract.py` asserts the three new `steps.rade_score_diff.outputs.axe-*` references are wired through.
+- Acceptance: workflow file contains exactly three new `echo` lines for axe gate status / regression reason / regression detected; env-var indirection is used for all interpolations; `tests/test_github_action_contract.py::test_pr_workflow_consumes_action_outputs_in_summary` asserts the new wiring; 206 tests stay green
+- Does NOT include: new Action inputs, new Action outputs, score-gate direction changes, or per-impact gate configuration
+
 ### 41. Opt-in axe-core regression gate on the GitHub Action
 
 - Status: implemented 2026-04-20
