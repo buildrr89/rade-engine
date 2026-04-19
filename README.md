@@ -34,6 +34,7 @@ RADE exists to turn interface inspection into a deterministic, traceable workflo
 - Scrubbed artifacts that preserve structural traceability without pretending the repo is a hosted platform
 - A GitHub Action boundary for deterministic PR score diffs when your repository stores RADE fixtures
 - Embeddable SVG score badges and shields.io endpoint JSON for live score display in your README
+- Optional axe-core integration that embeds Deque-backed WCAG violations in the same report (enable with `--axe`)
 
 ## Quick Start
 
@@ -90,6 +91,18 @@ uv run python -m src.core.cli analyze \
   --md-output output/modernization_report.md \
   --html-output output/modernization_report.html
 ```
+
+Run the same URL analysis with axe-core violations attached (uses Deque's axe-core engine loaded from a pinned CDN, MPL-2.0):
+
+```bash
+uv run python -m src.core.cli analyze \
+  --url https://example.com \
+  --axe \
+  --json-output output/example_report.json \
+  --md-output output/example_report.md
+```
+
+Each violation becomes one finding under `accessibility_violations` with explicit `provenance: "axe-core"`, WCAG refs, impact-to-priority mapping, and the axe rule help URL. The rest of the report — structural clusters, deterministic scores, recommendations — is unchanged, so teams can see axe findings alongside RADE's rule-based analysis without losing the deterministic contract.
 
 Generate an embeddable SVG score badge from a RADE report:
 

@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 35. axe-core accessibility findings integration
+
+- Status: implemented 2026-04-19
+- Risk reduced: the accessibility_risk score is a bespoke RADE heuristic that is not grounded in a trusted third-party standard, which limits adoption for agencies and audit teams that already trust axe-core
+- Scope: add an optional `--axe` flag on `rade analyze --url` that injects Deque's axe-core engine into the live Playwright page, runs `axe.run()`, and embeds the normalized violations in the generated report as a new `accessibility_violations` block. Findings carry explicit `provenance: "axe-core"`, WCAG tag refs, axe rule help URLs, and impact-to-priority mapping. The existing deterministic structural analysis, scoring, and report shape are unchanged when `--axe` is not set, so all existing golden fixtures remain valid.
+- Acceptance: `rade analyze --url <url> --axe` attaches deterministic axe-core violations to the report without changing the existing contract; adapter exposes injected `script_loader`/`runner` seams so tests can exercise normalization, summarization, and error paths without a real browser; Markdown report renders a dedicated axe section when the block is present; CLI tests cover both the axe-on and axe-off paths; full test suite remains green
+- Does NOT include: rescoring `accessibility_risk` against axe violations, offline vendoring of axe-core, axe custom rule configuration, SPA-aware axe runs, or authenticated/private-page collection
+
 ### 34. Deterministic SVG score badges
 
 - Status: implemented 2026-04-19

@@ -55,6 +55,14 @@ def build_parser() -> argparse.ArgumentParser:
         default=10_000,
         help="Timeout for Playwright page collection when using --url.",
     )
+    analyze.add_argument(
+        "--axe",
+        action="store_true",
+        help=(
+            "Run axe-core against the page during --url collection and embed "
+            "the violations in the report with provenance 'axe-core'."
+        ),
+    )
 
     diff = subparsers.add_parser(
         "diff", help="Compare two RADE JSON reports and write diff artifacts."
@@ -116,6 +124,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.input:
                 if not args.app_id:
                     parser.error("--app-id is required when using --input.")
+                if args.axe:
+                    parser.error("--axe requires --url (axe runs on live pages).")
                 report = analyze_file(
                     args.input,
                     args.app_id,
@@ -126,9 +136,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             else:
                 app_id = args.app_id or derive_app_id_from_url(args.url)
                 payload = collect_from_web_dom(
-                    args.url, timeout_ms=args.collector_timeout_ms
+                    args.url,
+                    timeout_ms=args.collector_timeout_ms,
+                    run_axe=args.axe,
                 )
-                raw_report = analyze_payload(payload, app_id)
+                axe_findings = payload.pop("_axe_findings", None)
+                raw_report = analyze_payload(payload, app_id, axe_findings=axe_findings)
                 write_report(
                     raw_report,
                     args.json_output,

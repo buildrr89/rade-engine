@@ -5,6 +5,12 @@ import re
 from typing import Any
 from urllib.parse import urlparse
 
+from ..engine.axe_adapter import (
+    DEFAULT_AXE_CDN_URL,
+    AxeRunError,
+    run_axe_against_page,
+)
+
 JsonDict = dict[str, Any]
 
 INTERACTIVE_ROLES = {
@@ -99,7 +105,12 @@ def derive_app_id_from_url(url: str) -> str:
 
 
 def collect_from_web_dom(
-    url: str, *, timeout_ms: int = 10_000, browser_name: str = "chromium"
+    url: str,
+    *,
+    timeout_ms: int = 10_000,
+    browser_name: str = "chromium",
+    run_axe: bool = False,
+    axe_source_url: str = DEFAULT_AXE_CDN_URL,
 ) -> JsonDict:
     sync_playwright, playwright_error, playwright_timeout = _load_playwright()
     parsed = _normalize_url(url)
@@ -131,10 +142,23 @@ def collect_from_web_dom(
                 title = _safe_page_title(page, parsed.hostname or "Untitled page")
                 snapshot = page.locator("body").aria_snapshot(timeout=timeout_ms)
                 if snapshot and str(snapshot).strip():
-                    return _build_payload_from_aria_snapshot(
+                    payload = _build_payload_from_aria_snapshot(
                         str(snapshot), parsed.geturl(), title
                     )
-                return _build_payload_from_dom_snapshot(page, parsed.geturl(), title)
+                else:
+                    payload = _build_payload_from_dom_snapshot(
+                        page, parsed.geturl(), title
+                    )
+                if run_axe:
+                    try:
+                        payload["_axe_findings"] = run_axe_against_page(
+                            page,
+                            axe_source_url=axe_source_url,
+                            timeout_ms=timeout_ms,
+                        )
+                    except AxeRunError as axe_exc:
+                        raise WebDomCollectionError(str(axe_exc)) from axe_exc
+                return payload
             finally:
                 context.close()
                 browser.close()

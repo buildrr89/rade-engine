@@ -56,6 +56,82 @@ def test_cli_analyze_writes_golden_reports(tmp_path):
     assert generated_md == golden_md
 
 
+def test_cli_analyze_url_with_axe_embeds_violations(tmp_path):
+    json_output = tmp_path / "report.json"
+    stdout = StringIO()
+
+    fixture = json.loads(
+        Path("tests/fixtures/sample_ios_output.json").read_text(encoding="utf-8")
+    )
+    fixture_with_axe = dict(fixture)
+    fixture_with_axe["_axe_findings"] = [
+        {
+            "rule_id": "color-contrast",
+            "provenance": "axe-core",
+            "engine_version": "4.10.2",
+            "priority": "P1",
+            "impact": "serious",
+            "category": "accessibility",
+            "title": "Elements must meet minimum colour contrast",
+            "description": "Ensures elements have sufficient colour contrast",
+            "help_url": "https://dequeuniversity.com/rules/axe/4.10/color-contrast",
+            "wcag_refs": ["wcag2aa"],
+            "tags": ["cat.color", "wcag143", "wcag2aa"],
+            "target": ".btn-primary",
+            "html": '<a class="btn-primary">Go</a>',
+            "failure_summary": "Fix any of the following: ...",
+        }
+    ]
+
+    with patch(
+        "src.core.cli.collect_from_web_dom", return_value=fixture_with_axe
+    ) as collector:
+        with patch(
+            "src.core.cli.derive_app_id_from_url",
+            return_value="com.example.legacyapp",
+        ):
+            with patch(
+                "src.core.report_generator.now_iso",
+                return_value="2026-03-18T00:00:00Z",
+            ):
+                with redirect_stdout(stdout):
+                    exit_code = main(
+                        [
+                            "analyze",
+                            "--url",
+                            "https://example.com",
+                            "--axe",
+                            "--json-output",
+                            str(json_output),
+                        ]
+                    )
+
+    assert exit_code == 0
+    collector.assert_called_once_with(
+        "https://example.com", timeout_ms=10_000, run_axe=True
+    )
+    report = json.loads(json_output.read_text(encoding="utf-8"))
+    assert "accessibility_violations" in report
+    assert report["accessibility_violations"]["summary"]["total"] == 1
+    assert (
+        report["accessibility_violations"]["findings"][0]["rule_id"] == "color-contrast"
+    )
+
+
+def test_cli_analyze_axe_flag_requires_url(tmp_path):
+    with pytest.raises(SystemExit):
+        main(
+            [
+                "analyze",
+                "--input",
+                "tests/fixtures/sample_ios_output.json",
+                "--app-id",
+                "com.example.legacyapp",
+                "--axe",
+            ]
+        )
+
+
 def test_cli_analyze_url_uses_collector_and_writes_reports(tmp_path):
     json_output = tmp_path / "report.json"
     md_output = tmp_path / "report.md"
@@ -88,7 +164,9 @@ def test_cli_analyze_url_uses_collector_and_writes_reports(tmp_path):
                     )
 
     assert exit_code == 0
-    collector.assert_called_once_with("https://example.com", timeout_ms=10_000)
+    collector.assert_called_once_with(
+        "https://example.com", timeout_ms=10_000, run_axe=False
+    )
     assert stdout.getvalue().splitlines() == [
         "generated 2 screens and 3 recommendations",
         f"json: {json_output}",

@@ -9,6 +9,7 @@ from typing import Any
 from uuid import uuid4
 
 from ..connectors.standards_pack import load_standards_pack
+from ..engine.axe_adapter import summarize_axe_findings
 from ..scrubber.pii_scrubber import scrub_report_artifact
 from .compliance import (
     iso_date_from_timestamp,
@@ -38,7 +39,10 @@ def now_iso() -> str:
 
 
 def analyze_payload(
-    payload: JsonDict, app_id: str, generated_at: str | None = None
+    payload: JsonDict,
+    app_id: str,
+    generated_at: str | None = None,
+    axe_findings: list[JsonDict] | None = None,
 ) -> JsonDict:
     run_id = str(uuid4())
     _set_last_run_metadata({"run_id": run_id})
@@ -149,6 +153,11 @@ def analyze_payload(
         "recommendations": recommendations,
         "roadmap": roadmap,
     }
+    if axe_findings is not None:
+        report["accessibility_violations"] = {
+            "findings": list(axe_findings),
+            "summary": summarize_axe_findings(axe_findings),
+        }
     report["_telemetry"] = {"run_id": run_id}
     return report
 
@@ -247,6 +256,32 @@ def render_markdown_report(report: JsonDict) -> str:
             f"- Step {item['step']}: {item['title']} ({item['priority']}, {item['implementation_effort']})"
         )
     lines.append("")
+    axe_block = report.get("accessibility_violations")
+    if axe_block is not None:
+        summary = axe_block.get("summary", {})
+        total = summary.get("total", 0)
+        engine_versions = summary.get("engine_versions", []) or ["unknown"]
+        lines.append("## Accessibility violations (axe-core)")
+        lines.append(f"- Engine: axe-core (versions: {', '.join(engine_versions)})")
+        lines.append(f"- Total violations: {total}")
+        by_impact = summary.get("by_impact", {})
+        if by_impact:
+            parts = ", ".join(
+                f"{impact}={count}" for impact, count in by_impact.items() if count
+            )
+            if parts:
+                lines.append(f"- By impact: {parts}")
+        for finding in axe_block.get("findings", []):
+            lines.append(f"### {finding.get('title') or finding.get('rule_id')}")
+            lines.append(f"- Rule ID: {finding.get('rule_id')}")
+            lines.append(f"- Impact: {finding.get('impact')}")
+            lines.append(f"- Priority: {finding.get('priority')}")
+            lines.append(f"- Target: `{finding.get('target') or ''}`")
+            if finding.get("wcag_refs"):
+                lines.append(f"- WCAG: {', '.join(finding.get('wcag_refs') or [])}")
+            if finding.get("help_url"):
+                lines.append(f"- Help: {finding.get('help_url')}")
+            lines.append("")
     return "\n".join(lines)
 
 
