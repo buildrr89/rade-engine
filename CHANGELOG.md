@@ -8,6 +8,17 @@ from v0.1.0 onward.
 
 ## [Unreleased]
 
+### Added
+
+- Optional axe-core regression gate on the GitHub Action via new
+  `fail-on-axe-regression` input. When enabled, the Action fails the PR
+  if any newly-introduced axe rule has `critical` or `serious` impact in
+  the head report. Pre-existing violations and new `moderate` / `minor`
+  findings do not trigger the gate. New deterministic outputs:
+  `axe-gate-status`, `axe-regression-detected`, `axe-regression-reason`.
+  The score regression gate (`fail-on-regression`) is unchanged (slice
+  #41).
+
 ### Changed
 
 - GitHub Action runtime no longer installs the `neo4j` driver; only

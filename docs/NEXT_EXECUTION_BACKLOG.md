@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 41. Opt-in axe-core regression gate on the GitHub Action
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #38 made axe deltas visible in the PR comment but left them toothless — teams that want axe to actually block merges had no lever. Gating on total count is too noisy (any new `minor` finding would fire); gating on newly-introduced `critical`/`serious` rules matches how real a11y programs operate and avoids punishing pre-existing debt.
+- Scope: extend `build_axe_diff()` with a `newly_introduced_by_impact` bucketing derived from head-side findings, plus `has_axe_regression()` and `axe_regression_reason()` helpers. Add a new `fail-on-axe-regression` Action input (default `"false"`) that gates independently of the existing `fail-on-regression` score gate — both gates are OR'd into `should-fail`. Add three new deterministic outputs: `axe-gate-status`, `axe-regression-detected`, `axe-regression-reason`. The PR comment's `Accessibility violations (axe-core)` subsection now leads with an `Axe regression gate status` line and lists newly-introduced critical/serious rules explicitly.
+- Acceptance: new cases in `tests/test_pr_score_diff.py` cover (a) gate fires on newly-introduced critical, (b) fires on newly-introduced serious, (c) fires on both with reason `"both"`, (d) does not fire when only `moderate`/`minor` are introduced, (e) does not fire when a pre-existing `critical` rule's count grows without introducing new rule IDs, (f) absent-on-both-sides stays `none`. `tests/test_github_action_contract.py` asserts the new input, outputs, and input-validation predicate. All 206 tests pass; existing golden-output tests are unchanged.
+- Does NOT include: per-impact thresholds exposed as Action inputs, node-target-level gating, rescoring `accessibility_risk` against axe findings, or changing the score-gate direction rules
+
 ### 40. CHANGELOG.md for public-alpha release
 
 - Status: implemented 2026-04-20

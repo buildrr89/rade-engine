@@ -3,9 +3,11 @@ from __future__ import annotations
 
 from src.core.pr_score_diff import (
     ALL_SCORE_NAMES,
+    axe_regression_reason,
     build_axe_diff,
     build_score_diff,
     classify_score_delta,
+    has_axe_regression,
     has_score_regression,
     regression_reason,
     render_pr_comment,
@@ -170,11 +172,19 @@ def _axe_report(
     *,
     by_impact: dict | None = None,
     by_rule: dict | None = None,
+    rule_impacts: dict[str, str] | None = None,
 ) -> dict:
     if by_impact is None:
         by_impact = {"critical": 0, "serious": 0, "moderate": 0, "minor": 0}
     if by_rule is None:
         by_rule = {}
+    if rule_impacts is None:
+        rule_impacts = {}
+    findings = []
+    for rule_id, count in by_rule.items():
+        impact = rule_impacts.get(rule_id, "moderate")
+        for _ in range(count):
+            findings.append({"rule_id": rule_id, "impact": impact})
     total = sum(by_impact.values())
     return {
         "scores": {
@@ -184,7 +194,7 @@ def _axe_report(
             "migration_risk": {"value": 50},
         },
         "accessibility_violations": {
-            "findings": [],
+            "findings": findings,
             "summary": {
                 "total": total,
                 "by_impact": by_impact,
@@ -355,6 +365,111 @@ def test_render_pr_comment_axe_section_stable_across_runs():
         axe_diff=axe_diff,
     )
     assert first == second
+
+
+def test_has_axe_regression_false_when_absent():
+    assert has_axe_regression({"present": False}) is False
+    assert axe_regression_reason({"present": False}) == "none"
+
+
+def test_has_axe_regression_false_when_no_new_serious_or_critical():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 1, "minor": 0},
+        by_rule={"image-alt": 1},
+        rule_impacts={"image-alt": "moderate"},
+    )
+    head = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 2, "minor": 0},
+        by_rule={"image-alt": 1, "duplicate-id": 1},
+        rule_impacts={"image-alt": "moderate", "duplicate-id": "moderate"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is False
+    assert axe_regression_reason(diff) == "none"
+
+
+def test_has_axe_regression_fires_on_newly_introduced_critical():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 0, "minor": 0}
+    )
+    head = _axe_report(
+        by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 1},
+        rule_impacts={"color-contrast": "critical"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is True
+    assert axe_regression_reason(diff) == "critical_introduced"
+    assert diff["newly_introduced_by_impact"]["critical"] == ["color-contrast"]
+
+
+def test_has_axe_regression_fires_on_newly_introduced_serious():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 0, "minor": 0}
+    )
+    head = _axe_report(
+        by_impact={"critical": 0, "serious": 1, "moderate": 0, "minor": 0},
+        by_rule={"label": 1},
+        rule_impacts={"label": "serious"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is True
+    assert axe_regression_reason(diff) == "serious_introduced"
+
+
+def test_has_axe_regression_both_when_critical_and_serious_introduced():
+    base = _axe_report(
+        by_impact={"critical": 0, "serious": 0, "moderate": 0, "minor": 0}
+    )
+    head = _axe_report(
+        by_impact={"critical": 1, "serious": 1, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 1, "label": 1},
+        rule_impacts={"color-contrast": "critical", "label": "serious"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is True
+    assert axe_regression_reason(diff) == "both"
+
+
+def test_has_axe_regression_ignores_pre_existing_critical_rule():
+    """A rule that was already critical in base should not trigger the gate
+    even when its count grows in head."""
+    base = _axe_report(
+        by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 1},
+        rule_impacts={"color-contrast": "critical"},
+    )
+    head = _axe_report(
+        by_impact={"critical": 2, "serious": 0, "moderate": 0, "minor": 0},
+        by_rule={"color-contrast": 2},
+        rule_impacts={"color-contrast": "critical"},
+    )
+    diff = build_axe_diff(base, head)
+    assert has_axe_regression(diff) is False
+    assert axe_regression_reason(diff) == "none"
+
+
+def test_render_pr_comment_includes_axe_gate_status_line_when_present():
+    axe_diff = build_axe_diff(
+        _axe_report(by_impact={"critical": 0, "serious": 0, "moderate": 0, "minor": 0}),
+        _axe_report(
+            by_impact={"critical": 1, "serious": 0, "moderate": 0, "minor": 0},
+            by_rule={"color-contrast": 1},
+            rule_impacts={"color-contrast": "critical"},
+        ),
+    )
+    comment = render_pr_comment(
+        {
+            "reusability": {"base": 80, "head": 80, "delta": 0},
+            "accessibility_risk": {"base": 30, "head": 30, "delta": 0},
+        },
+        base_ref="base-sha",
+        head_ref="head-sha",
+        axe_diff=axe_diff,
+        axe_gate_status="enabled:failed",
+    )
+    assert "Axe regression gate status: `enabled:failed`." in comment
+    assert "Newly introduced `critical` rules: `color-contrast`." in comment
 
 
 def test_regression_reason_both_when_both_regression_conditions_trigger():

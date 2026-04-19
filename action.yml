@@ -33,6 +33,10 @@ inputs:
     description: "If true, fail when reusability drops or accessibility risk rises."
     required: false
     default: "false"
+  fail-on-axe-regression:
+    description: "If true, fail when axe-core introduces new `critical` or `serious` rule violations. Independent of `fail-on-regression`."
+    required: false
+    default: "false"
 outputs:
   gate-status:
     description: "Regression gate status (`disabled`, `enabled:passed`, or `enabled:failed`)."
@@ -52,6 +56,15 @@ outputs:
   regression-detected:
     description: "Whether any regression predicate triggered (`true` or `false`)."
     value: ${{ steps.regression.outputs.regression_detected }}
+  axe-gate-status:
+    description: "Axe regression gate status (`disabled`, `enabled:passed`, or `enabled:failed`)."
+    value: ${{ steps.regression.outputs.axe_gate_status }}
+  axe-regression-detected:
+    description: "Whether the axe gate predicate triggered (`true` or `false`)."
+    value: ${{ steps.regression.outputs.axe_regression_detected }}
+  axe-regression-reason:
+    description: "Stable axe regression reason code (`none`, `critical_introduced`, `serious_introduced`, or `both`)."
+    value: ${{ steps.regression.outputs.axe_regression_reason }}
 runs:
   using: "composite"
   steps:
@@ -96,7 +109,10 @@ runs:
         import sys
         from pathlib import Path
         from src.core.pr_score_diff import (
+            axe_regression_reason,
+            build_axe_diff,
             build_score_diff,
+            has_axe_regression,
             has_score_regression,
             load_report,
             regression_reason,
@@ -110,22 +126,41 @@ runs:
             )
             raise SystemExit(2)
 
+        raw_axe_gate = os.environ["RADE_FAIL_ON_AXE_REGRESSION"]
+        if raw_axe_gate not in {"true", "false"}:
+            print(
+                "RADE action input 'fail-on-axe-regression' must be 'true' or 'false'.",
+                file=sys.stderr,
+            )
+            raise SystemExit(2)
+
         enabled = raw_gate == "true"
+        axe_enabled = raw_axe_gate == "true"
         base_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-base.json"))
         head_report = load_report(Path(f"{os.environ['RUNNER_TEMP']}/rade-head.json"))
         diff = build_score_diff(base_report, head_report)
+        axe_diff = build_axe_diff(base_report, head_report)
         has_regression = has_score_regression(diff)
         reason = regression_reason(diff)
+        has_axe_reg = has_axe_regression(axe_diff)
+        axe_reason = axe_regression_reason(axe_diff)
 
         if enabled and has_regression:
             status = "enabled:failed"
-            should_fail = "true"
         elif enabled:
             status = "enabled:passed"
-            should_fail = "false"
         else:
             status = "disabled"
-            should_fail = "false"
+
+        if axe_enabled and has_axe_reg:
+            axe_status = "enabled:failed"
+        elif axe_enabled:
+            axe_status = "enabled:passed"
+        else:
+            axe_status = "disabled"
+
+        should_fail_bool = (enabled and has_regression) or (axe_enabled and has_axe_reg)
+        should_fail = "true" if should_fail_bool else "false"
 
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
             f.write(
@@ -135,11 +170,16 @@ runs:
                 f"accessibility_risk_delta={diff['accessibility_risk']['delta']}\n"
                 f"regression_reason={reason}\n"
                 f"regression_detected={'true' if has_regression else 'false'}\n"
+                f"axe_gate_status={axe_status}\n"
+                f"axe_regression_reason={axe_reason}\n"
+                f"axe_regression_detected={'true' if has_axe_reg else 'false'}\n"
             )
         print(f"RADE regression gate status: {status}")
+        print(f"RADE axe regression gate status: {axe_status}")
         PY
       env:
         RADE_FAIL_ON_REGRESSION: ${{ inputs.fail-on-regression }}
+        RADE_FAIL_ON_AXE_REGRESSION: ${{ inputs.fail-on-axe-regression }}
 
     - name: Build PR comment body
       shell: bash
@@ -152,6 +192,7 @@ runs:
           --base-ref "${{ inputs.base-sha }}" \
           --head-ref "${{ inputs.head-sha }}" \
           --gate-status "${{ steps.regression.outputs.gate_status }}" \
+          --axe-gate-status "${{ steps.regression.outputs.axe_gate_status }}" \
           --output "$RUNNER_TEMP/rade-comment.md"
 
     - name: Post or update PR comment
@@ -193,5 +234,5 @@ runs:
       if: ${{ steps.regression.outputs.should_fail == 'true' }}
       shell: bash
       run: |
-        echo "RADE regression gate failed: reusability decreased and/or accessibility_risk increased." >&2
+        echo "RADE regression gate failed: score regression and/or newly introduced critical/serious axe violations." >&2
         exit 1

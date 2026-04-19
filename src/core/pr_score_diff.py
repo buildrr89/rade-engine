@@ -85,6 +85,31 @@ def _axe_rule_ids(summary: dict) -> set[str]:
     return {str(rule_id) for rule_id, count in by_rule.items() if int(count) > 0}
 
 
+AXE_GATE_IMPACTS: tuple[str, ...] = ("critical", "serious")
+
+
+def _axe_rule_impact_map(block: dict | None) -> dict[str, str]:
+    """Map each rule_id in a report's axe block to its worst impact level."""
+    if block is None:
+        return {}
+    findings = block.get("findings") or []
+    severity = {level: idx for idx, level in enumerate(AXE_IMPACT_LEVELS)}
+    rule_impacts: dict[str, str] = {}
+    for finding in findings:
+        if not isinstance(finding, dict):
+            continue
+        rule_id = str(finding.get("rule_id") or "")
+        if not rule_id:
+            continue
+        impact = str(finding.get("impact") or "moderate").lower()
+        if impact not in severity:
+            impact = "moderate"
+        current = rule_impacts.get(rule_id)
+        if current is None or severity[impact] < severity[current]:
+            rule_impacts[rule_id] = impact
+    return rule_impacts
+
+
 def build_axe_diff(base_report: dict, head_report: dict) -> dict:
     """Deterministic axe-core violation delta at rule-id granularity.
 
@@ -109,6 +134,16 @@ def build_axe_diff(base_report: dict, head_report: dict) -> dict:
     }
     base_rules = _axe_rule_ids(base_summary)
     head_rules = _axe_rule_ids(head_summary)
+    newly_introduced = sorted(head_rules - base_rules)
+    head_rule_impacts = _axe_rule_impact_map(head_block)
+    newly_introduced_by_impact: dict[str, list[str]] = {
+        level: [] for level in AXE_IMPACT_LEVELS
+    }
+    for rule_id in newly_introduced:
+        impact = head_rule_impacts.get(rule_id, "moderate")
+        if impact not in newly_introduced_by_impact:
+            impact = "moderate"
+        newly_introduced_by_impact[impact].append(rule_id)
     return {
         "present": True,
         "base_present": base_block is not None,
@@ -119,12 +154,37 @@ def build_axe_diff(base_report: dict, head_report: dict) -> dict:
         "base_by_impact": base_by_impact,
         "head_by_impact": head_by_impact,
         "delta_by_impact": delta_by_impact,
-        "newly_introduced_rule_ids": sorted(head_rules - base_rules),
+        "newly_introduced_rule_ids": newly_introduced,
+        "newly_introduced_by_impact": newly_introduced_by_impact,
         "fully_resolved_rule_ids": sorted(base_rules - head_rules),
     }
 
 
-def render_axe_section(axe_diff: dict) -> list[str]:
+def has_axe_regression(axe_diff: dict) -> bool:
+    """Slice-#41 gate: any newly introduced critical or serious rule fails."""
+    if not axe_diff.get("present"):
+        return False
+    buckets = axe_diff.get("newly_introduced_by_impact") or {}
+    return any(buckets.get(level) for level in AXE_GATE_IMPACTS)
+
+
+def axe_regression_reason(axe_diff: dict) -> str:
+    """Stable reason code paralleling `regression_reason()` for the axe gate."""
+    if not axe_diff.get("present"):
+        return "none"
+    buckets = axe_diff.get("newly_introduced_by_impact") or {}
+    critical = bool(buckets.get("critical"))
+    serious = bool(buckets.get("serious"))
+    if critical and serious:
+        return "both"
+    if critical:
+        return "critical_introduced"
+    if serious:
+        return "serious_introduced"
+    return "none"
+
+
+def render_axe_section(axe_diff: dict, axe_gate_status: str = "disabled") -> list[str]:
     """Markdown subsection for the PR comment. Returns [] when absent."""
     if not axe_diff.get("present"):
         return []
@@ -132,6 +192,7 @@ def render_axe_section(axe_diff: dict) -> list[str]:
         "",
         "### Accessibility violations (axe-core)",
         "",
+        f"Axe regression gate status: `{axe_gate_status}`.",
     ]
     if not axe_diff["base_present"]:
         lines.append("Base report has no axe-core output; head introduced axe data.")
@@ -160,13 +221,21 @@ def render_axe_section(axe_diff: dict) -> list[str]:
         lines.append(f"Newly introduced rule IDs: {rule_list}.")
     else:
         lines.append("Newly introduced rule IDs: none.")
+    gate_impacts = axe_diff.get("newly_introduced_by_impact") or {}
+    for level in AXE_GATE_IMPACTS:
+        rules = gate_impacts.get(level) or []
+        if rules:
+            rule_list = ", ".join(f"`{rule_id}`" for rule_id in rules)
+            lines.append(f"Newly introduced `{level}` rules: {rule_list}.")
     if resolved:
         rule_list = ", ".join(f"`{rule_id}`" for rule_id in resolved)
         lines.append(f"Fully resolved rule IDs: {rule_list}.")
     else:
         lines.append("Fully resolved rule IDs: none.")
     lines.append(
-        "Reported for visibility; the regression gate still tracks only `reusability` and `accessibility_risk`."
+        "Axe gate fires on newly-introduced `critical` or `serious` rules; "
+        "the score regression gate still tracks only `reusability` and "
+        "`accessibility_risk`."
     )
     return lines
 
@@ -177,6 +246,7 @@ def render_pr_comment(
     head_ref: str,
     gate_status: str = "disabled",
     axe_diff: dict | None = None,
+    axe_gate_status: str = "disabled",
 ) -> str:
     lines = [
         COMMENT_MARKER,
@@ -195,7 +265,7 @@ def render_pr_comment(
             f"| `{score_name}` | {values['base']} | {values['head']} | {format_delta(values['delta'])} |"
         )
     if axe_diff is not None:
-        lines.extend(render_axe_section(axe_diff))
+        lines.extend(render_axe_section(axe_diff, axe_gate_status=axe_gate_status))
     lines.extend(
         [
             "",

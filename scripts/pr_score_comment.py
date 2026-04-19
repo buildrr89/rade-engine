@@ -22,6 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--base-ref", required=True)
     parser.add_argument("--head-ref", required=True)
     parser.add_argument("--gate-status", default="disabled")
+    parser.add_argument("--axe-gate-status", default="disabled")
     parser.add_argument("--output", type=Path, required=True)
     return parser
 
@@ -38,6 +39,7 @@ def main() -> int:
         args.head_ref,
         gate_status=args.gate_status,
         axe_diff=axe_diff,
+        axe_gate_status=args.axe_gate_status,
     )
     args.output.write_text(comment, encoding="utf-8")
     print(f"wrote: {args.output}")
