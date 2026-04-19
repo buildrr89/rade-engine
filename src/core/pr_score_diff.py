@@ -62,11 +62,121 @@ def classify_score_delta(score_name: str, delta: int) -> str:
     return "improved" if delta < 0 else "regressed"
 
 
+AXE_IMPACT_LEVELS = ("critical", "serious", "moderate", "minor")
+
+
+def _axe_block(report: dict) -> dict | None:
+    block = report.get("accessibility_violations")
+    if isinstance(block, dict):
+        return block
+    return None
+
+
+def _axe_by_impact(summary: dict) -> dict[str, int]:
+    raw = summary.get("by_impact") or {}
+    counts: dict[str, int] = {}
+    for level in AXE_IMPACT_LEVELS:
+        counts[level] = int(raw.get(level, 0))
+    return counts
+
+
+def _axe_rule_ids(summary: dict) -> set[str]:
+    by_rule = summary.get("by_rule") or {}
+    return {str(rule_id) for rule_id, count in by_rule.items() if int(count) > 0}
+
+
+def build_axe_diff(base_report: dict, head_report: dict) -> dict:
+    """Deterministic axe-core violation delta at rule-id granularity.
+
+    `present` is True when either side carries an `accessibility_violations`
+    block. When neither side has axe data, callers should omit the PR comment
+    section entirely.
+    """
+    base_block = _axe_block(base_report)
+    head_block = _axe_block(head_report)
+    if base_block is None and head_block is None:
+        return {"present": False}
+
+    base_summary = (base_block or {}).get("summary") or {}
+    head_summary = (head_block or {}).get("summary") or {}
+    base_total = int(base_summary.get("total", 0))
+    head_total = int(head_summary.get("total", 0))
+    base_by_impact = _axe_by_impact(base_summary)
+    head_by_impact = _axe_by_impact(head_summary)
+    delta_by_impact = {
+        level: head_by_impact[level] - base_by_impact[level]
+        for level in AXE_IMPACT_LEVELS
+    }
+    base_rules = _axe_rule_ids(base_summary)
+    head_rules = _axe_rule_ids(head_summary)
+    return {
+        "present": True,
+        "base_present": base_block is not None,
+        "head_present": head_block is not None,
+        "base_total": base_total,
+        "head_total": head_total,
+        "delta_total": head_total - base_total,
+        "base_by_impact": base_by_impact,
+        "head_by_impact": head_by_impact,
+        "delta_by_impact": delta_by_impact,
+        "newly_introduced_rule_ids": sorted(head_rules - base_rules),
+        "fully_resolved_rule_ids": sorted(base_rules - head_rules),
+    }
+
+
+def render_axe_section(axe_diff: dict) -> list[str]:
+    """Markdown subsection for the PR comment. Returns [] when absent."""
+    if not axe_diff.get("present"):
+        return []
+    lines = [
+        "",
+        "### Accessibility violations (axe-core)",
+        "",
+    ]
+    if not axe_diff["base_present"]:
+        lines.append("Base report has no axe-core output; head introduced axe data.")
+    elif not axe_diff["head_present"]:
+        lines.append("Head report has no axe-core output; base carried axe data.")
+    lines.extend(
+        [
+            "",
+            "| Impact | Base | Head | Delta |",
+            "|---|---:|---:|---:|",
+            f"| `total` | {axe_diff['base_total']} | {axe_diff['head_total']} | {format_delta(axe_diff['delta_total'])} |",
+        ]
+    )
+    for level in AXE_IMPACT_LEVELS:
+        base_count = axe_diff["base_by_impact"][level]
+        head_count = axe_diff["head_by_impact"][level]
+        delta = axe_diff["delta_by_impact"][level]
+        lines.append(
+            f"| `{level}` | {base_count} | {head_count} | {format_delta(delta)} |"
+        )
+    newly = axe_diff["newly_introduced_rule_ids"]
+    resolved = axe_diff["fully_resolved_rule_ids"]
+    lines.append("")
+    if newly:
+        rule_list = ", ".join(f"`{rule_id}`" for rule_id in newly)
+        lines.append(f"Newly introduced rule IDs: {rule_list}.")
+    else:
+        lines.append("Newly introduced rule IDs: none.")
+    if resolved:
+        rule_list = ", ".join(f"`{rule_id}`" for rule_id in resolved)
+        lines.append(f"Fully resolved rule IDs: {rule_list}.")
+    else:
+        lines.append("Fully resolved rule IDs: none.")
+    lines.append(
+        "Reported for visibility; the regression gate still tracks only `reusability` and `accessibility_risk`."
+    )
+    return lines
+
+
 def render_pr_comment(
     diff: dict[str, dict[str, int]],
     base_ref: str,
     head_ref: str,
     gate_status: str = "disabled",
+    axe_diff: dict | None = None,
 ) -> str:
     lines = [
         COMMENT_MARKER,
@@ -84,6 +194,8 @@ def render_pr_comment(
         lines.append(
             f"| `{score_name}` | {values['base']} | {values['head']} | {format_delta(values['delta'])} |"
         )
+    if axe_diff is not None:
+        lines.extend(render_axe_section(axe_diff))
     lines.extend(
         [
             "",

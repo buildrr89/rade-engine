@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 38. axe-core violations in PR score-diff comment
+
+- Status: implemented 2026-04-20
+- Risk reduced: `--axe` is the headline credibility feature, but the PR score-diff comment was structural-only. Teams reviewing PRs could not see axe findings where they actually decide — making the axe surface effectively invisible to the adoption audience.
+- Scope: add `build_axe_diff(base_report, head_report)` to `src/core/pr_score_diff.py` that returns a deterministic, rule-id-granularity delta: per-impact counts (critical/serious/moderate/minor), total delta, and sorted `newly_introduced_rule_ids` / `fully_resolved_rule_ids` sets. Handles both-sides-have-axe, head-only, base-only, and neither-side. `render_pr_comment()` gains an optional `axe_diff` parameter; when present, a dedicated `### Accessibility violations (axe-core)` subsection is appended below the score table. `scripts/pr_score_comment.py` now computes the axe diff and threads it through. When neither side has axe data, the section is omitted entirely — the existing comment shape is unchanged.
+- Acceptance: `tests/test_pr_score_diff.py` covers both-sides-have-axe, head-only, base-only, neither-side, determinism across repeated calls, and the comment-with-axe vs comment-without-axe rendering contracts; all previously-green tests still pass (198 total); regression gate is unchanged — axe deltas are reported, not enforced, in this slice
+- Does NOT include: turning axe into a gate, new Action inputs, rescoring `accessibility_risk` against axe violations, node-target-level pairing, or score-direction changes
+
 ### 37. Optional `graph` extra for Neo4j driver
 
 - Status: implemented 2026-04-19
