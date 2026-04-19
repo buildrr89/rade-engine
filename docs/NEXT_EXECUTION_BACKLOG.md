@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 40. CHANGELOG.md for public-alpha release
+
+- Status: implemented 2026-04-20
+- Risk reduced: PyPI v0.1.0 is pending a maintainer tag, and without a curated changelog the first external release notes would be raw `git log` output — unreadable for adopters and hostile to downstream security reviewers who need to see what actually changed between slices.
+- Scope: add `CHANGELOG.md` at the repo root covering the path from slice #1 shell through slices #32–#39 under an `[Unreleased]` / `[0.1.0]` pair, grouped by Keep-a-Changelog sections (Added / Changed / Security). Include the file in the hatch sdist include list so it ships with the wheel.
+- Acceptance: `CHANGELOG.md` exists, reflects the as-shipped state of the branch (slices #32–#39), and does not claim features beyond what the code supports; `pyproject.toml` sdist includes `CHANGELOG.md`; test suite stays green
+- Does NOT include: a release-notes automation (towncrier / release-drafter), v0.1.0 tagging, or backfilling entries for every historical slice below #32
+
 ### 39. Drop neo4j from GitHub Action runtime install
 
 - Status: implemented 2026-04-20
