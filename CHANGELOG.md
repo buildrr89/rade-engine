@@ -29,6 +29,13 @@ from v0.1.0 onward.
   indirection for all interpolated output values to comply with the
   GitHub Actions workflow-injection security pattern (slice #42).
 
+### Documentation
+
+- README gains a dedicated `## GitHub Action` section with a working
+  YAML example covering both `fail-on-regression` and
+  `fail-on-axe-regression`, plus an inventory of the 9 deterministic
+  outputs (slice #43).
+
 ## [0.1.0] — pending tag
 
 First public-alpha release on PyPI as `rade-engine`. The package exposes the

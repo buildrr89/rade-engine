@@ -32,7 +32,7 @@ RADE exists to turn interface inspection into a deterministic, traceable workflo
 - JSON, Markdown, and interactive HTML reports from the same engine run
 - Deterministic report-to-report diffs for tracking interface change over time
 - Scrubbed artifacts that preserve structural traceability without pretending the repo is a hosted platform
-- A GitHub Action boundary for deterministic PR score diffs when your repository stores RADE fixtures
+- A GitHub Action boundary for deterministic PR score diffs when your repository stores RADE fixtures, with an opt-in axe-core regression gate that blocks newly introduced `critical` or `serious` violations
 - Embeddable SVG score badges and shields.io endpoint JSON for live score display in your README
 - Optional axe-core integration that embeds Deque-backed WCAG violations in the same report (enable with `--axe`)
 
@@ -140,6 +140,42 @@ Supported metrics: `complexity`, `reusability`, `accessibility_risk`, `migration
 4. Use the JSON outputs for automation, diffing, or downstream scoring checks.
 5. If your workflow stores fixtures in git, use the GitHub Action to compare score deltas on pull requests.
 
+## GitHub Action
+
+The repository ships a composite Action at the root (`action.yml`) that runs RADE against a checked-in input fixture on the base and head refs of a pull request, then posts or updates a single PR comment with the deterministic score deltas. Two gates are available and independent — either, both, or neither can be enabled.
+
+```yaml
+# .github/workflows/rade.yml
+name: RADE
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  rade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: buildrr89/rade-engine@v0.1.0  # pin to a release tag
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-number: ${{ github.event.pull_request.number }}
+          base-sha: ${{ github.event.pull_request.base.sha }}
+          head-sha: ${{ github.event.pull_request.head.sha }}
+          input-path: examples/sample_ios_output.json
+          app-id: com.example.legacyapp
+          # optional score gate: fail when reusability drops or accessibility_risk rises
+          fail-on-regression: "false"
+          # optional axe gate (slice #41): fail when new critical/serious axe rules are introduced.
+          # Requires fixtures that already carry an `accessibility_violations` block.
+          fail-on-axe-regression: "false"
+```
+
+Outputs exposed for downstream steps: `gate-status`, `should-fail`, `reusability-delta`, `accessibility-risk-delta`, `regression-reason`, `regression-detected`, and their axe counterparts `axe-gate-status`, `axe-regression-detected`, `axe-regression-reason`. The axe gate fires only on rule IDs that were absent from the base report and present with `critical` or `serious` impact in the head — pre-existing violations and new `moderate`/`minor` findings do not trigger it.
+
 ## Output Artifacts
 
 - `JSON report`
@@ -153,7 +189,7 @@ Supported metrics: `complexity`, `reusability`, `accessibility_risk`, `migration
 - `Markdown report diff`
   Review-friendly change log for before/after interface runs.
 - `GitHub Action comment`
-  Deterministic base/head score deltas for `reusability` and `accessibility_risk` when run on fixture-backed pull requests.
+  Deterministic base/head score deltas for `reusability` and `accessibility_risk` when run on fixture-backed pull requests. If the fixtures include axe-core output (`--axe`), the comment also carries an `Accessibility violations (axe-core)` subsection with per-impact counts and newly-introduced / fully-resolved rule IDs.
 
 See [examples/](examples/) for checked-in report artifacts from public websites.
 

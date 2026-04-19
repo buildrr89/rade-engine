@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 43. README docs pass for axe gate and graph extra
+
+- Status: implemented 2026-04-20
+- Risk reduced: slices #37 and #41 shipped user-facing surfaces (the `[graph]` pip extra and the `fail-on-axe-regression` Action input) that were reachable only by reading the backlog or the code. External consumers had no canonical doc showing how to wire either one. That's a credibility problem on a public-alpha repo.
+- Scope: add a dedicated `## GitHub Action` section to `README.md` with a minimal working YAML example that uses both `fail-on-regression` and `fail-on-axe-regression`, and an inventory of the 9 deterministic outputs. Tighten the existing Features bullet to mention the axe gate, and the Output Artifacts bullet to mention the `Accessibility violations (axe-core)` PR subsection when fixtures include axe output. The `[graph]` extra callout from slice #37 already exists in the Install section and needs no further edits.
+- Acceptance: README carries a `## GitHub Action` section with a copy-pasteable YAML snippet pinning a release tag; mentions `fail-on-axe-regression` and the three new outputs; explicitly states the gate semantics (newly-introduced critical/serious only); test suite unchanged (206 passing)
+- Does NOT include: a standalone Action README inside a `docs/` directory, marketplace listing copy, per-input tables, or any code changes
+
 ### 42. PR workflow step-summary surfaces axe gate outputs
 
 - Status: implemented 2026-04-20
