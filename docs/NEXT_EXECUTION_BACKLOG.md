@@ -204,6 +204,14 @@
 - Acceptance: `rade diff --base-report <base.json> --head-report <head.json>` writes deterministic `report_diff.json` and `report_diff.md`; score deltas are direction-aware for `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`; recommendation and repeated-structure changes are stable and traceable by identifiers/fingerprints; CLI and artifact contract tests cover deterministic output and invalid-input failures
 - Does NOT include: hosted persistence, historical storage, auth changes, tenant concepts, queues, private-page collection, or LLM-generated comparison logic
 
+### 39. Drop neo4j from GitHub Action runtime install
+
+- Status: implemented 2026-04-20
+- Risk reduced: slice #37 made `neo4j` an optional extra at the package level, but `action.yml`'s runtime-deps step still `pip install`ed it on every PR run — wasting ~40MB of bandwidth and cold-start time for every Action consumer, who by definition never exercises the Neo4j Aura ingest path from inside the Action.
+- Scope: remove `neo4j` from the `Install RADE runtime dependencies` step in `action.yml`. No new inputs, no test changes — the graph ingest path is not reachable from the Action's CLI invocation, so dropping the driver there has no runtime effect.
+- Acceptance: full test suite stays green; `action.yml` contract tests still pass; Action runtime install is now `playwright pyyaml` only
+- Does NOT include: switching the Action to install from PyPI, pinning transitive deps, or changing the Action's CLI surface
+
 ### 38. axe-core violations in PR score-diff comment
 
 - Status: implemented 2026-04-20

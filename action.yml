@@ -62,7 +62,7 @@ runs:
 
     - name: Install RADE runtime dependencies
       shell: bash
-      run: python -m pip install --disable-pip-version-check neo4j playwright pyyaml
+      run: python -m pip install --disable-pip-version-check playwright pyyaml
 
     - name: Generate base/head reports
       shell: bash
