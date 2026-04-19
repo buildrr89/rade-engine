@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 from src.core.slab03_hybrid_anchor import (
@@ -180,7 +180,12 @@ def test_landmark_kind_for_element_heading_not_header() -> None:
 def test_modal_pulse_alone_does_not_set_landmark_kind() -> None:
     elements = [
         {"element_id": "d", "parent_id": None, "role": "dialog", "element_type": "div"},
-        {"element_id": "b", "parent_id": "d", "role": "button", "element_type": "button"},
+        {
+            "element_id": "b",
+            "parent_id": "d",
+            "role": "button",
+            "element_type": "button",
+        },
     ]
     out = apply_modal_frame_pulse(elements)
     assert "slab03_landmark_kind" not in out[1]

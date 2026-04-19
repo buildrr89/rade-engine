@@ -1,0 +1,411 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha",
+    "live_raid_date": "2026-03-22"
+  },
+  "report_version": "1.0",
+  "generated_at": "2026-03-22T00:00:00Z",
+  "app_id": "org.mozilla.mdn",
+  "project_name": "MDN Homepage Snapshot",
+  "platform": "web",
+  "standards_pack": {
+    "version": "2026-Q1",
+    "refs": [
+      {
+        "name": "Apple Human Interface Guidelines",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/"
+      },
+      {
+        "name": "Apple iOS design guidance",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-ios"
+      },
+      {
+        "name": "Android Material 3 guidance",
+        "url": "https://developer.android.com/develop/ui/compose/designsystems/material3"
+      },
+      {
+        "name": "Android accessibility guidance",
+        "url": "https://developer.android.com/develop/ui/compose/accessibility"
+      },
+      {
+        "name": "Android semantics guidance",
+        "url": "https://developer.android.com/develop/ui/compose/accessibility/semantics"
+      },
+      {
+        "name": "WCAG 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/"
+      }
+    ]
+  },
+  "summary": {
+    "screen_count": 1,
+    "node_count": 24,
+    "interactive_node_count": 18,
+    "duplicate_cluster_count": 4,
+    "recommendation_count": 3
+  },
+  "scores": {
+    "complexity": {
+      "value": 100,
+      "version": "2026-03-18",
+      "evidence": [
+        "1 screens",
+        "24 nodes",
+        "18 interactive nodes"
+      ]
+    },
+    "reusability": {
+      "value": 100,
+      "version": "2026-03-18",
+      "evidence": [
+        "4 duplicate clusters",
+        "10 duplicated nodes"
+      ]
+    },
+    "accessibility_risk": {
+      "value": 100,
+      "version": "2026-03-18",
+      "evidence": [
+        "18 interactive nodes without accessibility identifiers",
+        "0 interactive nodes without labels"
+      ]
+    },
+    "migration_risk": {
+      "value": 88,
+      "version": "2026-03-18",
+      "evidence": [
+        "100 accessibility risk",
+        "4 duplicate clusters"
+      ]
+    }
+  },
+  "screen_inventory": [
+    {
+      "screen_id": "mdn-home",
+      "screen_name": "MDN Web Docs Home",
+      "node_count": 24,
+      "interactive_count": 18,
+      "duplicate_node_count": 14,
+      "accessibility_gap_count": 18
+    }
+  ],
+  "duplicate_clusters": [
+    {
+      "fingerprint": "46f94f2fbea74e17",
+      "count": 4,
+      "interactive": true,
+      "screen_ids": [
+        "mdn-home"
+      ],
+      "screen_names": [
+        "MDN Web Docs Home"
+      ],
+      "node_refs": [
+        "mdn-home#nav-html",
+        "mdn-home#nav-css",
+        "mdn-home#nav-javascript",
+        "mdn-home#nav-web-apis"
+      ],
+      "element_types": [
+        "button"
+      ],
+      "roles": [
+        "button"
+      ],
+      "representative_node_ref": "mdn-home#nav-html"
+    },
+    {
+      "fingerprint": "a757d36019e886c6",
+      "count": 4,
+      "interactive": true,
+      "screen_ids": [
+        "mdn-home"
+      ],
+      "screen_names": [
+        "MDN Web Docs Home"
+      ],
+      "node_refs": [
+        "mdn-home#article-mdn-20",
+        "mdn-home#article-highlight-api",
+        "mdn-home#article-server-timing",
+        "mdn-home#article-resource-management"
+      ],
+      "element_types": [
+        "link"
+      ],
+      "roles": [
+        "link"
+      ],
+      "representative_node_ref": "mdn-home#article-mdn-20"
+    },
+    {
+      "fingerprint": "1a3deca58af9ea59",
+      "count": 3,
+      "interactive": true,
+      "screen_ids": [
+        "mdn-home"
+      ],
+      "screen_names": [
+        "MDN Web Docs Home"
+      ],
+      "node_refs": [
+        "mdn-home#hero-link-css",
+        "mdn-home#hero-link-html",
+        "mdn-home#hero-link-javascript"
+      ],
+      "element_types": [
+        "link"
+      ],
+      "roles": [
+        "link"
+      ],
+      "representative_node_ref": "mdn-home#hero-link-css"
+    },
+    {
+      "fingerprint": "b1f102302ddc9b4c",
+      "count": 3,
+      "interactive": true,
+      "screen_ids": [
+        "mdn-home"
+      ],
+      "screen_names": [
+        "MDN Web Docs Home"
+      ],
+      "node_refs": [
+        "mdn-home#nav-search",
+        "mdn-home#theme-toggle",
+        "mdn-home#language-switcher"
+      ],
+      "element_types": [
+        "button"
+      ],
+      "roles": [
+        "button"
+      ],
+      "representative_node_ref": "mdn-home#nav-search"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "finding-001",
+      "rule_id": "accessibility_missing_identifier",
+      "category": "accessibility",
+      "title": "18 interactive nodes are missing accessibility identifiers.",
+      "priority": "P1",
+      "provenance": "standards",
+      "evidence": [
+        "mdn-home#nav-html",
+        "mdn-home#nav-css",
+        "mdn-home#nav-javascript",
+        "mdn-home#nav-web-apis",
+        "mdn-home#nav-blog",
+        "mdn-home#nav-search",
+        "mdn-home#theme-toggle",
+        "mdn-home#language-switcher",
+        "mdn-home#hero-link-css",
+        "mdn-home#hero-link-html",
+        "mdn-home#hero-link-javascript",
+        "mdn-home#hero-search",
+        "mdn-home#article-mdn-20",
+        "mdn-home#article-highlight-api",
+        "mdn-home#article-server-timing",
+        "mdn-home#article-resource-management",
+        "mdn-home#spotlight-profile",
+        "mdn-home#spotlight-get-involved"
+      ]
+    },
+    {
+      "finding_id": "finding-002",
+      "rule_id": "migration_sequence_accessibility_before_reuse",
+      "category": "migration_sequencing",
+      "title": "Fix accessibility on the repeated primary action before expanding reuse or visual refinement.",
+      "priority": "P1",
+      "provenance": "standards",
+      "evidence": [
+        "missing_accessibility_node_refs=mdn-home#nav-html,mdn-home#nav-css,mdn-home#nav-javascript,mdn-home#nav-web-apis,mdn-home#nav-blog,mdn-home#nav-search,mdn-home#theme-toggle,mdn-home#language-switcher,mdn-home#hero-link-css,mdn-home#hero-link-html,mdn-home#hero-link-javascript,mdn-home#hero-search,mdn-home#article-mdn-20,mdn-home#article-highlight-api,mdn-home#article-server-timing,mdn-home#article-resource-management,mdn-home#spotlight-profile,mdn-home#spotlight-get-involved",
+        "repeated_interactive_cluster_fingerprint=46f94f2fbea74e17",
+        "primary_reuse_target=mdn-home#nav-html"
+      ]
+    },
+    {
+      "finding_id": "finding-003",
+      "rule_id": "component_reuse_interactive_cluster",
+      "category": "component_reuse",
+      "title": "Repeated interactive structure appears 4 times across 1 screens.",
+      "priority": "P2",
+      "provenance": "standards",
+      "evidence": [
+        "cluster_fingerprint=46f94f2fbea74e17",
+        "screen_ids=mdn-home",
+        "node_refs=mdn-home#nav-html,mdn-home#nav-css,mdn-home#nav-javascript,mdn-home#nav-web-apis"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "recommendation_id": "rec-accessibility_missing_identifier-0deb78f0",
+      "rule_id": "accessibility_missing_identifier",
+      "category": "accessibility",
+      "scope": "project",
+      "target": "interactive_nodes_without_accessibility_identifier",
+      "priority": "P1",
+      "confidence": "medium",
+      "problem_statement": "18 interactive nodes are missing accessibility identifiers.",
+      "recommended_change": "Add stable accessibility identifiers and preserve the accessible name, role, and value for each interactive node.",
+      "reasoning": "Interactive controls without identifiers are harder to test, verify, and support for assistive technologies.",
+      "evidence": [
+        "mdn-home#nav-html",
+        "mdn-home#nav-css",
+        "mdn-home#nav-javascript",
+        "mdn-home#nav-web-apis",
+        "mdn-home#nav-blog",
+        "mdn-home#nav-search",
+        "mdn-home#theme-toggle",
+        "mdn-home#language-switcher",
+        "mdn-home#hero-link-css",
+        "mdn-home#hero-link-html",
+        "mdn-home#hero-link-javascript",
+        "mdn-home#hero-search",
+        "mdn-home#article-mdn-20",
+        "mdn-home#article-highlight-api",
+        "mdn-home#article-server-timing",
+        "mdn-home#article-resource-management",
+        "mdn-home#spotlight-profile",
+        "mdn-home#spotlight-get-involved"
+      ],
+      "standards_refs": [
+        "WCAG 2.2 4.1.2 Name, Role, Value",
+        "Apple HIG: accessibility and clarity"
+      ],
+      "benchmark_refs": [],
+      "expected_impact": "High: removes assistive technology blockers",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "mdn-home"
+      ],
+      "affected_components": [
+        "mdn-home#nav-html",
+        "mdn-home#nav-css",
+        "mdn-home#nav-javascript",
+        "mdn-home#nav-web-apis",
+        "mdn-home#nav-blog",
+        "mdn-home#nav-search",
+        "mdn-home#theme-toggle",
+        "mdn-home#language-switcher",
+        "mdn-home#hero-link-css",
+        "mdn-home#hero-link-html",
+        "mdn-home#hero-link-javascript",
+        "mdn-home#hero-search",
+        "mdn-home#article-mdn-20",
+        "mdn-home#article-highlight-api",
+        "mdn-home#article-server-timing",
+        "mdn-home#article-resource-management",
+        "mdn-home#spotlight-profile",
+        "mdn-home#spotlight-get-involved"
+      ],
+      "provenance": "standards"
+    },
+    {
+      "recommendation_id": "rec-migration_sequence_accessibility_before_reuse-4ef453e7",
+      "rule_id": "migration_sequence_accessibility_before_reuse",
+      "category": "migration_sequencing",
+      "scope": "project",
+      "target": "accessibility-before-reuse",
+      "priority": "P1",
+      "confidence": "high",
+      "problem_statement": "Fix accessibility on the repeated primary action before expanding reuse or visual refinement.",
+      "recommended_change": "Address the missing accessibility identifiers first, then extract and standardize the repeated control.",
+      "reasoning": "Accessibility fixes reduce user-facing risk faster than structure-only cleanup and make reuse safer.",
+      "evidence": [
+        "missing_accessibility_node_refs=mdn-home#nav-html,mdn-home#nav-css,mdn-home#nav-javascript,mdn-home#nav-web-apis,mdn-home#nav-blog,mdn-home#nav-search,mdn-home#theme-toggle,mdn-home#language-switcher,mdn-home#hero-link-css,mdn-home#hero-link-html,mdn-home#hero-link-javascript,mdn-home#hero-search,mdn-home#article-mdn-20,mdn-home#article-highlight-api,mdn-home#article-server-timing,mdn-home#article-resource-management,mdn-home#spotlight-profile,mdn-home#spotlight-get-involved",
+        "repeated_interactive_cluster_fingerprint=46f94f2fbea74e17",
+        "primary_reuse_target=mdn-home#nav-html"
+      ],
+      "standards_refs": [
+        "WCAG 2.2: accessibility first",
+        "Apple HIG: system consistency"
+      ],
+      "benchmark_refs": [],
+      "expected_impact": "High: reduces future rework risk",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "mdn-home"
+      ],
+      "affected_components": [
+        "mdn-home#nav-html"
+      ],
+      "provenance": "standards"
+    },
+    {
+      "recommendation_id": "rec-component_reuse_interactive_cluster-96ccd145",
+      "rule_id": "component_reuse_interactive_cluster",
+      "category": "component_reuse",
+      "scope": "component",
+      "target": "button",
+      "priority": "P2",
+      "confidence": "high",
+      "problem_statement": "Repeated interactive structure appears 4 times across 1 screens.",
+      "recommended_change": "Extract the repeated control into one reusable component and reuse it across screens.",
+      "reasoning": "Copy-pasted interactive structure increases drift and makes future changes more expensive.",
+      "evidence": [
+        "cluster_fingerprint=46f94f2fbea74e17",
+        "screen_ids=mdn-home",
+        "node_refs=mdn-home#nav-html,mdn-home#nav-css,mdn-home#nav-javascript,mdn-home#nav-web-apis"
+      ],
+      "standards_refs": [
+        "Apple HIG: consistency",
+        "Material 3: reusable component patterns"
+      ],
+      "benchmark_refs": [],
+      "expected_impact": "Medium: reduces duplication and drift",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "mdn-home"
+      ],
+      "affected_components": [
+        "46f94f2fbea74e17"
+      ],
+      "provenance": "standards"
+    }
+  ],
+  "roadmap": [
+    {
+      "step": 1,
+      "title": "Add stable accessibility identifiers and preserve the accessible name, role, and value for each interactive node.",
+      "why_now": "18 interactive nodes are missing accessibility identifiers.",
+      "category": "accessibility",
+      "priority": "P1",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "mdn-home"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Address the missing accessibility identifiers first, then extract and standardize the repeated control.",
+      "why_now": "Fix accessibility on the repeated primary action before expanding reuse or visual refinement.",
+      "category": "migration_sequencing",
+      "priority": "P1",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "mdn-home"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Extract the repeated control into one reusable component and reuse it across screens.",
+      "why_now": "Repeated interactive structure appears 4 times across 1 screens.",
+      "category": "component_reuse",
+      "priority": "P2",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "mdn-home"
+      ]
+    }
+  ]
+}

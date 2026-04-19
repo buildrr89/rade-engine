@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 import argparse
@@ -16,14 +16,8 @@ from urllib.parse import urlparse
 from xml.sax.saxutils import escape
 
 from ..core.compliance import (
-    IP_OWNER as COMPLIANCE_IP_OWNER,
-)
-from ..core.compliance import (
-    LEAD_ARCHITECT as COMPLIANCE_LEAD_ARCHITECT,
-)
-from ..core.compliance import (
-    LEAD_ARCHITECT_NOTICE,
     LEGAL_NOTICE,
+    PROJECT_TERMS_NOTICE,
     SVG_HEADER_COMMENT,
     SVG_WATERMARK_TEXT,
     clear_terminal,
@@ -51,10 +45,6 @@ try:  # Optional dependency.
     from rich.console import Console
 except Exception:  # pragma: no cover - exercised when rich is unavailable.
     Console = None
-
-
-LEAD_ARCHITECT = COMPLIANCE_LEAD_ARCHITECT
-IP_OWNER = COMPLIANCE_IP_OWNER
 
 
 ANSI_RESET = "\033[0m"
@@ -732,7 +722,7 @@ class _PositionedNode:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="run_raid_visualizer",
-        description="Run the RADE Ambient Engine demo pipeline.",
+        description="Run the RADE alpha demo pipeline.",
     )
     parser.add_argument(
         "--output-dir",
@@ -1305,7 +1295,8 @@ class RadeVectorBridge:
     def _render_metadata_block(self) -> str:
         metadata_lines = [
             f"legal_notice={LEGAL_NOTICE}",
-            f"ownership=Exclusive intellectual property of {IP_OWNER}",
+            "attribution=Buildrr89",
+            "license=AGPL-3.0-only",
             "systems=5-Slab Taxonomy; Ambient Engine",
             f"watermark={SVG_WATERMARK_TEXT}",
             f"live_raid_date={self._live_raid_date}",
@@ -1718,7 +1709,9 @@ class RadeVectorBridge:
             _slot(dna.get("instruction_role"), "component"),
             _slot(dna.get("frame_kind"), "node"),
             _slot(slab03_kind, "none"),
-            _slot(dna.get("pattern_fingerprint") or node.structural_fingerprint, "none"),
+            _slot(
+                dna.get("pattern_fingerprint") or node.structural_fingerprint, "none"
+            ),
             _slot(node.role or node.element_type, "unknown"),
         ]
         token_pulse_id = _slot(dna.get("token_pulse_id"), "none")
@@ -1862,9 +1855,9 @@ def run_demo(
             "⚠️ HIGH DENSITY RAID: SVG rendering may impact system performance.",
             file=sys.stderr,
         )
-    styler.emit("RADE Lead Architect View Demo Runner", color="magenta", bold=True)
+    styler.emit("RADE alpha demo runner", color="magenta", bold=True)
     styler.emit(LEGAL_NOTICE, color="cyan")
-    styler.emit(LEAD_ARCHITECT_NOTICE, color="cyan")
+    styler.emit(PROJECT_TERMS_NOTICE, color="cyan")
     styler.emit("Authorized surfaces only. No login bypass.", color="cyan")
 
     screen_name = "Target App"
@@ -2013,7 +2006,7 @@ def run_demo(
     if auto_open:
         _auto_open_artifact(svg_path)
         styler.emit("SVG opened with the default macOS handler.", color="green")
-    styler.emit("Architect Logs complete.", color="magenta", bold=True)
+    styler.emit("Demo logs complete.", color="magenta", bold=True)
 
     return DemoRunResult(
         graph=graph,

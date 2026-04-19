@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 """Slab 03 (Frame) hybrid anchor heuristics — Phase 1 componentization.
 
 Pulses (in order):
@@ -11,6 +11,7 @@ Pulses (in order):
    ``slab03_frame_id`` with ``visual:vbox-contained``. Never overrides modal or
    prior landmark assignments.
 """
+
 from __future__ import annotations
 
 from typing import Any, Iterable
@@ -99,13 +100,9 @@ def landmark_kind_for_element(element: JsonDict) -> str | None:
     if role == "heading":
         return None
 
-    if role in _LANDMARK_NAV_ROLES or any(
-        t in _LANDMARK_NAV_ROLES for t in traits
-    ):
+    if role in _LANDMARK_NAV_ROLES or any(t in _LANDMARK_NAV_ROLES for t in traits):
         return "nav"
-    if "navigation" in element_type or "navigationbar" in element_type.replace(
-        " ", ""
-    ):
+    if "navigation" in element_type or "navigationbar" in element_type.replace(" ", ""):
         return "nav"
 
     if role in _LANDMARK_MAIN_ROLES or "main" in traits:
@@ -186,7 +183,7 @@ def _label_slug(label: str, accessibility_identifier: str | None) -> str:
     s = "".join(parts).strip("_")
     while "__" in s:
         s = s.replace("__", "_")
-    return (s[:48] or "default")
+    return s[:48] or "default"
 
 
 def build_landmark_frame_id(root_id: str, kind: str, slug: str) -> str:
@@ -203,7 +200,7 @@ def _parse_bounds_rect(element: JsonDict) -> tuple[int, int, int, int] | None:
             y = int(float(bbox["y"]))
             w = int(float(bbox["width"]))
             h = int(float(bbox["height"]))
-        except (KeyError, TypeError, ValueError):
+        except KeyError, TypeError, ValueError:
             pass
         else:
             if w > 0 and h > 0:
@@ -212,7 +209,7 @@ def _parse_bounds_rect(element: JsonDict) -> tuple[int, int, int, int] | None:
     if isinstance(raw, (list, tuple)) and len(raw) == 4:
         try:
             x, y, w, h = (int(float(raw[i])) for i in range(4))
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             return None
         if w > 0 and h > 0:
             return (x, y, w, h)
@@ -223,9 +220,7 @@ def _rect_area(rect: tuple[int, int, int, int]) -> int:
     return rect[2] * rect[3]
 
 
-def _center_inside_rect(
-    rect: tuple[int, int, int, int], cx: float, cy: float
-) -> bool:
+def _center_inside_rect(rect: tuple[int, int, int, int], cx: float, cy: float) -> bool:
     x, y, w, h = rect
     return x <= cx <= x + w and y <= cy <= y + h
 
@@ -405,11 +400,7 @@ def apply_vbox_tertiary_pulse(elements: list[JsonDict]) -> list[JsonDict]:
         x, y, w, h = rect
         cx = x + w / 2.0
         cy = y + h / 2.0
-        candidates = [
-            c
-            for c in containers
-            if _center_inside_rect(c["rect"], cx, cy)
-        ]
+        candidates = [c for c in containers if _center_inside_rect(c["rect"], cx, cy)]
         if not candidates:
             out.append(merged)
             continue

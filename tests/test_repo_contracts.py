@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 from pathlib import Path
@@ -33,6 +33,27 @@ def test_proof_workflow_contains_required_guardrails():
             "pnpm --dir web test",
             "uv run python -m src.core.cli analyze",
             "Publish proof summary",
+        ],
+    )
+
+
+def test_codeql_workflow_contains_required_guardrails():
+    workflow = _read(".github/workflows/codeql.yml")
+    _assert_contains_all(
+        workflow,
+        [
+            "name: CodeQL",
+            "pull_request:",
+            "branches:\n      - main",
+            'cron: "0 6 * * 1"',
+            "security-events: write",
+            "concurrency:",
+            "cancel-in-progress: true",
+            "timeout-minutes: 45",
+            "matrix:\n        language: [python, javascript]",
+            "github/codeql-action/init@v3",
+            "github/codeql-action/autobuild@v3",
+            "github/codeql-action/analyze@v3",
         ],
     )
 

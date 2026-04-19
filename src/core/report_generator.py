@@ -1,13 +1,15 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
+from html import escape
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
 from ..connectors.standards_pack import load_standards_pack
+from ..engine.axe_adapter import summarize_axe_findings
 from ..scrubber.pii_scrubber import scrub_report_artifact
 from .compliance import (
     iso_date_from_timestamp,
@@ -37,7 +39,10 @@ def now_iso() -> str:
 
 
 def analyze_payload(
-    payload: JsonDict, app_id: str, generated_at: str | None = None
+    payload: JsonDict,
+    app_id: str,
+    generated_at: str | None = None,
+    axe_findings: list[JsonDict] | None = None,
 ) -> JsonDict:
     run_id = str(uuid4())
     _set_last_run_metadata({"run_id": run_id})
@@ -148,6 +153,11 @@ def analyze_payload(
         "recommendations": recommendations,
         "roadmap": roadmap,
     }
+    if axe_findings is not None:
+        report["accessibility_violations"] = {
+            "findings": list(axe_findings),
+            "summary": summarize_axe_findings(axe_findings),
+        }
     report["_telemetry"] = {"run_id": run_id}
     return report
 
@@ -246,11 +256,326 @@ def render_markdown_report(report: JsonDict) -> str:
             f"- Step {item['step']}: {item['title']} ({item['priority']}, {item['implementation_effort']})"
         )
     lines.append("")
+    axe_block = report.get("accessibility_violations")
+    if axe_block is not None:
+        summary = axe_block.get("summary", {})
+        total = summary.get("total", 0)
+        engine_versions = summary.get("engine_versions", []) or ["unknown"]
+        lines.append("## Accessibility violations (axe-core)")
+        lines.append(f"- Engine: axe-core (versions: {', '.join(engine_versions)})")
+        lines.append(f"- Total violations: {total}")
+        by_impact = summary.get("by_impact", {})
+        if by_impact:
+            parts = ", ".join(
+                f"{impact}={count}" for impact, count in by_impact.items() if count
+            )
+            if parts:
+                lines.append(f"- By impact: {parts}")
+        for finding in axe_block.get("findings", []):
+            lines.append(f"### {finding.get('title') or finding.get('rule_id')}")
+            lines.append(f"- Rule ID: {finding.get('rule_id')}")
+            lines.append(f"- Impact: {finding.get('impact')}")
+            lines.append(f"- Priority: {finding.get('priority')}")
+            lines.append(f"- Target: `{finding.get('target') or ''}`")
+            if finding.get("wcag_refs"):
+                lines.append(f"- WCAG: {', '.join(finding.get('wcag_refs') or [])}")
+            if finding.get("help_url"):
+                lines.append(f"- Help: {finding.get('help_url')}")
+            lines.append("")
     return "\n".join(lines)
 
 
+def _h(text: object) -> str:
+    return escape(str(text))
+
+
+def _score_bar_color(score_name: str, value: int) -> str:
+    if score_name in ("accessibility_risk", "migration_risk", "complexity"):
+        if value >= 70:
+            return "#e74c3c"
+        if value >= 40:
+            return "#f39c12"
+        return "#27ae60"
+    if value >= 70:
+        return "#27ae60"
+    if value >= 40:
+        return "#f39c12"
+    return "#e74c3c"
+
+
+def _priority_class(priority: str) -> str:
+    return priority.lower().replace(" ", "")
+
+
+def render_html_report(report: JsonDict) -> str:
+    report = prepare_report_for_output(report)
+    legal = report.get("rade_legal", {})
+    summary = report["summary"]
+    scores = report["scores"]
+
+    score_rows = []
+    for name in ("complexity", "reusability", "accessibility_risk", "migration_risk"):
+        s = scores[name]
+        color = _score_bar_color(name, s["value"])
+        evidence_str = _h("; ".join(s["evidence"]))
+        score_rows.append(
+            f"<tr><td>{_h(name)}</td>"
+            f'<td><div class="score-bar"><div class="score-fill" '
+            f'style="width:{s["value"]}%;background:{color}">'
+            f'{s["value"]}</div></div></td>'
+            f"<td>{evidence_str}</td></tr>"
+        )
+
+    screen_rows = []
+    for screen in report["screen_inventory"]:
+        screen_rows.append(
+            f"<tr><td>{_h(screen['screen_name'])}</td>"
+            f"<td><code>{_h(screen['screen_id'])}</code></td>"
+            f"<td>{screen['node_count']}</td>"
+            f"<td>{screen['interactive_count']}</td>"
+            f"<td>{screen['duplicate_node_count']}</td>"
+            f"<td>{screen['accessibility_gap_count']}</td></tr>"
+        )
+
+    categories = sorted({f["category"] for f in report["findings"]})
+    filter_buttons = ['<button class="filter-btn active" data-cat="all">All</button>']
+    for cat in categories:
+        filter_buttons.append(
+            f'<button class="filter-btn" data-cat="{_h(cat)}">{_h(cat)}</button>'
+        )
+
+    finding_cards = []
+    for finding in report["findings"]:
+        evidence_items = "".join(
+            f"<li><code>{_h(e)}</code></li>" for e in finding["evidence"]
+        )
+        finding_cards.append(
+            f'<details class="finding-card" data-category="{_h(finding["category"])}">'
+            f"<summary>"
+            f'<span class="priority-badge {_priority_class(finding["priority"])}">'
+            f'{_h(finding["priority"])}</span> '
+            f'{_h(finding["title"])}'
+            f"</summary>"
+            f'<div class="finding-body">'
+            f"<dl>"
+            f"<dt>Rule ID</dt><dd><code>{_h(finding['rule_id'])}</code></dd>"
+            f"<dt>Category</dt><dd>{_h(finding['category'])}</dd>"
+            f"<dt>Provenance</dt><dd>{_h(finding['provenance'])}</dd>"
+            f"</dl>"
+            f"<strong>Evidence</strong><ul>{evidence_items}</ul>"
+            f"</div></details>"
+        )
+
+    rec_cards = []
+    for rec in report["recommendations"]:
+        evidence_items = "".join(
+            f"<li><code>{_h(e)}</code></li>" for e in rec["evidence"]
+        )
+        standards_items = "".join(f"<li>{_h(s)}</li>" for s in rec["standards_refs"])
+        benchmark_items = (
+            "".join(f"<li>{_h(b)}</li>" for b in rec["benchmark_refs"])
+            or "<li>none</li>"
+        )
+        rec_cards.append(
+            f'<details class="rec-card" data-category="{_h(rec["category"])}">'
+            f"<summary>"
+            f'<span class="priority-badge {_priority_class(rec["priority"])}">'
+            f'{_h(rec["priority"])}</span> '
+            f'{_h(rec["category"])} &mdash; {_h(rec["target"])}'
+            f"</summary>"
+            f'<div class="rec-body">'
+            f"<dl>"
+            f"<dt>Recommendation ID</dt>"
+            f"<dd><code>{_h(rec['recommendation_id'])}</code></dd>"
+            f"<dt>Rule ID</dt><dd><code>{_h(rec['rule_id'])}</code></dd>"
+            f"<dt>Confidence</dt><dd>{_h(rec['confidence'])}</dd>"
+            f"<dt>Effort</dt><dd>{_h(rec['implementation_effort'])}</dd>"
+            f"<dt>Expected impact</dt><dd>{_h(rec['expected_impact'])}</dd>"
+            f"</dl>"
+            f"<p><strong>Problem:</strong> {_h(rec['problem_statement'])}</p>"
+            f"<p><strong>Change:</strong> {_h(rec['recommended_change'])}</p>"
+            f"<p><strong>Reasoning:</strong> {_h(rec['reasoning'])}</p>"
+            f"<strong>Standards</strong><ul>{standards_items}</ul>"
+            f"<strong>Benchmarks</strong><ul>{benchmark_items}</ul>"
+            f"<strong>Evidence</strong><ul>{evidence_items}</ul>"
+            f"</div></details>"
+        )
+
+    roadmap_rows = []
+    for item in report["roadmap"]:
+        screens = ", ".join(item["affected_screens"])
+        roadmap_rows.append(
+            f'<tr><td>{item["step"]}</td>'
+            f'<td>{_h(item["title"])}</td>'
+            f'<td><span class="priority-badge {_priority_class(item["priority"])}">'
+            f'{_h(item["priority"])}</span></td>'
+            f'<td>{_h(item["implementation_effort"])}</td>'
+            f"<td>{_h(screens)}</td></tr>"
+        )
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RADE report &mdash; {_h(report['project_name'])}</title>
+<style>
+*,*::before,*::after{{box-sizing:border-box}}
+:root{{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--text:#e4e4e7;
+--text-muted:#9ca3af;--accent:#62f2b1;--accent-dim:#1a3d2e}}
+body{{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
+Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);
+line-height:1.6}}
+.container{{max-width:960px;margin:0 auto;padding:24px 16px}}
+h1{{font-size:1.5rem;color:var(--accent);margin:0 0 4px}}
+h2{{font-size:1.15rem;color:var(--accent);margin:32px 0 12px;
+border-bottom:1px solid var(--border);padding-bottom:6px}}
+.meta{{color:var(--text-muted);font-size:0.85rem;margin-bottom:24px}}
+.meta span{{display:inline-block;margin-right:16px}}
+.legal{{color:var(--text-muted);font-size:0.75rem;margin-bottom:20px;
+padding:8px 12px;background:var(--surface);border-radius:6px;
+border:1px solid var(--border)}}
+.summary-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:12px;margin-bottom:8px}}
+.summary-card{{background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:16px;text-align:center}}
+.summary-card .num{{font-size:1.8rem;font-weight:700;color:var(--accent)}}
+.summary-card .label{{font-size:0.8rem;color:var(--text-muted);margin-top:2px}}
+table{{width:100%;border-collapse:collapse;margin-bottom:8px;font-size:0.9rem}}
+th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}}
+th{{color:var(--accent);font-weight:600;font-size:0.8rem;text-transform:uppercase;
+letter-spacing:0.04em}}
+.score-bar{{background:var(--surface);border-radius:4px;height:22px;
+width:100%;min-width:100px;position:relative;overflow:hidden;
+border:1px solid var(--border)}}
+.score-fill{{height:100%;border-radius:3px;display:flex;align-items:center;
+padding-left:8px;font-size:0.75rem;font-weight:700;color:#fff;
+min-width:28px;transition:width .3s}}
+.filter-bar{{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}}
+.filter-btn{{background:var(--surface);color:var(--text-muted);border:1px solid var(--border);
+border-radius:4px;padding:4px 12px;cursor:pointer;font-size:0.8rem}}
+.filter-btn:hover{{border-color:var(--accent)}}
+.filter-btn.active{{background:var(--accent-dim);color:var(--accent);
+border-color:var(--accent)}}
+details{{background:var(--surface);border:1px solid var(--border);
+border-radius:8px;margin-bottom:8px}}
+summary{{cursor:pointer;padding:12px 16px;font-weight:500;font-size:0.9rem;
+list-style:none;display:flex;align-items:center;gap:8px}}
+summary::-webkit-details-marker{{display:none}}
+summary::before{{content:"\\25B6";font-size:0.6rem;transition:transform .2s;
+color:var(--text-muted)}}
+details[open] summary::before{{transform:rotate(90deg)}}
+.finding-body,.rec-body{{padding:4px 16px 16px}}
+dl{{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:8px 0}}
+dt{{color:var(--text-muted);font-size:0.8rem;font-weight:600}}
+dd{{margin:0;font-size:0.9rem}}
+.priority-badge{{display:inline-block;padding:2px 8px;border-radius:4px;
+font-size:0.75rem;font-weight:700;text-transform:uppercase}}
+.p1{{background:#3b1318;color:#e74c3c}}
+.p2{{background:#3b2e10;color:#f39c12}}
+.p3{{background:#1a3d2e;color:#27ae60}}
+code{{background:var(--surface);padding:1px 5px;border-radius:3px;
+font-size:0.85em;border:1px solid var(--border)}}
+ul{{padding-left:20px;margin:4px 0}}
+li{{margin:2px 0;font-size:0.9rem}}
+.hidden{{display:none}}
+footer{{margin-top:40px;padding-top:12px;border-top:1px solid var(--border);
+color:var(--text-muted);font-size:0.75rem;text-align:center}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>RADE modernization report</h1>
+<div class="meta">
+<span>v{_h(report['report_version'])}</span>
+<span>{_h(report['generated_at'])}</span>
+<span>{_h(report['app_id'])}</span>
+<span>{_h(report['platform'])}</span>
+<span>Standards: {_h(report['standards_pack']['version'])}</span>
+</div>
+<div class="legal">
+{_h(legal.get('header_notice', ''))} &middot;
+{_h(legal.get('attribution', ''))} &middot;
+{_h(legal.get('license', ''))} &middot;
+{_h(legal.get('project_status', ''))}
+<br>{_h(legal.get('project_terms_notice', ''))}
+</div>
+
+<h2>Summary</h2>
+<div class="summary-grid">
+<div class="summary-card"><div class="num">{summary['screen_count']}</div>
+<div class="label">Screens</div></div>
+<div class="summary-card"><div class="num">{summary['node_count']}</div>
+<div class="label">Nodes</div></div>
+<div class="summary-card"><div class="num">{summary['interactive_node_count']}</div>
+<div class="label">Interactive</div></div>
+<div class="summary-card"><div class="num">{summary['duplicate_cluster_count']}</div>
+<div class="label">Dup Clusters</div></div>
+<div class="summary-card"><div class="num">{summary['recommendation_count']}</div>
+<div class="label">Recommendations</div></div>
+</div>
+
+<h2>Scorecard</h2>
+<table>
+<thead><tr><th>Metric</th><th>Score</th><th>Evidence</th></tr></thead>
+<tbody>{''.join(score_rows)}</tbody>
+</table>
+
+<h2>Screen Inventory</h2>
+<table>
+<thead><tr><th>Screen</th><th>ID</th><th>Nodes</th><th>Interactive</th>
+<th>Duplicated</th><th>A11y Gaps</th></tr></thead>
+<tbody>{''.join(screen_rows)}</tbody>
+</table>
+
+<h2>Findings</h2>
+<div class="filter-bar" id="finding-filters">{''.join(filter_buttons)}</div>
+<div id="findings">{''.join(finding_cards)}</div>
+
+<h2>Recommendations</h2>
+<div class="filter-bar" id="rec-filters">{''.join(filter_buttons)}</div>
+<div id="recommendations">{''.join(rec_cards)}</div>
+
+<h2>Roadmap</h2>
+<table>
+<thead><tr><th>#</th><th>Action</th><th>Priority</th><th>Effort</th>
+<th>Screens</th></tr></thead>
+<tbody>{''.join(roadmap_rows)}</tbody>
+</table>
+
+<footer>
+RADE &middot; {_h(legal.get('attribution', ''))} &middot;
+{_h(legal.get('license', ''))} &middot;
+{_h(legal.get('project_status', ''))}
+</footer>
+</div>
+<script>
+document.querySelectorAll(".filter-bar").forEach(function(bar){{
+  bar.addEventListener("click",function(e){{
+    var btn=e.target.closest(".filter-btn");
+    if(!btn)return;
+    bar.querySelectorAll(".filter-btn").forEach(function(b){{
+      b.classList.remove("active")}});
+    btn.classList.add("active");
+    var cat=btn.getAttribute("data-cat");
+    var section=bar.nextElementSibling;
+    section.querySelectorAll("details").forEach(function(d){{
+      if(cat==="all"||d.getAttribute("data-category")===cat){{
+        d.classList.remove("hidden")}}else{{
+        d.classList.add("hidden")}}}});
+  }});
+}});
+</script>
+</body>
+</html>
+"""
+
+
 def write_report(
-    report: JsonDict, json_output: Path | None, md_output: Path | None
+    report: JsonDict,
+    json_output: Path | None,
+    md_output: Path | None,
+    html_output: Path | None = None,
 ) -> None:
     run_id = report.get("_telemetry", {}).get("run_id")
     with log_stage(run_id=run_id, component="cli", stage="report_write"):
@@ -266,6 +591,11 @@ def write_report(
             md_output.write_text(
                 render_markdown_report(report_for_output), encoding="utf-8"
             )
+        if html_output is not None:
+            html_output.parent.mkdir(parents=True, exist_ok=True)
+            html_output.write_text(
+                render_html_report(report_for_output), encoding="utf-8"
+            )
 
 
 def analyze_file(
@@ -273,8 +603,9 @@ def analyze_file(
     app_id: str,
     json_output: Path | None = None,
     md_output: Path | None = None,
+    html_output: Path | None = None,
 ) -> JsonDict:
     payload = load_json_file(Path(input_path))
     report = analyze_payload(payload, app_id)
-    write_report(report, json_output, md_output)
+    write_report(report, json_output, md_output, html_output)
     return prepare_report_for_output(report)

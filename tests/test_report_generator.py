@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 import json
@@ -7,6 +7,7 @@ from pathlib import Path
 from src.core.report_generator import (
     analyze_payload,
     prepare_report_for_output,
+    render_html_report,
     render_markdown_report,
     write_report,
 )
@@ -34,6 +35,20 @@ def test_report_generator_matches_golden_outputs(tmp_path):
     generated_md = (tmp_path / "report.md").read_text(encoding="utf-8")
     assert generated_md == golden_md
     assert render_markdown_report(report) == golden_md
+
+
+def test_report_generator_html_matches_golden(tmp_path):
+    report = analyze_payload(
+        load_fixture(), "com.example.legacyapp", generated_at="2026-03-18T00:00:00Z"
+    )
+    write_report(report, None, None, html_output=tmp_path / "report.html")
+
+    golden_html = Path("tests/golden/sample_modernization_report.html").read_text(
+        encoding="utf-8"
+    )
+    generated_html = (tmp_path / "report.html").read_text(encoding="utf-8")
+    assert generated_html == golden_html
+    assert render_html_report(report) == golden_html
 
 
 def test_report_generator_is_deterministic_with_fixed_timestamp():

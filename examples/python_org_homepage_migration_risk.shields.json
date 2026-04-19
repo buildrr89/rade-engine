@@ -1,0 +1,14 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha"
+  },
+  "schemaVersion": 1,
+  "label": "rade migration risk",
+  "message": "71/100",
+  "color": "fe7d37"
+}

@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 import json
@@ -40,7 +40,7 @@ def test_api_root_route_returns_ready_metadata():
     assert status == "200 OK"
     assert headers["Content-Type"] == "application/json"
     assert payload == {
-        "routes": ["/healthz"],
+        "routes": ["/healthz", "/analyze"],
         "service": "rade-api",
         "status": "ready",
     }

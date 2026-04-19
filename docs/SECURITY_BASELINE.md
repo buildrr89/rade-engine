@@ -19,7 +19,7 @@
 - Encrypt retained raw captures.
 - Support deletion-by-default for sensitive customers.
 - Scrub report artifacts for obvious sensitive strings before JSON and Markdown write.
-- Regression tests in [tests/test_scrubber.py](/Users/restolad/Desktop/RADE/tests/test_scrubber.py) prove that both JSON and Markdown outputs are scrubbed at the artifact boundary.
+- Regression tests in [tests/test_scrubber.py](../tests/test_scrubber.py) prove that both JSON and Markdown outputs are scrubbed at the artifact boundary.
 - Preserve only the structural identifiers needed for deterministic review and debugging.
 
 ## Hosted persistence controls
@@ -32,3 +32,8 @@
 ## Product rule
 
 Do not ship collector behavior that depends on fake accounts, login bypass, or anti-bot evasion.
+
+## Public repository intake
+
+- Public vulnerability reports must use GitHub Private Vulnerability Reporting.
+- Public issues are for reproducible bugs, docs, and collaboration, not sensitive disclosures.

@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 import io
@@ -54,7 +54,7 @@ def test_demo_runner_writes_svg_and_reports_redactions(tmp_path) -> None:
     assert "[RADE] Layer 03: Frame Stability" in output
     assert "[RADE] Layer 04: Mapping Plumbing..." in output
     assert "[RADE] EdgeShield:" in output
-    assert "RADE Lead Architect View Demo Runner" in output
+    assert "RADE alpha demo runner" in output
 
 
 def test_demo_runner_visual_consistency_against_golden_svg(tmp_path) -> None:

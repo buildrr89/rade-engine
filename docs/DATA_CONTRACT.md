@@ -8,7 +8,7 @@ This document defines the input and output contract for the deterministic proof 
 
 The analysis input is a JSON object with these top-level fields:
 
-- `rade_legal`: optional object carrying the Lead Architect compliance header because JSON does not support comments
+- `rade_legal`: optional object carrying public repository metadata because JSON does not support comments
 - `project_name`: string
 - `platform`: string, currently `ios`, `android`, or `web`
 - `screens`: array of screen objects
@@ -109,17 +109,17 @@ Artifact scrub rule:
 
 - JSON and Markdown report artifacts are scrubbed at write time for obvious sensitive strings
 - Structural identifiers such as `node_ref`, `screen_id`, `recommendation_id`, `rule_id`, and fingerprints remain intentionally preserved
-- `rade_legal` preserves the Lead Architect notice, the exclusive intellectual-property claim for the `5-Slab Taxonomy` and `Ambient Engine`, the SVG watermark text, and the report Live Raid date
+- `rade_legal` preserves the repository legal notice, attribution, license, project-status metadata, terminology notice, SVG watermark text, and the report Live Raid date
 
 ## Legal metadata contract
 
 `rade_legal` may contain these compliance fields when present:
 
 - `header_notice`
-- `lead_architect`
-- `classification`
-- `ownership`
-- `proprietary_systems`
+- `attribution`
+- `license`
+- `project_status`
+- `project_terms_notice`
 - `visible_svg_watermark`
 - `live_raid_date`
 

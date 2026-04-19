@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 """Figma Bridge v0 — deterministic manifest from captured graph nodes.
 
 Emits one component row per distinct ``slab03_frame_id`` so downstream tooling can
@@ -6,6 +6,7 @@ map Slab 03 frames to Figma component candidates. ``ref_map`` records Slab 04
 plumbing edges as cross-frame (or internal) wires. ``variant_axes`` is reserved
 for Tier 2 pattern promotion and is empty in v0.2.2.
 """
+
 from __future__ import annotations
 
 from collections import defaultdict
@@ -126,9 +127,7 @@ def _wire_action_type(edge: JsonDict, edge_type: str) -> str:
     return _action_type_for_edge(edge_type)
 
 
-def _plumbing_scope(
-    source_frame_id: str | None, target_frame_id: str | None
-) -> str:
+def _plumbing_scope(source_frame_id: str | None, target_frame_id: str | None) -> str:
     if source_frame_id is None:
         return "unresolved_source"
     if target_frame_id is None:
@@ -251,7 +250,7 @@ def build_figma_bridge_v0_manifest(
             str(m["node_ref"])
             for m in members
             if m.get("node_ref") is not None and str(m.get("node_ref")).strip()
-        ][: _SAMPLE_NODE_REF_LIMIT]
+        ][:_SAMPLE_NODE_REF_LIMIT]
 
         figma_alias = _slab03_figma_alias(first)
         if not figma_alias:

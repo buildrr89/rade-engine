@@ -1,16 +1,16 @@
 # ARCHITECTURE
 
-© 2026 RADE Project. All Rights Reserved.
-
 ## Purpose
 
-This document defines the current executable architecture and the boundaries between the primary proof path and secondary experimental paths.
+This document defines the current executable architecture for RADE's deterministic UI intelligence wedge and the boundaries between the primary proof path and secondary experimental paths.
 
 ## Architecture at a glance
 
-- Primary path: deterministic local report generation from a structured JSON payload.
+- Primary path: deterministic report generation from a structured JSON payload or a Playwright-collected public web page.
 - Secondary path: accessibility-like tree collection -> construction graph -> blueprint SVG / scrubbed graph ingest helpers.
-- Thin shells: API, worker, web, and agent surfaces exist to keep entrypoints explicit without claiming hosted product completeness.
+- Thin shells: worker, web, and agent surfaces exist to keep entrypoints explicit without claiming hosted product completeness. The served API surface is real, but intentionally narrow.
+
+The current wedge is proof-backed interface analysis for repeated structure, accessibility gaps, and modernization risk. The architecture is designed to keep those outputs deterministic and traceable while preserving a broader path toward interface intelligence infrastructure.
 
 ## Primary proof path
 
@@ -18,9 +18,11 @@ This document defines the current executable architecture and the boundaries bet
 
 `src/core/cli.py` is the main entrypoint.
 
-- Input is a local JSON payload.
+- Input is either a local JSON payload or a public `http/https` URL passed through `src/collectors/web_dom_adapter.py`.
+- The same CLI also accepts two existing RADE JSON reports for deterministic report-to-report comparison.
 - `src/core/schemas.py` validates required fields, uniqueness, parent references, slab layers, and scalar types.
 - Only `ios`, `android`, and `web` are valid platforms.
+- The web collector uses Playwright `locator("body").aria_snapshot()` as the primary collection source and falls back to a semantic DOM walk when the ARIA snapshot is empty.
 
 ### 2. Normalization boundary
 
@@ -56,18 +58,30 @@ Current recommendations are standards-backed and derived from current determinis
 
 - JSON report
 - Markdown report
+- HTML report
 
 Before write, report artifacts are scrubbed by `src/scrubber/pii_scrubber.py`.
 
 - stable identifiers such as `node_ref`, `rule_id`, `recommendation_id`, and fingerprints are intentionally preserved
-- emitted artifacts receive legal metadata from `src/core/compliance.py`
+- emitted artifacts receive public repository metadata from `src/core/compliance.py`
 
-### 5. Supporting runtime shells
+### 4b. Diff boundary
 
-- `agent/cli.py` forwards `scan` to the core CLI analyze path
-- `src/api/app.py` exposes only `/` and `/healthz`
+`src/core/report_diff.py` compares two existing RADE JSON reports.
+
+- score deltas reuse the directional semantics from `src/core/pr_score_diff.py`
+- all four current scores are compared deterministically: `complexity`, `reusability`, `accessibility_risk`, and `migration_risk`
+- recommendation additions and removals are traced by stable `recommendation_id`
+- repeated-structure changes are traced by duplicate-cluster `fingerprint` and node references
+- output artifacts are local JSON and Markdown files, not hosted history or persistence claims
+
+### 5. Supporting runtime surfaces
+
+- `agent/cli.py` forwards `scan` to the core CLI analyze path for either `--input` or `--url`
+- `src/api/wsgi.py` is the served entrypoint for `/`, `/healthz`, and `POST /analyze`; it wraps the core `src/api/app.py` handler with API key auth middleware
 - `src/worker/main.py` emits staged telemetry but performs no real queue work
 - `web/lib/shell.mjs` serves the active web shell; `web/app/` is dormant scaffold only
+- Root `action.yml` defines a GitHub Action boundary that compares PR base/head fixture reports, posts score deltas for `reusability` and `accessibility_risk` with explicit regression-gate status, validates strict boolean regression-gate input, exports deterministic gate/delta/reason/flag outputs for workflow reuse, and can optionally fail on score regression after commenting
 
 ## Secondary blueprint path
 
@@ -92,7 +106,7 @@ Current blueprint behavior includes:
 
 - slab-layer-aware node styling
 - `data-rade-dna` and `data-slab-layer` metadata on groups
-- legal metadata and visible watermark text
+- public metadata and visible watermark text
 - deterministic demo outputs validated against a golden SVG fixture
 
 ### Graph persistence boundary
@@ -111,6 +125,7 @@ Current status:
 RADE currently supports two proven deconstruction inputs:
 
 - structured JSON payloads for the report path
+- public unauthenticated web pages converted through the Playwright web collector
 - accessibility-like trees for the blueprint / graph path
 
 Pixel-first analysis is not the current core architecture.
@@ -142,10 +157,11 @@ Required behavior:
 - preserve structural nodes and edges where needed for proof
 - emit audit metadata for persistence-side scrubbing
 - neutralize persistence-side sensitive strings into placeholders such as `DATA_SLOT_01`
+- preserve public-page collector outputs as structured schema payloads before report scrubbing
 
 ## Legal framing
 
-The `5-Slab Taxonomy` and `Ambient Engine` are the exclusive intellectual property of Trung Nguyen (Buildrr89).
+The labels `5-Slab Taxonomy` and `Ambient Engine` are retained as project terminology in this repository.
 
 Use hiQ v. LinkedIn as a narrow CFAA-domain reference for public-facing collection logic.
 
@@ -158,7 +174,6 @@ These are not current architecture claims:
 - hosted auth
 - tenant-aware persistence
 - queue-backed execution
-- API-triggered analysis runs
 - build scanning beyond deterministic local repo metadata
 - a real Next.js runtime
 - a shipped AWS Device Farm / Appium integration

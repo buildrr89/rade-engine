@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RADE report &mdash; Python.org Homepage Snapshot</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{--bg:#0f1117;--surface:#1a1d27;--border:#2a2d3a;--text:#e4e4e7;
+--text-muted:#9ca3af;--accent:#62f2b1;--accent-dim:#1a3d2e}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
+Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);
+line-height:1.6}
+.container{max-width:960px;margin:0 auto;padding:24px 16px}
+h1{font-size:1.5rem;color:var(--accent);margin:0 0 4px}
+h2{font-size:1.15rem;color:var(--accent);margin:32px 0 12px;
+border-bottom:1px solid var(--border);padding-bottom:6px}
+.meta{color:var(--text-muted);font-size:0.85rem;margin-bottom:24px}
+.meta span{display:inline-block;margin-right:16px}
+.legal{color:var(--text-muted);font-size:0.75rem;margin-bottom:20px;
+padding:8px 12px;background:var(--surface);border-radius:6px;
+border:1px solid var(--border)}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:12px;margin-bottom:8px}
+.summary-card{background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:16px;text-align:center}
+.summary-card .num{font-size:1.8rem;font-weight:700;color:var(--accent)}
+.summary-card .label{font-size:0.8rem;color:var(--text-muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin-bottom:8px;font-size:0.9rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+th{color:var(--accent);font-weight:600;font-size:0.8rem;text-transform:uppercase;
+letter-spacing:0.04em}
+.score-bar{background:var(--surface);border-radius:4px;height:22px;
+width:100%;min-width:100px;position:relative;overflow:hidden;
+border:1px solid var(--border)}
+.score-fill{height:100%;border-radius:3px;display:flex;align-items:center;
+padding-left:8px;font-size:0.75rem;font-weight:700;color:#fff;
+min-width:28px;transition:width .3s}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.filter-btn{background:var(--surface);color:var(--text-muted);border:1px solid var(--border);
+border-radius:4px;padding:4px 12px;cursor:pointer;font-size:0.8rem}
+.filter-btn:hover{border-color:var(--accent)}
+.filter-btn.active{background:var(--accent-dim);color:var(--accent);
+border-color:var(--accent)}
+details{background:var(--surface);border:1px solid var(--border);
+border-radius:8px;margin-bottom:8px}
+summary{cursor:pointer;padding:12px 16px;font-weight:500;font-size:0.9rem;
+list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"\25B6";font-size:0.6rem;transition:transform .2s;
+color:var(--text-muted)}
+details[open] summary::before{transform:rotate(90deg)}
+.finding-body,.rec-body{padding:4px 16px 16px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:8px 0}
+dt{color:var(--text-muted);font-size:0.8rem;font-weight:600}
+dd{margin:0;font-size:0.9rem}
+.priority-badge{display:inline-block;padding:2px 8px;border-radius:4px;
+font-size:0.75rem;font-weight:700;text-transform:uppercase}
+.p1{background:#3b1318;color:#e74c3c}
+.p2{background:#3b2e10;color:#f39c12}
+.p3{background:#1a3d2e;color:#27ae60}
+code{background:var(--surface);padding:1px 5px;border-radius:3px;
+font-size:0.85em;border:1px solid var(--border)}
+ul{padding-left:20px;margin:4px 0}
+li{margin:2px 0;font-size:0.9rem}
+.hidden{display:none}
+footer{margin-top:40px;padding-top:12px;border-top:1px solid var(--border);
+color:var(--text-muted);font-size:0.75rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>RADE modernization report</h1>
+<div class="meta">
+<span>v1.0</span>
+<span>2026-03-22T00:00:00Z</span>
+<span>org.python.www</span>
+<span>web</span>
+<span>Standards: 2026-Q1</span>
+</div>
+<div class="legal">
+Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only. &middot;
+Buildrr89 &middot;
+AGPL-3.0-only &middot;
+early alpha
+<br>The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.
+</div>
+
+<h2>Summary</h2>
+<div class="summary-grid">
+<div class="summary-card"><div class="num">1</div>
+<div class="label">Screens</div></div>
+<div class="summary-card"><div class="num">16</div>
+<div class="label">Nodes</div></div>
+<div class="summary-card"><div class="num">11</div>
+<div class="label">Interactive</div></div>
+<div class="summary-card"><div class="num">2</div>
+<div class="label">Dup Clusters</div></div>
+<div class="summary-card"><div class="num">3</div>
+<div class="label">Recommendations</div></div>
+</div>
+
+<h2>Scorecard</h2>
+<table>
+<thead><tr><th>Metric</th><th>Score</th><th>Evidence</th></tr></thead>
+<tbody><tr><td>complexity</td><td><div class="score-bar"><div class="score-fill" style="width:83%;background:#e74c3c">83</div></div></td><td>1 screens; 16 nodes; 11 interactive nodes</td></tr><tr><td>reusability</td><td><div class="score-bar"><div class="score-fill" style="width:98%;background:#27ae60">98</div></div></td><td>2 duplicate clusters; 6 duplicated nodes</td></tr><tr><td>accessibility_risk</td><td><div class="score-bar"><div class="score-fill" style="width:100%;background:#e74c3c">100</div></div></td><td>10 interactive nodes without accessibility identifiers; 0 interactive nodes without labels</td></tr><tr><td>migration_risk</td><td><div class="score-bar"><div class="score-fill" style="width:71%;background:#e74c3c">71</div></div></td><td>100 accessibility risk; 2 duplicate clusters</td></tr></tbody>
+</table>
+
+<h2>Screen Inventory</h2>
+<table>
+<thead><tr><th>Screen</th><th>ID</th><th>Nodes</th><th>Interactive</th>
+<th>Duplicated</th><th>A11y Gaps</th></tr></thead>
+<tbody><tr><td>Python.org Home</td><td><code>python-org-home</code></td><td>16</td><td>11</td><td>8</td><td>10</td></tr></tbody>
+</table>
+
+<h2>Findings</h2>
+<div class="filter-bar" id="finding-filters"><button class="filter-btn active" data-cat="all">All</button><button class="filter-btn" data-cat="accessibility">accessibility</button><button class="filter-btn" data-cat="component_reuse">component_reuse</button><button class="filter-btn" data-cat="migration_sequencing">migration_sequencing</button></div>
+<div id="findings"><details class="finding-card" data-category="accessibility"><summary><span class="priority-badge p1">P1</span> 10 interactive nodes are missing accessibility identifiers.</summary><div class="finding-body"><dl><dt>Rule ID</dt><dd><code>accessibility_missing_identifier</code></dd><dt>Category</dt><dd>accessibility</dd><dt>Provenance</dt><dd>standards</dd></dl><strong>Evidence</strong><ul><li><code>python-org-home#nav-about</code></li><li><code>python-org-home#nav-downloads</code></li><li><code>python-org-home#nav-documentation</code></li><li><code>python-org-home#nav-community</code></li><li><code>python-org-home#search-go</code></li><li><code>python-org-home#hero-learn-more</code></li><li><code>python-org-home#resource-get-started</code></li><li><code>python-org-home#resource-download</code></li><li><code>python-org-home#resource-docs</code></li><li><code>python-org-home#resource-jobs</code></li></ul></div></details><details class="finding-card" data-category="migration_sequencing"><summary><span class="priority-badge p1">P1</span> Fix accessibility on the repeated primary action before expanding reuse or visual refinement.</summary><div class="finding-body"><dl><dt>Rule ID</dt><dd><code>migration_sequence_accessibility_before_reuse</code></dd><dt>Category</dt><dd>migration_sequencing</dd><dt>Provenance</dt><dd>standards</dd></dl><strong>Evidence</strong><ul><li><code>missing_accessibility_node_refs=python-org-home#nav-about,python-org-home#nav-downloads,python-org-home#nav-documentation,python-org-home#nav-community,python-org-home#search-go,python-org-home#hero-learn-more,python-org-home#resource-get-started,python-org-home#resource-download,python-org-home#resource-docs,python-org-home#resource-jobs</code></li><li><code>repeated_interactive_cluster_fingerprint=52a6cab3351e0d62</code></li><li><code>primary_reuse_target=python-org-home#resource-get-started</code></li></ul></div></details><details class="finding-card" data-category="component_reuse"><summary><span class="priority-badge p2">P2</span> Repeated interactive structure appears 4 times across 1 screens.</summary><div class="finding-body"><dl><dt>Rule ID</dt><dd><code>component_reuse_interactive_cluster</code></dd><dt>Category</dt><dd>component_reuse</dd><dt>Provenance</dt><dd>standards</dd></dl><strong>Evidence</strong><ul><li><code>cluster_fingerprint=52a6cab3351e0d62</code></li><li><code>screen_ids=python-org-home</code></li><li><code>node_refs=python-org-home#resource-get-started,python-org-home#resource-download,python-org-home#resource-docs,python-org-home#resource-jobs</code></li></ul></div></details></div>
+
+<h2>Recommendations</h2>
+<div class="filter-bar" id="rec-filters"><button class="filter-btn active" data-cat="all">All</button><button class="filter-btn" data-cat="accessibility">accessibility</button><button class="filter-btn" data-cat="component_reuse">component_reuse</button><button class="filter-btn" data-cat="migration_sequencing">migration_sequencing</button></div>
+<div id="recommendations"><details class="rec-card" data-category="accessibility"><summary><span class="priority-badge p1">P1</span> accessibility &mdash; interactive_nodes_without_accessibility_identifier</summary><div class="rec-body"><dl><dt>Recommendation ID</dt><dd><code>rec-accessibility_missing_identifier-70884120</code></dd><dt>Rule ID</dt><dd><code>accessibility_missing_identifier</code></dd><dt>Confidence</dt><dd>medium</dd><dt>Effort</dt><dd>M</dd><dt>Expected impact</dt><dd>High: removes assistive technology blockers</dd></dl><p><strong>Problem:</strong> 10 interactive nodes are missing accessibility identifiers.</p><p><strong>Change:</strong> Add stable accessibility identifiers and preserve the accessible name, role, and value for each interactive node.</p><p><strong>Reasoning:</strong> Interactive controls without identifiers are harder to test, verify, and support for assistive technologies.</p><strong>Standards</strong><ul><li>WCAG 2.2 4.1.2 Name, Role, Value</li><li>Apple HIG: accessibility and clarity</li></ul><strong>Benchmarks</strong><ul><li>none</li></ul><strong>Evidence</strong><ul><li><code>python-org-home#nav-about</code></li><li><code>python-org-home#nav-downloads</code></li><li><code>python-org-home#nav-documentation</code></li><li><code>python-org-home#nav-community</code></li><li><code>python-org-home#search-go</code></li><li><code>python-org-home#hero-learn-more</code></li><li><code>python-org-home#resource-get-started</code></li><li><code>python-org-home#resource-download</code></li><li><code>python-org-home#resource-docs</code></li><li><code>python-org-home#resource-jobs</code></li></ul></div></details><details class="rec-card" data-category="migration_sequencing"><summary><span class="priority-badge p1">P1</span> migration_sequencing &mdash; accessibility-before-reuse</summary><div class="rec-body"><dl><dt>Recommendation ID</dt><dd><code>rec-migration_sequence_accessibility_before_reuse-29b66fc7</code></dd><dt>Rule ID</dt><dd><code>migration_sequence_accessibility_before_reuse</code></dd><dt>Confidence</dt><dd>high</dd><dt>Effort</dt><dd>M</dd><dt>Expected impact</dt><dd>High: reduces future rework risk</dd></dl><p><strong>Problem:</strong> Fix accessibility on the repeated primary action before expanding reuse or visual refinement.</p><p><strong>Change:</strong> Address the missing accessibility identifiers first, then extract and standardize the repeated control.</p><p><strong>Reasoning:</strong> Accessibility fixes reduce user-facing risk faster than structure-only cleanup and make reuse safer.</p><strong>Standards</strong><ul><li>WCAG 2.2: accessibility first</li><li>Apple HIG: system consistency</li></ul><strong>Benchmarks</strong><ul><li>none</li></ul><strong>Evidence</strong><ul><li><code>missing_accessibility_node_refs=python-org-home#nav-about,python-org-home#nav-downloads,python-org-home#nav-documentation,python-org-home#nav-community,python-org-home#search-go,python-org-home#hero-learn-more,python-org-home#resource-get-started,python-org-home#resource-download,python-org-home#resource-docs,python-org-home#resource-jobs</code></li><li><code>repeated_interactive_cluster_fingerprint=52a6cab3351e0d62</code></li><li><code>primary_reuse_target=python-org-home#resource-get-started</code></li></ul></div></details><details class="rec-card" data-category="component_reuse"><summary><span class="priority-badge p2">P2</span> component_reuse &mdash; link</summary><div class="rec-body"><dl><dt>Recommendation ID</dt><dd><code>rec-component_reuse_interactive_cluster-d3c2246a</code></dd><dt>Rule ID</dt><dd><code>component_reuse_interactive_cluster</code></dd><dt>Confidence</dt><dd>high</dd><dt>Effort</dt><dd>M</dd><dt>Expected impact</dt><dd>Medium: reduces duplication and drift</dd></dl><p><strong>Problem:</strong> Repeated interactive structure appears 4 times across 1 screens.</p><p><strong>Change:</strong> Extract the repeated control into one reusable component and reuse it across screens.</p><p><strong>Reasoning:</strong> Copy-pasted interactive structure increases drift and makes future changes more expensive.</p><strong>Standards</strong><ul><li>Apple HIG: consistency</li><li>Material 3: reusable component patterns</li></ul><strong>Benchmarks</strong><ul><li>none</li></ul><strong>Evidence</strong><ul><li><code>cluster_fingerprint=52a6cab3351e0d62</code></li><li><code>screen_ids=python-org-home</code></li><li><code>node_refs=python-org-home#resource-get-started,python-org-home#resource-download,python-org-home#resource-docs,python-org-home#resource-jobs</code></li></ul></div></details></div>
+
+<h2>Roadmap</h2>
+<table>
+<thead><tr><th>#</th><th>Action</th><th>Priority</th><th>Effort</th>
+<th>Screens</th></tr></thead>
+<tbody><tr><td>1</td><td>Add stable accessibility identifiers and preserve the accessible name, role, and value for each interactive node.</td><td><span class="priority-badge p1">P1</span></td><td>M</td><td>python-org-home</td></tr><tr><td>2</td><td>Address the missing accessibility identifiers first, then extract and standardize the repeated control.</td><td><span class="priority-badge p1">P1</span></td><td>M</td><td>python-org-home</td></tr><tr><td>3</td><td>Extract the repeated control into one reusable component and reuse it across screens.</td><td><span class="priority-badge p2">P2</span></td><td>M</td><td>python-org-home</td></tr></tbody>
+</table>
+
+<footer>
+RADE &middot; Buildrr89 &middot;
+AGPL-3.0-only &middot;
+early alpha
+</footer>
+</div>
+<script>
+document.querySelectorAll(".filter-bar").forEach(function(bar){
+  bar.addEventListener("click",function(e){
+    var btn=e.target.closest(".filter-btn");
+    if(!btn)return;
+    bar.querySelectorAll(".filter-btn").forEach(function(b){
+      b.classList.remove("active")});
+    btn.classList.add("active");
+    var cat=btn.getAttribute("data-cat");
+    var section=bar.nextElementSibling;
+    section.querySelectorAll("details").forEach(function(d){
+      if(cat==="all"||d.getAttribute("data-category")===cat){
+        d.classList.remove("hidden")}else{
+        d.classList.add("hidden")}});
+  });
+});
+</script>
+</body>
+</html>

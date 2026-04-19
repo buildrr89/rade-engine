@@ -59,7 +59,8 @@ jobs:
             --input examples/sample_ios_output.json \
             --app-id com.example.legacyapp \
             --json-output output/modernization_report.json \
-            --md-output output/modernization_report.md | tee proof-output.txt
+            --md-output output/modernization_report.md \
+            --html-output output/modernization_report.html | tee proof-output.txt
 
       - name: Publish proof summary
         run: |

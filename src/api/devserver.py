@@ -1,4 +1,4 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 import argparse
@@ -22,7 +22,7 @@ def _load_app(spec: str):
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="rade-devserver", add_help=True)
-    parser.add_argument("app", nargs="?", default="src.api.app:app")
+    parser.add_argument("app", nargs="?", default="src.api.wsgi:application")
     parser.add_argument("--host", default=os.environ.get("API_HOST", "127.0.0.1"))
     parser.add_argument(
         "--port", type=int, default=int(os.environ.get("API_PORT", "8000"))

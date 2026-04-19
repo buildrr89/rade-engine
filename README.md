@@ -1,96 +1,255 @@
-# RADE
+# RADE Engine
 
-## Current Stage
+**Deterministic UI intelligence for repeated structure, accessibility gaps, and modernization risk.**
 
-RADE is currently a proof-first local analysis workspace.
+For frontend teams, agencies, design-system work, modernization efforts, and accessibility audits: analyze a public web page or structured UI payload and get proof-backed JSON, Markdown, and HTML outputs you can review, diff, and trust.
 
-The primary proven product slice is:
+![Proof](https://github.com/buildrr89/rade-engine/actions/workflows/proof.yml/badge.svg)
 
-- local JSON fixture input
-- deterministic validation, normalization, layering, fingerprinting, and deduplication
-- deterministic scoring, recommendation generation, and roadmap generation
-- scrubbed JSON and Markdown report output with legal metadata
+Fastest way to understand the project:
 
-The repo also contains secondary implemented surfaces that are real but thin:
+- Open a checked-in report now: [Markdown](examples/python_org_homepage_report.md) · [JSON](examples/python_org_homepage_report.json)
+- Open a checked-in diff now: [Markdown](examples/python_to_web_dev_report_diff.md) · [JSON](examples/python_to_web_dev_report_diff.json)
+- Run it locally in two commands: `make bootstrap` and `make analyze`
+- Expect deterministic outputs with stable evidence identifiers, not one-shot AI opinion text
 
-- a WSGI API shell with `/` and `/healthz`
-- a worker shell that emits staged telemetry but does not process a real queue
-- a web shell server in `web/lib/shell.mjs`
-- an agent wrapper that forwards to the CLI
-- an accessibility-tree-to-blueprint demo path with SVG output and a Neo4j Aura ingest library boundary
+## Why This Exists
 
-## What Is Proven
+Most interface reviews still rely on screenshots, spreadsheets, taste-based commentary, or opaque AI summaries. That makes it hard to answer basic questions with evidence:
 
-- `src/core/cli.py` runs the deterministic `analyze` flow.
-- `src/core/report_generator.py` validates payloads, normalizes nodes, fingerprints structure, deduplicates repeated nodes, scores the project, builds standards-backed recommendations, builds a roadmap, and writes JSON / Markdown artifacts.
-- `src/core/schemas.py` enforces the JSON contract for `project_name`, `platform`, `screens`, and per-element invariants.
-- `src/scrubber/pii_scrubber.py` scrubs report artifacts while preserving stable identifiers such as `node_ref`, `rule_id`, and fingerprints.
-- `src/scrubber/edge_shield.py` neutralizes sensitive strings into deterministic `DATA_SLOT_XX` placeholders for the blueprint / graph path.
-- `src/demo/run_raid_visualizer.py`, `src/engine/rade_orchestrator.py`, and `src/database/graph_ingestor.py` prove an exploratory blueprint pipeline from accessibility-like trees to SVG and scrubbed graph persistence primitives.
-- **Slab 03 (Frame) — hybrid pulse:** `src/core/slab03_hybrid_anchor.py` runs **modal**, then **landmark**, then **VBox tertiary** (`apply_slab03_hybrid_pulse`): `dialog` / `alertdialog` subtrees win over landmarks; semantic regions get `slab03:landmark:…` frames; nodes still without a frame whose center lies inside a **landmark root**’s bounds inherit that frame with `slab03_anchor_kind = visual:vbox-contained` (never overrides modal or prior assignments). Geometry is fed from `bounds` / `bounding_box` on `FunctionalNode.to_dict()` and into the Slab 03 pipeline from `rade_orchestrator`.
-- `docs/PHASE_1_COMPONENTIZATION.md` is the planning / RFC contract for Phase 1 (Figma bridge export and deeper variant promotion remain incremental).
-- **Figma Bridge v0:** `src/core/figma_bridge_v0.py` builds a deterministic, legal-wrapped JSON manifest (`manifest_version` **0.2.2**) from graph node dicts (`component_id`, `stable_component_key`, `figma_suggested_name`, per-frame `anchor_kinds_observed` from `slab03_anchor_kind`, aggregated `design_tokens` for color/typography/spacing, `ref_map` / `variant_axes` reserved). `ConstructionGraph.to_figma_bridge_v0_manifest()` exposes this on orchestrator output.
-- `tests/` contains 25 test files and 96 test cases covering the primary report path, shells, contracts, scrubbers, orchestrator, Slab 03 heuristics, Figma Bridge v0, and graph ingestor.
+- What structures repeat across the interface?
+- Where are the accessibility gaps?
+- Which surfaces are expensive to modernize?
+- What changed between two runs?
 
-## What Is Implemented But Not A Full Product Surface
+RADE exists to turn interface inspection into a deterministic, traceable workflow. The current engine accepts authorized structured payloads or public web URLs, analyzes them without model inference, and emits artifacts that can be reviewed by humans or consumed by tooling.
 
-- `src/api/app.py` is a health/readiness WSGI app, not a report-generation API.
-- `src/worker/main.py` is a telemetry-producing shell, not a queue consumer.
-- `src/connectors/repo_connector.py` extracts local repo metadata only.
-- `src/connectors/build_connector.py` is explicitly deferred and raises `NotImplementedError`.
-- `web/lib/shell.mjs` is the active web runtime; `web/app/` is a dormant scaffold and is not the current runtime.
-- `src/engine/rade_orchestrator.py` includes managed-session configuration and capability building, but the repo does not ship a real Appium / AWS Device Farm integration.
+## What You Get
 
-## What Is Out Of Scope Right Now
+- Repeated-structure analysis that clusters duplicated interface patterns across screens
+- Accessibility gap detection with stable identifiers and standards-backed findings
+- Modernization and migration risk scoring grounded in deterministic rules
+- JSON, Markdown, and interactive HTML reports from the same engine run
+- Deterministic report-to-report diffs for tracking interface change over time
+- Scrubbed artifacts that preserve structural traceability without pretending the repo is a hosted platform
+- A GitHub Action boundary for deterministic PR score diffs when your repository stores RADE fixtures
+- Embeddable SVG score badges and shields.io endpoint JSON for live score display in your README
+- Optional axe-core integration that embeds Deque-backed WCAG violations in the same report (enable with `--axe`)
 
-- hosted auth, tenants, and persisted analysis history
-- a real queue-backed execution system
-- an API route that accepts scans and runs analysis
-- a build connector implementation
-- a real Next.js application runtime
-- fully integrated device-farm collection
-- benchmark-backed ranking beyond the current standards references
-
-## Repo Map
-
-- `PRD.md`: current product definition for the repo state
-- `docs/TRUTH_HIERARCHY.md`: conflict resolution order
-- `docs/APP_SCOPE.md`: canonical current implementation scope
-- `docs/ARCHITECTURE.md`: current architecture and boundaries
-- `docs/BUILD_SHEET.md`: current proof target and latest verified commands
-- `docs/PHASE_1_COMPONENTIZATION.md`: Phase 1 componentization / frame intelligence RFC
-- `src/`: Python implementation
-- `web/`: shell web runtime and smoke tests
-- `tests/`: deterministic proof coverage
-
-## Quickstart
+## Install
 
 ```bash
-uv sync --dev
-pnpm --dir web install
-./rade-proof
-uv run ruff check src tests agent
-uv run black --check src tests agent
-pnpm --dir web lint
-pnpm --dir web test
-uv run python -m src.core.cli analyze \
-  --input tests/fixtures/sample_ios_output.json \
-  --app-id com.example.legacyapp \
-  --json-output output/modernization_report.json \
-  --md-output output/modernization_report.md
+pip install rade-engine
+# or, with uv, run it one-off with zero install:
+uvx rade analyze --url https://example.com --json-output report.json --md-output report.md
 ```
 
-## Truth Rule
+Installing also gives you the `rade` CLI on your PATH. The Playwright-backed `--url` path additionally requires `playwright install chromium` the first time.
 
-Read repo truth in this order:
+## Quick Start (from source)
 
-1. `README.md`
-2. `PRD.md`
-3. `docs/TRUTH_HIERARCHY.md`
-4. `docs/APP_SCOPE.md`
-5. `docs/HARD_RISKS.md`
-6. `docs/ARCHITECTURE.md`
-7. `docs/BUILD_SHEET.md`
-8. implementation contracts and executable code / tests
+Prerequisites:
 
-If a historical file such as `RADE.md` or `RADE2.0.md` reappears later, treat it as archival unless the truth hierarchy is explicitly updated to make it authoritative again.
+- [uv](https://docs.astral.sh/uv/)
+- Python 3.14.3
+- Node 20.19.5
+- [pnpm](https://pnpm.io/)
+
+Run the sample proof path:
+
+```bash
+make bootstrap
+make analyze
+```
+
+This writes:
+
+- `output/modernization_report.json`
+- `output/modernization_report.md`
+- `output/modernization_report.html`
+
+Compare two existing RADE JSON reports:
+
+```bash
+uv run python -m src.core.cli diff \
+  --base-report examples/python_org_homepage_report.json \
+  --head-report examples/web_dev_homepage_report.json
+```
+
+This writes:
+
+- `output/report_diff.json`
+- `output/report_diff.md`
+
+Run against a public URL:
+
+```bash
+uv run python -m src.core.cli analyze \
+  --url https://example.com \
+  --json-output output/example_report.json \
+  --md-output output/example_report.md \
+  --html-output output/example_report.html
+```
+
+Run against a local UI payload:
+
+```bash
+uv run python -m src.core.cli analyze \
+  --input examples/sample_ios_output.json \
+  --app-id com.example.legacyapp \
+  --json-output output/modernization_report.json \
+  --md-output output/modernization_report.md \
+  --html-output output/modernization_report.html
+```
+
+Run the same URL analysis with axe-core violations attached (uses Deque's axe-core engine loaded from a pinned CDN, MPL-2.0):
+
+```bash
+uv run python -m src.core.cli analyze \
+  --url https://example.com \
+  --axe \
+  --json-output output/example_report.json \
+  --md-output output/example_report.md
+```
+
+Each violation becomes one finding under `accessibility_violations` with explicit `provenance: "axe-core"`, WCAG refs, impact-to-priority mapping, and the axe rule help URL. The rest of the report — structural clusters, deterministic scores, recommendations — is unchanged, so teams can see axe findings alongside RADE's rule-based analysis without losing the deterministic contract.
+
+Generate an embeddable SVG score badge from a RADE report:
+
+```bash
+uv run python -m src.core.cli badge \
+  --report examples/python_org_homepage_report.json \
+  --metric reusability \
+  --svg-output output/reusability_badge.svg \
+  --endpoint-output output/reusability_badge.shields.json
+```
+
+Supported metrics: `complexity`, `reusability`, `accessibility_risk`, `migration_risk`. Commit the SVG into your repo, or host the `*.shields.json` output and embed a live badge via `https://img.shields.io/endpoint?url=<raw-json-url>`. Sample artifacts are checked in at [examples/python_org_homepage_reusability.svg](examples/python_org_homepage_reusability.svg).
+
+## Example Workflow
+
+1. Point RADE at a public web page or a structured export of an existing interface.
+2. Review repeated clusters, accessibility findings, and prioritized modernization risk in the HTML or Markdown report.
+3. Compare two RADE JSON reports to see score direction, recommendation changes, and repeated-structure changes over time.
+4. Use the JSON outputs for automation, diffing, or downstream scoring checks.
+5. If your workflow stores fixtures in git, use the GitHub Action to compare score deltas on pull requests.
+
+## Output Artifacts
+
+- `JSON report`
+  Machine-readable output with scores, findings, recommendations, evidence IDs, and repo metadata.
+- `Markdown report`
+  Review-friendly output for PRs, docs, and audit trails.
+- `HTML report`
+  Interactive output with filters, score bars, and expandable sections for findings and recommendations.
+- `JSON report diff`
+  Machine-readable base/head delta with score direction, recommendation changes, and duplicate-cluster changes.
+- `Markdown report diff`
+  Review-friendly change log for before/after interface runs.
+- `GitHub Action comment`
+  Deterministic base/head score deltas for `reusability` and `accessibility_risk` when run on fixture-backed pull requests.
+
+See [examples/](examples/) for checked-in report artifacts from public websites.
+
+## Why This Is Different
+
+RADE is not a screenshot-first redesign bot and it does not try to sell confidence through vague language.
+
+- Deterministic inspection instead of one-shot AI judgments
+- Reproducible evidence chains instead of unverifiable scoring magic
+- Stable identifiers and explicit report contracts instead of fuzzy summaries
+- Auditable logic that can be tested and reviewed in-repo
+- Structural analysis that can feed CI, docs, and downstream tooling
+
+## Why Deterministic Matters
+
+The core promise is simple: same input, same report, except for `generated_at`.
+
+That matters because deterministic outputs are:
+
+- Diffable in pull requests
+- Safe to baseline in tests
+- Easier to trust in modernization planning
+- Easier to extend without losing traceability
+- More useful than black-box advice when teams need proof, not style commentary
+
+## Who This Is For
+
+- Frontend teams trying to understand duplicated UI and modernization effort
+- Agencies that need sharper discovery and audit outputs before a rebuild
+- Design-system teams looking for repeated structures and reuse opportunities
+- Accessibility reviewers who need evidence-backed findings they can trace
+- Engineering leads who want a deterministic interface analysis layer rather than subjective review decks
+
+## Current Wedge
+
+The current commercial wedge is deliberately narrow:
+
+- Proof-backed analysis of repeated structure
+- Proof-backed analysis of accessibility gaps
+- Proof-backed analysis of migration and modernization risk
+
+That wedge is useful today for frontend teams, agencies, design-system work, modernization efforts, and accessibility audits. It is narrow enough to run, inspect, and extend now, while still sitting on top of infrastructure that can support a much larger interface-intelligence system later.
+
+## Long-Term Vision
+
+Interfaces contain market intelligence.
+
+If repeated UI structures, interaction patterns, and implementation conventions can be collected, normalized, and compared over time, they become more than audit outputs. They become an intelligence layer for understanding:
+
+- how software interfaces are actually built
+- which patterns repeat across products and categories
+- where conventions are converging or fragmenting
+- how interface structure changes as the market moves
+
+RADE starts with deterministic interface analysis because the foundation needs to be inspectable before it can become strategically valuable.
+
+## Contributing
+
+Contributions are welcome, but the repo is proof-first.
+
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, workflow, and exact proof expectations
+- Use [docs/APP_SCOPE.md](docs/APP_SCOPE.md) and [docs/TRUTH_HIERARCHY.md](docs/TRUTH_HIERARCHY.md) before broadening behavior
+- Favor small, reversible changes that improve the engine, collectors, scoring, reports, docs, or examples
+
+If you want to fork it, the natural extension points are visible in the repo: collectors, scoring rules, report generation, API boundaries, fixtures, and CI workflows.
+
+## Status / Roadmap
+
+RADE is a public alpha. The current repo proves a real wedge, not a full hosted platform.
+
+**Proven today**
+
+- CLI analysis from local JSON fixtures
+- CLI analysis from public unauthenticated URLs via Playwright
+- Deterministic JSON, Markdown, and HTML report generation
+- CLI comparison of two existing RADE JSON reports into deterministic JSON and Markdown diff artifacts
+- `POST /analyze` through `src.api.wsgi:application` with static API key auth
+- PII scrubbing that preserves stable structural identifiers
+- Fixture-backed GitHub Action score diffs for pull requests
+
+**Exploratory or secondary**
+
+- Accessibility-tree-to-SVG blueprint generation
+- Neo4j Aura ingest boundary for scrubbed structural graphs
+- Figma Bridge v0 manifest export
+
+**Not built yet**
+
+- Hosted auth and tenant management
+- Persisted analysis history
+- Queue-backed execution
+- Authenticated private-page collection
+- Broad enterprise workflow surfaces
+
+For exact implementation boundaries, see [docs/APP_SCOPE.md](docs/APP_SCOPE.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), and [docs/BUILD_SHEET.md](docs/BUILD_SHEET.md).
+
+## Legal
+
+RADE is licensed under the GNU Affero General Public License v3.0. See [LICENSE](LICENSE).
+
+The labels `5-Slab Taxonomy` and `Ambient Engine` are retained as project terminology in this repository.
+
+## Security
+
+See [SECURITY.md](SECURITY.md). Do not report vulnerabilities in public issues.

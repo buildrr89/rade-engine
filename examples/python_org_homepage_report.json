@@ -1,0 +1,341 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha",
+    "live_raid_date": "2026-03-22"
+  },
+  "report_version": "1.0",
+  "generated_at": "2026-03-22T00:00:00Z",
+  "app_id": "org.python.www",
+  "project_name": "Python.org Homepage Snapshot",
+  "platform": "web",
+  "standards_pack": {
+    "version": "2026-Q1",
+    "refs": [
+      {
+        "name": "Apple Human Interface Guidelines",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/"
+      },
+      {
+        "name": "Apple iOS design guidance",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-ios"
+      },
+      {
+        "name": "Android Material 3 guidance",
+        "url": "https://developer.android.com/develop/ui/compose/designsystems/material3"
+      },
+      {
+        "name": "Android accessibility guidance",
+        "url": "https://developer.android.com/develop/ui/compose/accessibility"
+      },
+      {
+        "name": "Android semantics guidance",
+        "url": "https://developer.android.com/develop/ui/compose/accessibility/semantics"
+      },
+      {
+        "name": "WCAG 2.2",
+        "url": "https://www.w3.org/TR/WCAG22/"
+      }
+    ]
+  },
+  "summary": {
+    "screen_count": 1,
+    "node_count": 16,
+    "interactive_node_count": 11,
+    "duplicate_cluster_count": 2,
+    "recommendation_count": 3
+  },
+  "scores": {
+    "complexity": {
+      "value": 83,
+      "version": "2026-03-18",
+      "evidence": [
+        "1 screens",
+        "16 nodes",
+        "11 interactive nodes"
+      ]
+    },
+    "reusability": {
+      "value": 98,
+      "version": "2026-03-18",
+      "evidence": [
+        "2 duplicate clusters",
+        "6 duplicated nodes"
+      ]
+    },
+    "accessibility_risk": {
+      "value": 100,
+      "version": "2026-03-18",
+      "evidence": [
+        "10 interactive nodes without accessibility identifiers",
+        "0 interactive nodes without labels"
+      ]
+    },
+    "migration_risk": {
+      "value": 71,
+      "version": "2026-03-18",
+      "evidence": [
+        "100 accessibility risk",
+        "2 duplicate clusters"
+      ]
+    }
+  },
+  "screen_inventory": [
+    {
+      "screen_id": "python-org-home",
+      "screen_name": "Python.org Home",
+      "node_count": 16,
+      "interactive_count": 11,
+      "duplicate_node_count": 8,
+      "accessibility_gap_count": 10
+    }
+  ],
+  "duplicate_clusters": [
+    {
+      "fingerprint": "52a6cab3351e0d62",
+      "count": 4,
+      "interactive": true,
+      "screen_ids": [
+        "python-org-home"
+      ],
+      "screen_names": [
+        "Python.org Home"
+      ],
+      "node_refs": [
+        "python-org-home#resource-get-started",
+        "python-org-home#resource-download",
+        "python-org-home#resource-docs",
+        "python-org-home#resource-jobs"
+      ],
+      "element_types": [
+        "link"
+      ],
+      "roles": [
+        "link"
+      ],
+      "representative_node_ref": "python-org-home#resource-get-started"
+    },
+    {
+      "fingerprint": "784bfa8762478fdc",
+      "count": 4,
+      "interactive": true,
+      "screen_ids": [
+        "python-org-home"
+      ],
+      "screen_names": [
+        "Python.org Home"
+      ],
+      "node_refs": [
+        "python-org-home#nav-about",
+        "python-org-home#nav-downloads",
+        "python-org-home#nav-documentation",
+        "python-org-home#nav-community"
+      ],
+      "element_types": [
+        "link"
+      ],
+      "roles": [
+        "link"
+      ],
+      "representative_node_ref": "python-org-home#nav-about"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "finding-001",
+      "rule_id": "accessibility_missing_identifier",
+      "category": "accessibility",
+      "title": "10 interactive nodes are missing accessibility identifiers.",
+      "priority": "P1",
+      "provenance": "standards",
+      "evidence": [
+        "python-org-home#nav-about",
+        "python-org-home#nav-downloads",
+        "python-org-home#nav-documentation",
+        "python-org-home#nav-community",
+        "python-org-home#search-go",
+        "python-org-home#hero-learn-more",
+        "python-org-home#resource-get-started",
+        "python-org-home#resource-download",
+        "python-org-home#resource-docs",
+        "python-org-home#resource-jobs"
+      ]
+    },
+    {
+      "finding_id": "finding-002",
+      "rule_id": "migration_sequence_accessibility_before_reuse",
+      "category": "migration_sequencing",
+      "title": "Fix accessibility on the repeated primary action before expanding reuse or visual refinement.",
+      "priority": "P1",
+      "provenance": "standards",
+      "evidence": [
+        "missing_accessibility_node_refs=python-org-home#nav-about,python-org-home#nav-downloads,python-org-home#nav-documentation,python-org-home#nav-community,python-org-home#search-go,python-org-home#hero-learn-more,python-org-home#resource-get-started,python-org-home#resource-download,python-org-home#resource-docs,python-org-home#resource-jobs",
+        "repeated_interactive_cluster_fingerprint=52a6cab3351e0d62",
+        "primary_reuse_target=python-org-home#resource-get-started"
+      ]
+    },
+    {
+      "finding_id": "finding-003",
+      "rule_id": "component_reuse_interactive_cluster",
+      "category": "component_reuse",
+      "title": "Repeated interactive structure appears 4 times across 1 screens.",
+      "priority": "P2",
+      "provenance": "standards",
+      "evidence": [
+        "cluster_fingerprint=52a6cab3351e0d62",
+        "screen_ids=python-org-home",
+        "node_refs=python-org-home#resource-get-started,python-org-home#resource-download,python-org-home#resource-docs,python-org-home#resource-jobs"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "recommendation_id": "rec-accessibility_missing_identifier-70884120",
+      "rule_id": "accessibility_missing_identifier",
+      "category": "accessibility",
+      "scope": "project",
+      "target": "interactive_nodes_without_accessibility_identifier",
+      "priority": "P1",
+      "confidence": "medium",
+      "problem_statement": "10 interactive nodes are missing accessibility identifiers.",
+      "recommended_change": "Add stable accessibility identifiers and preserve the accessible name, role, and value for each interactive node.",
+      "reasoning": "Interactive controls without identifiers are harder to test, verify, and support for assistive technologies.",
+      "evidence": [
+        "python-org-home#nav-about",
+        "python-org-home#nav-downloads",
+        "python-org-home#nav-documentation",
+        "python-org-home#nav-community",
+        "python-org-home#search-go",
+        "python-org-home#hero-learn-more",
+        "python-org-home#resource-get-started",
+        "python-org-home#resource-download",
+        "python-org-home#resource-docs",
+        "python-org-home#resource-jobs"
+      ],
+      "standards_refs": [
+        "WCAG 2.2 4.1.2 Name, Role, Value",
+        "Apple HIG: accessibility and clarity"
+      ],
+      "benchmark_refs": [],
+      "expected_impact": "High: removes assistive technology blockers",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "python-org-home"
+      ],
+      "affected_components": [
+        "python-org-home#nav-about",
+        "python-org-home#nav-downloads",
+        "python-org-home#nav-documentation",
+        "python-org-home#nav-community",
+        "python-org-home#search-go",
+        "python-org-home#hero-learn-more",
+        "python-org-home#resource-get-started",
+        "python-org-home#resource-download",
+        "python-org-home#resource-docs",
+        "python-org-home#resource-jobs"
+      ],
+      "provenance": "standards"
+    },
+    {
+      "recommendation_id": "rec-migration_sequence_accessibility_before_reuse-29b66fc7",
+      "rule_id": "migration_sequence_accessibility_before_reuse",
+      "category": "migration_sequencing",
+      "scope": "project",
+      "target": "accessibility-before-reuse",
+      "priority": "P1",
+      "confidence": "high",
+      "problem_statement": "Fix accessibility on the repeated primary action before expanding reuse or visual refinement.",
+      "recommended_change": "Address the missing accessibility identifiers first, then extract and standardize the repeated control.",
+      "reasoning": "Accessibility fixes reduce user-facing risk faster than structure-only cleanup and make reuse safer.",
+      "evidence": [
+        "missing_accessibility_node_refs=python-org-home#nav-about,python-org-home#nav-downloads,python-org-home#nav-documentation,python-org-home#nav-community,python-org-home#search-go,python-org-home#hero-learn-more,python-org-home#resource-get-started,python-org-home#resource-download,python-org-home#resource-docs,python-org-home#resource-jobs",
+        "repeated_interactive_cluster_fingerprint=52a6cab3351e0d62",
+        "primary_reuse_target=python-org-home#resource-get-started"
+      ],
+      "standards_refs": [
+        "WCAG 2.2: accessibility first",
+        "Apple HIG: system consistency"
+      ],
+      "benchmark_refs": [],
+      "expected_impact": "High: reduces future rework risk",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "python-org-home"
+      ],
+      "affected_components": [
+        "python-org-home#resource-get-started"
+      ],
+      "provenance": "standards"
+    },
+    {
+      "recommendation_id": "rec-component_reuse_interactive_cluster-d3c2246a",
+      "rule_id": "component_reuse_interactive_cluster",
+      "category": "component_reuse",
+      "scope": "component",
+      "target": "link",
+      "priority": "P2",
+      "confidence": "high",
+      "problem_statement": "Repeated interactive structure appears 4 times across 1 screens.",
+      "recommended_change": "Extract the repeated control into one reusable component and reuse it across screens.",
+      "reasoning": "Copy-pasted interactive structure increases drift and makes future changes more expensive.",
+      "evidence": [
+        "cluster_fingerprint=52a6cab3351e0d62",
+        "screen_ids=python-org-home",
+        "node_refs=python-org-home#resource-get-started,python-org-home#resource-download,python-org-home#resource-docs,python-org-home#resource-jobs"
+      ],
+      "standards_refs": [
+        "Apple HIG: consistency",
+        "Material 3: reusable component patterns"
+      ],
+      "benchmark_refs": [],
+      "expected_impact": "Medium: reduces duplication and drift",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "python-org-home"
+      ],
+      "affected_components": [
+        "52a6cab3351e0d62"
+      ],
+      "provenance": "standards"
+    }
+  ],
+  "roadmap": [
+    {
+      "step": 1,
+      "title": "Add stable accessibility identifiers and preserve the accessible name, role, and value for each interactive node.",
+      "why_now": "10 interactive nodes are missing accessibility identifiers.",
+      "category": "accessibility",
+      "priority": "P1",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "python-org-home"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Address the missing accessibility identifiers first, then extract and standardize the repeated control.",
+      "why_now": "Fix accessibility on the repeated primary action before expanding reuse or visual refinement.",
+      "category": "migration_sequencing",
+      "priority": "P1",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "python-org-home"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Extract the repeated control into one reusable component and reuse it across screens.",
+      "why_now": "Repeated interactive structure appears 4 times across 1 screens.",
+      "category": "component_reuse",
+      "priority": "P2",
+      "implementation_effort": "M",
+      "affected_screens": [
+        "python-org-home"
+      ]
+    }
+  ]
+}

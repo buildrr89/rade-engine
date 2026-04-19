@@ -1,0 +1,116 @@
+{
+  "rade_legal": {
+    "header_notice": "Copyright (c) 2026 Buildrr89. Licensed under AGPL-3.0-only.",
+    "attribution": "Buildrr89",
+    "license": "AGPL-3.0-only",
+    "project_status": "early alpha",
+    "project_terms_notice": "The labels 5-Slab Taxonomy and Ambient Engine are retained as project terminology in this repository.",
+    "visible_svg_watermark": "Buildrr89 | RADE alpha",
+    "live_raid_date": "2026-03-20"
+  },
+  "report_version": "1.0.0",
+  "generated_at": "2026-03-20T00:00:00Z",
+  "app_id": "com.example.legacyapp",
+  "project_name": "Legacy App",
+  "platform": "ios",
+  "summary": {
+    "screen_count": 2,
+    "node_count": 11,
+    "interactive_node_count": 5,
+    "duplicate_cluster_count": 2,
+    "recommendation_count": 2
+  },
+  "scores": {
+    "complexity": {
+      "value": 52,
+      "evidence": [
+        "node_count:11"
+      ]
+    },
+    "reusability": {
+      "value": 90,
+      "evidence": [
+        "duplicate_clusters:2"
+      ]
+    },
+    "accessibility_risk": {
+      "value": 44,
+      "evidence": [
+        "missing_identifiers:1"
+      ]
+    },
+    "migration_risk": {
+      "value": 48,
+      "evidence": [
+        "legacy_components:2"
+      ]
+    }
+  },
+  "recommendations": [
+    {
+      "recommendation_id": "rec-component_reuse_interactive_cluster-22222222",
+      "rule_id": "component_reuse_interactive_cluster",
+      "category": "component_reuse",
+      "target": "Footer Nav",
+      "priority": "P2"
+    },
+    {
+      "recommendation_id": "rec-migration_sequence_accessibility_before_reuse-33333333",
+      "rule_id": "migration_sequence_accessibility_before_reuse",
+      "category": "migration",
+      "target": "Settings Screen",
+      "priority": "P2"
+    }
+  ],
+  "duplicate_clusters": [
+    {
+      "fingerprint": "cluster-alpha",
+      "count": 3,
+      "interactive": true,
+      "screen_ids": [
+        "home",
+        "settings"
+      ],
+      "screen_names": [
+        "Home",
+        "Settings"
+      ],
+      "node_refs": [
+        "home:button:primary",
+        "settings:button:primary",
+        "settings:button:save"
+      ],
+      "element_types": [
+        "button"
+      ],
+      "roles": [
+        "button"
+      ],
+      "representative_node_ref": "home:button:primary"
+    },
+    {
+      "fingerprint": "cluster-gamma",
+      "count": 2,
+      "interactive": false,
+      "screen_ids": [
+        "home",
+        "settings"
+      ],
+      "screen_names": [
+        "Home",
+        "Settings"
+      ],
+      "node_refs": [
+        "home:text:hint",
+        "settings:text:hint"
+      ],
+      "element_types": [
+        "text"
+      ],
+      "roles": [
+        "text"
+      ],
+      "representative_node_ref": "home:text:hint"
+    }
+  ]
+}

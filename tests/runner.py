@@ -1,8 +1,9 @@
-# © 2026 RADE Project. All Rights Reserved. Lead Architect: Trung Nguyen - BUILDRR89. Confidential Construction Data Model.
+# SPDX-License-Identifier: AGPL-3.0-only
 from __future__ import annotations
 
 import importlib.util
 import inspect
+import io
 import sys
 import traceback
 from pathlib import Path
@@ -24,13 +25,55 @@ def _discover_test_files(selection: list[str]) -> list[Path]:
     return sorted(Path("tests").glob("test_*.py"))
 
 
+class _CapturedOutput:
+    """Minimal capsys-compatible capture fixture for the custom runner."""
+
+    def __init__(self) -> None:
+        self._out = io.StringIO()
+        self._err = io.StringIO()
+
+    def readouterr(self):
+        import collections
+
+        CaptureResult = collections.namedtuple("CaptureResult", ["out", "err"])
+        result = CaptureResult(self._out.getvalue(), self._err.getvalue())
+        self._out = io.StringIO()
+        self._err = io.StringIO()
+        return result
+
+
 def _run_test_function(func):
     signature = inspect.signature(func)
     kwargs = {}
-    if "tmp_path" in signature.parameters:
+    needs_capsys = "capsys" in signature.parameters
+    needs_tmp = "tmp_path" in signature.parameters
+
+    if needs_capsys:
+        capsys = _CapturedOutput()
+        kwargs["capsys"] = capsys
+
+    if needs_tmp:
         with TemporaryDirectory() as tempdir:
             kwargs["tmp_path"] = Path(tempdir)
+            if needs_capsys:
+                old_out, old_err = sys.stdout, sys.stderr
+                sys.stdout = capsys._out
+                sys.stderr = capsys._err
+                try:
+                    return func(**kwargs)
+                finally:
+                    sys.stdout, sys.stderr = old_out, old_err
             return func(**kwargs)
+
+    if needs_capsys:
+        old_out, old_err = sys.stdout, sys.stderr
+        sys.stdout = capsys._out
+        sys.stderr = capsys._err
+        try:
+            return func(**kwargs)
+        finally:
+            sys.stdout, sys.stderr = old_out, old_err
+
     return func()
 
 
