@@ -4,7 +4,11 @@
 
 For frontend teams, agencies, design-system work, modernization efforts, and accessibility audits: analyze a public web page or structured UI payload and get proof-backed JSON, Markdown, and HTML outputs you can review, diff, and trust.
 
-![Proof](https://github.com/buildrr89/rade-engine/actions/workflows/proof.yml/badge.svg)
+[![Proof](https://github.com/buildrr89/rade-engine/actions/workflows/proof.yml/badge.svg)](https://github.com/buildrr89/rade-engine/actions/workflows/proof.yml)
+[![Wheel smoke](https://github.com/buildrr89/rade-engine/actions/workflows/wheel-smoke.yml/badge.svg)](https://github.com/buildrr89/rade-engine/actions/workflows/wheel-smoke.yml)
+[![CodeQL](https://github.com/buildrr89/rade-engine/actions/workflows/codeql.yml/badge.svg)](https://github.com/buildrr89/rade-engine/actions/workflows/codeql.yml)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14-blue.svg)](pyproject.toml)
 
 Fastest way to understand the project:
 

@@ -212,6 +212,14 @@
 - Acceptance: README links to `CHANGELOG.md`; no other changes
 - Does NOT include: generating release notes automatically, splitting the changelog by version, or restructuring the README
 
+### 47. Professional-repo polish: CI status badges in README
+
+- Status: implemented 2026-04-19
+- Risk reduced: the README advertised only the `Proof` workflow badge, leaving the `wheel-smoke` (Python 3.12/3.13/3.14 install verification from slice #44) and `CodeQL` (security scanning) workflows invisible at the repo landing page. A public-alpha PyPI candidate should surface its full CI signal — missing badges erode credibility and hide the guardrails that actually ship with the package. Adding License and Python-version badges also makes the install surface readable at a glance.
+- Scope: in `README.md`, replace the single `![Proof]` image with a five-badge block: Proof (clickable to its workflow), Wheel smoke (clickable to `wheel-smoke.yml`), CodeQL (clickable to `codeql.yml`), a static License: AGPL-3.0 badge linking to `LICENSE`, and a static Python 3.12 | 3.13 | 3.14 badge linking to `pyproject.toml`. All three workflow badges point at workflow files that already exist in `.github/workflows/`.
+- Acceptance: 210 pytest pass unchanged; all three referenced workflows exist on disk; each badge image URL is paired with a clickable link target; no code changes
+- Does NOT include: Codecov/coverage badges (no coverage tool wired yet), PyPI version badge (package not yet published), downloads badge, or per-OS matrix badges
+
 ### 46. Golden axe-gate fixture pair
 
 - Status: implemented 2026-04-20

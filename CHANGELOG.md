@@ -48,6 +48,10 @@ from v0.1.0 onward.
 - README Contributing section now cross-links `CHANGELOG.md` so
   contributors can find release-by-release context without knowing
   the filename (slice #45).
+- README landing banner now surfaces five CI/status badges (Proof,
+  Wheel smoke, CodeQL, License AGPL-3.0, Python 3.12/3.13/3.14)
+  instead of the single Proof image, each clickable through to the
+  backing workflow or file (slice #47).
 
 ### Tests
 
