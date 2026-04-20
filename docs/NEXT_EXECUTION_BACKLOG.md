@@ -212,6 +212,14 @@
 - Acceptance: README links to `CHANGELOG.md`; no other changes
 - Does NOT include: generating release notes automatically, splitting the changelog by version, or restructuring the README
 
+### 49. Drop CodeQL badge from README banner
+
+- Status: implemented 2026-04-19
+- Risk reduced: slice #47 added a CodeQL badge pointing at `.github/workflows/codeql.yml`, but that workflow is `disabled_manually` on `buildrr89/rade-engine` because the maintainer uses GitHub's default CodeQL setup instead (which runs via the internal `dynamic/github-code-scanning/codeql` pipeline and exposes no workflow-file badge URL). The badge therefore renders "no status" — worse than no badge at all on a public-alpha landing page. Security scanning itself is unaffected.
+- Scope: remove the `[![CodeQL](...codeql.yml/badge.svg)]` line from the README banner. No other file changes.
+- Acceptance: 210 tests still pass; banner carries four badges (Proof, Wheel smoke, License, Python); no broken/grey CI badge on the landing page
+- Does NOT include: re-enabling the workflow file, switching away from default setup, adding a Dependabot or PyPI version badge, or touching any other README section
+
 ### 48. Unbreak the proof workflow on main (sitecustomize stdout pollution)
 
 - Status: implemented 2026-04-19

@@ -58,6 +58,12 @@ from v0.1.0 onward.
   Wheel smoke, CodeQL, License AGPL-3.0, Python 3.12/3.13/3.14)
   instead of the single Proof image, each clickable through to the
   backing workflow or file (slice #47).
+- Remove the CodeQL badge from the README banner. The `codeql.yml`
+  workflow is `disabled_manually` on `buildrr89/rade-engine` in favour
+  of GitHub's default CodeQL setup, which does not expose a
+  workflow-file badge URL — so the badge was rendering
+  "no status" instead of green. Security scanning itself is
+  unchanged (slice #49).
 
 ### Tests
 
