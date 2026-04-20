@@ -21,6 +21,9 @@ from v0.1.0 onward.
 
 ### Changed
 
+- Cursor helper content is no longer tracked under `.cursor/` (that path stays
+  gitignored). Canonical rules live in `docs/CURSOR_RULES.md`; optional skill
+  checklists live in `docs/cursor-skills/`.
 - GitHub Action runtime no longer installs the `neo4j` driver; only
   `playwright` and `pyyaml` are pulled, matching the base package surface
   (slice #39).
@@ -31,6 +34,12 @@ from v0.1.0 onward.
 
 ### Security
 
+- `ApiKeyMiddleware` Bearer scheme is now matched case-insensitively
+  per RFC 6750 §2.1 (previously required exact `Bearer ` prefix,
+  rejecting spec-compliant lowercase `bearer` or uppercase `BEARER`
+  headers). Non-string Authorization environ values are coerced to
+  `str` before parsing. New regression test covers the lowercase
+  path (slice #52).
 - `publish-pypi.yml` `workflow_dispatch` now defaults `dry_run`
   to `"true"` (was `"false"`), and the publish job's `if:` predicate
   is tightened to a positive form so an unexpected input value

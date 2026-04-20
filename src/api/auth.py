@@ -21,10 +21,11 @@ def _json_response(start_response, status: str, payload: dict) -> list[bytes]:
 
 def _extract_bearer_token(environ: dict[str, Any]) -> str | None:
     """Extract Bearer token from the Authorization header."""
-    auth_header = environ.get("HTTP_AUTHORIZATION", "")
-    if not auth_header.startswith("Bearer "):
+    auth_header = str(environ.get("HTTP_AUTHORIZATION", ""))
+    scheme, separator, token = auth_header.partition(" ")
+    if separator == "" or scheme.lower() != "bearer":
         return None
-    return auth_header[7:].strip()
+    return token.strip()
 
 
 class ApiKeyMiddleware:

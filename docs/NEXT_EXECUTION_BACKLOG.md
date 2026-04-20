@@ -212,6 +212,14 @@
 - Acceptance: README links to `CHANGELOG.md`; no other changes
 - Does NOT include: generating release notes automatically, splitting the changelog by version, or restructuring the README
 
+### 52. Case-insensitive Bearer scheme in API auth middleware
+
+- Status: implemented 2026-04-19
+- Risk reduced: `ApiKeyMiddleware._extract_bearer_token()` compared the Authorization header with `startswith("Bearer ")` (capital-B only). RFC 6750 §2.1 is explicit that the auth scheme is case-insensitive, so a client sending `bearer <token>` or `BEARER <token>` — both spec-compliant — would be rejected with `missing_token`. For a hosted-mode surface advertised as accepting Bearer auth, that's a real interoperability bug waiting for its first non-curl client.
+- Scope: rewrite `_extract_bearer_token()` to partition the header on the first space and compare the scheme lower-cased. Coerce the header to `str()` for robustness against non-string environ values. Add `test_bearer_scheme_is_case_insensitive` to `tests/test_api_auth.py` using lowercase `bearer`. No behaviour change for the existing title-case path or for missing/empty headers.
+- Acceptance: 212 pytest pass; existing 8 auth tests still pass unchanged; new test asserts `200 OK` for lowercase `bearer`
+- Does NOT include: supporting multiple auth schemes (Basic, Digest), token introspection, JWT validation, rate limiting, or touching the constant-time comparison
+
 ### 50. Harden publish-pypi workflow against accidental manual publishes
 
 - Status: implemented 2026-04-19

@@ -166,6 +166,25 @@ def test_non_bearer_auth_header_rejected():
     assert payload["error"] == "missing_token"
 
 
+def test_bearer_scheme_is_case_insensitive():
+    authed_app = _build_authed_app()
+    fixture_path = "examples/sample_ios_output.json"
+    with open(fixture_path, encoding="utf-8") as f:
+        fixture = json.load(f)
+    fixture["app_id"] = "com.example.test"
+    body = json.dumps(fixture).encode("utf-8")
+
+    status, _, payload = _call_wsgi(
+        authed_app,
+        "/analyze",
+        method="POST",
+        body=body,
+        auth_header=f"bearer {TEST_API_KEY}",
+    )
+    assert status == "200 OK"
+    assert payload["app_id"] == "com.example.test"
+
+
 def test_empty_bearer_token_rejected():
     authed_app = _build_authed_app()
     status, _, payload = _call_wsgi(
