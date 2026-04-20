@@ -212,6 +212,14 @@
 - Acceptance: README links to `CHANGELOG.md`; no other changes
 - Does NOT include: generating release notes automatically, splitting the changelog by version, or restructuring the README
 
+### 50. Harden publish-pypi workflow against accidental manual publishes
+
+- Status: implemented 2026-04-19
+- Risk reduced: the release workflow was triggered on `release: published` (intended path) but also on `workflow_dispatch` with a `dry_run` input that defaulted to `"false"`. That meant any maintainer clicking "Run workflow" without reading the form would immediately publish a half-built wheel to PyPI — there is no undo for a PyPI version. The `if:` gate also used a negative-form predicate (`inputs.dry_run != 'true'`) which fails open on any unexpected input value. For a first-release repo wired to a trusted publisher, the safety margin needs to be the other direction.
+- Scope: flip `workflow_dispatch.inputs.dry_run.default` to `"true"` so manual runs are dry by default. Tighten the publish job's `if:` to an explicit positive predicate: `github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false')`. Add `test_publish_pypi_workflow_requires_explicit_manual_publish_opt_in` to `tests/test_repo_contracts.py` locking both strings in place so this can't quietly regress.
+- Acceptance: 211 pytest pass; release-triggered publishes still run (no change to the `release: published` path); `workflow_dispatch` with no input changes now only builds; `workflow_dispatch` with `dry_run=false` publishes; contract test fails if either string drifts
+- Does NOT include: changing the trusted-publisher config on PyPI, moving to manual version tagging, adding a second reviewer gate, or per-environment approvals
+
 ### 49. Drop CodeQL badge from README banner
 
 - Status: implemented 2026-04-19
