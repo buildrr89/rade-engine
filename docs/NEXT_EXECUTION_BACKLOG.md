@@ -212,6 +212,14 @@
 - Acceptance: README links to `CHANGELOG.md`; no other changes
 - Does NOT include: generating release notes automatically, splitting the changelog by version, or restructuring the README
 
+### 51. Conservative default Python for the GitHub Action + gitignore Playwright CLI traces
+
+- Status: implemented 2026-04-19
+- Risk reduced: `action.yml` advertised `python-version` default `"3.14"`, but Python 3.14 is still the newest minor and is not yet universally cached on GitHub-hosted runners — every external consumer using our Action would therefore pay a cold `setup-python` download on every run even though the package fully supports `3.12` (our declared `requires-python` floor). Dropping to `3.12` as the Action default removes that cold-start tax for downstream consumers; maintainers who want newer versions can still opt in via the input. Separately, `.playwright-cli/` trace/console artifacts from local `rade analyze --url` runs were leaking into `git status`, risking accidental commits of browser debugging data.
+- Scope: (a) change `action.yml` default `python-version` from `"3.14"` to `"3.12"`; (b) add `.playwright-cli/` to `.gitignore`. No code or test changes.
+- Acceptance: 211 pytest pass unchanged; `.playwright-cli/` no longer appears in `git status` after a run; Action users who pin `python-version` are unaffected
+- Does NOT include: dropping 3.14 from the matrix (wheel-smoke still tests it), changing `requires-python`, or adding a second Action for a higher floor
+
 ### 49. Drop CodeQL badge from README banner
 
 - Status: implemented 2026-04-19

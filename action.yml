@@ -28,7 +28,7 @@ inputs:
   python-version:
     description: "Python runtime version used to run RADE CLI."
     required: false
-    default: "3.14"
+    default: "3.12"
   fail-on-regression:
     description: "If true, fail when reusability drops or accessibility risk rises."
     required: false

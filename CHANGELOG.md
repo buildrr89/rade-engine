@@ -21,6 +21,10 @@ from v0.1.0 onward.
 
 ### Changed
 
+- GitHub Action default `python-version` input changed from `"3.14"`
+  to `"3.12"`, matching the declared `requires-python` floor and
+  saving a cold `setup-python` download for downstream consumers
+  (slice #51).
 - GitHub Action runtime no longer installs the `neo4j` driver; only
   `playwright` and `pyyaml` are pulled, matching the base package surface
   (slice #39).
