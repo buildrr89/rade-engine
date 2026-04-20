@@ -24,6 +24,9 @@ from v0.1.0 onward.
 - Cursor helper content is no longer tracked under `.cursor/` (that path stays
   gitignored). Canonical rules live in `docs/CURSOR_RULES.md`; optional skill
   checklists live in `docs/cursor-skills/`.
+- `.cursorrules` is gitignored; RADE-specific bullets from the former committed
+  file are merged into `docs/CURSOR_RULES.md` under **Product and collection
+  boundaries**.
 - GitHub Action runtime no longer installs the `neo4j` driver; only
   `playwright` and `pyyaml` are pulled, matching the base package surface
   (slice #39).

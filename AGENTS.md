@@ -23,7 +23,7 @@ Before making changes, read:
 6. `docs/ARCHITECTURE.md`
 7. `docs/BUILD_SHEET.md`
 8. `AGENTS.md`
-9. `.cursor/rules.md`
+9. `docs/CURSOR_RULES.md`
 
 ## Working rules
 

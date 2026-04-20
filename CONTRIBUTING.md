@@ -32,7 +32,8 @@ Before proposing scope changes, read the canonical files in this order:
 6. [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 7. [docs/BUILD_SHEET.md](docs/BUILD_SHEET.md)
 8. [AGENTS.md](AGENTS.md)
-9. [.cursor/rules.md](.cursor/rules.md)
+9. [docs/CURSOR_RULES.md](docs/CURSOR_RULES.md)
+10. Optional agent checklists: [docs/cursor-skills/README.md](docs/cursor-skills/README.md)
 
 ## Good Contribution Paths
 
