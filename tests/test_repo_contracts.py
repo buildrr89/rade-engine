@@ -58,6 +58,17 @@ def test_codeql_workflow_contains_required_guardrails():
     )
 
 
+def test_publish_pypi_workflow_requires_explicit_manual_publish_opt_in():
+    workflow = _read(".github/workflows/publish-pypi.yml")
+    _assert_contains_all(
+        workflow,
+        [
+            'default: "true"',
+            "if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false')",
+        ],
+    )
+
+
 def test_pull_request_template_covers_required_sections():
     template = _read(".github/pull_request_template.md")
     _assert_contains_all(

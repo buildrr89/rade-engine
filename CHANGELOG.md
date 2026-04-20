@@ -29,6 +29,15 @@ from v0.1.0 onward.
   indirection for all interpolated output values to comply with the
   GitHub Actions workflow-injection security pattern (slice #42).
 
+### Security
+
+- `publish-pypi.yml` `workflow_dispatch` now defaults `dry_run`
+  to `"true"` (was `"false"`), and the publish job's `if:` predicate
+  is tightened to a positive form so an unexpected input value
+  fails closed instead of publishing. A new contract test in
+  `tests/test_repo_contracts.py` locks both invariants in place
+  (slice #50).
+
 ### Fixed
 
 - `sitecustomize.py` no longer prints the terminal banner to stdout
