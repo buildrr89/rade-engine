@@ -1,0 +1,30 @@
+{
+  "name": "RADE",
+  "url": "https://rade-cloud.example.com",
+  "hook_attributes": {
+    "url": "https://rade-cloud.example.com/api/gh/webhook",
+    "active": true
+  },
+  "redirect_url": "https://rade-cloud.example.com/app/setup/callback",
+  "callback_urls": [
+    "https://rade-cloud.example.com/app/oauth/callback"
+  ],
+  "public": false,
+  "description": "Deterministic UI score + accessibility regression gates on pull requests. Powered by the open-source RADE engine.",
+  "default_events": [
+    "pull_request",
+    "pull_request_review",
+    "check_run",
+    "installation",
+    "installation_repositories"
+  ],
+  "default_permissions": {
+    "contents": "read",
+    "metadata": "read",
+    "pull_requests": "write",
+    "checks": "write",
+    "members": "read"
+  },
+  "request_oauth_on_install": true,
+  "setup_on_update": true
+}

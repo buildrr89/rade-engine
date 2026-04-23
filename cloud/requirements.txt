@@ -1,0 +1,4 @@
+# Vercel Python Fluid Compute — RADE Cloud
+psycopg[binary]>=3.2.0
+PyJWT>=2.9.0
+cryptography>=42.0.0

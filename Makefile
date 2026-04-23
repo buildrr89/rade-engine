@@ -6,7 +6,7 @@ OUTPUT_DIR ?= output
 WEB_DIR ?= web
 export UV_CACHE_DIR ?= .uv-cache
 export UV_OFFLINE ?= 0
-PY_SOURCES ?= src tests agent
+PY_SOURCES ?= src tests agent cloud api
 
 .PHONY: bootstrap test proof lint format analyze api worker agent-scan web-install web-dev web-test clean
 

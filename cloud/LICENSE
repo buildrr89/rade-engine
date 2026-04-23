@@ -1,0 +1,27 @@
+RADE Cloud — Proprietary License
+================================
+
+Copyright (c) 2026 Buildrr89. All rights reserved.
+
+The contents of this directory ("RADE Cloud") are NOT licensed under the
+GNU Affero General Public License v3.0 that governs the rest of the
+RADE Engine repository.
+
+RADE Cloud is proprietary software. No license is granted to copy,
+modify, distribute, or deploy the contents of this directory, except:
+
+1. As necessary to evaluate the software on your own infrastructure for
+   non-commercial, non-production purposes, provided no copy is
+   redistributed.
+
+2. Under a separate commercial agreement executed with the copyright
+   holder. See ../COMMERCIAL.md for how to obtain such an agreement.
+
+RADE Cloud consumes the AGPL-3.0-licensed RADE Engine (in the `src/`
+directory of this repository) as an upstream dependency. AGPL
+obligations apply to that engine. They do not extend to RADE Cloud's
+own source, because the copyright holder retains the right to
+distribute the engine under additional licenses (see LICENSE-COMMERCIAL.md
+and CLA.md at the repository root).
+
+No warranty is provided. Use at your own risk.

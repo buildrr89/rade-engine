@@ -1,0 +1,2 @@
+# Root Vercel install — see vercel.json installCommand. Engine deps come from pip install -e .
+-r cloud/requirements.txt

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "build": {
+    "env": {
+      "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
+    }
+  },
+  "functions": {
+    "api/gh/webhook.py": {
+      "runtime": "@vercel/python@4.3.0",
+      "maxDuration": 10,
+      "memory": 512
+    },
+    "api/gh/analyze.py": {
+      "runtime": "@vercel/python@4.3.0",
+      "maxDuration": 300,
+      "memory": 3008
+    }
+  }
+}

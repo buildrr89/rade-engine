@@ -25,6 +25,8 @@ SKIP_PARTS = {
     "__pycache__",
     "output",
     "rade-repo",
+    # Proprietary hosted service; see cloud/LICENSE (not AGPL).
+    "cloud",
 }
 
 PUBLIC_DOC_PATHS = [
@@ -74,6 +76,9 @@ def test_python_files_have_spdx_header() -> None:
 def test_json_files_have_header_slot_legal_metadata() -> None:
     for path in _iter_project_files():
         if path.suffix != ".json":
+            continue
+        # Vercel platform schema; cannot carry rade_legal without breaking deploy.
+        if path.name == "vercel.json":
             continue
         raw = path.read_text(encoding="utf-8")
         normalized = raw.lstrip()
